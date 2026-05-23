@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma — Dragons Den Academy</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F409;</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --gold: #c8a96e;
+            --bg: #080808;
+            --surface: #0f0f0f;
+            --surface2: #141414;
+            --border: #1e1e1e;
+            --text: #e8e8e8;
+            --muted: #555;
+            --sidebar-w: 260px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Satoshi', Arial, sans-serif;
+            min-height: 100dvh;
+        }
+
+        /* ── LOADING ── */
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .loading-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 13px;
+            letter-spacing: 6px;
+            color: var(--gold);
+            opacity: 0.6;
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:0.9} }
+
+        /* ── MAIN LAYOUT ── */
+        #app { display: none; min-height: 100dvh; }
+
+        .platform-layout {
+            display: grid;
+            grid-template-columns: var(--sidebar-w) 1fr;
+            min-height: 100dvh;
+        }
+
+        /* ── SIDEBAR ── */
+        .sidebar {
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            height: 100dvh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-header {
+            padding: 28px 24px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .sidebar-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: var(--gold);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .sidebar-tagline {
+            font-size: 10px;
+            color: #2a2a2a;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .sidebar-nav {
+            flex: 1;
+            padding: 20px 0;
+        }
+        .sidebar-section-label {
+            font-size: 8px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #2a2a2a;
+            padding: 16px 24px 8px;
+        }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 24px;
+            font-size: 13px;
+            color: var(--muted);
+            cursor: pointer;
+            transition: color 0.2s, background 0.2s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            position: relative;
+        }
+        .sidebar-item:hover { color: var(--text); background: rgba(255,255,255,0.02); }
+        .sidebar-item.active {
+            color: var(--gold);
+            background: rgba(200,169,110,0.05);
+        }
+        .sidebar-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 2px;
+            background: var(--gold);
+        }
+        .sidebar-item.locked { opacity: 0.35; cursor: not-allowed; }
+        .sidebar-item.locked:hover { color: var(--muted); background: none; }
+        .pack-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 11px;
+            color: inherit;
+            opacity: 0.5;
+            flex-shrink: 0;
+        }
+        .lock-icon {
+            margin-left: auto;
+            font-size: 10px;
+            opacity: 0.4;
+        }
+        .sidebar-footer {
+            padding: 20px 24px;
+            border-top: 1px solid var(--border);
+        }
+        .user-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .user-name {
+            font-size: 12px;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .btn-logout {
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            background: none;
+            border: 1px solid var(--border);
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+            flex-shrink: 0;
+        }
+        .btn-logout:hover { color: #ff6b6b; border-color: rgba(255,107,107,0.3); }
+
+        /* ── MAIN CONTENT ── */
+        .main-content {
+            padding: 48px 56px;
+            max-width: 900px;
+        }
+
+        .content-header {
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+        .content-eyebrow {
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .content-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 52px;
+            line-height: 0.95;
+            letter-spacing: -0.5px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .content-desc {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.7;
+            margin-top: 14px;
+            max-width: 560px;
+        }
+
+        /* ── VIDEO LIST ── */
+        .module-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .module-item {
+            display: grid;
+            grid-template-columns: 48px 1fr auto;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 24px;
+            background: var(--surface);
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid transparent;
+        }
+        .module-item:hover { background: var(--surface2); border-color: var(--border); }
+        .module-item.playing {
+            background: var(--surface2);
+            border-color: rgba(200,169,110,0.2);
+        }
+        .module-item.playing .module-num { color: var(--gold); }
+        .module-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            color: #222;
+            line-height: 1;
+        }
+        .module-info {}
+        .module-name {
+            font-size: 14px;
+            color: var(--text);
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        .module-meta {
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 0.3px;
+        }
+        .module-duration {
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        /* ── VIDEO PLAYER ── */
+        .video-player-wrap {
+            background: #000;
+            aspect-ratio: 16/9;
+            margin-bottom: 24px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .video-player-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .video-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+        .video-placeholder-icon {
+            width: 56px;
+            height: 56px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── LOCKED PACK ── */
+        .locked-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 56px 48px;
+            text-align: center;
+        }
+        .locked-panel h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: #fff;
+            margin: 16px 0 10px;
+            text-transform: uppercase;
+        }
+        .locked-panel p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 380px;
+            margin: 0 auto 28px;
+        }
+        .btn-upgrade {
+            display: inline-block;
+            background: var(--gold);
+            color: #000;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 14px 32px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .btn-upgrade:hover { opacity: 0.85; }
+
+        /* ── WELCOME ── */
+        .welcome-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2px;
+            margin-top: 8px;
+        }
+        .welcome-pack-card {
+            background: var(--surface);
+            padding: 24px 20px;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+            border: 1px solid transparent;
+        }
+        .welcome-pack-card:hover { background: var(--surface2); border-color: var(--border); }
+        .welcome-pack-card.locked-card { opacity: 0.3; cursor: not-allowed; }
+        .welcome-pack-card.locked-card:hover { background: var(--surface); border-color: transparent; }
+        .wpc-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        .wpc-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            color: #fff;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+        .wpc-count {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
+        /* ── MOBILE TOPBAR ── */
+        .mobile-topbar {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .mobile-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: var(--gold);
+        }
+        .mobile-menu-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 6px 12px;
+            font-size: 10px;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .platform-layout { grid-template-columns: 1fr; }
+            .sidebar {
+                position: fixed;
+                top: 0; left: 0; bottom: 0;
+                z-index: 200;
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+                width: var(--sidebar-w);
+            }
+            .sidebar.open { transform: translateX(0); }
+            .mobile-topbar { display: flex; }
+            .main-content { padding: 28px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div id="loading-screen">
+    <p class="loading-logo">Dragons Den</p>
+</div>
+
+<!-- App (hidden until auth verified) -->
+<div id="app">
+
+    <!-- Mobile topbar -->
+    <div class="mobile-topbar">
+        <span class="mobile-logo">Dragons Den</span>
+        <button class="mobile-menu-btn" id="mobile-menu-btn">Menú</button>
+    </div>
+
+    <div class="platform-layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="academia.html" class="sidebar-logo">Dragons Den</a>
+                <p class="sidebar-tagline">Academia Online</p>
+            </div>
+
+            <nav class="sidebar-nav" id="sidebar-nav" aria-label="Packs">
+                <p class="sidebar-section-label">Tus packs</p>
+                <!-- JS renders pack list here -->
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-row">
+                    <span class="user-name" id="user-name-display">—</span>
+                    <button class="btn-logout" id="btn-logout">Salir</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main-content" id="main-content" aria-live="polite">
+            <!-- JS renders content here -->
+        </main>
+
+    </div>
+</div>
+
+<script>
+// ── Pack definitions ──────────────────────────────────────────────────────
+const PACKS = [
+    {
+        id: 'tiro',
+        num: '01',
+        name: 'Tiro',
+        fullName: 'Fundamentos de Tiro',
+        desc: 'Mecánica de lanzamiento, puntos de referencia y ejercicios de repetición para construir un tiro consistente.',
+        modules: [
+            { name: 'Introducción y mecánica base', duration: '18 min', videoId: '' },
+            { name: 'Grip y posición de manos', duration: '22 min', videoId: '' },
+            { name: 'Base y equilibrio', duration: '19 min', videoId: '' },
+            { name: 'Tiro en movimiento', duration: '25 min', videoId: '' },
+            { name: 'Catch & shoot', duration: '21 min', videoId: '' },
+            { name: 'Tiro bajo presión', duration: '28 min', videoId: '' },
+            { name: 'Rutina de 500 tiros', duration: '15 min', videoId: '' },
+            { name: 'Evaluación y corrección', duration: '20 min', videoId: '' },
+        ]
+    },
+    {
+        id: 'footwork',
+        num: '02',
+        name: 'Footwork',
+        fullName: 'Trabajo de Pies y 1vs1',
+        desc: 'Domina los pies en el poste bajo, en el perímetro y en situaciones de 1vs1. Base técnica para atacar y crear espacio.',
+        modules: [
+            { name: 'Fundamentos del footwork', duration: '20 min', videoId: '' },
+            { name: 'Paradas y pivotes', duration: '18 min', videoId: '' },
+            { name: 'Crossover y hesitation', duration: '24 min', videoId: '' },
+            { name: 'Eurostep y floater', duration: '22 min', videoId: '' },
+            { name: '1vs1 desde perímetro', duration: '26 min', videoId: '' },
+            { name: 'Crear espacio sin balón', duration: '19 min', videoId: '' },
+        ]
+    },
+    {
+        id: 'defensa',
+        num: '03',
+        name: 'Defensa',
+        fullName: 'Defensa Individual',
+        desc: 'Posición defensiva, técnica de deslizamiento y cómo anticipar al atacante. Principios que se aplican en cualquier sistema.',
+        modules: [
+            { name: 'Posición y stance defensivo', duration: '16 min', videoId: '' },
+            { name: 'Deslizamiento lateral', duration: '20 min', videoId: '' },
+            { name: 'Defensa al portador', duration: '22 min', videoId: '' },
+            { name: 'Defensa off-ball', duration: '18 min', videoId: '' },
+            { name: 'Cierre al tirador', duration: '21 min', videoId: '' },
+        ]
+    },
+    {
+        id: 'fisico',
+        num: '04',
+        name: 'Físico',
+        fullName: 'Físico y Explosividad',
+        desc: 'Preparación física específica para baloncesto: salto vertical, velocidad de reacción, agilidad y resistencia de cancha.',
+        modules: [
+            { name: 'Evaluación física inicial', duration: '14 min', videoId: '' },
+            { name: 'Salto vertical — protocolo', duration: '25 min', videoId: '' },
+            { name: 'Explosividad y primer paso', duration: '22 min', videoId: '' },
+            { name: 'Agilidad y cambios de dirección', duration: '20 min', videoId: '' },
+            { name: 'Core para baloncesto', duration: '18 min', videoId: '' },
+            { name: 'Resistencia específica', duration: '24 min', videoId: '' },
+        ]
+    },
+    {
+        id: 'mental',
+        num: '05',
+        name: 'Mental',
+        fullName: 'Mentalidad y Táctica',
+        desc: 'Lectura del juego, gestión de la presión y herramientas mentales para rendir cuando más importa.',
+        modules: [
+            { name: 'Mentalidad competitiva', duration: '20 min', videoId: '' },
+            { name: 'Lectura del defensa', duration: '22 min', videoId: '' },
+            { name: 'Toma de decisiones rápida', duration: '19 min', videoId: '' },
+            { name: 'Gestión del error', duration: '17 min', videoId: '' },
+        ]
+    },
+    {
+        id: 'completo',
+        num: '06',
+        name: 'Pack Completo',
+        fullName: 'Dragons Den Method',
+        desc: 'Los 5 packs más 4 módulos bonus exclusivos. El sistema completo de entrenamiento de Dragons Den.',
+        isComplete: true,
+        modules: [
+            { name: 'Bonus 01 — Análisis de partido', duration: '30 min', videoId: '' },
+            { name: 'Bonus 02 — Rutina pre-temporada', duration: '28 min', videoId: '' },
+            { name: 'Bonus 03 — Entrenamiento en solitario', duration: '25 min', videoId: '' },
+            { name: 'Bonus 04 — Q&A con Yefangyi', duration: '35 min', videoId: '' },
+        ]
+    }
+];
+
+// ── State ─────────────────────────────────────────────────────────────────
+let currentUser = null;
+let userPacks = [];
+let activePack = null;
+let activeModule = null;
+
+// ── Auth ──────────────────────────────────────────────────────────────────
+async function checkAuth() {
+    const token = localStorage.getItem('dd_token');
+    if (!token) return redirect();
+
+    try {
+        const res = await fetch('/api/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token })
+        });
+        const data = await res.json();
+        if (!data.valid) return redirect();
+
+        currentUser = { name: data.name, packs: data.packs };
+        userPacks = data.packs || [];
+        init();
+    } catch {
+        redirect();
+    }
+}
+
+function redirect() {
+    window.location.href = 'login.html';
+}
+
+function hasAccess(packId) {
+    if (userPacks.includes('all') || userPacks.includes('completo')) return true;
+    return userPacks.includes(packId);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+function init() {
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('user-name-display').textContent = currentUser.name;
+
+    renderSidebar();
+    renderWelcome();
+
+    document.getElementById('btn-logout').addEventListener('click', () => {
+        localStorage.removeItem('dd_token');
+        localStorage.removeItem('dd_user');
+        window.location.href = 'login.html';
+    });
+
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+        document.getElementById('sidebar').classList.toggle('open');
+    });
+}
+
+// ── Sidebar ───────────────────────────────────────────────────────────────
+function renderSidebar() {
+    const nav = document.getElementById('sidebar-nav');
+    nav.innerHTML = '<p class="sidebar-section-label">Tus packs</p>';
+
+    PACKS.forEach(pack => {
+        const accessible = hasAccess(pack.id);
+        const btn = document.createElement('button');
+        btn.className = 'sidebar-item' + (accessible ? '' : ' locked');
+        btn.dataset.packId = pack.id;
+        btn.innerHTML = `
+            <span class="pack-num">${pack.num}</span>
+            <span>${pack.name}</span>
+            ${accessible ? '' : '<span class="lock-icon">&#x1F512;</span>'}
+        `;
+        if (accessible) {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+                btn.classList.add('active');
+                renderPack(pack);
+                document.getElementById('sidebar').classList.remove('open');
+            });
+        }
+        nav.appendChild(btn);
+    });
+}
+
+// ── Welcome screen ────────────────────────────────────────────────────────
+function renderWelcome() {
+    const main = document.getElementById('main-content');
+    const firstName = (currentUser.name || '').split(' ')[0];
+
+    const cards = PACKS.map(pack => {
+        const accessible = hasAccess(pack.id);
+        return `
+            <div class="welcome-pack-card${accessible ? '' : ' locked-card'}"
+                 ${accessible ? `onclick="selectPackById('${pack.id}')"` : ''}>
+                <p class="wpc-num">${pack.num}</p>
+                <p class="wpc-name">${pack.name}</p>
+                <p class="wpc-count">${accessible ? pack.modules.length + ' módulos' : 'Sin acceso'}</p>
+            </div>`;
+    }).join('');
+
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Bienvenido de vuelta</p>
+            <h1 class="content-title">${firstName || 'Jugador'}</h1>
+            <p class="content-desc">Selecciona un pack para empezar a entrenar.</p>
+        </div>
+        <div class="welcome-grid">${cards}</div>`;
+}
+
+function selectPackById(id) {
+    const pack = PACKS.find(p => p.id === id);
+    if (!pack) return;
+    document.querySelectorAll('.sidebar-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.packId === id);
+    });
+    renderPack(pack);
+}
+
+// ── Pack view ─────────────────────────────────────────────────────────────
+function renderPack(pack) {
+    activePack = pack;
+    const main = document.getElementById('main-content');
+
+    if (!hasAccess(pack.id)) {
+        main.innerHTML = `
+            <div class="content-header">
+                <p class="content-eyebrow">Pack ${pack.num}</p>
+                <h1 class="content-title">${pack.fullName}</h1>
+            </div>
+            <div class="locked-panel">
+                <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#555" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
+                </svg>
+                <h2>Pack bloqueado</h2>
+                <p>No tienes acceso a este pack. Amplía tu suscripción para desbloquearlo.</p>
+                <a href="academia.html#lista-espera" class="btn-upgrade">Ver opciones</a>
+            </div>`;
+        return;
+    }
+
+    const moduleItems = pack.modules.map((mod, i) => `
+        <div class="module-item" data-index="${i}" onclick="playModule(${i})">
+            <span class="module-num">${String(i + 1).padStart(2, '0')}</span>
+            <div class="module-info">
+                <p class="module-name">${mod.name}</p>
+                <p class="module-meta">Módulo ${i + 1} · Pack ${pack.num}</p>
+            </div>
+            <span class="module-duration">${mod.duration}</span>
+        </div>`).join('');
+
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Pack ${pack.num}</p>
+            <h1 class="content-title">${pack.fullName}</h1>
+            <p class="content-desc">${pack.desc}</p>
+        </div>
+        <div id="video-area" style="margin-bottom:32px;"></div>
+        <div class="module-list">${moduleItems}</div>`;
+
+    renderVideoPlaceholder();
+}
+
+function renderVideoPlaceholder() {
+    document.getElementById('video-area').innerHTML = `
+        <div class="video-player-wrap">
+            <div class="video-placeholder">
+                <div class="video-placeholder-icon">
+                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 010 1.972l-11.54 6.347a1.125 1.125 0 01-1.667-.986V5.653z"/>
+                    </svg>
+                </div>
+                Selecciona un módulo para reproducir
+            </div>
+        </div>`;
+}
+
+function playModule(index) {
+    if (!activePack) return;
+    const mod = activePack.modules[index];
+    activeModule = index;
+
+    document.querySelectorAll('.module-item').forEach((el, i) => {
+        el.classList.toggle('playing', i === index);
+    });
+
+    const videoArea = document.getElementById('video-area');
+    if (mod.videoId) {
+        videoArea.innerHTML = `
+            <div class="video-player-wrap">
+                <iframe src="https://www.youtube.com/embed/${mod.videoId}?autoplay=1&rel=0"
+                    allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
+            <p style="font-size:12px;color:var(--muted);margin-bottom:24px;">${mod.name} · ${mod.duration}</p>`;
+    } else {
+        videoArea.innerHTML = `
+            <div class="video-player-wrap">
+                <div class="video-placeholder">
+                    <div class="video-placeholder-icon">
+                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 010 1.972l-11.54 6.347a1.125 1.125 0 01-1.667-.986V5.653z"/>
+                        </svg>
+                    </div>
+                    <span>${mod.name}</span>
+                    <span style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#2a2a2a;margin-top:4px;">Disponible pronto</span>
+                </div>
+            </div>
+            <p style="font-size:12px;color:var(--muted);margin-bottom:24px;">${mod.name} · ${mod.duration}</p>`;
+    }
+}
+
+// ── Start ─────────────────────────────────────────────────────────────────
+checkAuth();
+</script>
+
+</body>
+</html>
