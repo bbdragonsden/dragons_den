@@ -1385,16 +1385,9 @@
             <form
                 class="wl-form"
                 id="waitlist-form"
-                action="https://formsubmit.co/bbdragonsden@gmail.com"
-                method="POST"
                 aria-label="Formulario lista de espera"
                 novalidate
             >
-                <!-- FormSubmit hidden fields -->
-                <input type="hidden" name="_subject" value="🏀 Nueva plaza — Academia DD | %nombre% · %interes%">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_autoresponse" value="Hola,&#10;&#10;Tu plaza en la lista de espera de la Academia Online Dragons Den está confirmada.&#10;&#10;Eres de los primeros en apuntarte. Cuando lancemos este verano, serás el primero en saberlo — y tendrás el precio de lanzamiento bloqueado antes de que suba.&#10;&#10;El contenido se graba en los entrenamientos del verano 2026. Nada de teoría vacía: los mismos ejercicios que usamos en pista, grabados para que puedas entrenar cuando quieras y donde quieras.&#10;&#10;Nos vemos en pista.&#10;&#10;— Yefangyi&#10;Dragons Den Basketball Academy&#10;@dragonsdenbasketball">
                 <input type="text" name="_honey" style="display:none" tabindex="-1" aria-hidden="true">
 
                 <div class="wl-form-group">
@@ -1689,16 +1682,21 @@
                 submitBtn.textContent = 'Enviando…';
                 submitBtn.disabled = true;
 
-                var data = new FormData(form);
-
-                fetch('https://formsubmit.co/ajax/bbdragonsden@gmail.com', {
+                fetch('/api/waitlist', {
                     method: 'POST',
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
+                    body: JSON.stringify({
+                        nombre: nameEl.value.trim(),
+                        email: emailEl.value.trim(),
+                        interes: interestEl.value
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
                 })
                 .then(function (res) { return res.json(); })
                 .then(function (json) {
-                    if (json.success === 'true' || json.success === true) {
+                    if (json.success) {
                         document.getElementById('wl-form-inner').style.display = 'none';
                         var confirm = document.getElementById('wl-confirm');
                         confirm.style.display = 'block';
