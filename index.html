@@ -534,7 +534,30 @@
             font-size: 13px;
             color: var(--muted);
             margin-top: 8px;
-            margin-bottom: 32px;
+            margin-bottom: 16px;
+        }
+        .price-market-note {
+            font-size: 10px;
+            color: var(--muted);
+            opacity: 0.45;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+        }
+        .price-market-note s {
+            letter-spacing: 0.3px;
+        }
+        .price-period-tag {
+            display: inline-block;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            color: var(--gold);
+            letter-spacing: 1px;
+            padding: 3px 10px;
+            border: 1px solid rgba(200,169,110,0.3);
+            background: rgba(200,169,110,0.05);
+            vertical-align: middle;
+            margin-left: 4px;
+            line-height: 1.2;
         }
 
         .price-features {
@@ -1286,8 +1309,8 @@
     <div class="pricing-grid">
         <div class="price-card">
             <p class="price-label">Jugador anterior</p>
-            <div><span class="price-currency">&euro;</span><span class="price-amount">35</span></div>
-            <p class="price-period">por mes</p>
+            <div><span class="price-currency">&euro;</span><span class="price-amount">35</span><span class="price-period-tag">/mes</span></div>
+            <p class="price-market-note">vs. entrenador personal <s>60&ndash;80&euro;/mes</s></p>
             <ul class="price-features">
                 <li>Acceso a todas las sesiones</li>
                 <li>An&aacute;lisis de video</li>
@@ -1300,8 +1323,8 @@
         <div class="price-card featured">
             <div class="price-badge">M&aacute;s popular</div>
             <p class="price-label">Nuevo jugador</p>
-            <div><span class="price-currency">&euro;</span><span class="price-amount">40</span></div>
-            <p class="price-period">por mes</p>
+            <div><span class="price-currency">&euro;</span><span class="price-amount">40</span><span class="price-period-tag">/mes</span></div>
+            <p class="price-market-note">vs. entrenador personal <s>60&ndash;80&euro;/mes</s></p>
             <ul class="price-features">
                 <li>Acceso a todas las sesiones</li>
                 <li>An&aacute;lisis de video</li>
@@ -1313,11 +1336,12 @@
 
         <div class="price-card">
             <p class="price-label">Pack Verano Completo</p>
-            <div><span class="price-currency" style="color:#fff;">&minus;</span><span class="price-amount">15%</span></div>
-            <p class="price-period">sobre el precio mensual</p>
+            <div><span class="price-currency">&euro;</span><span class="price-amount" style="font-size:56px;line-height:1.1;">119&ndash;136</span></div>
+            <p class="price-period" style="margin-bottom:4px;">4 meses &mdash; Jun&nbsp;/&nbsp;Jul&nbsp;/&nbsp;Ago&nbsp;/&nbsp;Sep</p>
+            <p class="price-market-note">&asymp;&nbsp;30&ndash;34&nbsp;&euro;/mes &middot; <s>40&euro;/mes</s> sin pack</p>
             <ul class="price-features">
-                <li>Junio + Julio + Agosto + Septiembre</li>
-                <li>€119 / 4 meses (anterior) o €136 / 4 meses (nuevo)</li>
+                <li>&euro;119 &mdash; jugador anterior</li>
+                <li>&euro;136 &mdash; jugador nuevo</li>
                 <li>Todo incluido los 4 meses</li>
                 <li>Seguimiento continuo garantizado</li>
             </ul>
@@ -1336,8 +1360,8 @@
     <div class="pricing-grid pricing-grid-4">
         <div class="price-card">
             <p class="price-label">Seguimiento Mensual</p>
-            <div><span class="price-currency">&euro;</span><span class="price-amount">40</span></div>
-            <p class="price-period">por mes &mdash; sin compromiso</p>
+            <div><span class="price-currency">&euro;</span><span class="price-amount">40</span><span class="price-period-tag">/mes</span></div>
+            <p class="price-market-note">Sin permanencia &middot; vs. academia privada <s>70&ndash;120&euro;/mes</s></p>
             <ul class="price-features">
                 <li>1&ndash;2 sesiones semanales</li>
                 <li>An&aacute;lisis de v&iacute;deo mensual</li>
@@ -1350,8 +1374,8 @@
         <div class="price-card featured">
             <div class="price-badge">Mejor valor</div>
             <p class="price-label">Pack Trimestral</p>
-            <div><span class="price-currency">&euro;</span><span class="price-amount">105</span></div>
-            <p class="price-period">cada 3 meses &mdash; €35 / mes</p>
+            <div><span class="price-currency">&euro;</span><span class="price-amount">105</span><span class="price-period-tag">/trim.</span></div>
+            <p class="price-market-note">&asymp;&nbsp;35&euro;/mes &middot; ahorro de 15&euro; sobre mensual</p>
             <ul class="price-features">
                 <li>Todo lo del plan mensual</li>
                 <li>Informe de progreso trimestral</li>
@@ -1363,8 +1387,8 @@
 
         <div class="price-card">
             <p class="price-label">Temporada Completa</p>
-            <div><span class="price-currency">&euro;</span><span class="price-amount">270</span></div>
-            <p class="price-period">Sep&ndash;Jun (9 meses) &mdash; €30 / mes</p>
+            <div><span class="price-currency">&euro;</span><span class="price-amount">270</span><span class="price-period-tag">/temp.</span></div>
+            <p class="price-market-note">Sep&ndash;Jun (9 meses) &asymp;&nbsp;30&euro;/mes &middot; ahorro de 90&euro;</p>
             <ul class="price-features">
                 <li>Todo lo del pack trimestral</li>
                 <li>Evaluaci&oacute;n inicial y final con v&iacute;deo</li>
@@ -1376,8 +1400,8 @@
 
         <div class="price-card" style="border-top:2px solid #fff;">
             <p class="price-label">Seguimiento Profesional</p>
-            <div><span class="price-currency">&euro;</span><span class="price-amount">50</span></div>
-            <p class="price-period">por mes &mdash; servicio premium</p>
+            <div><span class="price-currency">&euro;</span><span class="price-amount">50</span><span class="price-period-tag">/mes</span></div>
+            <p class="price-market-note">Servicio premium &middot; vs. entrenador personal <s>60&ndash;80&euro;/mes</s></p>
             <ul class="price-features">
                 <li>Sesiones individuales ilimitadas</li>
                 <li>An&aacute;lisis de v&iacute;deo semanal</li>
@@ -1400,8 +1424,8 @@
     <div class="pricing-grid">
         <div class="price-card">
             <p class="price-label">Add-on Gym</p>
-            <div><span class="price-currency">&euro;</span><span class="price-amount">20</span></div>
-            <p class="price-period">por mes &mdash; sobre cualquier plan base</p>
+            <div><span class="price-currency">&euro;</span><span class="price-amount">20</span><span class="price-period-tag">/mes</span></div>
+            <p class="price-market-note">Add-on sobre cualquier plan base</p>
             <ul class="price-features">
                 <li>2 sesiones semanales de fuerza</li>
                 <li>Trabajo de explosividad y salto vertical</li>
@@ -1415,8 +1439,8 @@
         <div class="price-card featured">
             <div class="price-badge">Recomendado</div>
             <p class="price-label">Pack &Eacute;lite</p>
-            <div><span class="price-currency">&euro;</span><span class="price-amount">55</span></div>
-            <p class="price-period">por mes &mdash; Baloncesto + Gym + Piscina</p>
+            <div><span class="price-currency">&euro;</span><span class="price-amount">55</span><span class="price-period-tag">/mes</span></div>
+            <p class="price-market-note">Baloncesto + Gym + Piscina &middot; vs. gimnasio solo <s>40&ndash;60&euro;/mes</s></p>
             <ul class="price-features">
                 <li>Acceso completo al campus (2&ndash;4 ses./sem.)</li>
                 <li>2 sesiones semanales de gimnasio</li>
@@ -1430,8 +1454,8 @@
 
         <div class="price-card">
             <p class="price-label">Add-on Piscina</p>
-            <div><span class="price-currency">&euro;</span><span class="price-amount">12</span></div>
-            <p class="price-period">por sesi&oacute;n &mdash; o 35&euro;/mes (4 ses.)</p>
+            <div><span class="price-currency">&euro;</span><span class="price-amount">12</span><span class="price-period-tag">/ses.</span></div>
+            <p class="price-market-note">o 35&euro;/mes (bono 4 sesiones)</p>
             <ul class="price-features">
                 <li>Recuperaci&oacute;n activa postentrenamiento</li>
                 <li>Resistencia cardiovascular sin impacto</li>

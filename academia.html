@@ -334,44 +334,56 @@
             box-shadow: 0 0 0 1px rgba(200,169,110,0.25);
         }
 
-        .course-price-sub {
-            font-size: 10px;
-            color: var(--muted);
-            letter-spacing: 1px;
-            margin-top: 1px;
-        }
+        .price-block { flex: 1; }
 
-        .price-anchor {
-            display: flex;
+        .price-market-ref {
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
+            margin-bottom: 10px;
+            padding: 3px 8px;
+            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.02);
         }
-        .price-anchor-market {
-            text-align: right;
-        }
-        .price-anchor-label {
-            font-size: 9px;
+        .price-market-label {
+            font-size: 8px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             color: var(--muted);
-            margin-bottom: 2px;
-            opacity: 0.7;
+            opacity: 0.5;
         }
-        .price-anchor-val {
+        .price-market-val {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 20px;
+            font-size: 13px;
             color: var(--muted);
             text-decoration: line-through;
-            opacity: 0.4;
-            letter-spacing: 1px;
+            opacity: 0.35;
+            letter-spacing: 0.5px;
         }
-        .price-anchor-sep {
+        .price-main-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 0;
+            line-height: 1;
+        }
+        .price-year-tag {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 17px;
+            color: var(--gold);
+            letter-spacing: 1px;
+            padding: 4px 8px;
+            border: 1px solid rgba(200,169,110,0.3);
+            background: rgba(200,169,110,0.06);
+            margin-left: 6px;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+        .price-monthly-equiv {
             font-size: 10px;
             color: var(--muted);
-            opacity: 0.4;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            flex-shrink: 0;
+            letter-spacing: 0.5px;
+            margin-top: 6px;
+            opacity: 0.55;
         }
 
         .course-card.featured {
@@ -1157,18 +1169,15 @@
             </div>
             <span class="course-difficulty" aria-label="Nivel: Iniciaci&oacute;n y Medio">Iniciaci&oacute;n &mdash; Medio</span>
             <div class="course-price-row">
-                <div class="price-anchor">
-                    <div class="price-anchor-market">
-                        <p class="price-anchor-label">Mercado</p>
-                        <p class="price-anchor-val">~15&euro;/mes</p>
+                <div class="price-block">
+                    <div class="price-market-ref">
+                        <span class="price-market-label">Mercado</span>
+                        <span class="price-market-val">~15&euro;/mes</span>
                     </div>
-                    <div class="price-anchor-sep">vs</div>
-                    <div>
-                        <div>
-                            <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
-                        </div>
-                        <p class="course-price-sub">1,58&euro; al mes</p>
+                    <div class="price-main-row">
+                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span class="price-year-tag">/a&ntilde;o</span>
                     </div>
+                    <p class="price-monthly-equiv">&asymp;&nbsp;1,58&nbsp;&euro;&nbsp;al mes</p>
                 </div>
                 <a href="#lista-espera" class="btn-course">Unirme</a>
             </div>
@@ -1190,18 +1199,15 @@
             </div>
             <span class="course-difficulty" aria-label="Nivel: Medio">Medio</span>
             <div class="course-price-row">
-                <div class="price-anchor">
-                    <div class="price-anchor-market">
-                        <p class="price-anchor-label">Mercado</p>
-                        <p class="price-anchor-val">~15&euro;/mes</p>
+                <div class="price-block">
+                    <div class="price-market-ref">
+                        <span class="price-market-label">Mercado</span>
+                        <span class="price-market-val">~15&euro;/mes</span>
                     </div>
-                    <div class="price-anchor-sep">vs</div>
-                    <div>
-                        <div>
-                            <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
-                        </div>
-                        <p class="course-price-sub">1,58&euro; al mes</p>
+                    <div class="price-main-row">
+                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span class="price-year-tag">/a&ntilde;o</span>
                     </div>
+                    <p class="price-monthly-equiv">&asymp;&nbsp;1,58&nbsp;&euro;&nbsp;al mes</p>
                 </div>
                 <a href="#lista-espera" class="btn-course">Unirme</a>
             </div>
@@ -1223,18 +1229,15 @@
             </div>
             <span class="course-difficulty" aria-label="Nivel: Iniciaci&oacute;n y Medio">Iniciaci&oacute;n &mdash; Medio</span>
             <div class="course-price-row">
-                <div class="price-anchor">
-                    <div class="price-anchor-market">
-                        <p class="price-anchor-label">Mercado</p>
-                        <p class="price-anchor-val">~15&euro;/mes</p>
+                <div class="price-block">
+                    <div class="price-market-ref">
+                        <span class="price-market-label">Mercado</span>
+                        <span class="price-market-val">~15&euro;/mes</span>
                     </div>
-                    <div class="price-anchor-sep">vs</div>
-                    <div>
-                        <div>
-                            <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
-                        </div>
-                        <p class="course-price-sub">1,58&euro; al mes</p>
+                    <div class="price-main-row">
+                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span class="price-year-tag">/a&ntilde;o</span>
                     </div>
+                    <p class="price-monthly-equiv">&asymp;&nbsp;1,58&nbsp;&euro;&nbsp;al mes</p>
                 </div>
                 <a href="#lista-espera" class="btn-course">Unirme</a>
             </div>
@@ -1256,18 +1259,15 @@
             </div>
             <span class="course-difficulty" aria-label="Nivel: Todos">Todos los niveles</span>
             <div class="course-price-row">
-                <div class="price-anchor">
-                    <div class="price-anchor-market">
-                        <p class="price-anchor-label">Mercado</p>
-                        <p class="price-anchor-val">~15&euro;/mes</p>
+                <div class="price-block">
+                    <div class="price-market-ref">
+                        <span class="price-market-label">Mercado</span>
+                        <span class="price-market-val">~15&euro;/mes</span>
                     </div>
-                    <div class="price-anchor-sep">vs</div>
-                    <div>
-                        <div>
-                            <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
-                        </div>
-                        <p class="course-price-sub">1,58&euro; al mes</p>
+                    <div class="price-main-row">
+                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span class="price-year-tag">/a&ntilde;o</span>
                     </div>
+                    <p class="price-monthly-equiv">&asymp;&nbsp;1,58&nbsp;&euro;&nbsp;al mes</p>
                 </div>
                 <a href="#lista-espera" class="btn-course">Unirme</a>
             </div>
@@ -1289,18 +1289,15 @@
             </div>
             <span class="course-difficulty" aria-label="Nivel: Todos">Todos los niveles</span>
             <div class="course-price-row">
-                <div class="price-anchor">
-                    <div class="price-anchor-market">
-                        <p class="price-anchor-label">Mercado</p>
-                        <p class="price-anchor-val">~15&euro;/mes</p>
+                <div class="price-block">
+                    <div class="price-market-ref">
+                        <span class="price-market-label">Mercado</span>
+                        <span class="price-market-val">~15&euro;/mes</span>
                     </div>
-                    <div class="price-anchor-sep">vs</div>
-                    <div>
-                        <div>
-                            <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
-                        </div>
-                        <p class="course-price-sub">1,58&euro; al mes</p>
+                    <div class="price-main-row">
+                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span class="price-year-tag">/a&ntilde;o</span>
                     </div>
+                    <p class="price-monthly-equiv">&asymp;&nbsp;1,58&nbsp;&euro;&nbsp;al mes</p>
                 </div>
                 <a href="#lista-espera" class="btn-course">Unirme</a>
             </div>
@@ -1324,18 +1321,15 @@
             </div>
             <span class="course-difficulty all-levels" aria-label="Nivel: Todos">Todos los niveles</span>
             <div class="course-price-row">
-                <div class="price-anchor">
-                    <div class="price-anchor-market">
-                        <p class="price-anchor-label">Mercado</p>
-                        <p class="price-anchor-val">~30&euro;/mes</p>
+                <div class="price-block">
+                    <div class="price-market-ref">
+                        <span class="price-market-label">Mercado</span>
+                        <span class="price-market-val">~30&euro;/mes</span>
                     </div>
-                    <div class="price-anchor-sep">vs</div>
-                    <div>
-                        <div>
-                            <span class="course-price-currency">&euro;</span><span class="course-price">49</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
-                        </div>
-                        <p class="course-price-sub">4,08&euro; al mes &mdash; 5 packs + 4 bonus</p>
+                    <div class="price-main-row">
+                        <span class="course-price-currency">&euro;</span><span class="course-price">49</span><span class="price-year-tag">/a&ntilde;o</span>
                     </div>
+                    <p class="price-monthly-equiv">&asymp;&nbsp;4,08&nbsp;&euro;&nbsp;al mes &middot; 5 packs + 4 bonus</p>
                 </div>
                 <a href="#lista-espera" class="btn-course">Unirme</a>
             </div>
