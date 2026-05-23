@@ -1,0 +1,12 @@
+# Datos internos — no subir a repositorio público
+FINANZAS/
+CLIENTES/
+COWORK_PROMPTS/
+MARKETING/
+CONTENIDO/
+config.txt
+
+# Sistema
+Thumbs.db
+.DS_Store
+desktop.ini

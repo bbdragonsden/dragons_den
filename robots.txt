@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /FINANZAS/
+Disallow: /CLIENTES/
+Disallow: /COWORK_PROMPTS/
+
+Sitemap: https://www.dragonsden.es/sitemap.xml

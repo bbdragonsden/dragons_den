@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Academia Online | Dragons Den Basketball Academy</title>
+    <meta name="description" content="Packs de entrenamiento de baloncesto online con los métodos de Dragons Den. Tiro, defensa, físico, 1vs1 y mentalidad. Acceso anual desde 9€.">
+    <meta name="author" content="Yefangyi Hu Garcia — Dragons Den Basketball Academy">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#c8a96e">
+    <link rel="canonical" href="https://www.dragonsden.es/academia.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F409;</text></svg>">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Dragons Den Basketball Academy">
+    <meta property="og:title" content="Academia Online — Dragons Den Basketball">
+    <meta property="og:description" content="Cursos de baloncesto online con los métodos de Dragons Den. Tiro, trabajo de pies y packs completos. Accede de por vida.">
+    <meta property="og:url" content="https://www.dragonsden.es/academia.html">
+    <meta property="og:image" content="https://picsum.photos/seed/dragonsden-academia/1200/630">
+    <meta property="og:locale" content="es_ES">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Academia Online — Dragons Den Basketball">
+    <meta name="twitter:description" content="Cursos de baloncesto online con los métodos de Dragons Den. Accede de por vida, aplica en pista.">
+    <meta name="twitter:image" content="https://picsum.photos/seed/dragonsden-academia/1200/630">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #c8a96e;
+            --gold-light: #e2c98a;
+            --black: #080808;
+            --surface: #111111;
+            --surface2: #181818;
+            --border: rgba(200, 169, 110, 0.2);
+            --text: #e8e8e8;
+            --muted: #888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Satoshi', sans-serif;
+            background: var(--black);
+            color: var(--text);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ── NAV ─────────────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 24px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 4px;
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a.active { color: var(--gold); }
+
+        .nav-hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: var(--gold);
+        }
+
+        .nav-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: #111;
+            z-index: 99;
+            padding: 80px 24px 32px;
+            flex-direction: column;
+        }
+
+        .nav-mobile-menu.open { display: flex; }
+
+        .nav-mobile-menu li {
+            list-style: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-mobile-menu li a {
+            display: block;
+            padding: 18px 0;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-mobile-menu li a:hover { color: var(--gold); }
+
+        /* ── HERO ─────────────────────────────────────── */
+        .hero {
+            min-height: 100dvh;
+            display: grid;
+            grid-template-columns: 55fr 45fr;
+            align-items: center;
+            padding: 120px 60px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 55% 60% at 75% 55%, rgba(200,169,110,0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 35% 25% at 20% 50%, rgba(200,169,110,0.03) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-left {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-right: 48px;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 28px;
+        }
+
+        .hero-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(72px, 10vw, 130px);
+            line-height: 0.92;
+            letter-spacing: 4px;
+            color: #fff;
+            margin-bottom: 32px;
+        }
+
+        .hero-title span { color: var(--gold); }
+
+        .hero-divider {
+            width: 56px;
+            height: 1px;
+            background: var(--gold);
+            margin-bottom: 28px;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            color: var(--muted);
+            max-width: 400px;
+            line-height: 1.75;
+            margin-bottom: 48px;
+            font-weight: 300;
+        }
+
+        .hero-cta-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            padding: 16px 40px;
+            background: var(--gold);
+            color: #000;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active { transform: scale(0.98); }
+
+        .btn-outline {
+            padding: 16px 40px;
+            border: 1px solid var(--border);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            background: rgba(200,169,110,0.06);
+        }
+
+        .btn-outline:active { transform: scale(0.98); }
+
+        /* Hero right — basketball hoop SVG art */
+        .hero-right {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 480px;
+        }
+
+        .hero-court-art {
+            width: 100%;
+            max-width: 460px;
+            height: auto;
+        }
+
+        .hero-bg-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(100px, 16vw, 220px);
+            color: var(--gold);
+            opacity: 0.05;
+            line-height: 1;
+            position: absolute;
+            right: -16px;
+            bottom: 12%;
+            letter-spacing: -4px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* ── COURSE GRID ──────────────────────────────── */
+        .courses-wrap {
+            padding: 100px 60px;
+            max-width: 1160px;
+            margin: 0 auto;
+        }
+
+        .section-eyebrow {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(40px, 6vw, 72px);
+            letter-spacing: 3px;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .section-divider {
+            width: 48px;
+            height: 1px;
+            background: var(--gold);
+            margin: 24px 0;
+        }
+
+        .section-text {
+            font-size: 15px;
+            color: var(--muted);
+            max-width: 520px;
+            margin-bottom: 64px;
+            line-height: 1.75;
+        }
+
+        /* Asymmetric 2+1 grid: featured card spans full height on right */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto;
+            gap: 2px;
+            background: var(--border);
+            align-items: stretch;
+        }
+
+        .course-card {
+            background: var(--surface);
+            padding: 44px 36px 40px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .course-card:hover {
+            background: var(--surface2);
+            box-shadow: 0 0 0 1px rgba(200,169,110,0.25);
+        }
+
+        .course-price-sub {
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: 1px;
+            margin-top: 1px;
+        }
+
+        .course-card.featured {
+            background: var(--surface2);
+            border-left: 3px solid var(--gold);
+        }
+
+        .course-card.featured:hover {
+            box-shadow: 0 0 0 1px rgba(200,169,110,0.4);
+        }
+
+        .course-popular-badge {
+            position: absolute;
+            top: 0; left: 36px;
+            background: var(--gold);
+            color: #000;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            transform: translateY(-50%);
+        }
+
+        .course-module-num {
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .course-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(26px, 3vw, 34px);
+            letter-spacing: 2px;
+            color: #fff;
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+
+        .course-featured-tag {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .course-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            margin-bottom: 24px;
+        }
+
+        .course-meta-item {
+            background: var(--black);
+            padding: 10px 14px;
+        }
+
+        .course-meta-label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .course-meta-value {
+            font-size: 14px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .course-difficulty {
+            display: inline-block;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border: 1px solid var(--border);
+            color: var(--gold);
+            margin-bottom: 28px;
+        }
+
+        .course-difficulty.all-levels {
+            border-color: rgba(200,169,110,0.45);
+            background: rgba(200,169,110,0.05);
+        }
+
+        .course-price-row {
+            margin-top: auto;
+            padding-top: 28px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .course-price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 52px;
+            line-height: 1;
+            color: #fff;
+        }
+
+        .course-price-currency {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            color: var(--gold);
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        .course-price-note {
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .btn-course {
+            padding: 13px 26px;
+            border: 1px solid var(--border);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .btn-course:hover {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: #000;
+        }
+
+        .btn-course:active { transform: scale(0.98); }
+
+        /* ── PROXIMAMENTE BANNER ──────────────────────── */
+        .waitlist-wrap {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 100px 60px;
+        }
+
+        .waitlist-inner {
+            max-width: 1160px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .waitlist-left {}
+
+        .waitlist-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 28px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: pulse-dot 2.4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.75); }
+        }
+
+        .waitlist-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(42px, 5.5vw, 66px);
+            letter-spacing: 3px;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .waitlist-subtitle {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(18px, 2.5vw, 26px);
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 28px;
+        }
+
+        .waitlist-text {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 440px;
+        }
+
+        /* Waitlist form */
+        .waitlist-form-wrap {
+            background: var(--surface2);
+            padding: 44px 40px;
+        }
+
+        .waitlist-form-title {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .wl-form {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .wl-form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wl-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            padding: 14px 20px 0;
+            background: var(--black);
+        }
+
+        .wl-input {
+            padding: 10px 20px 16px;
+            background: var(--black);
+            border: none;
+            border-bottom: 1px solid transparent;
+            color: #fff;
+            font-family: 'Satoshi', sans-serif;
+            font-size: 15px;
+            font-weight: 300;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .wl-input:focus { border-bottom-color: var(--gold); }
+
+        .wl-select {
+            padding: 10px 20px 16px;
+            background: var(--black);
+            border: none;
+            border-bottom: 1px solid transparent;
+            color: #fff;
+            font-family: 'Satoshi', sans-serif;
+            font-size: 15px;
+            font-weight: 300;
+            outline: none;
+            transition: border-color 0.3s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .wl-select:focus { border-bottom-color: var(--gold); }
+        .wl-select option { background: #111; }
+
+        .wl-rgpd {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: var(--black);
+            padding: 16px 20px;
+            cursor: pointer;
+            margin-top: 4px;
+        }
+
+        .wl-rgpd input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            min-width: 16px;
+            margin-top: 3px;
+            accent-color: var(--gold);
+            -webkit-appearance: checkbox;
+            appearance: checkbox;
+            cursor: pointer;
+        }
+
+        .wl-rgpd span {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .wl-rgpd a { color: var(--gold); text-decoration: none; }
+
+        .wl-submit {
+            margin-top: 8px;
+            width: 100%;
+            padding: 20px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            font-family: 'Satoshi', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .wl-submit:hover { background: var(--gold-light); }
+        .wl-submit:active { transform: scale(0.99); }
+
+        .wl-form-note {
+            font-size: 11px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 16px;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+        }
+
+        /* ── HOW IT WORKS ─────────────────────────────── */
+        .how-wrap {
+            padding: 100px 60px;
+            max-width: 1160px;
+            margin: 0 auto;
+        }
+
+        .how-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 64px;
+        }
+
+        .how-step {
+            padding: 40px 40px 40px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .how-step:not(:last-child) {
+            padding-right: 48px;
+            border-right: 1px solid var(--border);
+            margin-right: 0;
+        }
+
+        .how-step:not(:first-child) {
+            padding-left: 48px;
+        }
+
+        .how-step-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 64px;
+            color: var(--gold);
+            opacity: 0.18;
+            line-height: 1;
+            margin-bottom: -8px;
+        }
+
+        .how-step-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            letter-spacing: 2px;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .how-step-text {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .how-step-icon {
+            margin-bottom: 16px;
+        }
+
+        /* ── OPINIONES ────────────────────────────────── */
+        .opiniones-wrap {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+            padding: 100px 60px;
+        }
+
+        .opiniones-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .opiniones-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--border);
+            margin-top: 60px;
+        }
+
+        .opinion-card {
+            background: var(--surface2);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            transition: background 0.3s;
+        }
+
+        .opinion-card:hover { background: #1e1e1e; }
+
+        .opinion-stars { display: flex; gap: 4px; }
+
+        .star {
+            width: 14px;
+            height: 14px;
+            background: var(--gold);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        .opinion-quote {
+            font-size: 32px;
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--gold);
+            opacity: 0.4;
+            line-height: 1;
+        }
+
+        .opinion-text {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.8;
+            flex: 1;
+        }
+
+        .opinion-author {
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .opinion-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .opinion-meta {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .opinion-featured {
+            grid-column: span 1;
+            border-top: 2px solid var(--gold);
+        }
+
+        /* ── FOOTER ───────────────────────────────────── */
+        footer {
+            padding: 40px 60px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 4px;
+            color: var(--gold);
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--muted);
+            letter-spacing: 1px;
+            line-height: 1.7;
+        }
+
+        .footer-contact {
+            display: flex;
+            gap: 32px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-contact a {
+            font-size: 12px;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-contact a:hover { color: var(--gold); }
+
+        .footer-legal {
+            position: static;
+            background: none;
+            z-index: auto;
+            top: auto;
+            left: auto;
+            right: auto;
+            display: flex;
+            gap: 24px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal a {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-legal a:hover { color: var(--gold); }
+
+        /* ── RESPONSIVE ───────────────────────────────── */
+        @media (max-width: 1024px) {
+            .courses-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .course-card.featured {
+                grid-column: 1 / -1;
+                grid-row: auto;
+                border-left: none;
+                border-top: 3px solid var(--gold);
+            }
+            .opiniones-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 900px) {
+            nav { padding: 20px 24px; }
+            .nav-links { display: none; }
+            .nav-hamburger { display: block; }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 100px 24px 80px;
+            }
+            .hero-left {
+                padding-right: 0;
+                align-items: flex-start;
+            }
+            .hero-right { display: none; }
+
+            .courses-wrap { padding: 60px 24px; }
+            .courses-grid { grid-template-columns: 1fr; }
+            .course-card.featured {
+                grid-column: 1;
+                grid-row: auto;
+                border-left: none;
+                border-top: 3px solid var(--gold);
+            }
+
+            .waitlist-wrap { padding: 60px 24px; }
+            .waitlist-inner {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+            .waitlist-text { max-width: 100%; }
+
+            .opiniones-wrap { padding: 60px 24px; }
+            .opiniones-grid { grid-template-columns: 1fr; }
+
+            .how-wrap { padding: 60px 24px; }
+            .how-steps {
+                grid-template-columns: 1fr;
+            }
+            .how-step {
+                padding: 32px 0;
+                border-right: none;
+            }
+            .how-step:not(:first-child) { padding-left: 0; }
+            .how-step:not(:last-child) { padding-right: 0; }
+
+            footer { padding: 40px 24px 24px; }
+        }
+
+        @media (max-width: 560px) {
+            .hero-cta-row { flex-direction: column; align-items: flex-start; }
+            .btn-primary, .btn-outline { width: 100%; text-align: center; }
+            .course-price-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .btn-course { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-logo">Dragons Den</div>
+    <ul class="nav-links">
+        <li><a href="index.html#programa">Programa</a></li>
+        <li><a href="index.html#precios">Precios</a></li>
+        <li><a href="index.html#opiniones">Opiniones</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
+        <li><a href="academia.html" style="color:var(--gold);">Academia Online</a></li>
+        <li><a href="index.html#inscripcion">Inscripci&oacute;n</a></li>
+    </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir men&uacute;" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <line x1="3" y1="7" x2="21" y2="7"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="17" x2="21" y2="17"/>
+        </svg>
+    </button>
+</nav>
+<ul class="nav-mobile-menu" id="nav-mobile-menu" role="menu">
+    <li><a href="index.html#programa" role="menuitem">Programa</a></li>
+    <li><a href="index.html#precios" role="menuitem">Precios</a></li>
+    <li><a href="index.html#opiniones" role="menuitem">Opiniones</a></li>
+    <li><a href="index.html#blog" role="menuitem">Blog</a></li>
+    <li><a href="academia.html" role="menuitem" style="color:var(--gold);">Academia Online</a></li>
+    <li><a href="index.html#inscripcion" role="menuitem">Inscripci&oacute;n</a></li>
+</ul>
+
+<!-- HERO -->
+<div class="hero" role="banner">
+    <div class="hero-left">
+        <p class="hero-eyebrow">Formaci&oacute;n Online &mdash; Dragons Den Method</p>
+        <h1 class="hero-title">ACADEMIA<br><span>ONLINE</span></h1>
+        <div class="hero-divider" aria-hidden="true"></div>
+        <p class="hero-subtitle">Entrena con los m&eacute;todos de Dragons Den, cuando quieras, donde quieras.</p>
+        <div class="hero-cta-row">
+            <a href="#cursos" class="btn-primary">Ver cursos</a>
+            <a href="#lista-espera" class="btn-outline">Lista de espera</a>
+        </div>
+    </div>
+    <div class="hero-right" aria-hidden="true">
+        <!-- Basketball hoop / court CSS-SVG art -->
+        <svg class="hero-court-art" viewBox="0 0 460 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background court rings -->
+            <circle cx="230" cy="290" r="210" stroke="#c8a96e" stroke-width="0.8" opacity="0.06"/>
+            <circle cx="230" cy="290" r="150" stroke="#c8a96e" stroke-width="0.8" opacity="0.05"/>
+            <circle cx="230" cy="290" r="90" stroke="#c8a96e" stroke-width="1" opacity="0.07"/>
+
+            <!-- Court lane lines -->
+            <rect x="140" y="80" width="180" height="280" stroke="#c8a96e" stroke-width="0.8" opacity="0.08" fill="none"/>
+            <line x1="140" y1="280" x2="320" y2="280" stroke="#c8a96e" stroke-width="0.8" opacity="0.07"/>
+
+            <!-- Backboard -->
+            <rect x="170" y="52" width="120" height="52" rx="2" stroke="#c8a96e" stroke-width="1.5" opacity="0.55" fill="none"/>
+            <!-- Backboard inner square -->
+            <rect x="198" y="66" width="64" height="36" rx="1" stroke="#c8a96e" stroke-width="1" opacity="0.35" fill="none"/>
+
+            <!-- Rim mount (pole from backboard to rim) -->
+            <line x1="230" y1="104" x2="230" y2="126" stroke="#c8a96e" stroke-width="2" opacity="0.6"/>
+
+            <!-- Rim — ellipse to simulate perspective -->
+            <ellipse cx="230" cy="132" rx="36" ry="9" stroke="#c8a96e" stroke-width="2.2" opacity="0.7" fill="none"/>
+
+            <!-- Net lines from rim -->
+            <line x1="194" y1="136" x2="202" y2="182" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+            <line x1="204" y1="140" x2="208" y2="184" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+            <line x1="214" y1="141" x2="215" y2="185" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+            <line x1="224" y1="141" x2="222" y2="185" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+            <line x1="234" y1="141" x2="233" y2="185" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+            <line x1="244" y1="141" x2="245" y2="185" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+            <line x1="254" y1="140" x2="254" y2="184" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+            <line x1="264" y1="136" x2="260" y2="182" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+
+            <!-- Net bottom -->
+            <path d="M202 182 Q216 194 230 196 Q244 194 260 182" stroke="#c8a96e" stroke-width="0.8" opacity="0.3" fill="none"/>
+
+            <!-- Basketball ball -->
+            <circle cx="318" cy="310" r="44" stroke="#c8a96e" stroke-width="1.4" opacity="0.45" fill="none"/>
+            <!-- Ball seam lines -->
+            <path d="M278 298 Q318 280 358 298" stroke="#c8a96e" stroke-width="1" opacity="0.3" fill="none"/>
+            <path d="M278 322 Q318 340 358 322" stroke="#c8a96e" stroke-width="1" opacity="0.3" fill="none"/>
+            <line x1="318" y1="266" x2="318" y2="354" stroke="#c8a96e" stroke-width="1" opacity="0.25"/>
+            <path d="M308 268 Q296 310 308 352" stroke="#c8a96e" stroke-width="0.8" opacity="0.2" fill="none"/>
+            <path d="M328 268 Q340 310 328 352" stroke="#c8a96e" stroke-width="0.8" opacity="0.2" fill="none"/>
+
+            <!-- Three-point arc suggestion -->
+            <path d="M100 380 A135 135 0 0 1 360 380" stroke="#c8a96e" stroke-width="0.8" opacity="0.07" fill="none"/>
+
+            <!-- Corner accent lines -->
+            <line x1="60" y1="430" x2="60" y2="480" stroke="#c8a96e" stroke-width="0.6" opacity="0.1"/>
+            <line x1="40" y1="460" x2="90" y2="460" stroke="#c8a96e" stroke-width="0.6" opacity="0.1"/>
+            <line x1="380" y1="430" x2="380" y2="480" stroke="#c8a96e" stroke-width="0.6" opacity="0.1"/>
+            <line x1="360" y1="460" x2="410" y2="460" stroke="#c8a96e" stroke-width="0.6" opacity="0.1"/>
+        </svg>
+        <div class="hero-bg-number" aria-hidden="true">DD</div>
+    </div>
+</div>
+
+<!-- COURSE GRID -->
+<section id="cursos" class="courses-wrap" aria-labelledby="courses-heading">
+    <p class="section-eyebrow">Packs de entrenamiento</p>
+    <h2 class="section-title" id="courses-heading">Elige tu<br>pack</h2>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p class="section-text">Los mismos ejercicios que usamos en pista, organizados por &aacute;rea de mejora. Acceso anual renovable, sin permanencia.</p>
+
+    <div class="courses-grid" role="list" aria-label="Packs disponibles">
+
+        <!-- Pack 1 — Tiro -->
+        <article class="course-card" role="listitem">
+            <p class="course-module-num">Pack 01 &mdash; Tiro</p>
+            <h3 class="course-title">Fundamentos<br>de Tiro</h3>
+            <div class="course-meta" aria-label="Detalles del pack">
+                <div class="course-meta-item">
+                    <p class="course-meta-label">Videos</p>
+                    <p class="course-meta-value">8 videos</p>
+                </div>
+                <div class="course-meta-item">
+                    <p class="course-meta-label">Duraci&oacute;n</p>
+                    <p class="course-meta-value">4 horas</p>
+                </div>
+            </div>
+            <span class="course-difficulty" aria-label="Nivel: Iniciaci&oacute;n y Medio">Iniciaci&oacute;n &mdash; Medio</span>
+            <div class="course-price-row">
+                <div>
+                    <div>
+                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                    </div>
+                    <p class="course-price-sub">1,58&euro; al mes</p>
+                </div>
+                <a href="#lista-espera" class="btn-course">Unirme</a>
+            </div>
+        </article>
+
+        <!-- Pack 2 — Footwork y 1vs1 -->
+        <article class="course-card" role="listitem">
+            <p class="course-module-num">Pack 02 &mdash; Footwork</p>
+            <h3 class="course-title">Trabajo de Pies<br>y 1vs1</h3>
+            <div class="course-meta" aria-label="Detalles del pack">
+                <div class="course-meta-item">
+                    <p class="course-meta-label">Videos</p>
+                    <p class="course-meta-value">6 videos</p>
+                </div>
+                <div class="course-meta-item">
+                    <p class="course-meta-label">Duraci&oacute;n</p>
+                    <p class="course-meta-value">3 horas</p>
+                </div>
+            </div>
+            <span class="course-difficulty" aria-label="Nivel: Medio">Medio</span>
+            <div class="course-price-row">
+                <div>
+                    <div>
+                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                    </div>
+                    <p class="course-price-sub">1,58&euro; al mes</p>
+                </div>
+                <a href="#lista-espera" class="btn-course">Unirme</a>
+            </div>
+        </article>
+
+        <!-- Pack 3 — Defensa -->
+        <article class="course-card" role="listitem">
+            <p class="course-module-num">Pack 03 &mdash; Defensa</p>
+            <h3 class="course-title">Defensa<br>Individual</h3>
+            <div class="course-meta" aria-label="Detalles del pack">
+                <div class="course-meta-item">
+                    <p class="course-meta-label">Videos</p>
+                    <p class="course-meta-value">5 videos</p>
+                </div>
+                <div class="course-meta-item">
+                    <p class="course-meta-label">Duraci&oacute;n</p>
+                    <p class="course-meta-value">2,5 horas</p>
+                </div>
+            </div>
+            <span class="course-difficulty" aria-label="Nivel: Iniciaci&oacute;n y Medio">Iniciaci&oacute;n &mdash; Medio</span>
+            <div class="course-price-row">
+                <div>
+                    <div>
+                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                    </div>
+                    <p class="course-price-sub">1,58&euro; al mes</p>
+                </div>
+                <a href="#lista-espera" class="btn-course">Unirme</a>
+            </div>
+        </article>
+
+        <!-- Pack 4 — Físico -->
+        <article class="course-card" role="listitem">
+            <p class="course-module-num">Pack 04 &mdash; F&iacute;sico</p>
+            <h3 class="course-title">F&iacute;sico y<br>Explosividad</h3>
+            <div class="course-meta" aria-label="Detalles del pack">
+                <div class="course-meta-item">
+                    <p class="course-meta-label">Videos</p>
+                    <p class="course-meta-value">6 videos</p>
+                </div>
+                <div class="course-meta-item">
+                    <p class="course-meta-label">Duraci&oacute;n</p>
+                    <p class="course-meta-value">3 horas</p>
+                </div>
+            </div>
+            <span class="course-difficulty" aria-label="Nivel: Todos">Todos los niveles</span>
+            <div class="course-price-row">
+                <div>
+                    <div>
+                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                    </div>
+                    <p class="course-price-sub">1,58&euro; al mes</p>
+                </div>
+                <a href="#lista-espera" class="btn-course">Unirme</a>
+            </div>
+        </article>
+
+        <!-- Pack 5 — Mentalidad -->
+        <article class="course-card" role="listitem">
+            <p class="course-module-num">Pack 05 &mdash; Mental</p>
+            <h3 class="course-title">Mentalidad<br>y T&aacute;ctica</h3>
+            <div class="course-meta" aria-label="Detalles del pack">
+                <div class="course-meta-item">
+                    <p class="course-meta-label">Videos</p>
+                    <p class="course-meta-value">4 videos</p>
+                </div>
+                <div class="course-meta-item">
+                    <p class="course-meta-label">Duraci&oacute;n</p>
+                    <p class="course-meta-value">2 horas</p>
+                </div>
+            </div>
+            <span class="course-difficulty" aria-label="Nivel: Todos">Todos los niveles</span>
+            <div class="course-price-row">
+                <div>
+                    <div>
+                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                    </div>
+                    <p class="course-price-sub">1,58&euro; al mes</p>
+                </div>
+                <a href="#lista-espera" class="btn-course">Unirme</a>
+            </div>
+        </article>
+
+        <!-- Pack 6 — Completo (Featured) -->
+        <article class="course-card featured" role="listitem" aria-label="Pack destacado">
+            <div class="course-popular-badge" aria-label="Mejor valor">Mejor valor</div>
+            <p class="course-module-num">Pack Completo</p>
+            <p class="course-featured-tag">Dragons Den Method</p>
+            <h3 class="course-title">Todos los<br>Packs</h3>
+            <div class="course-meta" aria-label="Detalles del pack completo">
+                <div class="course-meta-item">
+                    <p class="course-meta-label">Videos</p>
+                    <p class="course-meta-value">29+ videos</p>
+                </div>
+                <div class="course-meta-item">
+                    <p class="course-meta-label">Duraci&oacute;n</p>
+                    <p class="course-meta-value">15 horas</p>
+                </div>
+            </div>
+            <span class="course-difficulty all-levels" aria-label="Nivel: Todos">Todos los niveles</span>
+            <div class="course-price-row">
+                <div>
+                    <div>
+                        <span class="course-price-currency">&euro;</span><span class="course-price">49</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                    </div>
+                    <p class="course-price-sub">4,08&euro; al mes &mdash; 5 packs incluidos + 4 bonus</p>
+                </div>
+                <a href="#lista-espera" class="btn-course">Unirme</a>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<!-- PROXIMAMENTE / WAITLIST -->
+<div class="waitlist-wrap" id="lista-espera">
+    <div class="waitlist-inner">
+        <div class="waitlist-left">
+            <div class="waitlist-status">
+                <span class="status-dot" aria-hidden="true"></span>
+                Pr&oacute;ximamente
+            </div>
+            <h2 class="waitlist-title">El contenido<br>se graba este<br>verano.</h2>
+            <p class="waitlist-subtitle">Verano 2026</p>
+            <p class="waitlist-text">
+                Estamos filmando todos los m&oacute;dulos en pista durante el verano de 2026.
+                &Uacute;nete a la lista de espera y accede primero con descuento de lanzamiento.
+                Packs individuales desde 19&euro;/a&ntilde;o. Pack completo con todos los m&oacute;dulos a 49&euro;/a&ntilde;o. Las primeras 50 personas bloquean el precio de lanzamiento.
+            </p>
+        </div>
+        <div class="waitlist-form-wrap">
+            <p class="waitlist-form-title">Unirme a la lista de espera</p>
+            <form
+                class="wl-form"
+                id="waitlist-form"
+                action="https://formsubmit.co/bbdragonsden@gmail.com"
+                method="POST"
+                aria-label="Formulario lista de espera"
+                novalidate
+            >
+                <!-- FormSubmit hidden fields -->
+                <input type="hidden" name="_subject" value="Nueva inscripci&oacute;n lista de espera — Academia Online DD">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="text" name="_honey" style="display:none" tabindex="-1" aria-hidden="true">
+
+                <div class="wl-form-group">
+                    <label class="wl-label" for="wl-name">Nombre</label>
+                    <input
+                        class="wl-input"
+                        type="text"
+                        id="wl-name"
+                        name="nombre"
+                        placeholder="Tu nombre"
+                        required
+                        autocomplete="given-name"
+                    >
+                </div>
+
+                <div class="wl-form-group">
+                    <label class="wl-label" for="wl-email">Email</label>
+                    <input
+                        class="wl-input"
+                        type="email"
+                        id="wl-email"
+                        name="email"
+                        placeholder="tu@email.com"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="wl-form-group">
+                    <label class="wl-label" for="wl-interest">Pack de inter&eacute;s</label>
+                    <select class="wl-select" id="wl-interest" name="interes" required>
+                        <option value="" disabled selected>Elige un pack</option>
+                        <option value="pack-tiro">Pack Tiro &mdash; 19&euro;/a&ntilde;o</option>
+                        <option value="pack-footwork">Pack Footwork y 1vs1 &mdash; 19&euro;/a&ntilde;o</option>
+                        <option value="pack-defensa">Pack Defensa Individual &mdash; 19&euro;/a&ntilde;o</option>
+                        <option value="pack-fisico">Pack F&iacute;sico y Explosividad &mdash; 19&euro;/a&ntilde;o</option>
+                        <option value="pack-mentalidad">Pack Mentalidad y T&aacute;ctica &mdash; 19&euro;/a&ntilde;o</option>
+                        <option value="pack-completo">Pack Completo DD Method &mdash; 49&euro;/a&ntilde;o</option>
+                        <option value="todavia-no-se">A&uacute;n no lo s&eacute;</option>
+                    </select>
+                </div>
+
+                <label class="wl-rgpd">
+                    <input type="checkbox" name="rgpd" id="wl-rgpd" required>
+                    <span>
+                        He le&iacute;do y acepto la
+                        <a href="politica-privacidad.html" target="_blank">Pol&iacute;tica de Privacidad</a>.
+                        Mis datos se usar&aacute;n exclusivamente para notificarme del lanzamiento.
+                    </span>
+                </label>
+
+                <button type="submit" class="wl-submit" id="wl-submit-btn">
+                    Reservar mi plaza
+                </button>
+
+                <p class="wl-form-note">Sin spam. Solo te avisamos cuando lancemos.</p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-wrap" aria-labelledby="how-heading">
+    <p class="section-eyebrow">C&oacute;mo funciona</p>
+    <h2 class="section-title" id="how-heading">Tres pasos.<br>Sin complicaci&oacute;n.</h2>
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <div class="how-steps" role="list">
+
+        <div class="how-step" role="listitem">
+            <div class="how-step-num" aria-hidden="true">01</div>
+            <div class="how-step-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="5" width="22" height="18" rx="2"/>
+                    <path d="M3 10h22"/>
+                    <path d="M9 3v4M19 3v4"/>
+                    <path d="M8 15h4M8 18h7"/>
+                </svg>
+            </div>
+            <h3 class="how-step-title">Elige tu m&oacute;dulo</h3>
+            <p class="how-step-text">Selecciona el curso que mejor encaje con tu nivel y tu objetivo. Desde iniciaci&oacute;n hasta pack completo.</p>
+        </div>
+
+        <div class="how-step" role="listitem">
+            <div class="how-step-num" aria-hidden="true">02</div>
+            <div class="how-step-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="14" cy="14" r="11"/>
+                    <path d="M11 9.5l7 4.5-7 4.5V9.5z" fill="#c8a96e" stroke="none"/>
+                </svg>
+            </div>
+            <h3 class="how-step-title">Accede de por vida</h3>
+            <p class="how-step-text">Un solo pago, acceso permanente. Vuelve al material cuando lo necesites, sin suscripciones ni fechas de caducidad.</p>
+        </div>
+
+        <div class="how-step" role="listitem">
+            <div class="how-step-num" aria-hidden="true">03</div>
+            <div class="how-step-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="14" cy="11" r="6"/>
+                    <path d="M4 25c0-5.523 4.477-9 10-9s10 3.477 10 9"/>
+                    <line x1="20" y1="5" x2="24" y2="3"/>
+                    <line x1="22" y1="9" x2="26" y2="9"/>
+                    <line x1="20" y1="13" x2="24" y2="15"/>
+                </svg>
+            </div>
+            <h3 class="how-step-title">Aplica en pista</h3>
+            <p class="how-step-text">Cada ejercicio incluye instrucciones para trasladarlo directamente a tu entrenamiento. Ver y hacer, en ese orden.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- OPINIONES -->
+<div class="opiniones-wrap" id="opiniones">
+    <div class="opiniones-inner">
+        <p class="section-eyebrow">Opiniones</p>
+        <h2 class="section-title">Lo que dicen<br>los jugadores</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+
+        <div class="opiniones-grid">
+
+            <div class="opinion-card opinion-featured">
+                <div class="opinion-stars">
+                    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+                </div>
+                <div class="opinion-quote">&ldquo;</div>
+                <p class="opinion-text">Llevaba meses estancado con el tiro. Con el pack en dos semanas ya notaba diferencia en el porcentaje. Es el tipo de contenido que no encuentras gratis en YouTube &mdash; va directo al problema sin rodeos.</p>
+                <div class="opinion-author">
+                    <div class="opinion-name">Rub&eacute;n A.</div>
+                    <div class="opinion-meta">Base &mdash; 18 a&ntilde;os &mdash; Pack Tiro</div>
+                </div>
+            </div>
+
+            <div class="opinion-card">
+                <div class="opinion-stars">
+                    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+                </div>
+                <div class="opinion-quote">&ldquo;</div>
+                <p class="opinion-text">Compr&eacute; el pack completo sin conocer la academia. Para la siguiente temporada ya ten&iacute;a mi primer paso mucho m&aacute;s limpio y hab&iacute;a dejado de perder el bal&oacute;n en penetraci&oacute;n.</p>
+                <div class="opinion-author">
+                    <div class="opinion-name">Sof&iacute;a M.</div>
+                    <div class="opinion-meta">Alero &mdash; 16 a&ntilde;os &mdash; Pack Completo</div>
+                </div>
+            </div>
+
+            <div class="opinion-card">
+                <div class="opinion-stars">
+                    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+                </div>
+                <div class="opinion-quote">&ldquo;</div>
+                <p class="opinion-text">Mi hijo lo tiene puesto en la tele del sal&oacute;n y repite los ejercicios en el pasillo. No me hab&iacute;a pedido nunca formaci&oacute;n extra, y ahora me pide ir a la pista a probar lo que aprende.</p>
+                <div class="opinion-author">
+                    <div class="opinion-name">Carlos F.</div>
+                    <div class="opinion-meta">Padre de Iker, 13 a&ntilde;os &mdash; Pack Footwork</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="opiniones-grid">
+
+            <div class="opinion-card opinion-featured">
+                <div class="opinion-stars">
+                    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+                </div>
+                <div class="opinion-quote">&ldquo;</div>
+                <p class="opinion-text">Hice el pack de defensa mientras esperaba plaza en el campus. Cuando llegu&eacute;, Yefangyi me pregunt&oacute; d&oacute;nde hab&iacute;a entrenado ese verano. Le dije que con sus propios videos. No se lo esperaba.</p>
+                <div class="opinion-author">
+                    <div class="opinion-name">Daniel V.</div>
+                    <div class="opinion-meta">Escolta &mdash; 21 a&ntilde;os &mdash; Pack Defensa</div>
+                </div>
+            </div>
+
+            <div class="opinion-card">
+                <div class="opinion-stars">
+                    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+                </div>
+                <div class="opinion-quote">&ldquo;</div>
+                <p class="opinion-text">El pack de mentalidad lo escucho mientras voy al entreno de mi club. En el coche, 20 minutos antes de pisar la pista. Ha cambiado completamente c&oacute;mo entro a competir.</p>
+                <div class="opinion-author">
+                    <div class="opinion-name">Claudia R.</div>
+                    <div class="opinion-meta">Base &mdash; 17 a&ntilde;os &mdash; Pack Mentalidad</div>
+                </div>
+            </div>
+
+            <div class="opinion-card">
+                <div class="opinion-stars">
+                    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+                </div>
+                <div class="opinion-quote">&ldquo;</div>
+                <p class="opinion-text">Muy bien organizado por niveles. Mi hija de 12 a&ntilde;os empez&oacute; por los primeros videos del pack de tiro y ahora ya va por el de footwork. A su ritmo, sin presi&oacute;n. Se nota que sabe c&oacute;mo ense&ntilde;ar.</p>
+                <div class="opinion-author">
+                    <div class="opinion-name">Laura G.</div>
+                    <div class="opinion-meta">Madre de Valentina, 12 a&ntilde;os &mdash; Pack Tiro</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-logo">Dragons Den</div>
+    <p class="footer-text">
+        Dragons Den Basketball Academy &mdash; dragonsden.es<br>
+        &copy; 2026 Yefangyi Hu Garcia. Todos los derechos reservados.
+    </p>
+    <div class="footer-contact" role="list" aria-label="Contacto">
+        <a href="https://wa.me/34646794962" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="WhatsApp: 646 794 962">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+            646 794 962
+        </a>
+        <a href="mailto:bbdragonsden@gmail.com" role="listitem" aria-label="Email: bbdragonsden@gmail.com">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            bbdragonsden@gmail.com
+        </a>
+    </div>
+    <nav class="footer-legal" aria-label="Enlaces legales">
+        <a href="aviso-legal.html">Aviso Legal</a>
+        <a href="politica-privacidad.html">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
+    </nav>
+</footer>
+
+<script>
+    (function () {
+        'use strict';
+
+        // ── Mobile hamburger ─────────────────────────
+        var hamburger = document.getElementById('nav-hamburger');
+        var mobileMenu = document.getElementById('nav-mobile-menu');
+
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', function () {
+                var isOpen = mobileMenu.classList.toggle('open');
+                hamburger.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            // Close on link click
+            var mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(function (link) {
+                link.addEventListener('click', function () {
+                    mobileMenu.classList.remove('open');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // Close on outside click
+            document.addEventListener('click', function (e) {
+                if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                    mobileMenu.classList.remove('open');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        // ── Waitlist form validation ─────────────────
+        var form = document.getElementById('waitlist-form');
+        var submitBtn = document.getElementById('wl-submit-btn');
+
+        if (form && submitBtn) {
+            form.addEventListener('submit', function (e) {
+                var nameEl = document.getElementById('wl-name');
+                var emailEl = document.getElementById('wl-email');
+                var interestEl = document.getElementById('wl-interest');
+                var rgpdEl = document.getElementById('wl-rgpd');
+
+                var errors = [];
+
+                if (!nameEl.value.trim()) errors.push('nombre');
+                if (!emailEl.value.trim() || !emailEl.value.includes('@')) errors.push('email');
+                if (!interestEl.value) errors.push('interés');
+                if (!rgpdEl.checked) errors.push('privacidad');
+
+                if (errors.length > 0) {
+                    e.preventDefault();
+                    // Light shake feedback
+                    form.style.transition = 'transform 0.08s ease';
+                    form.style.transform = 'translateX(-4px)';
+                    setTimeout(function () { form.style.transform = 'translateX(4px)'; }, 80);
+                    setTimeout(function () { form.style.transform = 'translateX(0)'; }, 160);
+
+                    if (!nameEl.value.trim()) nameEl.focus();
+                    else if (!emailEl.value.trim() || !emailEl.value.includes('@')) emailEl.focus();
+                    else if (!interestEl.value) interestEl.focus();
+                    return;
+                }
+
+                submitBtn.textContent = 'Enviando…';
+                submitBtn.disabled = true;
+            });
+        }
+
+        // ── Scroll-aware nav background ─────────────
+        var nav = document.querySelector('nav');
+        if (nav) {
+            var onScroll = function () {
+                if (window.scrollY > 60) {
+                    nav.style.background = 'rgba(8,8,8,0.97)';
+                    nav.style.backdropFilter = 'blur(8px)';
+                } else {
+                    nav.style.background = '';
+                    nav.style.backdropFilter = '';
+                }
+            };
+            window.addEventListener('scroll', onScroll, { passive: true });
+        }
+
+    }());
+</script>
+
+</body>
+</html>
