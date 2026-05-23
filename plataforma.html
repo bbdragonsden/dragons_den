@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -544,6 +545,10 @@ const PACKS = [
     }
 ];
 
+const SUPABASE_URL = 'https://oyuhyrzjhaqzawwnmwcv.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_W4UBtORpWtWnKGzw-x9VbA_gPsDQfzQ';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 // ── State ─────────────────────────────────────────────────────────────────
 let currentUser = null;
 let userPacks = [];
@@ -552,28 +557,25 @@ let activeModule = null;
 
 // ── Auth ──────────────────────────────────────────────────────────────────
 async function checkAuth() {
-    const token = localStorage.getItem('dd_token');
-    if (!token) return redirect();
-
-    try {
-        const res = await fetch('/api/verify', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token })
-        });
-        const data = await res.json();
-        if (!data.valid) return redirect();
-
-        currentUser = { name: data.name, packs: data.packs };
-        userPacks = data.packs || [];
-        init();
-    } catch {
-        redirect();
+    // Handle OAuth/email confirmation code in URL
+    const code = new URLSearchParams(window.location.search).get('code');
+    if (code) {
+        await sb.auth.exchangeCodeForSession(code);
+        window.history.replaceState({}, '', window.location.pathname);
     }
-}
 
-function redirect() {
-    window.location.href = 'login.html';
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) return window.location.href = 'login.html';
+
+    const user = session.user;
+    const name = user.user_metadata?.name || user.user_metadata?.full_name || user.email.split('@')[0];
+
+    // Fetch pack permissions from DB
+    const { data: packsData } = await sb.from('user_packs').select('pack_id');
+    userPacks = packsData ? packsData.map(p => p.pack_id) : [];
+
+    currentUser = { name, email: user.email };
+    init();
 }
 
 function hasAccess(packId) {
@@ -590,9 +592,8 @@ function init() {
     renderSidebar();
     renderWelcome();
 
-    document.getElementById('btn-logout').addEventListener('click', () => {
-        localStorage.removeItem('dd_token');
-        localStorage.removeItem('dd_user');
+    document.getElementById('btn-logout').addEventListener('click', async () => {
+        await sb.auth.signOut();
         window.location.href = 'login.html';
     });
 
