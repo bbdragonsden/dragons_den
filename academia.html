@@ -15,14 +15,14 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Dragons Den Basketball Academy">
     <meta property="og:title" content="Academia Online — Dragons Den Basketball">
-    <meta property="og:description" content="Cursos de baloncesto online con los métodos de Dragons Den. Tiro, trabajo de pies y packs completos. Accede de por vida.">
+    <meta property="og:description" content="Cursos de baloncesto online con los métodos de Dragons Den. Tiro, trabajo de pies y packs completos. Acceso anual desde 19€.">
     <meta property="og:url" content="https://www.dragonsden.es/academia.html">
     <meta property="og:image" content="https://picsum.photos/seed/dragonsden-academia/1200/630">
     <meta property="og:locale" content="es_ES">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Academia Online — Dragons Den Basketball">
-    <meta name="twitter:description" content="Cursos de baloncesto online con los métodos de Dragons Den. Accede de por vida, aplica en pista.">
+    <meta name="twitter:description" content="Cursos de baloncesto online con los métodos de Dragons Den. Acceso anual desde 19€, aplica en pista.">
     <meta name="twitter:image" content="https://picsum.photos/seed/dragonsden-academia/1200/630">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -339,6 +339,39 @@
             color: var(--muted);
             letter-spacing: 1px;
             margin-top: 1px;
+        }
+
+        .price-anchor {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .price-anchor-market {
+            text-align: right;
+        }
+        .price-anchor-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            margin-bottom: 2px;
+            opacity: 0.7;
+        }
+        .price-anchor-val {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: var(--muted);
+            text-decoration: line-through;
+            opacity: 0.4;
+            letter-spacing: 1px;
+        }
+        .price-anchor-sep {
+            font-size: 10px;
+            color: var(--muted);
+            opacity: 0.4;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            flex-shrink: 0;
         }
 
         .course-card.featured {
@@ -668,6 +701,47 @@
 
         .wl-submit:hover { background: var(--gold-light); }
         .wl-submit:active { transform: scale(0.99); }
+
+        .wl-confirm {
+            display: none;
+            padding: 8px 0 16px;
+        }
+        .wl-confirm-icon {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
+        }
+        .wl-confirm-eyebrow {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 14px;
+        }
+        .wl-confirm-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 52px;
+            color: var(--white);
+            letter-spacing: 2px;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+        .wl-confirm-body {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.75;
+            max-width: 380px;
+            margin-bottom: 20px;
+        }
+        .wl-confirm-sub {
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 1px;
+        }
 
         .wl-form-note {
             font-size: 11px;
@@ -1083,11 +1157,18 @@
             </div>
             <span class="course-difficulty" aria-label="Nivel: Iniciaci&oacute;n y Medio">Iniciaci&oacute;n &mdash; Medio</span>
             <div class="course-price-row">
-                <div>
-                    <div>
-                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                <div class="price-anchor">
+                    <div class="price-anchor-market">
+                        <p class="price-anchor-label">Mercado</p>
+                        <p class="price-anchor-val">~15&euro;/mes</p>
                     </div>
-                    <p class="course-price-sub">1,58&euro; al mes</p>
+                    <div class="price-anchor-sep">vs</div>
+                    <div>
+                        <div>
+                            <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                        </div>
+                        <p class="course-price-sub">1,58&euro; al mes</p>
+                    </div>
                 </div>
                 <a href="#lista-espera" class="btn-course">Unirme</a>
             </div>
@@ -1109,11 +1190,18 @@
             </div>
             <span class="course-difficulty" aria-label="Nivel: Medio">Medio</span>
             <div class="course-price-row">
-                <div>
-                    <div>
-                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                <div class="price-anchor">
+                    <div class="price-anchor-market">
+                        <p class="price-anchor-label">Mercado</p>
+                        <p class="price-anchor-val">~15&euro;/mes</p>
                     </div>
-                    <p class="course-price-sub">1,58&euro; al mes</p>
+                    <div class="price-anchor-sep">vs</div>
+                    <div>
+                        <div>
+                            <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                        </div>
+                        <p class="course-price-sub">1,58&euro; al mes</p>
+                    </div>
                 </div>
                 <a href="#lista-espera" class="btn-course">Unirme</a>
             </div>
@@ -1135,11 +1223,18 @@
             </div>
             <span class="course-difficulty" aria-label="Nivel: Iniciaci&oacute;n y Medio">Iniciaci&oacute;n &mdash; Medio</span>
             <div class="course-price-row">
-                <div>
-                    <div>
-                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                <div class="price-anchor">
+                    <div class="price-anchor-market">
+                        <p class="price-anchor-label">Mercado</p>
+                        <p class="price-anchor-val">~15&euro;/mes</p>
                     </div>
-                    <p class="course-price-sub">1,58&euro; al mes</p>
+                    <div class="price-anchor-sep">vs</div>
+                    <div>
+                        <div>
+                            <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                        </div>
+                        <p class="course-price-sub">1,58&euro; al mes</p>
+                    </div>
                 </div>
                 <a href="#lista-espera" class="btn-course">Unirme</a>
             </div>
@@ -1161,11 +1256,18 @@
             </div>
             <span class="course-difficulty" aria-label="Nivel: Todos">Todos los niveles</span>
             <div class="course-price-row">
-                <div>
-                    <div>
-                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                <div class="price-anchor">
+                    <div class="price-anchor-market">
+                        <p class="price-anchor-label">Mercado</p>
+                        <p class="price-anchor-val">~15&euro;/mes</p>
                     </div>
-                    <p class="course-price-sub">1,58&euro; al mes</p>
+                    <div class="price-anchor-sep">vs</div>
+                    <div>
+                        <div>
+                            <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                        </div>
+                        <p class="course-price-sub">1,58&euro; al mes</p>
+                    </div>
                 </div>
                 <a href="#lista-espera" class="btn-course">Unirme</a>
             </div>
@@ -1187,11 +1289,18 @@
             </div>
             <span class="course-difficulty" aria-label="Nivel: Todos">Todos los niveles</span>
             <div class="course-price-row">
-                <div>
-                    <div>
-                        <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                <div class="price-anchor">
+                    <div class="price-anchor-market">
+                        <p class="price-anchor-label">Mercado</p>
+                        <p class="price-anchor-val">~15&euro;/mes</p>
                     </div>
-                    <p class="course-price-sub">1,58&euro; al mes</p>
+                    <div class="price-anchor-sep">vs</div>
+                    <div>
+                        <div>
+                            <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                        </div>
+                        <p class="course-price-sub">1,58&euro; al mes</p>
+                    </div>
                 </div>
                 <a href="#lista-espera" class="btn-course">Unirme</a>
             </div>
@@ -1215,11 +1324,18 @@
             </div>
             <span class="course-difficulty all-levels" aria-label="Nivel: Todos">Todos los niveles</span>
             <div class="course-price-row">
-                <div>
-                    <div>
-                        <span class="course-price-currency">&euro;</span><span class="course-price">49</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                <div class="price-anchor">
+                    <div class="price-anchor-market">
+                        <p class="price-anchor-label">Mercado</p>
+                        <p class="price-anchor-val">~30&euro;/mes</p>
                     </div>
-                    <p class="course-price-sub">4,08&euro; al mes &mdash; 5 packs incluidos + 4 bonus</p>
+                    <div class="price-anchor-sep">vs</div>
+                    <div>
+                        <div>
+                            <span class="course-price-currency">&euro;</span><span class="course-price">49</span><span style="font-size:16px;color:var(--muted);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;">/a&ntilde;o</span>
+                        </div>
+                        <p class="course-price-sub">4,08&euro; al mes &mdash; 5 packs + 4 bonus</p>
+                    </div>
                 </div>
                 <a href="#lista-espera" class="btn-course">Unirme</a>
             </div>
@@ -1245,6 +1361,26 @@
             </p>
         </div>
         <div class="waitlist-form-wrap">
+
+            <!-- Estado de confirmación (oculto hasta envío) -->
+            <div id="wl-confirm" class="wl-confirm">
+                <div class="wl-confirm-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="3,10 8,15 17,5" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <p class="wl-confirm-eyebrow">Plaza reservada</p>
+                <h3 class="wl-confirm-title">Est&aacute;s dentro.</h3>
+                <p class="wl-confirm-body">
+                    Eres de los primeros en apuntarte. Cuando el contenido est&eacute; listo este verano,
+                    ser&aacute;s el primero en saberlo &mdash; y tendr&aacute;s el precio de lanzamiento
+                    bloqueado antes de que suba.
+                </p>
+                <p class="wl-confirm-sub">Revisa tu bandeja de entrada. Te hemos enviado una confirmaci&oacute;n.</p>
+            </div>
+
+            <!-- Formulario (se oculta tras envío exitoso) -->
+            <div id="wl-form-inner">
             <p class="waitlist-form-title">Unirme a la lista de espera</p>
             <form
                 class="wl-form"
@@ -1255,9 +1391,10 @@
                 novalidate
             >
                 <!-- FormSubmit hidden fields -->
-                <input type="hidden" name="_subject" value="Nueva inscripci&oacute;n lista de espera — Academia Online DD">
+                <input type="hidden" name="_subject" value="🏀 Nueva plaza — Academia DD | %nombre% · %interes%">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_autoresponse" value="Hola,&#10;&#10;Tu plaza en la lista de espera de la Academia Online Dragons Den está confirmada.&#10;&#10;Eres de los primeros en apuntarte. Cuando lancemos este verano, serás el primero en saberlo — y tendrás el precio de lanzamiento bloqueado antes de que suba.&#10;&#10;El contenido se graba en los entrenamientos del verano 2026. Nada de teoría vacía: los mismos ejercicios que usamos en pista, grabados para que puedas entrenar cuando quieras y donde quieras.&#10;&#10;Nos vemos en pista.&#10;&#10;— Yefangyi&#10;Dragons Den Basketball Academy&#10;@dragonsdenbasketball">
                 <input type="text" name="_honey" style="display:none" tabindex="-1" aria-hidden="true">
 
                 <div class="wl-form-group">
@@ -1315,6 +1452,7 @@
 
                 <p class="wl-form-note">Sin spam. Solo te avisamos cuando lancemos.</p>
             </form>
+            </div><!-- /wl-form-inner -->
         </div>
     </div>
 </div>
@@ -1349,8 +1487,8 @@
                     <path d="M11 9.5l7 4.5-7 4.5V9.5z" fill="#c8a96e" stroke="none"/>
                 </svg>
             </div>
-            <h3 class="how-step-title">Accede de por vida</h3>
-            <p class="how-step-text">Un solo pago, acceso permanente. Vuelve al material cuando lo necesites, sin suscripciones ni fechas de caducidad.</p>
+            <h3 class="how-step-title">Accede todo el año</h3>
+            <p class="how-step-text">Paga una vez al año. Vuelve al material cuando lo necesites, renueva solo si quieres. Sin permanencia.</p>
         </div>
 
         <div class="how-step" role="listitem">
@@ -1521,40 +1659,58 @@
             });
         }
 
-        // ── Waitlist form validation ─────────────────
+        // ── Waitlist form — AJAX submission ──────────
         var form = document.getElementById('waitlist-form');
         var submitBtn = document.getElementById('wl-submit-btn');
 
         if (form && submitBtn) {
             form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
                 var nameEl = document.getElementById('wl-name');
                 var emailEl = document.getElementById('wl-email');
                 var interestEl = document.getElementById('wl-interest');
                 var rgpdEl = document.getElementById('wl-rgpd');
 
-                var errors = [];
+                var valid = true;
+                if (!nameEl.value.trim()) { nameEl.focus(); valid = false; }
+                else if (!emailEl.value.trim() || !emailEl.value.includes('@')) { emailEl.focus(); valid = false; }
+                else if (!interestEl.value) { interestEl.focus(); valid = false; }
+                else if (!rgpdEl.checked) { valid = false; }
 
-                if (!nameEl.value.trim()) errors.push('nombre');
-                if (!emailEl.value.trim() || !emailEl.value.includes('@')) errors.push('email');
-                if (!interestEl.value) errors.push('interés');
-                if (!rgpdEl.checked) errors.push('privacidad');
-
-                if (errors.length > 0) {
-                    e.preventDefault();
-                    // Light shake feedback
+                if (!valid) {
                     form.style.transition = 'transform 0.08s ease';
                     form.style.transform = 'translateX(-4px)';
                     setTimeout(function () { form.style.transform = 'translateX(4px)'; }, 80);
                     setTimeout(function () { form.style.transform = 'translateX(0)'; }, 160);
-
-                    if (!nameEl.value.trim()) nameEl.focus();
-                    else if (!emailEl.value.trim() || !emailEl.value.includes('@')) emailEl.focus();
-                    else if (!interestEl.value) interestEl.focus();
                     return;
                 }
 
                 submitBtn.textContent = 'Enviando…';
                 submitBtn.disabled = true;
+
+                var data = new FormData(form);
+
+                fetch('https://formsubmit.co/ajax/bbdragonsden@gmail.com', {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                })
+                .then(function (res) { return res.json(); })
+                .then(function (json) {
+                    if (json.success === 'true' || json.success === true) {
+                        document.getElementById('wl-form-inner').style.display = 'none';
+                        var confirm = document.getElementById('wl-confirm');
+                        confirm.style.display = 'block';
+                    } else {
+                        submitBtn.textContent = 'Reservar mi plaza';
+                        submitBtn.disabled = false;
+                    }
+                })
+                .catch(function () {
+                    submitBtn.textContent = 'Reservar mi plaza';
+                    submitBtn.disabled = false;
+                });
             });
         }
 
