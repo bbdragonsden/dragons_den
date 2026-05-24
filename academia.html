@@ -1510,12 +1510,12 @@
 
 <!-- COURSE GRID -->
 <section id="cursos" class="courses-wrap" aria-labelledby="courses-heading">
-    <p class="section-eyebrow" data-reveal>Packs de entrenamiento</p>
-    <h2 class="section-title js-fade-left" id="courses-heading" data-reveal>Elige tu<br>pack</h2>
-    <div class="section-divider js-fade-up" aria-hidden="true"></div>
-    <p class="section-text js-fade-up">Los mismos ejercicios que usamos en pista, organizados por &aacute;rea de mejora. Acceso anual renovable, sin permanencia.</p>
+    <p class="section-eyebrow">Packs de entrenamiento</p>
+    <h2 class="section-title" id="courses-heading">Elige tu<br>pack</h2>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p class="section-text">Los mismos ejercicios que usamos en pista, organizados por &aacute;rea de mejora. Acceso anual renovable, sin permanencia.</p>
 
-    <div class="courses-grid" role="list" aria-label="Packs disponibles" data-reveal-stagger>
+    <div class="courses-grid" role="list" aria-label="Packs disponibles"-stagger>
 
         <!-- Pack 1 — Tiro -->
         <article class="course-card" data-num="01" role="listitem">
@@ -1777,13 +1777,13 @@
 <!-- HOW IT WORKS -->
 <section class="how-section" id="como-funciona" aria-labelledby="how-heading">
     <div class="how-inner">
-        <p class="section-eyebrow js-fade-up" data-reveal>C&oacute;mo funciona</p>
-        <h2 class="section-title js-fade-left" id="how-heading" data-reveal>Tres pasos.<br>Sin complicaci&oacute;n.</h2>
-        <div class="section-divider js-fade-up" aria-hidden="true"></div>
+        <p class="section-eyebrow">C&oacute;mo funciona</p>
+        <h2 class="section-title" id="how-heading">Tres pasos.<br>Sin complicaci&oacute;n.</h2>
+        <div class="section-divider" aria-hidden="true"></div>
 
-        <div class="how-steps" role="list" data-reveal-stagger>
+        <div class="how-steps" role="list"-stagger>
 
-            <div class="how-step js-how-step" role="listitem">
+            <div class="how-step" role="listitem">
                 <span class="how-step-num" aria-hidden="true">01</span>
                 <div class="how-step-icon" aria-hidden="true">
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1797,7 +1797,7 @@
                 <p class="how-step-text">Selecciona el curso que mejor encaje con tu nivel y tu objetivo. Desde iniciaci&oacute;n hasta pack completo.</p>
             </div>
 
-            <div class="how-step js-how-step" role="listitem">
+            <div class="how-step" role="listitem">
                 <span class="how-step-num" aria-hidden="true">02</span>
                 <div class="how-step-icon" aria-hidden="true">
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1809,7 +1809,7 @@
                 <p class="how-step-text">Paga una vez al año. Vuelve al material cuando lo necesites, renueva solo si quieres. Sin permanencia.</p>
             </div>
 
-            <div class="how-step js-how-step" role="listitem">
+            <div class="how-step" role="listitem">
                 <span class="how-step-num" aria-hidden="true">03</span>
                 <div class="how-step-icon" aria-hidden="true">
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1831,9 +1831,9 @@
 <!-- OPINIONES -->
 <div class="opiniones-section" id="opiniones">
     <div class="opiniones-inner">
-        <p class="section-eyebrow js-fade-up" data-reveal>Opiniones</p>
-        <h2 class="section-title js-fade-left" data-reveal>Lo que dicen<br>los jugadores</h2>
-        <div class="section-divider js-fade-up" aria-hidden="true"></div>
+        <p class="section-eyebrow">Opiniones</p>
+        <h2 class="section-title">Lo que dicen<br>los jugadores</h2>
+        <div class="section-divider" aria-hidden="true"></div>
 
         <div class="opiniones-grid">
 
@@ -2177,147 +2177,91 @@
 <script>
 (function () {
     'use strict';
-
     if (typeof gsap === 'undefined') return;
-
     gsap.registerPlugin(ScrollTrigger);
 
-    // ── 1. Hero title line reveal ──────────────────
+    var E = 'power3.out';
+
+    // ── 1. Hero title line reveal ─────────────────
     var titleInners = document.querySelectorAll('.hero-title-inner');
     if (titleInners.length) {
         gsap.set(titleInners, { yPercent: 100 });
-        gsap.to(titleInners, {
-            yPercent: 0,
-            duration: 1.1,
-            ease: 'expo.out',
-            stagger: 0.12,
-            delay: 0.1
-        });
+        gsap.to(titleInners, { yPercent: 0, duration: 1.1, ease: 'expo.out', stagger: 0.12, delay: 0.1 });
     }
 
-    // ── 2. Hero supporting elements stagger ───────
-    var heroEls = document.querySelectorAll('.hero-left .js-fade-up');
-    if (heroEls.length) {
-        gsap.fromTo(heroEls,
-            { opacity: 0, y: 28 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.9,
-                ease: 'power3.out',
-                stagger: 0.1,
-                delay: 0.55
-            }
-        );
-    }
+    // ── 2. Hero elements ──────────────────────────
+    gsap.from('.hero-eyebrow', { opacity: 0, y: 16, duration: 0.7, ease: E, delay: 0.05 });
+    gsap.from('.hero-divider', { scaleX: 0, opacity: 0, duration: 0.5, ease: E, delay: 0.5, transformOrigin: 'left center' });
+    gsap.from('.hero-sub',     { opacity: 0, y: 22, duration: 0.75, ease: E, delay: 0.55 });
+    gsap.from('.hero-ctas',    { opacity: 0, y: 18, duration: 0.65, ease: E, delay: 0.72 });
 
-    // ── 3. Hero SVG float animation ───────────────
+    // ── 3. Hero SVG float ─────────────────────────
     var floatEl = document.getElementById('hero-float');
     if (floatEl) {
-        gsap.fromTo(floatEl,
-            { opacity: 0, x: 40 },
-            { opacity: 1, x: 0, duration: 1.2, ease: 'expo.out', delay: 0.3 }
-        );
-        gsap.to(floatEl, {
-            y: -10,
-            duration: 4,
-            ease: 'sine.inOut',
-            repeat: -1,
-            yoyo: true,
-            delay: 1.5
+        gsap.from(floatEl, { opacity: 0, x: 36, duration: 1.2, ease: 'expo.out', delay: 0.25 });
+        gsap.to(floatEl, { y: -10, duration: 4, ease: 'sine.inOut', repeat: -1, yoyo: true, delay: 1.5 });
+    }
+
+    // ── scroll reveal helper ──────────────────────
+    function sr(selector, extra) {
+        var els = document.querySelectorAll(selector);
+        if (!els.length) return;
+        gsap.from(els, Object.assign({
+            opacity: 0, y: 26, duration: 0.6, ease: E,
+            immediateRender: false,
+            scrollTrigger: { trigger: els[0], start: 'top 92%', toggleActions: 'play none none none' }
+        }, extra || {}));
+    }
+
+    // ── 4. Courses section header ─────────────────
+    sr('.courses-wrap .section-eyebrow');
+    sr('.courses-wrap .section-title', { y: 0, x: -18, duration: 0.65 });
+    sr('.courses-wrap .section-text', { delay: 0.08 });
+
+    // ── 5. Course cards stagger ───────────────────
+    var cards = document.querySelectorAll('.course-card');
+    if (cards.length) {
+        gsap.from(cards, {
+            opacity: 0, y: 36, duration: 0.5, ease: E, stagger: 0.065,
+            immediateRender: false,
+            scrollTrigger: { trigger: '.courses-grid', start: 'top 90%', toggleActions: 'play none none none' }
         });
     }
 
-    // ── 4. Section fade-left (section titles) ─────
-    document.querySelectorAll('.js-fade-left').forEach(function (el) {
-        if (el.closest('.hero-left')) return;
-        gsap.from(el, {
-            opacity: 0, x: -24, duration: 0.8, ease: 'power3.out',
+    // ── 6. How it works ───────────────────────────
+    sr('.how-section .section-eyebrow');
+    sr('.how-section .section-title', { y: 0, x: -18, duration: 0.65 });
+    var steps = document.querySelectorAll('.how-step');
+    if (steps.length) {
+        gsap.from(steps, {
+            opacity: 0, y: 28, duration: 0.55, ease: E, stagger: 0.12,
             immediateRender: false,
-            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
-        });
-    });
-
-    // ── 5. General fade-up on scroll ──────────────
-    document.querySelectorAll('.js-fade-up').forEach(function (el) {
-        if (el.closest('.hero-left')) return;
-        gsap.from(el, {
-            opacity: 0, y: 32, duration: 0.75, ease: 'power3.out',
-            immediateRender: false,
-            scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
-        });
-    });
-
-    // ── 6. Course cards stagger ───────────────────
-    var courseCards = document.querySelectorAll('.course-card');
-    if (courseCards.length) {
-        gsap.from(courseCards, {
-            opacity: 0, y: 48, duration: 0.65, ease: 'power3.out', stagger: 0.08,
-            immediateRender: false,
-            scrollTrigger: { trigger: '.courses-grid', start: 'top 85%', toggleActions: 'play none none none' }
+            scrollTrigger: { trigger: '.how-steps', start: 'top 92%', toggleActions: 'play none none none' }
         });
     }
 
-    // ── 7. How-it-works steps — sequential reveal ─
-    var howSteps = document.querySelectorAll('.js-how-step');
-    if (howSteps.length) {
-        gsap.from(howSteps, {
-            opacity: 0, x: -24, duration: 0.7, ease: 'power3.out', stagger: 0.15,
-            immediateRender: false,
-            scrollTrigger: { trigger: '.how-steps', start: 'top 85%', toggleActions: 'play none none none' }
-        });
-    }
-
-    // ── 8. Testimonial cards stagger ─────────────
+    // ── 7. Opiniones ──────────────────────────────
+    sr('.opiniones-section .section-eyebrow');
+    sr('.opiniones-section .section-title', { y: 0, x: -18, duration: 0.65 });
     var opinions = document.querySelectorAll('.opinion-card');
     if (opinions.length) {
-        opinions.forEach(function (card, i) {
-            gsap.from(card, {
-                opacity: 0, y: 28, duration: 0.65, ease: 'power3.out',
-                delay: (i % 3) * 0.08,
-                immediateRender: false,
-                scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none none' }
-            });
+        gsap.from(opinions, {
+            opacity: 0, y: 24, duration: 0.5, ease: E, stagger: 0.065,
+            immediateRender: false,
+            scrollTrigger: { trigger: '.opiniones-section', start: 'top 90%', toggleActions: 'play none none none' }
         });
     }
 
-    // ── 9. Waitlist section reveal ────────────────
-    var waitlistLeft = document.querySelector('.waitlist-left');
-    var waitlistForm = document.querySelector('.waitlist-form-wrap');
-    if (waitlistLeft) {
-        gsap.from(waitlistLeft, {
-            opacity: 0, x: -32, duration: 0.9, ease: 'power3.out',
+    // ── 8. Waitlist ───────────────────────────────
+    var wLeft = document.querySelector('.waitlist-left');
+    var wForm = document.querySelector('.waitlist-form-wrap');
+    if (wLeft && wForm) {
+        gsap.from([wLeft, wForm], {
+            opacity: 0, y: 28, duration: 0.7, ease: E, stagger: 0.14,
             immediateRender: false,
-            scrollTrigger: { trigger: '.waitlist-inner', start: 'top 82%', toggleActions: 'play none none none' }
+            scrollTrigger: { trigger: '.waitlist-inner', start: 'top 90%', toggleActions: 'play none none none' }
         });
     }
-    if (waitlistForm) {
-        gsap.from(waitlistForm, {
-            opacity: 0, x: 32, duration: 0.9, ease: 'power3.out', delay: 0.15,
-            immediateRender: false,
-            scrollTrigger: { trigger: '.waitlist-inner', start: 'top 82%', toggleActions: 'play none none none' }
-        });
-    }
-
-    // ── 10. Hero below-title elements + data-reveal ──
-    gsap.from('.hero-sub',  { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.35 });
-    gsap.from('.hero-ctas', { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out', delay: 0.55 });
-
-    gsap.utils.toArray('[data-reveal]').forEach(function (el) {
-        gsap.from(el, {
-            y: 50, opacity: 0, duration: 0.75, ease: 'power2.out',
-            immediateRender: false,
-            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
-        });
-    });
-
-    gsap.utils.toArray('[data-reveal-stagger]').forEach(function (parent) {
-        gsap.from(parent.children, {
-            y: 40, opacity: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1,
-            immediateRender: false,
-            scrollTrigger: { trigger: parent, start: 'top 85%', toggleActions: 'play none none none' }
-        });
-    });
 
 }());
 </script>
