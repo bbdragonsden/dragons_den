@@ -31,65 +31,101 @@
 
     <style>
         :root {
+            --bg: #080808;
+            --bg-2: #0f0f0f;
+            --bg-3: #161616;
             --gold: #c8a96e;
-            --gold-light: #e2c98a;
-            --black: #080808;
-            --surface: #111111;
-            --surface2: #181818;
-            --border: rgba(200, 169, 110, 0.2);
-            --text: #e8e8e8;
-            --muted: #888;
+            --gold-light: rgba(200,169,110,0.15);
+            --gold-border: rgba(200,169,110,0.2);
+            --text: #f0ede8;
+            --text-muted: #7a7570;
+            --border: rgba(255,255,255,0.06);
+            --radius: 2px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Satoshi', sans-serif;
-            background: var(--black);
+            background: var(--bg);
             color: var(--text);
-            font-weight: 300;
-            line-height: 1.6;
+            font-weight: 400;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── SELECTION ──────────────────────────────── */
+        ::selection {
+            background: var(--gold-light);
+            color: var(--gold);
         }
 
         /* ── NAV ─────────────────────────────────────── */
         nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
+            position: sticky;
+            top: 0;
             z-index: 100;
-            padding: 24px 60px;
+            padding: 0 60px;
+            height: 68px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+            background: rgba(8,8,8,0.85);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border-bottom: 1px solid var(--border);
+            transition: backdrop-filter 0.4s ease, background 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(8,8,8,0.97);
+            backdrop-filter: blur(32px) saturate(200%);
+            -webkit-backdrop-filter: blur(32px) saturate(200%);
         }
 
         .nav-logo {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 22px;
-            letter-spacing: 4px;
+            font-size: 20px;
+            letter-spacing: 5px;
             color: var(--gold);
             text-decoration: none;
+            flex-shrink: 0;
         }
 
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 36px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
-            color: var(--muted);
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 2px;
+            font-size: 11px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
-            transition: color 0.3s;
+            transition: color 0.25s;
+            font-weight: 500;
         }
 
-        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover { color: var(--text); }
         .nav-links a.active { color: var(--gold); }
+
+        .nav-links .nav-cta {
+            color: var(--gold);
+            border: 1px solid var(--gold-border);
+            padding: 7px 18px;
+            transition: background 0.25s, border-color 0.25s, color 0.25s;
+        }
+
+        .nav-links .nav-cta:hover {
+            background: var(--gold-light);
+            border-color: rgba(200,169,110,0.5);
+            color: var(--gold);
+        }
 
         .nav-hamburger {
             display: none;
@@ -104,7 +140,8 @@
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0;
-            background: #111;
+            background: #0c0c0c;
+            border-bottom: 1px solid var(--border);
             z-index: 99;
             padding: 80px 24px 32px;
             flex-direction: column;
@@ -122,10 +159,10 @@
             padding: 18px 0;
             color: var(--text);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 3px;
             text-transform: uppercase;
-            transition: color 0.3s;
+            transition: color 0.25s;
         }
 
         .nav-mobile-menu li a:hover { color: var(--gold); }
@@ -136,19 +173,28 @@
             display: grid;
             grid-template-columns: 55fr 45fr;
             align-items: center;
-            padding: 120px 60px 80px;
+            padding: 80px 60px 80px;
             position: relative;
             overflow: hidden;
+            background: var(--bg);
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                radial-gradient(ellipse 55% 60% at 75% 55%, rgba(200,169,110,0.06) 0%, transparent 70%),
-                radial-gradient(ellipse 35% 25% at 20% 50%, rgba(200,169,110,0.03) 0%, transparent 60%);
+            background: radial-gradient(ellipse 80% 50% at 70% 50%, rgba(200,169,110,0.04) 0%, transparent 70%);
             pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
         }
 
         .hero-left {
@@ -157,7 +203,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            padding-right: 48px;
+            padding-right: 60px;
         }
 
         .hero-eyebrow {
@@ -165,83 +211,123 @@
             letter-spacing: 5px;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 28px;
+            margin-bottom: 32px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 1px;
+            background: var(--gold);
+            flex-shrink: 0;
         }
 
         .hero-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(72px, 10vw, 130px);
-            line-height: 0.92;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            line-height: 0.9;
             letter-spacing: 4px;
-            color: #fff;
-            margin-bottom: 32px;
+            color: var(--text);
+            margin-bottom: 0;
         }
 
-        .hero-title span { color: var(--gold); }
+        .hero-title .gold { color: var(--gold); }
+
+        .hero-title-line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title-inner {
+            display: block;
+            transform: translateY(100%);
+        }
 
         .hero-divider {
-            width: 56px;
+            width: 48px;
             height: 1px;
-            background: var(--gold);
-            margin-bottom: 28px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            margin: 36px 0;
         }
 
         .hero-subtitle {
             font-size: 16px;
-            color: var(--muted);
-            max-width: 400px;
+            color: var(--text-muted);
+            max-width: 48ch;
             line-height: 1.75;
-            margin-bottom: 48px;
+            margin-bottom: 52px;
             font-weight: 300;
         }
 
         .hero-cta-row {
             display: flex;
-            gap: 16px;
+            gap: 14px;
             align-items: center;
         }
 
+        /* ── BUTTONS ─────────────────────────────────── */
         .btn-primary {
-            padding: 16px 40px;
+            position: relative;
+            padding: 14px 32px;
             background: var(--gold);
             color: #000;
             text-decoration: none;
-            font-size: 11px;
-            font-weight: 700;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 15px;
             letter-spacing: 3px;
             text-transform: uppercase;
-            transition: all 0.3s;
+            transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s;
             display: inline-block;
+            overflow: hidden;
         }
 
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.6s ease;
+        }
+
+        .btn-primary:hover::after { left: 150%; }
+
         .btn-primary:hover {
-            background: var(--gold-light);
-            transform: translateY(-1px);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 32px rgba(200,169,110,0.3);
         }
 
         .btn-primary:active { transform: scale(0.98); }
 
         .btn-outline {
-            padding: 16px 40px;
-            border: 1px solid var(--border);
+            padding: 14px 32px;
+            border: 1px solid var(--gold-border);
             color: var(--gold);
             text-decoration: none;
-            font-size: 11px;
-            font-weight: 500;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 15px;
             letter-spacing: 3px;
             text-transform: uppercase;
-            transition: all 0.3s;
+            transition: all 0.25s;
             display: inline-block;
         }
 
         .btn-outline:hover {
-            border-color: var(--gold);
-            background: rgba(200,169,110,0.06);
+            border-color: rgba(200,169,110,0.6);
+            background: var(--gold-light);
         }
 
         .btn-outline:active { transform: scale(0.98); }
 
-        /* Hero right — basketball hoop SVG art */
+        /* Hero right — basketball SVG art */
         .hero-right {
             position: relative;
             display: flex;
@@ -257,81 +343,215 @@
             height: auto;
         }
 
+        .hero-float-el {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 460px;
+        }
+
         .hero-bg-number {
             font-family: 'Bebas Neue', sans-serif;
             font-size: clamp(100px, 16vw, 220px);
             color: var(--gold);
-            opacity: 0.05;
+            opacity: 0.04;
             line-height: 1;
             position: absolute;
             right: -16px;
-            bottom: 12%;
+            bottom: 10%;
             letter-spacing: -4px;
             pointer-events: none;
             user-select: none;
         }
 
-        /* ── COURSE GRID ──────────────────────────────── */
-        .courses-wrap {
-            padding: 100px 60px;
-            max-width: 1160px;
-            margin: 0 auto;
-        }
-
+        /* ── SECTION COMMONS ──────────────────────── */
         .section-eyebrow {
             font-size: 11px;
             letter-spacing: 4px;
             text-transform: uppercase;
             color: var(--gold);
             margin-bottom: 16px;
+            font-weight: 500;
         }
 
         .section-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(40px, 6vw, 72px);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             letter-spacing: 3px;
-            color: #fff;
-            line-height: 1;
-            margin-bottom: 12px;
+            color: var(--text);
+            line-height: 0.95;
+            margin-bottom: 0;
+            border-left: 3px solid var(--gold);
+            padding-left: 14px;
         }
 
         .section-divider {
             width: 48px;
             height: 1px;
-            background: var(--gold);
-            margin: 24px 0;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            margin: 28px 0;
         }
 
         .section-text {
             font-size: 15px;
-            color: var(--muted);
-            max-width: 520px;
+            color: var(--text-muted);
+            max-width: 52ch;
             margin-bottom: 64px;
-            line-height: 1.75;
+            line-height: 1.8;
+            font-weight: 300;
         }
 
-        /* Asymmetric 2+1 grid: featured card spans full height on right */
+        /* ── COURSE GRID ──────────────────────────────── */
+        .courses-wrap {
+            padding: 120px 60px;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
         .courses-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: auto;
-            gap: 2px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
             background: var(--border);
-            align-items: stretch;
         }
 
         .course-card {
-            background: var(--surface);
-            padding: 44px 36px 40px;
+            background: var(--bg-2);
+            padding: 48px 40px 44px;
             position: relative;
             display: flex;
             flex-direction: column;
-            transition: background 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            transition: background 0.3s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        /* Faded background number */
+        .course-card::before {
+            content: attr(data-num);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 140px;
+            color: var(--gold);
+            opacity: 0.04;
+            line-height: 1;
+            position: absolute;
+            top: -16px;
+            left: 20px;
+            pointer-events: none;
+            user-select: none;
+            letter-spacing: -4px;
+        }
+
+        /* Gold L-corner accent top-right */
+        .course-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            border-top: 1.5px solid var(--gold);
+            border-right: 1.5px solid var(--gold);
+            opacity: 0.5;
+            transition: opacity 0.3s, width 0.3s, height 0.3s;
         }
 
         .course-card:hover {
-            background: var(--surface2);
-            box-shadow: 0 0 0 1px rgba(200,169,110,0.25);
+            background: var(--bg-3);
+            box-shadow: inset 0 0 0 1px rgba(200,169,110,0.4), 0 20px 60px rgba(0,0,0,0.6);
+            transform: translateY(-6px);
+            z-index: 1;
+        }
+
+        .course-card:hover::after {
+            opacity: 1;
+            width: 28px;
+            height: 28px;
+        }
+
+        .course-category-tag {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(28px, 3vw, 38px);
+            letter-spacing: 2px;
+            color: var(--text);
+            line-height: 1;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-meta-item {
+            background: var(--bg);
+            padding: 10px 14px;
+        }
+
+        .course-meta-label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .course-meta-value {
+            font-size: 13px;
+            color: var(--text);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .course-difficulty {
+            display: inline-block;
+            font-size: 9px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+
+        .course-difficulty.all-levels {
+            border-color: var(--gold-border);
+            color: var(--gold);
+            background: var(--gold-light);
+        }
+
+        /* Price block */
+        .course-price-row {
+            margin-top: auto;
+            padding-top: 28px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+            position: relative;
+            z-index: 1;
         }
 
         .price-block { flex: 1; }
@@ -342,182 +562,81 @@
             gap: 6px;
             margin-bottom: 10px;
             padding: 3px 8px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid var(--border);
             background: rgba(255,255,255,0.02);
         }
+
         .price-market-label {
             font-size: 8px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--muted);
+            color: var(--text-muted);
             opacity: 0.5;
         }
+
         .price-market-val {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 13px;
-            color: var(--muted);
+            color: var(--text-muted);
             text-decoration: line-through;
             opacity: 0.35;
             letter-spacing: 0.5px;
         }
+
         .price-main-row {
             display: flex;
             align-items: flex-end;
             gap: 0;
             line-height: 1;
         }
+
+        .course-price-currency {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            color: var(--gold);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .course-price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 58px;
+            line-height: 1;
+            color: var(--text);
+            letter-spacing: 2px;
+        }
+
         .price-year-tag {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 17px;
+            font-size: 15px;
             color: var(--gold);
             letter-spacing: 1px;
             padding: 4px 8px;
-            border: 1px solid rgba(200,169,110,0.3);
-            background: rgba(200,169,110,0.06);
+            border: 1px solid var(--gold-border);
+            background: var(--gold-light);
             margin-left: 6px;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             line-height: 1.2;
         }
+
         .price-monthly-equiv {
             font-size: 10px;
-            color: var(--muted);
+            color: var(--text-muted);
             letter-spacing: 0.5px;
             margin-top: 6px;
             opacity: 0.55;
         }
 
-        .course-card.featured {
-            background: var(--surface2);
-            border-left: 3px solid var(--gold);
-        }
-
-        .course-card.featured:hover {
-            box-shadow: 0 0 0 1px rgba(200,169,110,0.4);
-        }
-
-        .course-popular-badge {
-            position: absolute;
-            top: 0; left: 36px;
-            background: var(--gold);
-            color: #000;
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 5px 14px;
-            transform: translateY(-50%);
-        }
-
-        .course-module-num {
-            font-size: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 20px;
-        }
-
-        .course-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(26px, 3vw, 34px);
-            letter-spacing: 2px;
-            color: #fff;
-            line-height: 1.05;
-            margin-bottom: 24px;
-        }
-
-        .course-featured-tag {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 13px;
-            letter-spacing: 3px;
-            color: var(--gold);
-            margin-bottom: 4px;
-        }
-
-        .course-meta {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1px;
-            background: var(--border);
-            margin-bottom: 24px;
-        }
-
-        .course-meta-item {
-            background: var(--black);
-            padding: 10px 14px;
-        }
-
-        .course-meta-label {
-            font-size: 9px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 4px;
-        }
-
-        .course-meta-value {
-            font-size: 14px;
-            color: var(--text);
-            font-weight: 500;
-        }
-
-        .course-difficulty {
-            display: inline-block;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 5px 12px;
-            border: 1px solid var(--border);
-            color: var(--gold);
-            margin-bottom: 28px;
-        }
-
-        .course-difficulty.all-levels {
-            border-color: rgba(200,169,110,0.45);
-            background: rgba(200,169,110,0.05);
-        }
-
-        .course-price-row {
-            margin-top: auto;
-            padding-top: 28px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 16px;
-        }
-
-        .course-price {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 52px;
-            line-height: 1;
-            color: #fff;
-        }
-
-        .course-price-currency {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 24px;
-            color: var(--gold);
-            vertical-align: top;
-            line-height: 1.5;
-        }
-
-        .course-price-note {
-            font-size: 11px;
-            color: var(--muted);
-            letter-spacing: 1px;
-            margin-top: 2px;
-        }
-
         .btn-course {
-            padding: 13px 26px;
+            padding: 13px 24px;
             border: 1px solid var(--border);
             color: var(--gold);
             text-decoration: none;
-            font-size: 10px;
-            font-weight: 600;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 13px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            transition: all 0.3s;
+            transition: all 0.25s;
             white-space: nowrap;
             flex-shrink: 0;
         }
@@ -530,12 +649,46 @@
 
         .btn-course:active { transform: scale(0.98); }
 
-        /* ── PROXIMAMENTE BANNER ──────────────────────── */
+        /* Featured card */
+        .course-card.featured {
+            background: var(--bg-3);
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .course-card.featured:hover {
+            background: #1c1a16;
+        }
+
+        .course-popular-badge {
+            position: absolute;
+            top: 0; left: 40px;
+            background: var(--gold);
+            color: #000;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .course-featured-tag {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── WAITLIST SECTION ────────────────────────── */
         .waitlist-wrap {
-            background: var(--surface);
+            background: var(--bg-2);
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
-            padding: 100px 60px;
+            padding: 120px 60px;
         }
 
         .waitlist-inner {
@@ -543,11 +696,9 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 100px;
             align-items: center;
         }
-
-        .waitlist-left {}
 
         .waitlist-status {
             display: inline-flex;
@@ -557,7 +708,8 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 28px;
+            margin-bottom: 32px;
+            font-weight: 500;
         }
 
         .status-dot {
@@ -566,41 +718,47 @@
             background: var(--gold);
             border-radius: 50%;
             animation: pulse-dot 2.4s ease-in-out infinite;
+            flex-shrink: 0;
         }
 
         @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.75); }
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(200,169,110,0.4); }
+            50% { opacity: 0.6; transform: scale(0.85); box-shadow: 0 0 0 6px rgba(200,169,110,0); }
         }
 
         .waitlist-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(42px, 5.5vw, 66px);
+            font-size: clamp(2.5rem, 5.5vw, 4rem);
             letter-spacing: 3px;
-            color: #fff;
-            line-height: 1;
-            margin-bottom: 8px;
+            color: var(--text);
+            line-height: 0.95;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--gold);
+            padding-left: 14px;
         }
 
         .waitlist-subtitle {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(18px, 2.5vw, 26px);
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
             letter-spacing: 4px;
             color: var(--gold);
-            margin-bottom: 28px;
+            margin-bottom: 32px;
+            padding-left: 17px;
         }
 
         .waitlist-text {
             font-size: 15px;
-            color: var(--muted);
-            line-height: 1.8;
-            max-width: 440px;
+            color: var(--text-muted);
+            line-height: 1.85;
+            max-width: 44ch;
+            font-weight: 300;
         }
 
-        /* Waitlist form */
+        /* Form panel */
         .waitlist-form-wrap {
-            background: var(--surface2);
-            padding: 44px 40px;
+            background: var(--bg-3);
+            border: 1px solid var(--border);
+            padding: 48px 44px;
         }
 
         .waitlist-form-title {
@@ -608,9 +766,10 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 32px;
+            margin-bottom: 36px;
             padding-bottom: 16px;
             border-bottom: 1px solid var(--border);
+            font-weight: 500;
         }
 
         .wl-form {
@@ -630,35 +789,36 @@
             text-transform: uppercase;
             color: var(--gold);
             padding: 14px 20px 0;
-            background: var(--black);
+            background: var(--bg);
+            font-weight: 500;
         }
 
         .wl-input {
             padding: 10px 20px 16px;
-            background: var(--black);
+            background: var(--bg);
             border: none;
             border-bottom: 1px solid transparent;
-            color: #fff;
+            color: var(--text);
             font-family: 'Satoshi', sans-serif;
             font-size: 15px;
             font-weight: 300;
             outline: none;
-            transition: border-color 0.3s;
+            transition: border-color 0.25s;
         }
 
         .wl-input:focus { border-bottom-color: var(--gold); }
 
         .wl-select {
             padding: 10px 20px 16px;
-            background: var(--black);
+            background: var(--bg);
             border: none;
             border-bottom: 1px solid transparent;
-            color: #fff;
+            color: var(--text);
             font-family: 'Satoshi', sans-serif;
             font-size: 15px;
             font-weight: 300;
             outline: none;
-            transition: border-color 0.3s;
+            transition: border-color 0.25s;
             -webkit-appearance: none;
             appearance: none;
         }
@@ -670,7 +830,7 @@
             display: flex;
             align-items: flex-start;
             gap: 14px;
-            background: var(--black);
+            background: var(--bg);
             padding: 16px 20px;
             cursor: pointer;
             margin-top: 4px;
@@ -689,35 +849,60 @@
 
         .wl-rgpd span {
             font-size: 12px;
-            color: var(--muted);
+            color: var(--text-muted);
             line-height: 1.6;
         }
 
         .wl-rgpd a { color: var(--gold); text-decoration: none; }
 
         .wl-submit {
+            position: relative;
             margin-top: 8px;
             width: 100%;
             padding: 20px;
             background: var(--gold);
             color: #000;
             border: none;
-            font-family: 'Satoshi', sans-serif;
-            font-size: 11px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 15px;
             font-weight: 700;
             letter-spacing: 4px;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s;
+            overflow: hidden;
         }
 
-        .wl-submit:hover { background: var(--gold-light); }
+        .wl-submit::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: skewX(-20deg);
+            animation: shimmer 2.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            50%, 100% { left: 150%; }
+        }
+
+        .wl-submit:hover {
+            background: #d4b87a;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 32px rgba(200,169,110,0.35);
+        }
+
         .wl-submit:active { transform: scale(0.99); }
 
         .wl-confirm {
             display: none;
             padding: 8px 0 16px;
         }
+
         .wl-confirm-icon {
             width: 44px;
             height: 44px;
@@ -727,21 +912,25 @@
             justify-content: center;
             margin-bottom: 28px;
         }
+
         .wl-confirm-eyebrow {
             font-size: 10px;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold);
             margin-bottom: 14px;
+            font-weight: 500;
         }
+
         .wl-confirm-title {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 52px;
-            color: var(--white);
+            color: var(--text);
             letter-spacing: 2px;
             line-height: 1;
             margin-bottom: 20px;
         }
+
         .wl-confirm-body {
             font-size: 15px;
             color: var(--text);
@@ -749,15 +938,16 @@
             max-width: 380px;
             margin-bottom: 20px;
         }
+
         .wl-confirm-sub {
             font-size: 11px;
-            color: var(--muted);
+            color: var(--text-muted);
             letter-spacing: 1px;
         }
 
         .wl-form-note {
             font-size: 11px;
-            color: var(--muted);
+            color: var(--text-muted);
             text-align: center;
             margin-top: 16px;
             letter-spacing: 0.5px;
@@ -765,8 +955,11 @@
         }
 
         /* ── HOW IT WORKS ─────────────────────────────── */
-        .how-wrap {
-            padding: 100px 60px;
+        .how-section {
+            padding: 120px 60px;
+        }
+
+        .how-inner {
             max-width: 1160px;
             margin: 0 auto;
         }
@@ -778,94 +971,108 @@
         }
 
         .how-step {
-            padding: 40px 40px 40px 0;
+            padding: 44px 44px 44px 0;
             border-top: 1px solid var(--border);
+            position: relative;
         }
 
         .how-step:not(:last-child) {
-            padding-right: 48px;
+            padding-right: 52px;
             border-right: 1px solid var(--border);
-            margin-right: 0;
         }
 
         .how-step:not(:first-child) {
-            padding-left: 48px;
+            padding-left: 52px;
         }
 
         .how-step-num {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 64px;
+            font-size: 72px;
             color: var(--gold);
-            opacity: 0.18;
+            opacity: 0.14;
             line-height: 1;
-            margin-bottom: -8px;
+            margin-bottom: -6px;
+            transition: opacity 0.3s;
+            letter-spacing: 2px;
+        }
+
+        .how-step:hover .how-step-num { opacity: 0.3; }
+
+        .how-step-icon {
+            margin-bottom: 20px;
         }
 
         .how-step-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 26px;
+            font-size: 24px;
             letter-spacing: 2px;
-            color: #fff;
-            margin-bottom: 12px;
+            color: var(--text);
+            margin-bottom: 14px;
         }
 
         .how-step-text {
             font-size: 14px;
-            color: var(--muted);
-            line-height: 1.75;
-        }
-
-        .how-step-icon {
-            margin-bottom: 16px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-weight: 300;
         }
 
         /* ── OPINIONES ────────────────────────────────── */
-        .opiniones-wrap {
+        .opiniones-section {
+            background: var(--bg-2);
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
-            background: var(--surface);
-            padding: 100px 60px;
+            padding: 120px 60px;
         }
 
         .opiniones-inner {
-            max-width: 1100px;
+            max-width: 1160px;
             margin: 0 auto;
         }
 
         .opiniones-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-            background: var(--border);
-            margin-top: 60px;
+            gap: 0;
+            margin-top: 64px;
+        }
+
+        .opiniones-grid + .opiniones-grid {
+            margin-top: 0;
+            border-top: 1px solid var(--border);
         }
 
         .opinion-card {
-            background: var(--surface2);
-            padding: 40px;
+            padding: 48px 40px;
+            border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 0;
             transition: background 0.3s;
         }
 
-        .opinion-card:hover { background: #1e1e1e; }
+        .opinion-card:last-child { border-right: none; }
 
-        .opinion-stars { display: flex; gap: 4px; }
+        .opinion-card:hover { background: rgba(255,255,255,0.02); }
 
-        .star {
-            width: 14px;
-            height: 14px;
-            background: var(--gold);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        .opinion-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 20px;
+        }
+
+        .opinion-stars span {
+            color: var(--gold);
+            font-size: 14px;
         }
 
         .opinion-quote {
-            font-size: 32px;
             font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
             color: var(--gold);
-            opacity: 0.4;
-            line-height: 1;
+            opacity: 0.35;
+            line-height: 0.8;
+            margin-bottom: 20px;
         }
 
         .opinion-text {
@@ -873,10 +1080,12 @@
             color: var(--text);
             line-height: 1.8;
             flex: 1;
+            margin-bottom: 28px;
+            font-weight: 300;
         }
 
         .opinion-author {
-            border-top: 1px solid var(--border);
+            border-top: 2px solid var(--gold-border);
             padding-top: 20px;
         }
 
@@ -884,25 +1093,20 @@
             font-family: 'Bebas Neue', sans-serif;
             font-size: 18px;
             letter-spacing: 2px;
-            color: #fff;
+            color: var(--text);
         }
 
         .opinion-meta {
             font-size: 11px;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: var(--muted);
-            margin-top: 4px;
-        }
-
-        .opinion-featured {
-            grid-column: span 1;
-            border-top: 2px solid var(--gold);
+            color: var(--text-muted);
+            margin-top: 5px;
         }
 
         /* ── FOOTER ───────────────────────────────────── */
         footer {
-            padding: 40px 60px 24px;
+            padding: 48px 60px 28px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -914,31 +1118,32 @@
         .footer-logo {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 20px;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             color: var(--gold);
+            margin-bottom: 4px;
         }
 
         .footer-text {
             font-size: 12px;
-            color: var(--muted);
-            letter-spacing: 1px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
             line-height: 1.7;
         }
 
         .footer-contact {
             display: flex;
             gap: 32px;
-            margin-top: 12px;
+            margin-top: 16px;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .footer-contact a {
             font-size: 12px;
-            color: var(--muted);
+            color: var(--text-muted);
             text-decoration: none;
             letter-spacing: 1px;
-            transition: color 0.3s;
+            transition: color 0.25s;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -947,16 +1152,10 @@
         .footer-contact a:hover { color: var(--gold); }
 
         .footer-legal {
-            position: static;
-            background: none;
-            z-index: auto;
-            top: auto;
-            left: auto;
-            right: auto;
             display: flex;
             gap: 24px;
-            margin-top: 16px;
-            padding-top: 16px;
+            margin-top: 20px;
+            padding-top: 20px;
             border-top: 1px solid var(--border);
             width: 100%;
             justify-content: center;
@@ -967,12 +1166,25 @@
             font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--muted);
+            color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.25s;
         }
 
         .footer-legal a:hover { color: var(--gold); }
+
+        /* ── GSAP INITIAL STATES ─────────────────────── */
+        .js-hero-word { display: inline-block; }
+
+        .js-fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .js-fade-left {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
 
         /* ── RESPONSIVE ───────────────────────────────── */
         @media (max-width: 1024px) {
@@ -980,54 +1192,44 @@
                 grid-template-columns: 1fr 1fr;
             }
             .course-card.featured {
-                grid-column: 1 / -1;
-                grid-row: auto;
-                border-left: none;
-                border-top: 3px solid var(--gold);
+                border-bottom: none;
+                border-top: 2px solid var(--gold);
             }
             .opiniones-grid { grid-template-columns: 1fr 1fr; }
+            .opinion-card:nth-child(2n) { border-right: none; }
+            .opinion-card:nth-child(2) { border-bottom: 1px solid var(--border); }
         }
 
         @media (max-width: 900px) {
-            nav { padding: 20px 24px; }
+            nav { padding: 0 24px; }
             .nav-links { display: none; }
             .nav-hamburger { display: block; }
 
             .hero {
                 grid-template-columns: 1fr;
-                padding: 100px 24px 80px;
+                padding: 60px 24px 80px;
+                min-height: 100dvh;
             }
-            .hero-left {
-                padding-right: 0;
-                align-items: flex-start;
-            }
+
+            .hero-left { padding-right: 0; }
             .hero-right { display: none; }
 
-            .courses-wrap { padding: 60px 24px; }
+            .courses-wrap { padding: 80px 24px; }
             .courses-grid { grid-template-columns: 1fr; }
-            .course-card.featured {
-                grid-column: 1;
-                grid-row: auto;
-                border-left: none;
-                border-top: 3px solid var(--gold);
-            }
+            .course-card.featured { border-top: 2px solid var(--gold); border-bottom: none; }
 
-            .waitlist-wrap { padding: 60px 24px; }
-            .waitlist-inner {
-                grid-template-columns: 1fr;
-                gap: 48px;
-            }
+            .waitlist-wrap { padding: 80px 24px; }
+            .waitlist-inner { grid-template-columns: 1fr; gap: 60px; }
             .waitlist-text { max-width: 100%; }
 
-            .opiniones-wrap { padding: 60px 24px; }
+            .opiniones-section { padding: 80px 24px; }
             .opiniones-grid { grid-template-columns: 1fr; }
+            .opinion-card { border-right: none; border-bottom: 1px solid var(--border); }
 
-            .how-wrap { padding: 60px 24px; }
-            .how-steps {
-                grid-template-columns: 1fr;
-            }
+            .how-section { padding: 80px 24px; }
+            .how-steps { grid-template-columns: 1fr; }
             .how-step {
-                padding: 32px 0;
+                padding: 36px 0;
                 border-right: none;
             }
             .how-step:not(:first-child) { padding-left: 0; }
@@ -1041,21 +1243,22 @@
             .btn-primary, .btn-outline { width: 100%; text-align: center; }
             .course-price-row { flex-direction: column; align-items: flex-start; gap: 16px; }
             .btn-course { width: 100%; text-align: center; }
+            .waitlist-form-wrap { padding: 36px 24px; }
         }
     </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
-    <div class="nav-logo">Dragons Den</div>
+<nav id="main-nav">
+    <a href="index.html" class="nav-logo">Dragons Den</a>
     <ul class="nav-links">
         <li><a href="index.html">Inicio</a></li>
         <li><a href="#cursos">Cursos</a></li>
         <li><a href="#como-funciona">C&oacute;mo funciona</a></li>
         <li><a href="#opiniones">Opiniones</a></li>
         <li><a href="#lista-espera">Lista de espera</a></li>
-        <li><a href="login.html" style="color:var(--gold);border:1px solid rgba(200,169,110,0.4);padding:6px 16px;">Acceder</a></li>
+        <li><a href="login.html" class="nav-cta">Acceder</a></li>
     </ul>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir men&uacute;" aria-expanded="false">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
@@ -1077,85 +1280,87 @@
 <!-- HERO -->
 <div class="hero" role="banner">
     <div class="hero-left">
-        <p class="hero-eyebrow">Formaci&oacute;n Online &mdash; Dragons Den Method</p>
-        <h1 class="hero-title">ACADEMIA<br><span>ONLINE</span></h1>
-        <div class="hero-divider" aria-hidden="true"></div>
-        <p class="hero-subtitle">Entrena con los m&eacute;todos de Dragons Den, cuando quieras, donde quieras.</p>
-        <div class="hero-cta-row">
+        <p class="hero-eyebrow js-fade-up">Formaci&oacute;n Online &mdash; Dragons Den Method</p>
+        <h1 class="hero-title">
+            <span class="hero-title-line"><span class="hero-title-inner">ACADEMIA</span></span>
+            <span class="hero-title-line"><span class="hero-title-inner gold">ONLINE</span></span>
+        </h1>
+        <div class="hero-divider js-fade-up" aria-hidden="true"></div>
+        <p class="hero-subtitle js-fade-up">Entrena con los m&eacute;todos de Dragons Den, cuando quieras, donde quieras.</p>
+        <div class="hero-cta-row js-fade-up">
             <a href="#cursos" class="btn-primary">Ver cursos</a>
             <a href="#lista-espera" class="btn-outline">Lista de espera</a>
         </div>
     </div>
     <div class="hero-right" aria-hidden="true">
-        <!-- Basketball hoop / court CSS-SVG art -->
-        <svg class="hero-court-art" viewBox="0 0 460 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Background court rings -->
-            <circle cx="230" cy="290" r="210" stroke="#c8a96e" stroke-width="0.8" opacity="0.06"/>
-            <circle cx="230" cy="290" r="150" stroke="#c8a96e" stroke-width="0.8" opacity="0.05"/>
-            <circle cx="230" cy="290" r="90" stroke="#c8a96e" stroke-width="1" opacity="0.07"/>
+        <div class="hero-float-el" id="hero-float">
+            <svg class="hero-court-art" viewBox="0 0 460 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background court rings -->
+                <circle cx="230" cy="290" r="210" stroke="#c8a96e" stroke-width="0.8" opacity="0.06"/>
+                <circle cx="230" cy="290" r="150" stroke="#c8a96e" stroke-width="0.8" opacity="0.05"/>
+                <circle cx="230" cy="290" r="90" stroke="#c8a96e" stroke-width="1" opacity="0.07"/>
 
-            <!-- Court lane lines -->
-            <rect x="140" y="80" width="180" height="280" stroke="#c8a96e" stroke-width="0.8" opacity="0.08" fill="none"/>
-            <line x1="140" y1="280" x2="320" y2="280" stroke="#c8a96e" stroke-width="0.8" opacity="0.07"/>
+                <!-- Court lane lines -->
+                <rect x="140" y="80" width="180" height="280" stroke="#c8a96e" stroke-width="0.8" opacity="0.08" fill="none"/>
+                <line x1="140" y1="280" x2="320" y2="280" stroke="#c8a96e" stroke-width="0.8" opacity="0.07"/>
 
-            <!-- Backboard -->
-            <rect x="170" y="52" width="120" height="52" rx="2" stroke="#c8a96e" stroke-width="1.5" opacity="0.55" fill="none"/>
-            <!-- Backboard inner square -->
-            <rect x="198" y="66" width="64" height="36" rx="1" stroke="#c8a96e" stroke-width="1" opacity="0.35" fill="none"/>
+                <!-- Backboard -->
+                <rect x="170" y="52" width="120" height="52" rx="2" stroke="#c8a96e" stroke-width="1.5" opacity="0.55" fill="none"/>
+                <rect x="198" y="66" width="64" height="36" rx="1" stroke="#c8a96e" stroke-width="1" opacity="0.35" fill="none"/>
 
-            <!-- Rim mount (pole from backboard to rim) -->
-            <line x1="230" y1="104" x2="230" y2="126" stroke="#c8a96e" stroke-width="2" opacity="0.6"/>
+                <!-- Rim mount -->
+                <line x1="230" y1="104" x2="230" y2="126" stroke="#c8a96e" stroke-width="2" opacity="0.6"/>
 
-            <!-- Rim — ellipse to simulate perspective -->
-            <ellipse cx="230" cy="132" rx="36" ry="9" stroke="#c8a96e" stroke-width="2.2" opacity="0.7" fill="none"/>
+                <!-- Rim -->
+                <ellipse cx="230" cy="132" rx="36" ry="9" stroke="#c8a96e" stroke-width="2.2" opacity="0.7" fill="none"/>
 
-            <!-- Net lines from rim -->
-            <line x1="194" y1="136" x2="202" y2="182" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
-            <line x1="204" y1="140" x2="208" y2="184" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
-            <line x1="214" y1="141" x2="215" y2="185" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
-            <line x1="224" y1="141" x2="222" y2="185" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
-            <line x1="234" y1="141" x2="233" y2="185" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
-            <line x1="244" y1="141" x2="245" y2="185" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
-            <line x1="254" y1="140" x2="254" y2="184" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
-            <line x1="264" y1="136" x2="260" y2="182" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+                <!-- Net lines -->
+                <line x1="194" y1="136" x2="202" y2="182" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+                <line x1="204" y1="140" x2="208" y2="184" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+                <line x1="214" y1="141" x2="215" y2="185" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+                <line x1="224" y1="141" x2="222" y2="185" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+                <line x1="234" y1="141" x2="233" y2="185" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+                <line x1="244" y1="141" x2="245" y2="185" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+                <line x1="254" y1="140" x2="254" y2="184" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
+                <line x1="264" y1="136" x2="260" y2="182" stroke="#c8a96e" stroke-width="0.8" opacity="0.3"/>
 
-            <!-- Net bottom -->
-            <path d="M202 182 Q216 194 230 196 Q244 194 260 182" stroke="#c8a96e" stroke-width="0.8" opacity="0.3" fill="none"/>
+                <!-- Net bottom -->
+                <path d="M202 182 Q216 194 230 196 Q244 194 260 182" stroke="#c8a96e" stroke-width="0.8" opacity="0.3" fill="none"/>
 
-            <!-- Basketball ball -->
-            <circle cx="318" cy="310" r="44" stroke="#c8a96e" stroke-width="1.4" opacity="0.45" fill="none"/>
-            <!-- Ball seam lines -->
-            <path d="M278 298 Q318 280 358 298" stroke="#c8a96e" stroke-width="1" opacity="0.3" fill="none"/>
-            <path d="M278 322 Q318 340 358 322" stroke="#c8a96e" stroke-width="1" opacity="0.3" fill="none"/>
-            <line x1="318" y1="266" x2="318" y2="354" stroke="#c8a96e" stroke-width="1" opacity="0.25"/>
-            <path d="M308 268 Q296 310 308 352" stroke="#c8a96e" stroke-width="0.8" opacity="0.2" fill="none"/>
-            <path d="M328 268 Q340 310 328 352" stroke="#c8a96e" stroke-width="0.8" opacity="0.2" fill="none"/>
+                <!-- Basketball -->
+                <circle cx="318" cy="310" r="44" stroke="#c8a96e" stroke-width="1.4" opacity="0.45" fill="none"/>
+                <path d="M278 298 Q318 280 358 298" stroke="#c8a96e" stroke-width="1" opacity="0.3" fill="none"/>
+                <path d="M278 322 Q318 340 358 322" stroke="#c8a96e" stroke-width="1" opacity="0.3" fill="none"/>
+                <line x1="318" y1="266" x2="318" y2="354" stroke="#c8a96e" stroke-width="1" opacity="0.25"/>
+                <path d="M308 268 Q296 310 308 352" stroke="#c8a96e" stroke-width="0.8" opacity="0.2" fill="none"/>
+                <path d="M328 268 Q340 310 328 352" stroke="#c8a96e" stroke-width="0.8" opacity="0.2" fill="none"/>
 
-            <!-- Three-point arc suggestion -->
-            <path d="M100 380 A135 135 0 0 1 360 380" stroke="#c8a96e" stroke-width="0.8" opacity="0.07" fill="none"/>
+                <!-- Three-point arc -->
+                <path d="M100 380 A135 135 0 0 1 360 380" stroke="#c8a96e" stroke-width="0.8" opacity="0.07" fill="none"/>
 
-            <!-- Corner accent lines -->
-            <line x1="60" y1="430" x2="60" y2="480" stroke="#c8a96e" stroke-width="0.6" opacity="0.1"/>
-            <line x1="40" y1="460" x2="90" y2="460" stroke="#c8a96e" stroke-width="0.6" opacity="0.1"/>
-            <line x1="380" y1="430" x2="380" y2="480" stroke="#c8a96e" stroke-width="0.6" opacity="0.1"/>
-            <line x1="360" y1="460" x2="410" y2="460" stroke="#c8a96e" stroke-width="0.6" opacity="0.1"/>
-        </svg>
+                <!-- Corner accents -->
+                <line x1="60" y1="430" x2="60" y2="480" stroke="#c8a96e" stroke-width="0.6" opacity="0.1"/>
+                <line x1="40" y1="460" x2="90" y2="460" stroke="#c8a96e" stroke-width="0.6" opacity="0.1"/>
+                <line x1="380" y1="430" x2="380" y2="480" stroke="#c8a96e" stroke-width="0.6" opacity="0.1"/>
+                <line x1="360" y1="460" x2="410" y2="460" stroke="#c8a96e" stroke-width="0.6" opacity="0.1"/>
+            </svg>
+        </div>
         <div class="hero-bg-number" aria-hidden="true">DD</div>
     </div>
 </div>
 
 <!-- COURSE GRID -->
 <section id="cursos" class="courses-wrap" aria-labelledby="courses-heading">
-    <p class="section-eyebrow">Packs de entrenamiento</p>
-    <h2 class="section-title" id="courses-heading">Elige tu<br>pack</h2>
-    <div class="section-divider" aria-hidden="true"></div>
-    <p class="section-text">Los mismos ejercicios que usamos en pista, organizados por &aacute;rea de mejora. Acceso anual renovable, sin permanencia.</p>
+    <p class="section-eyebrow js-fade-up">Packs de entrenamiento</p>
+    <h2 class="section-title js-fade-left" id="courses-heading">Elige tu<br>pack</h2>
+    <div class="section-divider js-fade-up" aria-hidden="true"></div>
+    <p class="section-text js-fade-up">Los mismos ejercicios que usamos en pista, organizados por &aacute;rea de mejora. Acceso anual renovable, sin permanencia.</p>
 
     <div class="courses-grid" role="list" aria-label="Packs disponibles">
 
         <!-- Pack 1 — Tiro -->
-        <article class="course-card" role="listitem">
-            <p class="course-module-num">Pack 01 &mdash; Tiro</p>
+        <article class="course-card js-fade-up" data-num="01" role="listitem">
+            <p class="course-category-tag">Pack Tiro</p>
             <h3 class="course-title">Fundamentos<br>de Tiro</h3>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
@@ -1183,9 +1388,9 @@
             </div>
         </article>
 
-        <!-- Pack 2 — Footwork y 1vs1 -->
-        <article class="course-card" role="listitem">
-            <p class="course-module-num">Pack 02 &mdash; Footwork</p>
+        <!-- Pack 2 — Footwork -->
+        <article class="course-card js-fade-up" data-num="02" role="listitem">
+            <p class="course-category-tag">Pack Footwork</p>
             <h3 class="course-title">Trabajo de Pies<br>y 1vs1</h3>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
@@ -1214,8 +1419,8 @@
         </article>
 
         <!-- Pack 3 — Defensa -->
-        <article class="course-card" role="listitem">
-            <p class="course-module-num">Pack 03 &mdash; Defensa</p>
+        <article class="course-card js-fade-up" data-num="03" role="listitem">
+            <p class="course-category-tag">Pack Defensa</p>
             <h3 class="course-title">Defensa<br>Individual</h3>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
@@ -1244,8 +1449,8 @@
         </article>
 
         <!-- Pack 4 — Físico -->
-        <article class="course-card" role="listitem">
-            <p class="course-module-num">Pack 04 &mdash; F&iacute;sico</p>
+        <article class="course-card js-fade-up" data-num="04" role="listitem">
+            <p class="course-category-tag">Pack F&iacute;sico</p>
             <h3 class="course-title">F&iacute;sico y<br>Explosividad</h3>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
@@ -1257,7 +1462,7 @@
                     <p class="course-meta-value">3 horas</p>
                 </div>
             </div>
-            <span class="course-difficulty" aria-label="Nivel: Todos">Todos los niveles</span>
+            <span class="course-difficulty all-levels" aria-label="Nivel: Todos">Todos los niveles</span>
             <div class="course-price-row">
                 <div class="price-block">
                     <div class="price-market-ref">
@@ -1274,8 +1479,8 @@
         </article>
 
         <!-- Pack 5 — Mentalidad -->
-        <article class="course-card" role="listitem">
-            <p class="course-module-num">Pack 05 &mdash; Mental</p>
+        <article class="course-card js-fade-up" data-num="05" role="listitem">
+            <p class="course-category-tag">Pack Mental</p>
             <h3 class="course-title">Mentalidad<br>y T&aacute;ctica</h3>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
@@ -1287,7 +1492,7 @@
                     <p class="course-meta-value">2 horas</p>
                 </div>
             </div>
-            <span class="course-difficulty" aria-label="Nivel: Todos">Todos los niveles</span>
+            <span class="course-difficulty all-levels" aria-label="Nivel: Todos">Todos los niveles</span>
             <div class="course-price-row">
                 <div class="price-block">
                     <div class="price-market-ref">
@@ -1304,9 +1509,9 @@
         </article>
 
         <!-- Pack 6 — Completo (Featured) -->
-        <article class="course-card featured" role="listitem" aria-label="Pack destacado">
+        <article class="course-card featured js-fade-up" data-num="DD" role="listitem" aria-label="Pack destacado">
             <div class="course-popular-badge" aria-label="Mejor valor">Mejor valor</div>
-            <p class="course-module-num">Pack Completo</p>
+            <p class="course-category-tag">Pack Completo</p>
             <p class="course-featured-tag">Dragons Den Method</p>
             <h3 class="course-title">Todos los<br>Packs</h3>
             <div class="course-meta" aria-label="Detalles del pack completo">
@@ -1342,19 +1547,19 @@
 <div class="waitlist-wrap" id="lista-espera">
     <div class="waitlist-inner">
         <div class="waitlist-left">
-            <div class="waitlist-status">
+            <div class="waitlist-status js-fade-up">
                 <span class="status-dot" aria-hidden="true"></span>
                 Pr&oacute;ximamente
             </div>
-            <h2 class="waitlist-title">El contenido<br>se graba este<br>verano.</h2>
-            <p class="waitlist-subtitle">Verano 2026</p>
-            <p class="waitlist-text">
+            <h2 class="waitlist-title js-fade-left">El contenido<br>se graba este<br>verano.</h2>
+            <p class="waitlist-subtitle js-fade-up">Verano 2026</p>
+            <p class="waitlist-text js-fade-up">
                 Estamos filmando todos los m&oacute;dulos en pista durante el verano de 2026.
                 &Uacute;nete a la lista de espera y accede primero con descuento de lanzamiento.
                 Packs individuales desde 19&euro;/a&ntilde;o. Pack completo con todos los m&oacute;dulos a 49&euro;/a&ntilde;o. Las primeras 50 personas bloquean el precio de lanzamiento.
             </p>
         </div>
-        <div class="waitlist-form-wrap">
+        <div class="waitlist-form-wrap js-fade-up">
 
             <!-- Estado de confirmación (oculto hasta envío) -->
             <div id="wl-confirm" class="wl-confirm">
@@ -1375,139 +1580,141 @@
 
             <!-- Formulario (se oculta tras envío exitoso) -->
             <div id="wl-form-inner">
-            <p class="waitlist-form-title">Unirme a la lista de espera</p>
-            <form
-                class="wl-form"
-                id="waitlist-form"
-                aria-label="Formulario lista de espera"
-                novalidate
-            >
-                <input type="text" name="_honey" style="display:none" tabindex="-1" aria-hidden="true">
+                <p class="waitlist-form-title">Unirme a la lista de espera</p>
+                <form
+                    class="wl-form"
+                    id="waitlist-form"
+                    aria-label="Formulario lista de espera"
+                    novalidate
+                >
+                    <input type="text" name="_honey" style="display:none" tabindex="-1" aria-hidden="true">
 
-                <div class="wl-form-group">
-                    <label class="wl-label" for="wl-name">Nombre</label>
-                    <input
-                        class="wl-input"
-                        type="text"
-                        id="wl-name"
-                        name="nombre"
-                        placeholder="Tu nombre"
-                        required
-                        autocomplete="given-name"
-                    >
-                </div>
+                    <div class="wl-form-group">
+                        <label class="wl-label" for="wl-name">Nombre</label>
+                        <input
+                            class="wl-input"
+                            type="text"
+                            id="wl-name"
+                            name="nombre"
+                            placeholder="Tu nombre"
+                            required
+                            autocomplete="given-name"
+                        >
+                    </div>
 
-                <div class="wl-form-group">
-                    <label class="wl-label" for="wl-email">Email</label>
-                    <input
-                        class="wl-input"
-                        type="email"
-                        id="wl-email"
-                        name="email"
-                        placeholder="tu@email.com"
-                        required
-                        autocomplete="email"
-                    >
-                </div>
+                    <div class="wl-form-group">
+                        <label class="wl-label" for="wl-email">Email</label>
+                        <input
+                            class="wl-input"
+                            type="email"
+                            id="wl-email"
+                            name="email"
+                            placeholder="tu@email.com"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
 
-                <div class="wl-form-group">
-                    <label class="wl-label" for="wl-interest">Pack de inter&eacute;s</label>
-                    <select class="wl-select" id="wl-interest" name="interes" required>
-                        <option value="" disabled selected>Elige un pack</option>
-                        <option value="pack-tiro">Pack Tiro &mdash; 19&euro;/a&ntilde;o</option>
-                        <option value="pack-footwork">Pack Footwork y 1vs1 &mdash; 19&euro;/a&ntilde;o</option>
-                        <option value="pack-defensa">Pack Defensa Individual &mdash; 19&euro;/a&ntilde;o</option>
-                        <option value="pack-fisico">Pack F&iacute;sico y Explosividad &mdash; 19&euro;/a&ntilde;o</option>
-                        <option value="pack-mentalidad">Pack Mentalidad y T&aacute;ctica &mdash; 19&euro;/a&ntilde;o</option>
-                        <option value="pack-completo">Pack Completo DD Method &mdash; 49&euro;/a&ntilde;o</option>
-                        <option value="todavia-no-se">A&uacute;n no lo s&eacute;</option>
-                    </select>
-                </div>
+                    <div class="wl-form-group">
+                        <label class="wl-label" for="wl-interest">Pack de inter&eacute;s</label>
+                        <select class="wl-select" id="wl-interest" name="interes" required>
+                            <option value="" disabled selected>Elige un pack</option>
+                            <option value="pack-tiro">Pack Tiro &mdash; 19&euro;/a&ntilde;o</option>
+                            <option value="pack-footwork">Pack Footwork y 1vs1 &mdash; 19&euro;/a&ntilde;o</option>
+                            <option value="pack-defensa">Pack Defensa Individual &mdash; 19&euro;/a&ntilde;o</option>
+                            <option value="pack-fisico">Pack F&iacute;sico y Explosividad &mdash; 19&euro;/a&ntilde;o</option>
+                            <option value="pack-mentalidad">Pack Mentalidad y T&aacute;ctica &mdash; 19&euro;/a&ntilde;o</option>
+                            <option value="pack-completo">Pack Completo DD Method &mdash; 49&euro;/a&ntilde;o</option>
+                            <option value="todavia-no-se">A&uacute;n no lo s&eacute;</option>
+                        </select>
+                    </div>
 
-                <label class="wl-rgpd">
-                    <input type="checkbox" name="rgpd" id="wl-rgpd" required>
-                    <span>
-                        He le&iacute;do y acepto la
-                        <a href="politica-privacidad.html" target="_blank">Pol&iacute;tica de Privacidad</a>.
-                        Mis datos se usar&aacute;n exclusivamente para notificarme del lanzamiento.
-                    </span>
-                </label>
+                    <label class="wl-rgpd">
+                        <input type="checkbox" name="rgpd" id="wl-rgpd" required>
+                        <span>
+                            He le&iacute;do y acepto la
+                            <a href="politica-privacidad.html" target="_blank">Pol&iacute;tica de Privacidad</a>.
+                            Mis datos se usar&aacute;n exclusivamente para notificarme del lanzamiento.
+                        </span>
+                    </label>
 
-                <button type="submit" class="wl-submit" id="wl-submit-btn">
-                    Reservar mi plaza
-                </button>
+                    <button type="submit" class="wl-submit" id="wl-submit-btn">
+                        Reservar mi plaza
+                    </button>
 
-                <p class="wl-form-note">Sin spam. Solo te avisamos cuando lancemos.</p>
-            </form>
+                    <p class="wl-form-note">Sin spam. Solo te avisamos cuando lancemos.</p>
+                </form>
             </div><!-- /wl-form-inner -->
         </div>
     </div>
 </div>
 
 <!-- HOW IT WORKS -->
-<section class="how-wrap" id="como-funciona" aria-labelledby="how-heading">
-    <p class="section-eyebrow">C&oacute;mo funciona</p>
-    <h2 class="section-title" id="how-heading">Tres pasos.<br>Sin complicaci&oacute;n.</h2>
-    <div class="section-divider" aria-hidden="true"></div>
+<section class="how-section" id="como-funciona" aria-labelledby="how-heading">
+    <div class="how-inner">
+        <p class="section-eyebrow js-fade-up">C&oacute;mo funciona</p>
+        <h2 class="section-title js-fade-left" id="how-heading">Tres pasos.<br>Sin complicaci&oacute;n.</h2>
+        <div class="section-divider js-fade-up" aria-hidden="true"></div>
 
-    <div class="how-steps" role="list">
+        <div class="how-steps" role="list">
 
-        <div class="how-step" role="listitem">
-            <div class="how-step-num" aria-hidden="true">01</div>
-            <div class="how-step-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="5" width="22" height="18" rx="2"/>
-                    <path d="M3 10h22"/>
-                    <path d="M9 3v4M19 3v4"/>
-                    <path d="M8 15h4M8 18h7"/>
-                </svg>
+            <div class="how-step js-how-step" role="listitem">
+                <div class="how-step-num" aria-hidden="true">01</div>
+                <div class="how-step-icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="5" width="22" height="18" rx="2"/>
+                        <path d="M3 10h22"/>
+                        <path d="M9 3v4M19 3v4"/>
+                        <path d="M8 15h4M8 18h7"/>
+                    </svg>
+                </div>
+                <h3 class="how-step-title">Elige tu m&oacute;dulo</h3>
+                <p class="how-step-text">Selecciona el curso que mejor encaje con tu nivel y tu objetivo. Desde iniciaci&oacute;n hasta pack completo.</p>
             </div>
-            <h3 class="how-step-title">Elige tu m&oacute;dulo</h3>
-            <p class="how-step-text">Selecciona el curso que mejor encaje con tu nivel y tu objetivo. Desde iniciaci&oacute;n hasta pack completo.</p>
-        </div>
 
-        <div class="how-step" role="listitem">
-            <div class="how-step-num" aria-hidden="true">02</div>
-            <div class="how-step-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="14" cy="14" r="11"/>
-                    <path d="M11 9.5l7 4.5-7 4.5V9.5z" fill="#c8a96e" stroke="none"/>
-                </svg>
+            <div class="how-step js-how-step" role="listitem">
+                <div class="how-step-num" aria-hidden="true">02</div>
+                <div class="how-step-icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="14" cy="14" r="11"/>
+                        <path d="M11 9.5l7 4.5-7 4.5V9.5z" fill="#c8a96e" stroke="none"/>
+                    </svg>
+                </div>
+                <h3 class="how-step-title">Accede todo el año</h3>
+                <p class="how-step-text">Paga una vez al año. Vuelve al material cuando lo necesites, renueva solo si quieres. Sin permanencia.</p>
             </div>
-            <h3 class="how-step-title">Accede todo el año</h3>
-            <p class="how-step-text">Paga una vez al año. Vuelve al material cuando lo necesites, renueva solo si quieres. Sin permanencia.</p>
-        </div>
 
-        <div class="how-step" role="listitem">
-            <div class="how-step-num" aria-hidden="true">03</div>
-            <div class="how-step-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="14" cy="11" r="6"/>
-                    <path d="M4 25c0-5.523 4.477-9 10-9s10 3.477 10 9"/>
-                    <line x1="20" y1="5" x2="24" y2="3"/>
-                    <line x1="22" y1="9" x2="26" y2="9"/>
-                    <line x1="20" y1="13" x2="24" y2="15"/>
-                </svg>
+            <div class="how-step js-how-step" role="listitem">
+                <div class="how-step-num" aria-hidden="true">03</div>
+                <div class="how-step-icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="14" cy="11" r="6"/>
+                        <path d="M4 25c0-5.523 4.477-9 10-9s10 3.477 10 9"/>
+                        <line x1="20" y1="5" x2="24" y2="3"/>
+                        <line x1="22" y1="9" x2="26" y2="9"/>
+                        <line x1="20" y1="13" x2="24" y2="15"/>
+                    </svg>
+                </div>
+                <h3 class="how-step-title">Aplica en pista</h3>
+                <p class="how-step-text">Cada ejercicio incluye instrucciones para trasladarlo directamente a tu entrenamiento. Ver y hacer, en ese orden.</p>
             </div>
-            <h3 class="how-step-title">Aplica en pista</h3>
-            <p class="how-step-text">Cada ejercicio incluye instrucciones para trasladarlo directamente a tu entrenamiento. Ver y hacer, en ese orden.</p>
-        </div>
 
+        </div>
     </div>
 </section>
 
 <!-- OPINIONES -->
-<div class="opiniones-wrap" id="opiniones">
+<div class="opiniones-section" id="opiniones">
     <div class="opiniones-inner">
-        <p class="section-eyebrow">Opiniones</p>
-        <h2 class="section-title">Lo que dicen<br>los jugadores</h2>
-        <div class="section-divider" aria-hidden="true"></div>
+        <p class="section-eyebrow js-fade-up">Opiniones</p>
+        <h2 class="section-title js-fade-left">Lo que dicen<br>los jugadores</h2>
+        <div class="section-divider js-fade-up" aria-hidden="true"></div>
 
         <div class="opiniones-grid">
 
-            <div class="opinion-card opinion-featured">
+            <div class="opinion-card js-fade-up">
                 <div class="opinion-stars">
-                    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                 </div>
                 <div class="opinion-quote">&ldquo;</div>
                 <p class="opinion-text">Llevaba meses estancado con el tiro. Con el pack en dos semanas ya notaba diferencia en el porcentaje. Es el tipo de contenido que no encuentras gratis en YouTube &mdash; va directo al problema sin rodeos.</p>
@@ -1517,9 +1724,9 @@
                 </div>
             </div>
 
-            <div class="opinion-card">
+            <div class="opinion-card js-fade-up">
                 <div class="opinion-stars">
-                    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                 </div>
                 <div class="opinion-quote">&ldquo;</div>
                 <p class="opinion-text">Compr&eacute; el pack completo sin conocer la academia. Para la siguiente temporada ya ten&iacute;a mi primer paso mucho m&aacute;s limpio y hab&iacute;a dejado de perder el bal&oacute;n en penetraci&oacute;n.</p>
@@ -1529,9 +1736,9 @@
                 </div>
             </div>
 
-            <div class="opinion-card">
+            <div class="opinion-card js-fade-up">
                 <div class="opinion-stars">
-                    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                 </div>
                 <div class="opinion-quote">&ldquo;</div>
                 <p class="opinion-text">Mi hijo lo tiene puesto en la tele del sal&oacute;n y repite los ejercicios en el pasillo. No me hab&iacute;a pedido nunca formaci&oacute;n extra, y ahora me pide ir a la pista a probar lo que aprende.</p>
@@ -1545,9 +1752,9 @@
 
         <div class="opiniones-grid">
 
-            <div class="opinion-card opinion-featured">
+            <div class="opinion-card js-fade-up">
                 <div class="opinion-stars">
-                    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                 </div>
                 <div class="opinion-quote">&ldquo;</div>
                 <p class="opinion-text">Hice el pack de defensa mientras esperaba plaza en el campus. Cuando llegu&eacute;, Yefangyi me pregunt&oacute; d&oacute;nde hab&iacute;a entrenado ese verano. Le dije que con sus propios videos. No se lo esperaba.</p>
@@ -1557,9 +1764,9 @@
                 </div>
             </div>
 
-            <div class="opinion-card">
+            <div class="opinion-card js-fade-up">
                 <div class="opinion-stars">
-                    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                 </div>
                 <div class="opinion-quote">&ldquo;</div>
                 <p class="opinion-text">El pack de mentalidad lo escucho mientras voy al entreno de mi club. En el coche, 20 minutos antes de pisar la pista. Ha cambiado completamente c&oacute;mo entro a competir.</p>
@@ -1569,9 +1776,9 @@
                 </div>
             </div>
 
-            <div class="opinion-card">
+            <div class="opinion-card js-fade-up">
                 <div class="opinion-stars">
-                    <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                 </div>
                 <div class="opinion-quote">&ldquo;</div>
                 <p class="opinion-text">Muy bien organizado por niveles. Mi hija de 12 a&ntilde;os empez&oacute; por los primeros videos del pack de tiro y ahora ya va por el de footwork. A su ritmo, sin presi&oacute;n. Se nota que sabe c&oacute;mo ense&ntilde;ar.</p>
@@ -1706,22 +1913,220 @@
             });
         }
 
-        // ── Scroll-aware nav background ─────────────
-        var nav = document.querySelector('nav');
+        // ── Scroll-aware nav ─────────────────────────
+        var nav = document.getElementById('main-nav');
         if (nav) {
             var onScroll = function () {
                 if (window.scrollY > 60) {
-                    nav.style.background = 'rgba(8,8,8,0.97)';
-                    nav.style.backdropFilter = 'blur(8px)';
+                    nav.classList.add('scrolled');
                 } else {
-                    nav.style.background = '';
-                    nav.style.backdropFilter = '';
+                    nav.classList.remove('scrolled');
                 }
             };
             window.addEventListener('scroll', onScroll, { passive: true });
         }
 
     }());
+</script>
+
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+(function () {
+    'use strict';
+
+    if (typeof gsap === 'undefined') return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ── 1. Hero title line reveal ──────────────────
+    var titleInners = document.querySelectorAll('.hero-title-inner');
+    if (titleInners.length) {
+        gsap.set(titleInners, { yPercent: 100 });
+        gsap.to(titleInners, {
+            yPercent: 0,
+            duration: 1.1,
+            ease: 'expo.out',
+            stagger: 0.12,
+            delay: 0.1
+        });
+    }
+
+    // ── 2. Hero supporting elements stagger ───────
+    var heroEls = document.querySelectorAll('.hero-left .js-fade-up');
+    if (heroEls.length) {
+        gsap.fromTo(heroEls,
+            { opacity: 0, y: 28 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.9,
+                ease: 'power3.out',
+                stagger: 0.1,
+                delay: 0.55
+            }
+        );
+    }
+
+    // ── 3. Hero SVG float animation ───────────────
+    var floatEl = document.getElementById('hero-float');
+    if (floatEl) {
+        gsap.fromTo(floatEl,
+            { opacity: 0, x: 40 },
+            { opacity: 1, x: 0, duration: 1.2, ease: 'expo.out', delay: 0.3 }
+        );
+        gsap.to(floatEl, {
+            y: -10,
+            duration: 4,
+            ease: 'sine.inOut',
+            repeat: -1,
+            yoyo: true,
+            delay: 1.5
+        });
+    }
+
+    // ── 4. Section fade-left (section titles) ─────
+    document.querySelectorAll('.js-fade-left').forEach(function (el) {
+        // skip hero elements (handled above)
+        if (el.closest('.hero-left')) return;
+        gsap.fromTo(el,
+            { opacity: 0, x: -24 },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 88%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    });
+
+    // ── 5. General fade-up on scroll ──────────────
+    document.querySelectorAll('.js-fade-up').forEach(function (el) {
+        // skip hero elements (handled above)
+        if (el.closest('.hero-left')) return;
+        gsap.fromTo(el,
+            { opacity: 0, y: 32 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.75,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 90%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    });
+
+    // ── 6. Course cards stagger ───────────────────
+    var courseCards = document.querySelectorAll('.course-card');
+    if (courseCards.length) {
+        gsap.fromTo(courseCards,
+            { opacity: 0, y: 48 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.65,
+                ease: 'power3.out',
+                stagger: 0.08,
+                scrollTrigger: {
+                    trigger: '.courses-grid',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    }
+
+    // ── 7. How-it-works steps — sequential reveal ─
+    var howSteps = document.querySelectorAll('.js-how-step');
+    if (howSteps.length) {
+        gsap.fromTo(howSteps,
+            { opacity: 0, x: -24 },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 0.7,
+                ease: 'power3.out',
+                stagger: 0.15,
+                scrollTrigger: {
+                    trigger: '.how-steps',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    }
+
+    // ── 8. Testimonial cards stagger ─────────────
+    var opinions = document.querySelectorAll('.opinion-card');
+    if (opinions.length) {
+        opinions.forEach(function (card, i) {
+            gsap.fromTo(card,
+                { opacity: 0, y: 28 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.65,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 88%',
+                        toggleActions: 'play none none none'
+                    },
+                    delay: (i % 3) * 0.08
+                }
+            );
+        });
+    }
+
+    // ── 9. Waitlist section reveal ────────────────
+    var waitlistLeft = document.querySelector('.waitlist-left');
+    var waitlistForm = document.querySelector('.waitlist-form-wrap');
+    if (waitlistLeft) {
+        gsap.fromTo(waitlistLeft,
+            { opacity: 0, x: -32 },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 0.9,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.waitlist-inner',
+                    start: 'top 82%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    }
+    if (waitlistForm) {
+        gsap.fromTo(waitlistForm,
+            { opacity: 0, x: 32 },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 0.9,
+                ease: 'power3.out',
+                delay: 0.15,
+                scrollTrigger: {
+                    trigger: '.waitlist-inner',
+                    start: 'top 82%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    }
+
+}());
 </script>
 
 </body>
