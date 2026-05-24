@@ -1093,6 +1093,279 @@
         @media (min-width: 769px) {
             .mobile-topbar { display: none !important; }
         }
+
+        /* ─────────────────────────────────────────
+           CAMPUS / ACADEMIA ADMIN VIEWS
+        ───────────────────────────────────────── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 600px) {
+            .stats-row { grid-template-columns: 1fr 1fr; }
+            .stats-row .stat-card:last-child { grid-column: span 2; }
+        }
+
+        .stat-card {
+            background: var(--bg-3);
+            border: 1px solid var(--border);
+            padding: 16px 20px;
+        }
+
+        .stat-label {
+            font-size: 8px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .stat-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 30px;
+            letter-spacing: 1px;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .stat-sub {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .student-row {
+            border: 1px solid var(--border);
+            background: var(--bg-2);
+            padding: 16px 20px;
+            margin-bottom: 8px;
+        }
+
+        .student-row-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .student-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .student-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.3px;
+        }
+
+        .student-badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .status-badge {
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            white-space: nowrap;
+        }
+
+        .status-pendiente  { background: rgba(200,169,110,0.10); border: 1px solid rgba(200,169,110,0.30); color: var(--gold); }
+        .status-confirmado { background: rgba(74,222,128,0.08);  border: 1px solid rgba(74,222,128,0.25);  color: #4ade80; }
+        .status-cancelado  { background: rgba(255,80,80,0.08);   border: 1px solid rgba(255,80,80,0.22);   color: #ff5050; }
+        .status-en_lista   { background: rgba(200,169,110,0.10); border: 1px solid rgba(200,169,110,0.30); color: var(--gold); }
+        .status-convertido { background: rgba(74,222,128,0.08);  border: 1px solid rgba(74,222,128,0.25);  color: #4ade80; }
+        .status-descartado { background: rgba(255,80,80,0.08);   border: 1px solid rgba(255,80,80,0.22);   color: #ff5050; }
+
+        .precio-chip {
+            font-size: 11px;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+        }
+
+        .precio-chip strong {
+            color: var(--text);
+            font-size: 13px;
+        }
+
+        .student-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 4px 16px;
+            padding: 10px 0 8px;
+            border-top: 1px solid var(--border);
+            margin-top: 8px;
+        }
+
+        .student-detail-item {
+            display: flex;
+            gap: 6px;
+            align-items: baseline;
+        }
+
+        .student-detail-label {
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .student-detail-val {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .notas-admin-display {
+            font-size: 12px;
+            color: var(--gold-dim);
+            border-left: 2px solid var(--gold-border);
+            padding-left: 10px;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .btn-edit-student {
+            background: none;
+            border: 1px solid var(--border-strong);
+            color: var(--text-muted);
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            cursor: pointer;
+            transition: color 0.15s, border-color 0.15s;
+            font-family: 'Satoshi', sans-serif;
+        }
+
+        .btn-edit-student:hover {
+            color: var(--gold);
+            border-color: var(--gold-border);
+        }
+
+        /* Edit modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        .modal-box {
+            background: var(--bg-3);
+            border: 1px solid var(--border-strong);
+            padding: 28px 32px 24px;
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .modal-title {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .modal-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 24px;
+        }
+
+        .modal-field { margin-bottom: 18px; }
+
+        .modal-field label {
+            display: block;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .modal-select, .modal-textarea {
+            width: 100%;
+            background: var(--bg-5);
+            border: 1px solid var(--border-strong);
+            color: var(--text);
+            font-family: 'Satoshi', sans-serif;
+            font-size: 13px;
+            padding: 9px 12px;
+            outline: none;
+            border-radius: 0;
+        }
+
+        .modal-select:focus, .modal-textarea:focus {
+            border-color: var(--gold-dim);
+        }
+
+        .modal-textarea { resize: vertical; min-height: 80px; }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-modal-save {
+            flex: 1;
+            background: var(--gold);
+            color: #080808;
+            border: none;
+            padding: 10px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Satoshi', sans-serif;
+            transition: opacity 0.15s;
+        }
+
+        .btn-modal-save:hover { opacity: 0.85; }
+        .btn-modal-save:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .btn-modal-cancel {
+            background: none;
+            border: 1px solid var(--border-strong);
+            color: var(--text-muted);
+            padding: 10px 20px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-family: 'Satoshi', sans-serif;
+        }
+
+        .modal-msg {
+            font-size: 11px;
+            margin-top: 10px;
+            min-height: 16px;
+        }
+
+        .modal-msg.ok  { color: #4ade80; }
+        .modal-msg.err { color: #ff5050; }
     </style>
 </head>
 <body>
@@ -1176,6 +1449,30 @@
         </div>
 
     </div>
+
+<!-- Edit modal (shared for campus + waitlist) -->
+<div class="modal-overlay" id="edit-modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+        <p class="modal-title" id="modal-type-label">Editar</p>
+        <p class="modal-name" id="modal-student-name"></p>
+        <input type="hidden" id="modal-record-id">
+        <input type="hidden" id="modal-record-type">
+        <div class="modal-field">
+            <label for="modal-estado">Estado</label>
+            <select class="modal-select" id="modal-estado"></select>
+        </div>
+        <div class="modal-field">
+            <label for="modal-notas">Notas internas</label>
+            <textarea class="modal-textarea" id="modal-notas" placeholder="Anotaciones privadas..."></textarea>
+        </div>
+        <p class="modal-msg" id="modal-msg"></p>
+        <div class="modal-actions">
+            <button class="btn-modal-save" id="modal-save-btn" onclick="saveEdit()">Guardar</button>
+            <button class="btn-modal-cancel" onclick="closeEditModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
 </div>
 
 <script>
@@ -1398,6 +1695,40 @@ function renderSidebar() {
             document.getElementById('sidebar').classList.remove('open');
         });
         nav.appendChild(adminBtn);
+
+        const campusBtn = document.createElement('button');
+        campusBtn.className = 'sidebar-item';
+        campusBtn.id = 'sidebar-campus-btn';
+        campusBtn.dataset.packId = '__campus__';
+        campusBtn.innerHTML = `
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1M4.22 4.22l.707.707m12.728 12.728.707.707M3 12h1m16 0h1M4.22 19.78l.707-.707M18.364 5.636l.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"/>
+            </svg>
+            <span>Campus Verano</span>`;
+        campusBtn.addEventListener('click', () => {
+            document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+            campusBtn.classList.add('active');
+            renderCampus();
+            document.getElementById('sidebar').classList.remove('open');
+        });
+        nav.appendChild(campusBtn);
+
+        const academiaBtn = document.createElement('button');
+        academiaBtn.className = 'sidebar-item';
+        academiaBtn.id = 'sidebar-academia-btn';
+        academiaBtn.dataset.packId = '__academia__';
+        academiaBtn.innerHTML = `
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h12M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5H6M3.75 3l8.25 6.75L20.25 3"/>
+            </svg>
+            <span>Academia Online</span>`;
+        academiaBtn.addEventListener('click', () => {
+            document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+            academiaBtn.classList.add('active');
+            renderAcademia();
+            document.getElementById('sidebar').classList.remove('open');
+        });
+        nav.appendChild(academiaBtn);
     }
 }
 
@@ -1533,6 +1864,31 @@ async function adminToken() {
     return session?.access_token;
 }
 
+async function fetchAdminData(refresh = false) {
+    if (refresh) adminCache = null;
+    if (adminCache) return adminCache;
+    const token = await adminToken();
+    const r = await fetch('/api/admin-data', { headers: { 'Authorization': `Bearer ${token}` } });
+    if (!r.ok) throw new Error('Error al cargar datos');
+    adminCache = await r.json();
+    return adminCache;
+}
+
+// ── Pricing helpers ────────────────────────────────────────────────────────
+function campusPrecio(entry) {
+    const esNuevo = (entry.anterior || '').toLowerCase().includes('primera vez');
+    const precioMes = esNuevo ? 40 : 35;
+    const mesesStr = entry.meses || '';
+    const numMeses = (mesesStr === 'Por confirmar' || !mesesStr)
+        ? 0
+        : mesesStr.split(',').map(m => m.trim()).filter(Boolean).length;
+    return { precioMes, numMeses, total: precioMes * numMeses };
+}
+
+function academiaPrecio(interes) {
+    return (interes || '').toLowerCase().includes('completo') ? 49 : 19;
+}
+
 function formatExpiry(dateStr) {
     if (!dateStr) return '';
     const d = new Date(dateStr);
@@ -1557,21 +1913,15 @@ async function renderAdmin(refresh = false) {
     main.innerHTML = `
         <div class="content-header">
             <p class="content-eyebrow">Administración</p>
-            <h1 class="content-title">Alumnos</h1>
+            <h1 class="content-title">Plataforma</h1>
         </div>
         <p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
-
-    if (refresh) adminCache = null;
-    if (!adminCache) {
-        const token = await adminToken();
-        const r = await fetch('/api/admin-data', { headers: { 'Authorization': `Bearer ${token}` } });
-        if (!r.ok) {
-            main.querySelector('p').textContent = 'Error al cargar. Recarga la página.';
-            return;
-        }
-        adminCache = await r.json();
+    try {
+        const data = await fetchAdminData(refresh);
+        renderAdminPanel(data.users);
+    } catch {
+        main.querySelector('p').textContent = 'Error al cargar. Recarga la página.';
     }
-    renderAdminPanel(adminCache.users);
 }
 
 function renderAdminPanel(users) {
@@ -1579,8 +1929,8 @@ function renderAdminPanel(users) {
     main.innerHTML = `
         <div class="content-header">
             <p class="content-eyebrow">Administración</p>
-            <h1 class="content-title">Alumnos</h1>
-            <p class="content-desc">${users.length} registrados &middot; ${users.filter(u => u.confirmed).length} confirmados</p>
+            <h1 class="content-title">Plataforma</h1>
+            <p class="content-desc">${users.length} usuarios &middot; ${users.filter(u => u.confirmed).length} confirmados</p>
         </div>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
             <input class="admin-search" id="admin-search" placeholder="Buscar por nombre o email..." oninput="filterAdminUsers(this.value)">
@@ -1702,6 +2052,307 @@ async function revokePack(userId, pack, btn) {
         showMsg(userId, 'err', data.error || 'Error al revocar');
     }
 }
+
+// ── CAMPUS VERANO ─────────────────────────────────────────────────────────
+async function renderCampus(refresh = false) {
+    const main = document.getElementById('main-content');
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Administración</p>
+            <h1 class="content-title">Campus Verano</h1>
+        </div>
+        <p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
+    try {
+        const data = await fetchAdminData(refresh);
+        renderCampusPanel(data.campus || []);
+    } catch {
+        main.querySelector('p').textContent = 'Error al cargar. Recarga la página.';
+    }
+}
+
+function renderCampusPanel(entries) {
+    const main = document.getElementById('main-content');
+
+    const confirmados = entries.filter(e => e.estado === 'confirmado');
+    const pendientes  = entries.filter(e => e.estado === 'pendiente');
+    const ingresos    = confirmados.reduce((s, e) => s + campusPrecio(e).total, 0);
+    const proyectado  = entries.filter(e => e.estado !== 'cancelado')
+                               .reduce((s, e) => s + campusPrecio(e).total, 0);
+
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Administración</p>
+            <h1 class="content-title">Campus Verano</h1>
+            <p class="content-desc">${entries.length} inscripciones &middot; ${confirmados.length} confirmadas &middot; ${pendientes.length} pendientes</p>
+        </div>
+        <div class="stats-row">
+            <div class="stat-card">
+                <p class="stat-label">Ingresos confirmados</p>
+                <p class="stat-value">${ingresos}&euro;</p>
+                <p class="stat-sub">${confirmados.length} plazas &times; precio</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Proyectado (sin cancelar)</p>
+                <p class="stat-value">${proyectado}&euro;</p>
+                <p class="stat-sub">${entries.filter(e => e.estado !== 'cancelado').length} inscritos</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Total inscripciones</p>
+                <p class="stat-value">${entries.length}</p>
+                <p class="stat-sub">Nuevos + Alumni</p>
+            </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+            <input class="admin-search" id="campus-search" placeholder="Buscar por nombre o email..."
+                   oninput="filterCampus(this.value)">
+            <button class="admin-refresh-btn" onclick="renderCampus(true)">Actualizar</button>
+        </div>
+        <div id="campus-list">${buildCampusList(entries)}</div>`;
+}
+
+function buildCampusList(entries) {
+    if (!entries.length) return '<p style="color:var(--text-muted);font-size:13px;">Sin inscripciones todavía.</p>';
+
+    return entries.map(e => {
+        const p    = campusPrecio(e);
+        const tipo = (e.anterior || '').toLowerCase().includes('primera vez') ? 'Nuevo' : 'Alumni';
+        const mesesArr = (e.meses || '').split(',').map(m => m.trim()).filter(Boolean);
+
+        const detalles = [
+            e.edad     ? { l: 'Edad',      v: e.edad + ' años' }     : null,
+            e.posicion ? { l: 'Posición',   v: e.posicion }           : null,
+            e.nivel    ? { l: 'Nivel',      v: e.nivel }              : null,
+            e.club     ? { l: 'Club',       v: e.club }               : null,
+            e.telefono ? { l: 'Teléfono',   v: e.telefono }           : null,
+            e.origen   ? { l: 'Origen',     v: e.origen }             : null,
+        ].filter(Boolean);
+
+        const detalleHTML = detalles.map(d =>
+            `<div class="student-detail-item">
+                <span class="student-detail-label">${esc(d.l)}</span>
+                <span class="student-detail-val">${esc(d.v)}</span>
+            </div>`
+        ).join('');
+
+        const notasHTML = e.notas_admin
+            ? `<p class="notas-admin-display">${esc(e.notas_admin)}</p>`
+            : '';
+
+        const mesesHTML = mesesArr.length
+            ? mesesArr.map(m => `<span class="pack-tag valid"><span class="pack-tag-name">${esc(m)}</span></span>`).join('')
+            : '<span style="font-size:11px;color:var(--text-muted);">Por confirmar</span>';
+
+        const precioHTML = p.numMeses > 0
+            ? `<span class="precio-chip">${p.numMeses} mes${p.numMeses > 1 ? 'es' : ''} &times; ${p.precioMes}&euro; = <strong>${p.total}&euro;</strong></span>`
+            : `<span class="precio-chip">${p.precioMes}&euro;/mes</span>`;
+
+        const fechaStr = e.created_at
+            ? new Date(e.created_at).toLocaleDateString('es', { day:'numeric', month:'short', year:'2-digit' })
+            : '';
+
+        return `<div class="student-row" id="crow-${esc(e.id)}">
+            <div class="student-row-top">
+                <div>
+                    <p class="student-name">${esc(e.nombre)}</p>
+                    <p class="student-meta">${esc(e.email)} &middot; ${fechaStr}</p>
+                </div>
+                <div class="student-badges">
+                    <span class="status-badge status-${esc(e.estado || 'pendiente')}">${esc(e.estado || 'pendiente')}</span>
+                    <span class="pack-tag valid" style="font-size:9px;padding:3px 8px;">${tipo}</span>
+                    ${precioHTML}
+                    <button class="btn-edit-student" onclick="openEditModal('campus','${esc(e.id)}','${esc(e.estado||'pendiente')}',${JSON.stringify(e.notas_admin||'')},${JSON.stringify(e.nombre)})">Editar</button>
+                </div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;">${mesesHTML}</div>
+            ${detalleHTML ? `<div class="student-detail-grid">${detalleHTML}</div>` : ''}
+            ${notasHTML}
+        </div>`;
+    }).join('');
+}
+
+function filterCampus(q) {
+    if (!adminCache) return;
+    const lq = q.toLowerCase();
+    const filtered = lq
+        ? (adminCache.campus || []).filter(e =>
+              (e.nombre || '').toLowerCase().includes(lq) ||
+              (e.email  || '').toLowerCase().includes(lq))
+        : (adminCache.campus || []);
+    document.getElementById('campus-list').innerHTML = buildCampusList(filtered);
+}
+
+// ── ACADEMIA ONLINE ────────────────────────────────────────────────────────
+async function renderAcademia(refresh = false) {
+    const main = document.getElementById('main-content');
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Administración</p>
+            <h1 class="content-title">Academia Online</h1>
+        </div>
+        <p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
+    try {
+        const data = await fetchAdminData(refresh);
+        renderAcademiaPanel(data.waitlist || []);
+    } catch {
+        main.querySelector('p').textContent = 'Error al cargar. Recarga la página.';
+    }
+}
+
+function renderAcademiaPanel(entries) {
+    const main = document.getElementById('main-content');
+
+    const convertidos = entries.filter(e => e.estado === 'convertido');
+    const enLista     = entries.filter(e => e.estado === 'en_lista');
+    const ingresos    = convertidos.reduce((s, e) => s + academiaPrecio(e.interes), 0);
+    const proyectado  = entries.filter(e => e.estado !== 'descartado')
+                               .reduce((s, e) => s + academiaPrecio(e.interes), 0);
+
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Administración</p>
+            <h1 class="content-title">Academia Online</h1>
+            <p class="content-desc">${entries.length} en lista &middot; ${convertidos.length} convertidos &middot; ${enLista.length} pendientes</p>
+        </div>
+        <div class="stats-row">
+            <div class="stat-card">
+                <p class="stat-label">Ingresos convertidos</p>
+                <p class="stat-value">${ingresos}&euro;</p>
+                <p class="stat-sub">${convertidos.length} ventas</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Proyectado (lista activa)</p>
+                <p class="stat-value">${proyectado}&euro;</p>
+                <p class="stat-sub">${entries.filter(e => e.estado !== 'descartado').length} leads</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Total leads</p>
+                <p class="stat-value">${entries.length}</p>
+                <p class="stat-sub">Lista de espera</p>
+            </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+            <input class="admin-search" id="academia-search" placeholder="Buscar por nombre o email..."
+                   oninput="filterAcademia(this.value)">
+            <button class="admin-refresh-btn" onclick="renderAcademia(true)">Actualizar</button>
+        </div>
+        <div id="academia-list">${buildWaitlistItems(entries)}</div>`;
+}
+
+function buildWaitlistItems(entries) {
+    if (!entries.length) return '<p style="color:var(--text-muted);font-size:13px;">Sin leads todavía.</p>';
+
+    return entries.map(e => {
+        const precio   = academiaPrecio(e.interes);
+        const fechaStr = e.created_at
+            ? new Date(e.created_at).toLocaleDateString('es', { day:'numeric', month:'short', year:'2-digit' })
+            : '';
+
+        const notasHTML = e.notas_admin
+            ? `<p class="notas-admin-display" style="margin-top:8px;">${esc(e.notas_admin)}</p>`
+            : '';
+
+        return `<div class="student-row" id="wrow-${esc(e.id)}">
+            <div class="student-row-top">
+                <div>
+                    <p class="student-name">${esc(e.nombre)}</p>
+                    <p class="student-meta">${esc(e.email)} &middot; ${fechaStr}</p>
+                </div>
+                <div class="student-badges">
+                    <span class="status-badge status-${esc(e.estado || 'en_lista')}">${esc(e.estado || 'en_lista').replace('_', ' ')}</span>
+                    <span class="pack-tag valid" style="font-size:9px;padding:3px 8px;">${esc(e.interes || '—')}</span>
+                    <span class="precio-chip"><strong>${precio}&euro;</strong>/año</span>
+                    <button class="btn-edit-student" onclick="openEditModal('waitlist','${esc(e.id)}','${esc(e.estado||'en_lista')}',${JSON.stringify(e.notas_admin||'')},${JSON.stringify(e.nombre)})">Editar</button>
+                </div>
+            </div>
+            ${notasHTML}
+        </div>`;
+    }).join('');
+}
+
+function filterAcademia(q) {
+    if (!adminCache) return;
+    const lq = q.toLowerCase();
+    const filtered = lq
+        ? (adminCache.waitlist || []).filter(e =>
+              (e.nombre || '').toLowerCase().includes(lq) ||
+              (e.email  || '').toLowerCase().includes(lq))
+        : (adminCache.waitlist || []);
+    document.getElementById('academia-list').innerHTML = buildWaitlistItems(filtered);
+}
+
+// ── EDIT MODAL ─────────────────────────────────────────────────────────────
+const ESTADOS_CAMPUS   = ['pendiente', 'confirmado', 'cancelado'];
+const ESTADOS_WAITLIST = ['en_lista', 'convertido', 'descartado'];
+
+function openEditModal(type, id, estado, notas, nombre) {
+    document.getElementById('modal-record-id').value   = id;
+    document.getElementById('modal-record-type').value = type;
+    document.getElementById('modal-student-name').textContent = nombre;
+    document.getElementById('modal-type-label').textContent =
+        type === 'campus' ? 'Campus Verano' : 'Academia Online';
+    document.getElementById('modal-notas').value = notas || '';
+    document.getElementById('modal-msg').textContent = '';
+    document.getElementById('modal-msg').className = 'modal-msg';
+
+    const estadoSel = document.getElementById('modal-estado');
+    const opciones = type === 'campus' ? ESTADOS_CAMPUS : ESTADOS_WAITLIST;
+    estadoSel.innerHTML = opciones.map(o =>
+        `<option value="${o}"${o === estado ? ' selected' : ''}>${o.replace('_', ' ')}</option>`
+    ).join('');
+
+    document.getElementById('edit-modal').classList.add('open');
+    document.getElementById('modal-save-btn').disabled = false;
+}
+
+function closeEditModal() {
+    document.getElementById('edit-modal').classList.remove('open');
+}
+
+async function saveEdit() {
+    const id         = document.getElementById('modal-record-id').value;
+    const type       = document.getElementById('modal-record-type').value;
+    const estado     = document.getElementById('modal-estado').value;
+    const notas      = document.getElementById('modal-notas').value;
+    const saveBtn    = document.getElementById('modal-save-btn');
+    const msgEl      = document.getElementById('modal-msg');
+
+    saveBtn.disabled = true;
+    saveBtn.textContent = '...';
+    msgEl.textContent = '';
+    msgEl.className = 'modal-msg';
+
+    const action = type === 'campus' ? 'update_campus' : 'update_waitlist';
+    const token  = await adminToken();
+
+    const r = await fetch('/api/admin-action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ action, id, estado, notas_admin: notas })
+    });
+    const data = await r.json();
+
+    saveBtn.disabled = false;
+    saveBtn.textContent = 'Guardar';
+
+    if (data.success) {
+        msgEl.textContent = 'Guardado';
+        msgEl.className = 'modal-msg ok';
+        adminCache = null;
+        setTimeout(() => {
+            closeEditModal();
+            if (type === 'campus') renderCampus();
+            else renderAcademia();
+        }, 700);
+    } else {
+        msgEl.textContent = data.error || 'Error al guardar';
+        msgEl.className = 'modal-msg err';
+    }
+}
+
+// Close modal on overlay click
+document.getElementById('edit-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeEditModal();
+});
 
 // ── Start ─────────────────────────────────────────────────────────────────
 checkAuth();

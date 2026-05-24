@@ -1,6 +1,31 @@
 const { Resend } = require('resend');
+const https     = require('https');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const SUPABASE_HOST = 'oyuhyrzjhaqzawwnmwcv.supabase.co';
+const SERVICE_KEY   = process.env.SUPABASE_SERVICE_KEY;
+
+function dbInsert(table, record) {
+  return new Promise((resolve, reject) => {
+    const payload = JSON.stringify(record);
+    const req = https.request({
+      hostname: SUPABASE_HOST,
+      path: `/rest/v1/${table}`,
+      method: 'POST',
+      headers: {
+        'apikey': SERVICE_KEY,
+        'Authorization': `Bearer ${SERVICE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    }, res => { res.resume(); resolve(res.statusCode); });
+    req.on('error', reject);
+    req.write(payload);
+    req.end();
+  });
+}
 const OWNER_EMAIL = 'bbdragonsden@gmail.com';
 const FROM = 'Dragons Den <onboarding@resend.dev>';
 
@@ -161,12 +186,13 @@ module.exports = async function handler(req, res) {
         to: email,
         subject: 'Tu plaza está reservada — Dragons Den Academy',
         html: userEmailHTML({ nombre, interes })
-      })
+      }),
+      dbInsert('academia_waitlist', { nombre, email, interes })
     ]);
 
     return res.status(200).json({ success: true });
   } catch (err) {
-    console.error('Resend error:', err);
+    console.error('Waitlist error:', err);
     return res.status(500).json({ success: false, error: 'Error al enviar' });
   }
 };

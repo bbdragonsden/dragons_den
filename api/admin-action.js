@@ -57,8 +57,12 @@ module.exports = async function handler(req, res) {
   const admin = await verifyAdmin(req.headers.authorization);
   if (!admin) return res.status(403).json({ error: 'Acceso denegado' });
 
-  const { action, userId, pack } = req.body || {};
-  if (!action || !userId) return res.status(400).json({ error: 'Faltan campos' });
+  const { action, userId, pack, id, estado, notas_admin } = req.body || {};
+  if (!action) return res.status(400).json({ error: 'Falta action' });
+
+  // ── ASSIGN / REVOKE require userId ───────────────────────────────────────
+  if ((action === 'assign' || action === 'revoke') && !userId)
+    return res.status(400).json({ error: 'Falta userId' });
 
   // ── ASSIGN ────────────────────────────────────────────────────────────────
   if (action === 'assign') {
@@ -96,5 +100,39 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Error al revocar pack', details: r.body });
   }
 
-  return res.status(400).json({ error: 'Acción no válida. Usa: assign, revoke' });
+  // ── UPDATE CAMPUS ─────────────────────────────────────────────────────────
+  if (action === 'update_campus') {
+    if (!id) return res.status(400).json({ error: 'Falta id' });
+    const VALID = ['pendiente', 'confirmado', 'cancelado'];
+    if (estado !== undefined && !VALID.includes(estado))
+      return res.status(400).json({ error: 'Estado inválido' });
+    const patch = {};
+    if (estado      !== undefined) patch.estado      = estado;
+    if (notas_admin !== undefined) patch.notas_admin = notas_admin;
+    const r = await supabaseService(
+      `/rest/v1/campus_inscripciones?id=eq.${encodeURIComponent(id)}`,
+      'PATCH', patch, { 'Prefer': 'return=minimal' }
+    );
+    if (r.status === 204 || r.status === 200) return res.status(200).json({ success: true });
+    return res.status(500).json({ error: 'Error al actualizar', details: r.body });
+  }
+
+  // ── UPDATE WAITLIST ───────────────────────────────────────────────────────
+  if (action === 'update_waitlist') {
+    if (!id) return res.status(400).json({ error: 'Falta id' });
+    const VALID = ['en_lista', 'convertido', 'descartado'];
+    if (estado !== undefined && !VALID.includes(estado))
+      return res.status(400).json({ error: 'Estado inválido' });
+    const patch = {};
+    if (estado      !== undefined) patch.estado      = estado;
+    if (notas_admin !== undefined) patch.notas_admin = notas_admin;
+    const r = await supabaseService(
+      `/rest/v1/academia_waitlist?id=eq.${encodeURIComponent(id)}`,
+      'PATCH', patch, { 'Prefer': 'return=minimal' }
+    );
+    if (r.status === 204 || r.status === 200) return res.status(200).json({ success: true });
+    return res.status(500).json({ error: 'Error al actualizar', details: r.body });
+  }
+
+  return res.status(400).json({ error: 'Acción no válida. Usa: assign, revoke, update_campus, update_waitlist' });
 };
