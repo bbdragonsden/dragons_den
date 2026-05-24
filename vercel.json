@@ -1,6 +1,7 @@
 {
   "functions": {
     "api/waitlist.js":    { "memory": 256, "maxDuration": 10 },
+    "api/inscripcion.js": { "memory": 256, "maxDuration": 10 },
     "api/login.js":       { "memory": 256, "maxDuration": 10 },
     "api/verify.js":      { "memory": 256, "maxDuration": 10 },
     "api/assign-pack.js": { "memory": 256, "maxDuration": 15 },
