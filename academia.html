@@ -1333,16 +1333,6 @@
         /* ── GSAP INITIAL STATES ─────────────────────── */
         .js-hero-word { display: inline-block; }
 
-        .js-fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-        }
-
-        .js-fade-left {
-            opacity: 0;
-            transform: translateX(-30px);
-        }
-
         /* ── RESPONSIVE ───────────────────────────────── */
         @media (max-width: 1200px) {
             .courses-grid {
@@ -1528,7 +1518,7 @@
     <div class="courses-grid" role="list" aria-label="Packs disponibles" data-reveal-stagger>
 
         <!-- Pack 1 — Tiro -->
-        <article class="course-card js-fade-up" data-num="01" role="listitem">
+        <article class="course-card" data-num="01" role="listitem">
             <div class="course-card-bar" aria-hidden="true"></div>
             <div class="course-icon-wrap" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1573,7 +1563,7 @@
         </article>
 
         <!-- Pack 2 — Footwork -->
-        <article class="course-card js-fade-up" data-num="02" role="listitem">
+        <article class="course-card" data-num="02" role="listitem">
             <div class="course-card-bar" aria-hidden="true"></div>
             <div class="course-icon-wrap" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1615,7 +1605,7 @@
         </article>
 
         <!-- Pack 3 — Defensa -->
-        <article class="course-card js-fade-up" data-num="03" role="listitem">
+        <article class="course-card" data-num="03" role="listitem">
             <div class="course-card-bar" aria-hidden="true"></div>
             <div class="course-icon-wrap" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1657,7 +1647,7 @@
         </article>
 
         <!-- Pack 4 — Físico -->
-        <article class="course-card js-fade-up" data-num="04" role="listitem">
+        <article class="course-card" data-num="04" role="listitem">
             <div class="course-card-bar" aria-hidden="true"></div>
             <div class="course-icon-wrap" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1699,7 +1689,7 @@
         </article>
 
         <!-- Pack 5 — Mentalidad -->
-        <article class="course-card js-fade-up" data-num="05" role="listitem">
+        <article class="course-card" data-num="05" role="listitem">
             <div class="course-card-bar" aria-hidden="true"></div>
             <div class="course-icon-wrap" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1742,7 +1732,7 @@
         </article>
 
         <!-- Pack Completo — Featured, spans 2 cols -->
-        <article class="course-card featured js-fade-up" data-num="DD" role="listitem" aria-label="Pack destacado">
+        <article class="course-card featured" data-num="DD" role="listitem" aria-label="Pack destacado">
             <div class="course-card-bar" aria-hidden="true"></div>
             <div class="course-popular-badge" aria-label="Recomendado">Recomendado</div>
             <p class="course-category-tag">Pack Completo</p>
@@ -1847,7 +1837,7 @@
 
         <div class="opiniones-grid">
 
-            <div class="opinion-card js-fade-up">
+            <div class="opinion-card">
                 <div class="opinion-stars">
                     <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                 </div>
@@ -1858,7 +1848,7 @@
                 </div>
             </div>
 
-            <div class="opinion-card js-fade-up">
+            <div class="opinion-card">
                 <div class="opinion-stars">
                     <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                 </div>
@@ -1869,7 +1859,7 @@
                 </div>
             </div>
 
-            <div class="opinion-card js-fade-up">
+            <div class="opinion-card">
                 <div class="opinion-stars">
                     <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                 </div>
@@ -1884,7 +1874,7 @@
 
         <div class="opiniones-grid">
 
-            <div class="opinion-card js-fade-up">
+            <div class="opinion-card">
                 <div class="opinion-stars">
                     <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                 </div>
@@ -1895,7 +1885,7 @@
                 </div>
             </div>
 
-            <div class="opinion-card js-fade-up">
+            <div class="opinion-card">
                 <div class="opinion-stars">
                     <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                 </div>
@@ -1906,7 +1896,7 @@
                 </div>
             </div>
 
-            <div class="opinion-card js-fade-up">
+            <div class="opinion-card">
                 <div class="opinion-stars">
                     <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                 </div>
@@ -1925,19 +1915,19 @@
 <div class="waitlist-wrap" id="lista-espera">
     <div class="waitlist-inner">
         <div class="waitlist-left">
-            <div class="waitlist-status js-fade-up">
+            <div class="waitlist-status">
                 <span class="status-dot" aria-hidden="true"></span>
                 Pr&oacute;ximamente
             </div>
-            <h2 class="waitlist-title js-fade-left">El contenido<br>se graba este<br>verano.</h2>
-            <p class="waitlist-subtitle js-fade-up">Verano 2026</p>
-            <p class="waitlist-text js-fade-up">
+            <h2 class="waitlist-title">El contenido<br>se graba este<br>verano.</h2>
+            <p class="waitlist-subtitle">Verano 2026</p>
+            <p class="waitlist-text">
                 Estamos filmando todos los m&oacute;dulos en pista durante el verano de 2026.
                 &Uacute;nete a la lista de espera y accede primero con descuento de lanzamiento.
                 Packs individuales desde 19&euro;/a&ntilde;o. Pack completo con todos los m&oacute;dulos a 49&euro;/a&ntilde;o. Las primeras 50 personas bloquean el precio de lanzamiento.
             </p>
         </div>
-        <div class="waitlist-form-wrap js-fade-up">
+        <div class="waitlist-form-wrap">
 
             <!-- Estado de confirmación (oculto hasta envío) -->
             <div id="wl-confirm" class="wl-confirm">
@@ -2241,100 +2231,53 @@
     // ── 4. Section fade-left (section titles) ─────
     document.querySelectorAll('.js-fade-left').forEach(function (el) {
         if (el.closest('.hero-left')) return;
-        gsap.fromTo(el,
-            { opacity: 0, x: -24 },
-            {
-                opacity: 1,
-                x: 0,
-                duration: 0.8,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: el,
-                    start: 'top 88%',
-                    toggleActions: 'play none none none'
-                }
-            }
-        );
+        gsap.from(el, {
+            opacity: 0, x: -24, duration: 0.8, ease: 'power3.out',
+            immediateRender: false,
+            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+        });
     });
 
     // ── 5. General fade-up on scroll ──────────────
     document.querySelectorAll('.js-fade-up').forEach(function (el) {
         if (el.closest('.hero-left')) return;
-        gsap.fromTo(el,
-            { opacity: 0, y: 32 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.75,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: el,
-                    start: 'top 90%',
-                    toggleActions: 'play none none none'
-                }
-            }
-        );
+        gsap.from(el, {
+            opacity: 0, y: 32, duration: 0.75, ease: 'power3.out',
+            immediateRender: false,
+            scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
+        });
     });
 
     // ── 6. Course cards stagger ───────────────────
     var courseCards = document.querySelectorAll('.course-card');
     if (courseCards.length) {
-        gsap.fromTo(courseCards,
-            { opacity: 0, y: 48 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.65,
-                ease: 'power3.out',
-                stagger: 0.08,
-                scrollTrigger: {
-                    trigger: '.courses-grid',
-                    start: 'top 85%',
-                    toggleActions: 'play none none none'
-                }
-            }
-        );
+        gsap.from(courseCards, {
+            opacity: 0, y: 48, duration: 0.65, ease: 'power3.out', stagger: 0.08,
+            immediateRender: false,
+            scrollTrigger: { trigger: '.courses-grid', start: 'top 85%', toggleActions: 'play none none none' }
+        });
     }
 
     // ── 7. How-it-works steps — sequential reveal ─
     var howSteps = document.querySelectorAll('.js-how-step');
     if (howSteps.length) {
-        gsap.fromTo(howSteps,
-            { opacity: 0, x: -24 },
-            {
-                opacity: 1,
-                x: 0,
-                duration: 0.7,
-                ease: 'power3.out',
-                stagger: 0.15,
-                scrollTrigger: {
-                    trigger: '.how-steps',
-                    start: 'top 85%',
-                    toggleActions: 'play none none none'
-                }
-            }
-        );
+        gsap.from(howSteps, {
+            opacity: 0, x: -24, duration: 0.7, ease: 'power3.out', stagger: 0.15,
+            immediateRender: false,
+            scrollTrigger: { trigger: '.how-steps', start: 'top 85%', toggleActions: 'play none none none' }
+        });
     }
 
     // ── 8. Testimonial cards stagger ─────────────
     var opinions = document.querySelectorAll('.opinion-card');
     if (opinions.length) {
         opinions.forEach(function (card, i) {
-            gsap.fromTo(card,
-                { opacity: 0, y: 28 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.65,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 88%',
-                        toggleActions: 'play none none none'
-                    },
-                    delay: (i % 3) * 0.08
-                }
-            );
+            gsap.from(card, {
+                opacity: 0, y: 28, duration: 0.65, ease: 'power3.out',
+                delay: (i % 3) * 0.08,
+                immediateRender: false,
+                scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none none' }
+            });
         });
     }
 
@@ -2342,55 +2285,37 @@
     var waitlistLeft = document.querySelector('.waitlist-left');
     var waitlistForm = document.querySelector('.waitlist-form-wrap');
     if (waitlistLeft) {
-        gsap.fromTo(waitlistLeft,
-            { opacity: 0, x: -32 },
-            {
-                opacity: 1,
-                x: 0,
-                duration: 0.9,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.waitlist-inner',
-                    start: 'top 82%',
-                    toggleActions: 'play none none none'
-                }
-            }
-        );
+        gsap.from(waitlistLeft, {
+            opacity: 0, x: -32, duration: 0.9, ease: 'power3.out',
+            immediateRender: false,
+            scrollTrigger: { trigger: '.waitlist-inner', start: 'top 82%', toggleActions: 'play none none none' }
+        });
     }
     if (waitlistForm) {
-        gsap.fromTo(waitlistForm,
-            { opacity: 0, x: 32 },
-            {
-                opacity: 1,
-                x: 0,
-                duration: 0.9,
-                ease: 'power3.out',
-                delay: 0.15,
-                scrollTrigger: {
-                    trigger: '.waitlist-inner',
-                    start: 'top 82%',
-                    toggleActions: 'play none none none'
-                }
-            }
-        );
+        gsap.from(waitlistForm, {
+            opacity: 0, x: 32, duration: 0.9, ease: 'power3.out', delay: 0.15,
+            immediateRender: false,
+            scrollTrigger: { trigger: '.waitlist-inner', start: 'top 82%', toggleActions: 'play none none none' }
+        });
     }
 
-    // ── 10. data-reveal elements ──────────────────
-    gsap.from('.hero-title', { y: 80, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.1 });
-    gsap.from('.hero-sub', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.35 });
+    // ── 10. Hero below-title elements + data-reveal ──
+    gsap.from('.hero-sub',  { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.35 });
     gsap.from('.hero-ctas', { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out', delay: 0.55 });
 
     gsap.utils.toArray('[data-reveal]').forEach(function (el) {
         gsap.from(el, {
-            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-            y: 50, opacity: 0, duration: 0.75, ease: 'power2.out'
+            y: 50, opacity: 0, duration: 0.75, ease: 'power2.out',
+            immediateRender: false,
+            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
         });
     });
 
     gsap.utils.toArray('[data-reveal-stagger]').forEach(function (parent) {
         gsap.from(parent.children, {
-            scrollTrigger: { trigger: parent, start: 'top 85%', toggleActions: 'play none none none' },
-            y: 40, opacity: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1
+            y: 40, opacity: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1,
+            immediateRender: false,
+            scrollTrigger: { trigger: parent, start: 'top 85%', toggleActions: 'play none none none' }
         });
     });
 
