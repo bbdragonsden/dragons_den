@@ -168,5 +168,51 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Error al actualizar seguimiento', details: r.body });
   }
 
-  return res.status(400).json({ error: 'Acción no válida. Usa: assign, revoke, update_campus, update_waitlist, create_seguimiento, update_seguimiento' });
+  // ── UPDATE VIDEO ──────────────────────────────────────────────────────────
+  if (action === 'update_video') {
+    if (!id) return res.status(400).json({ error: 'Falta id' });
+    const VALID_VIDEO = ['pendiente', 'en_revision', 'completado'];
+    if (estado !== undefined && !VALID_VIDEO.includes(estado))
+      return res.status(400).json({ error: 'Estado inválido' });
+    const patch = { updated_at: new Date().toISOString() };
+    if (estado      !== undefined) patch.estado      = estado;
+    if (notas_admin !== undefined) patch.notas_admin = notas_admin;
+    const r = await supabaseService(
+      `/rest/v1/analisis_videos?id=eq.${encodeURIComponent(id)}`,
+      'PATCH', patch, { 'Prefer': 'return=minimal' }
+    );
+    if (r.status === 204 || r.status === 200) return res.status(200).json({ success: true });
+    return res.status(500).json({ error: 'Error al actualizar video', details: r.body });
+  }
+
+  // ── SEND MESSAGE (admin → user) ────────────────────────────────────────────
+  if (action === 'send_message') {
+    const { targetUserId, targetEmail, contenido } = req.body || {};
+    if (!targetUserId || !targetEmail || !contenido || !contenido.trim())
+      return res.status(400).json({ error: 'Faltan campos: targetUserId, targetEmail, contenido' });
+    if (contenido.length > 3000) return res.status(400).json({ error: 'Mensaje demasiado largo' });
+    const r = await supabaseService('/rest/v1/mensajes', 'POST', {
+      user_id:   targetUserId,
+      email:     targetEmail,
+      de_admin:  true,
+      contenido: contenido.trim(),
+      leido:     false
+    }, { 'Prefer': 'return=minimal' });
+    if (r.status === 201 || r.status === 200) return res.status(200).json({ success: true });
+    return res.status(500).json({ error: 'Error al enviar mensaje', details: r.body });
+  }
+
+  // ── MARK MESSAGES READ ────────────────────────────────────────────────────
+  if (action === 'mark_read') {
+    const { targetUserId } = req.body || {};
+    if (!targetUserId) return res.status(400).json({ error: 'Falta targetUserId' });
+    const r = await supabaseService(
+      `/rest/v1/mensajes?user_id=eq.${encodeURIComponent(targetUserId)}&de_admin=eq.false&leido=eq.false`,
+      'PATCH', { leido: true }, { 'Prefer': 'return=minimal' }
+    );
+    if (r.status === 204 || r.status === 200) return res.status(200).json({ success: true });
+    return res.status(500).json({ error: 'Error al marcar mensajes', details: r.body });
+  }
+
+  return res.status(400).json({ error: 'Acción no válida.' });
 };

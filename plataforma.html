@@ -1429,6 +1429,62 @@
 
         .modal-msg.ok  { color: #4ade80; }
         .modal-msg.err { color: #ff5050; }
+
+        /* ── PROFILE FORM ── */
+        .profile-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 620px; }
+        .profile-form .full-width { grid-column: 1 / -1; }
+        .profile-field { display: flex; flex-direction: column; gap: 6px; }
+        .profile-field label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+        .profile-input { background: var(--bg-3); border: 1px solid var(--border-strong); color: var(--text); font-family: 'Satoshi', sans-serif; font-size: 13px; padding: 10px 12px; outline: none; transition: border-color 0.2s; width: 100%; }
+        .profile-input:focus { border-color: var(--gold-border); }
+        .profile-input::placeholder { color: var(--text-muted); }
+        textarea.profile-input { resize: vertical; min-height: 80px; }
+        .btn-save-profile { display: inline-block; background: var(--gold); color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; padding: 12px 28px; border: none; cursor: pointer; transition: opacity 0.2s, transform 0.15s; }
+        .btn-save-profile:hover { opacity: 0.85; }
+        .btn-save-profile:active { transform: scale(0.98); }
+        .btn-save-profile:disabled { opacity: 0.4; cursor: not-allowed; }
+        .profile-save-msg { font-size: 12px; margin-top: 4px; min-height: 16px; }
+        .profile-save-msg.ok { color: #4ade80; }
+        .profile-save-msg.err { color: #ff5050; }
+
+        /* ── VIDEO CARDS ── */
+        .video-card { background: var(--bg-3); border: 1px solid var(--border); padding: 16px 20px; margin-bottom: 10px; }
+        .video-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+        .video-card-title { font-size: 14px; font-weight: 600; color: var(--text); }
+        .video-card-url { font-size: 11px; color: var(--gold-dim); word-break: break-all; margin-bottom: 6px; }
+        .video-card-url a { color: inherit; text-decoration: none; }
+        .video-card-url a:hover { color: var(--gold); }
+        .video-card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-bottom: 6px; }
+        .video-card-meta { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; }
+        .video-status { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 8px; white-space: nowrap; flex-shrink: 0; }
+        .video-status.pendiente   { background: rgba(200,169,110,0.12); color: var(--gold); }
+        .video-status.en_revision { background: rgba(59,130,246,0.12);  color: #60a5fa; }
+        .video-status.completado  { background: rgba(74,222,128,0.10);  color: #4ade80; }
+        .video-notas { font-size: 12px; color: var(--text-secondary); background: var(--bg-4); border-left: 2px solid var(--gold-border); padding: 8px 12px; margin-top: 8px; line-height: 1.6; }
+        .btn-submit-video { background: none; border: 1px solid var(--gold-border); color: var(--gold); font-family: 'Satoshi', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 10px 20px; cursor: pointer; transition: background 0.2s; }
+        .btn-submit-video:hover { background: var(--gold-light); }
+
+        /* ── MESSAGE THREAD ── */
+        .msg-thread { display: flex; flex-direction: column; gap: 14px; max-width: 680px; margin-bottom: 24px; }
+        .msg-bubble { padding: 12px 16px; max-width: 80%; line-height: 1.65; font-size: 13.5px; }
+        .msg-bubble.user-msg { background: var(--bg-4); border: 1px solid var(--border); align-self: flex-end; color: var(--text); }
+        .msg-bubble.admin-msg { background: rgba(200,169,110,0.07); border: 1px solid var(--gold-border); align-self: flex-start; color: var(--text); }
+        .msg-meta { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; }
+        .msg-compose { display: flex; flex-direction: column; gap: 10px; max-width: 680px; border-top: 1px solid var(--border); padding-top: 20px; }
+        .msg-input { background: var(--bg-3); border: 1px solid var(--border-strong); color: var(--text); font-family: 'Satoshi', sans-serif; font-size: 13px; padding: 12px 14px; outline: none; resize: vertical; min-height: 80px; transition: border-color 0.2s; }
+        .msg-input:focus { border-color: var(--gold-border); }
+        .msg-input::placeholder { color: var(--text-muted); }
+        .btn-send-msg { background: var(--gold); color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; padding: 11px 26px; border: none; cursor: pointer; align-self: flex-start; transition: opacity 0.2s, transform 0.15s; }
+        .btn-send-msg:hover { opacity: 0.85; }
+        .btn-send-msg:active { transform: scale(0.98); }
+        .btn-send-msg:disabled { opacity: 0.4; cursor: not-allowed; }
+        .msg-empty { font-size: 13px; color: var(--text-muted); padding: 24px 0; }
+        .unread-dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+        @media (max-width: 600px) {
+            .profile-form { grid-template-columns: 1fr; }
+            .msg-bubble { max-width: 95%; }
+        }
     </style>
 </head>
 <body>
@@ -1583,6 +1639,48 @@
         <div class="modal-actions">
             <button class="btn-modal-save" id="modal-save-btn" onclick="saveEdit()">Guardar</button>
             <button class="btn-modal-cancel" onclick="closeEditModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Video submit modal (user) -->
+<div class="modal-overlay" id="video-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:480px;">
+        <p class="modal-title">Enviar video para análisis</p>
+        <div class="video-modal-field modal-field">
+            <label for="vm-titulo">Título o descripción corta *</label>
+            <input class="modal-select" id="vm-titulo" type="text" placeholder="Ej: Mecánica de tiro — sesión 12 jun">
+        </div>
+        <div class="video-modal-field modal-field">
+            <label for="vm-url">URL del video *</label>
+            <input class="modal-select" id="vm-url" type="url" placeholder="YouTube, Google Drive, Dropbox...">
+        </div>
+        <div class="video-modal-field modal-field">
+            <label for="vm-desc">Qué quieres que analice (opcional)</label>
+            <textarea class="modal-textarea" id="vm-desc" rows="3" placeholder="Ej: Revisar posición de codos en el release..."></textarea>
+        </div>
+        <p class="modal-msg" id="vm-msg"></p>
+        <div class="modal-actions">
+            <button class="btn-modal-save" id="vm-save-btn" onclick="submitVideo()">Enviar</button>
+            <button class="btn-modal-cancel" onclick="closeVideoModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Admin reply modal (send message to user) -->
+<div class="modal-overlay" id="msg-reply-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:460px;">
+        <p class="modal-title">Responder a <span id="mrm-name"></span></p>
+        <input type="hidden" id="mrm-userid">
+        <input type="hidden" id="mrm-email">
+        <div class="modal-field">
+            <label for="mrm-texto">Mensaje</label>
+            <textarea class="modal-textarea" id="mrm-texto" rows="4" placeholder="Escribe tu respuesta..."></textarea>
+        </div>
+        <p class="modal-msg" id="mrm-msg"></p>
+        <div class="modal-actions">
+            <button class="btn-modal-save" id="mrm-save-btn" onclick="sendAdminMessage()">Enviar</button>
+            <button class="btn-modal-cancel" onclick="closeMsgReplyModal()">Cancelar</button>
         </div>
     </div>
 </div>
@@ -1786,6 +1884,33 @@ function renderSidebar() {
         nav.appendChild(btn);
     });
 
+    // ── Mi espacio (for all users) ──
+    const sepUser = document.createElement('p');
+    sepUser.className = 'sidebar-section-label';
+    sepUser.style.marginTop = '16px';
+    sepUser.textContent = 'Mi espacio';
+    nav.appendChild(sepUser);
+
+    [
+        { id: '__perfil__', label: 'Mi Perfil', fn: renderMiPerfil, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>' },
+        { id: '__mis_videos__', label: 'Mis Videos', fn: renderMisVideos, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/>' },
+        { id: '__mensajes__', label: 'Mensajes', fn: renderMisMensajes, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>' },
+    ].forEach(({ id, label, fn, icon }) => {
+        const btn = document.createElement('button');
+        btn.className = 'sidebar-item';
+        btn.id = `sidebar-${id.replace(/__/g,'')}btn`;
+        btn.dataset.packId = id;
+        btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">${icon}</svg><span>${label}</span>`;
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+            btn.classList.add('active');
+            fn();
+            document.getElementById('sidebar').classList.remove('open');
+        });
+        if (id === '__mensajes__') btn.id = 'sidebar-mensajes-user-btn';
+        nav.appendChild(btn);
+    });
+
     if (isAdmin) {
         const sep = document.createElement('p');
         sep.className = 'sidebar-section-label';
@@ -1879,6 +2004,40 @@ function renderSidebar() {
             document.getElementById('sidebar').classList.remove('open');
         });
         nav.appendChild(seguimientoBtn);
+
+        const videosAdminBtn = document.createElement('button');
+        videosAdminBtn.className = 'sidebar-item';
+        videosAdminBtn.id = 'sidebar-videos-admin-btn';
+        videosAdminBtn.dataset.packId = '__videos_admin__';
+        videosAdminBtn.innerHTML = `
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 010 1.972l-11.54 6.347a1.125 1.125 0 01-1.667-.986V5.653z"/>
+            </svg>
+            <span>Análisis Video</span>`;
+        videosAdminBtn.addEventListener('click', () => {
+            document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+            videosAdminBtn.classList.add('active');
+            renderVideosAdmin();
+            document.getElementById('sidebar').classList.remove('open');
+        });
+        nav.appendChild(videosAdminBtn);
+
+        const mensajesAdminBtn = document.createElement('button');
+        mensajesAdminBtn.className = 'sidebar-item';
+        mensajesAdminBtn.id = 'sidebar-mensajes-admin-btn';
+        mensajesAdminBtn.dataset.packId = '__mensajes_admin__';
+        mensajesAdminBtn.innerHTML = `
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+            </svg>
+            <span>Mensajes</span>`;
+        mensajesAdminBtn.addEventListener('click', () => {
+            document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+            mensajesAdminBtn.classList.add('active');
+            renderMensajesAdmin();
+            document.getElementById('sidebar').classList.remove('open');
+        });
+        nav.appendChild(mensajesAdminBtn);
     }
 }
 
@@ -2504,6 +2663,278 @@ document.getElementById('edit-modal').addEventListener('click', function(e) {
     if (e.target === this) closeEditModal();
 });
 
+// ── USER DATA ─────────────────────────────────────────────────────────────
+let _userProfileCache = undefined; // undefined = not loaded, null = no profile
+let _userVideosCache  = null;
+let _userMsgsCache    = null;
+
+async function userToken() {
+    const { data: { session } } = await sb.auth.getSession();
+    return session?.access_token;
+}
+
+// ── MI PERFIL ─────────────────────────────────────────────────────────────
+async function renderMiPerfil(refresh = false) {
+    const main = document.getElementById('main-content');
+    main.innerHTML = `<div class="content-header"><p class="content-eyebrow">Mi espacio</p><h1 class="content-title">Mi Perfil</h1></div><p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
+    if (refresh) _userProfileCache = undefined;
+    try {
+        if (_userProfileCache === undefined) {
+            const token = await userToken();
+            const r = await fetch('/api/user-profile', { headers: { 'Authorization': `Bearer ${token}` } });
+            const d = await r.json();
+            _userProfileCache = d.profile || null;
+        }
+        renderProfileForm(_userProfileCache);
+    } catch { main.querySelector('p').textContent = 'Error al cargar. Recarga la página.'; }
+}
+
+function renderProfileForm(profile) {
+    const p = profile || {};
+    const main = document.getElementById('main-content');
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Mi espacio</p>
+            <h1 class="content-title">Mi Perfil</h1>
+            <p class="content-desc">Tu información personal visible para el entrenador.</p>
+        </div>
+        <form class="profile-form" onsubmit="saveProfile(event)">
+            <div class="profile-field">
+                <label for="pf-nombre">Nombre completo</label>
+                <input class="profile-input" id="pf-nombre" type="text" value="${esc(p.nombre||'')}">
+            </div>
+            <div class="profile-field">
+                <label for="pf-edad">Edad</label>
+                <input class="profile-input" id="pf-edad" type="text" placeholder="Ej: 17 años" value="${esc(p.edad||'')}">
+            </div>
+            <div class="profile-field">
+                <label for="pf-posicion">Posición</label>
+                <input class="profile-input" id="pf-posicion" type="text" placeholder="Ej: Escolta / Base" value="${esc(p.posicion||'')}">
+            </div>
+            <div class="profile-field">
+                <label for="pf-nivel">Nivel</label>
+                <input class="profile-input" id="pf-nivel" type="text" placeholder="Ej: Amateur avanzado" value="${esc(p.nivel||'')}">
+            </div>
+            <div class="profile-field">
+                <label for="pf-club">Club actual</label>
+                <input class="profile-input" id="pf-club" type="text" placeholder="Ej: CB Ejemplo" value="${esc(p.club||'')}">
+            </div>
+            <div class="profile-field">
+                <label for="pf-telefono">Teléfono</label>
+                <input class="profile-input" id="pf-telefono" type="tel" placeholder="+34 6xx xxx xxx" value="${esc(p.telefono||'')}">
+            </div>
+            <div class="profile-field full-width">
+                <label for="pf-bio">Sobre ti / Objetivos</label>
+                <textarea class="profile-input" id="pf-bio" placeholder="Cuéntame un poco sobre ti, tus objetivos esta temporada...">${esc(p.bio||'')}</textarea>
+            </div>
+            <div style="grid-column:1/-1;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                <button class="btn-save-profile" id="pf-save-btn" type="submit">Guardar perfil</button>
+                <p class="profile-save-msg" id="pf-msg"></p>
+            </div>
+        </form>`;
+}
+
+async function saveProfile(e) {
+    if (e) e.preventDefault();
+    const btn = document.getElementById('pf-save-btn');
+    const msg = document.getElementById('pf-msg');
+    btn.disabled = true; btn.textContent = '...';
+    msg.textContent = ''; msg.className = 'profile-save-msg';
+    const body = {
+        nombre:   document.getElementById('pf-nombre').value.trim(),
+        edad:     document.getElementById('pf-edad').value.trim(),
+        posicion: document.getElementById('pf-posicion').value.trim(),
+        nivel:    document.getElementById('pf-nivel').value.trim(),
+        club:     document.getElementById('pf-club').value.trim(),
+        telefono: document.getElementById('pf-telefono').value.trim(),
+        bio:      document.getElementById('pf-bio').value.trim(),
+    };
+    try {
+        const token = await userToken();
+        const r = await fetch('/api/user-profile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify(body)
+        });
+        const d = await r.json();
+        btn.disabled = false; btn.textContent = 'Guardar perfil';
+        if (d.success) {
+            _userProfileCache = { ..._userProfileCache, ...body };
+            msg.textContent = 'Guardado correctamente';
+            msg.className = 'profile-save-msg ok';
+        } else {
+            msg.textContent = d.error || 'Error al guardar';
+            msg.className = 'profile-save-msg err';
+        }
+    } catch {
+        btn.disabled = false; btn.textContent = 'Guardar perfil';
+        msg.textContent = 'Error de red'; msg.className = 'profile-save-msg err';
+    }
+}
+
+// ── MIS VIDEOS ─────────────────────────────────────────────────────────────
+async function renderMisVideos(refresh = false) {
+    const main = document.getElementById('main-content');
+    main.innerHTML = `<div class="content-header"><p class="content-eyebrow">Mi espacio</p><h1 class="content-title">Mis Videos</h1></div><p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
+    if (refresh) _userVideosCache = null;
+    try {
+        if (!_userVideosCache) {
+            const token = await userToken();
+            const r = await fetch('/api/analisis-videos', { headers: { 'Authorization': `Bearer ${token}` } });
+            const d = await r.json();
+            _userVideosCache = d.videos || [];
+        }
+        renderVideosList(_userVideosCache);
+    } catch { main.querySelector('p').textContent = 'Error al cargar.'; }
+}
+
+function renderVideosList(videos) {
+    const main = document.getElementById('main-content');
+    const listHTML = videos.length
+        ? videos.map(v => {
+            const fecha = v.created_at ? new Date(v.created_at).toLocaleDateString('es', { day:'numeric', month:'short', year:'2-digit' }) : '';
+            const stLabel = { pendiente: 'Pendiente', en_revision: 'En revisión', completado: 'Analizado' }[v.estado] || v.estado;
+            return `<div class="video-card">
+                <div class="video-card-header">
+                    <span class="video-card-title">${esc(v.titulo)}</span>
+                    <span class="video-status ${esc(v.estado||'pendiente')}">${esc(stLabel)}</span>
+                </div>
+                <p class="video-card-url"><a href="${esc(v.url_video)}" target="_blank" rel="noopener">${esc(v.url_video)}</a></p>
+                ${v.descripcion ? `<p class="video-card-desc">${esc(v.descripcion)}</p>` : ''}
+                <p class="video-card-meta">${fecha}</p>
+                ${v.notas_admin ? `<div class="video-notas"><strong style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;">Análisis del entrenador</strong>${esc(v.notas_admin)}</div>` : ''}
+            </div>`;
+          }).join('')
+        : '<p style="color:var(--text-muted);font-size:13px;padding:16px 0;">Todavía no has enviado ningún video.</p>';
+
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Mi espacio</p>
+            <h1 class="content-title">Mis Videos</h1>
+            <p class="content-desc">Envía clips para que el entrenador los analice.</p>
+        </div>
+        <div style="margin-bottom:24px;">
+            <button class="btn-submit-video" onclick="openVideoModal()">+ Enviar nuevo video</button>
+        </div>
+        <div id="user-videos-list">${listHTML}</div>`;
+}
+
+function openVideoModal() {
+    document.getElementById('vm-titulo').value = '';
+    document.getElementById('vm-url').value    = '';
+    document.getElementById('vm-desc').value   = '';
+    document.getElementById('vm-msg').textContent = '';
+    document.getElementById('vm-msg').className = 'modal-msg';
+    document.getElementById('vm-save-btn').disabled = false;
+    document.getElementById('video-modal').classList.add('open');
+}
+function closeVideoModal() { document.getElementById('video-modal').classList.remove('open'); }
+
+async function submitVideo() {
+    const btn  = document.getElementById('vm-save-btn');
+    const msg  = document.getElementById('vm-msg');
+    const titulo    = document.getElementById('vm-titulo').value.trim();
+    const url_video = document.getElementById('vm-url').value.trim();
+    const descripcion = document.getElementById('vm-desc').value.trim();
+    if (!titulo || !url_video) {
+        msg.textContent = 'Título y URL son obligatorios'; msg.className = 'modal-msg err'; return;
+    }
+    btn.disabled = true; btn.textContent = '...';
+    msg.textContent = ''; msg.className = 'modal-msg';
+    try {
+        const token = await userToken();
+        const r = await fetch('/api/analisis-videos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify({ titulo, url_video, descripcion })
+        });
+        const d = await r.json();
+        btn.disabled = false; btn.textContent = 'Enviar';
+        if (d.success) {
+            msg.textContent = 'Enviado correctamente'; msg.className = 'modal-msg ok';
+            _userVideosCache = null;
+            setTimeout(() => { closeVideoModal(); renderMisVideos(); }, 800);
+        } else {
+            msg.textContent = d.error || 'Error al enviar'; msg.className = 'modal-msg err';
+        }
+    } catch {
+        btn.disabled = false; btn.textContent = 'Enviar';
+        msg.textContent = 'Error de red'; msg.className = 'modal-msg err';
+    }
+}
+
+// ── MIS MENSAJES ───────────────────────────────────────────────────────────
+async function renderMisMensajes(refresh = false) {
+    const main = document.getElementById('main-content');
+    main.innerHTML = `<div class="content-header"><p class="content-eyebrow">Mi espacio</p><h1 class="content-title">Mensajes</h1></div><p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
+    if (refresh) _userMsgsCache = null;
+    try {
+        const token = await userToken();
+        const r = await fetch('/api/mensajes', { headers: { 'Authorization': `Bearer ${token}` } });
+        const d = await r.json();
+        _userMsgsCache = d.mensajes || [];
+        renderMsgThread(_userMsgsCache);
+    } catch { main.querySelector('p').textContent = 'Error al cargar.'; }
+}
+
+function renderMsgThread(msgs) {
+    const main = document.getElementById('main-content');
+    const threadHTML = msgs.length
+        ? msgs.map(m => {
+            const hora = m.created_at ? new Date(m.created_at).toLocaleString('es', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }) : '';
+            const cls  = m.de_admin ? 'admin-msg' : 'user-msg';
+            const from = m.de_admin ? 'Yefangyi · Entrenador' : 'Tú';
+            return `<div class="msg-bubble ${cls}">
+                <p class="msg-meta">${esc(from)} &middot; ${hora}</p>
+                ${esc(m.contenido).replace(/\n/g, '<br>')}
+            </div>`;
+          }).join('')
+        : `<p class="msg-empty">Escríbeme un mensaje y te responderé lo antes posible.</p>`;
+
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Mi espacio</p>
+            <h1 class="content-title">Mensajes</h1>
+        </div>
+        <div class="msg-thread" id="msg-thread-user">${threadHTML}</div>
+        <div class="msg-compose">
+            <textarea class="msg-input" id="user-msg-input" placeholder="Escribe tu mensaje..."></textarea>
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button class="btn-send-msg" id="user-send-btn" onclick="sendUserMessage()">Enviar</button>
+                <span id="user-msg-status" style="font-size:12px;"></span>
+            </div>
+        </div>`;
+}
+
+async function sendUserMessage() {
+    const btn   = document.getElementById('user-send-btn');
+    const input = document.getElementById('user-msg-input');
+    const status = document.getElementById('user-msg-status');
+    const contenido = (input?.value || '').trim();
+    if (!contenido) return;
+    btn.disabled = true; btn.textContent = '...';
+    status.textContent = ''; status.style.color = '';
+    try {
+        const token = await userToken();
+        const r = await fetch('/api/mensajes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify({ contenido })
+        });
+        const d = await r.json();
+        btn.disabled = false; btn.textContent = 'Enviar';
+        if (d.success) {
+            _userMsgsCache = null;
+            renderMisMensajes();
+        } else {
+            status.textContent = d.error || 'Error'; status.style.color = '#ff5050';
+        }
+    } catch {
+        btn.disabled = false; btn.textContent = 'Enviar';
+        status.textContent = 'Error de red'; status.style.color = '#ff5050';
+    }
+}
+
 // ── ALUMNOS UNIFICADOS ─────────────────────────────────────────────────────
 let alumnosIndex    = null;
 let activeDetailEmail = null;
@@ -2658,6 +3089,44 @@ function renderAlumnoDetalle(email) {
         acadInner = `<div class="detail-section-body"><p class="detail-empty">No está registrado en academia online.</p></div>`;
     }
 
+    // ─ Videos section ─
+    const userVideos = (adminCache?.videos || []).filter(v => (v.email||'').toLowerCase() === a.email);
+    let videosInner;
+    if (userVideos.length) {
+        videosInner = `<div class="detail-section-body">${userVideos.map(v => {
+            const fecha = v.created_at ? new Date(v.created_at).toLocaleDateString('es', { day:'numeric', month:'short', year:'2-digit' }) : '';
+            const stLabel = { pendiente:'Pendiente', en_revision:'En revisión', completado:'Analizado' }[v.estado] || v.estado;
+            return `<div class="video-card" style="margin-bottom:8px;">
+                <div class="video-card-header">
+                    <span class="video-card-title">${esc(v.titulo)}</span>
+                    <span class="video-status ${esc(v.estado||'pendiente')}">${esc(stLabel)}</span>
+                </div>
+                <p class="video-card-url"><a href="${esc(v.url_video)}" target="_blank" rel="noopener">${esc(v.url_video)}</a></p>
+                ${v.descripcion ? `<p class="video-card-desc">${esc(v.descripcion)}</p>` : ''}
+                <p class="video-card-meta">${fecha}</p>
+                ${v.notas_admin ? `<div class="video-notas">${esc(v.notas_admin)}</div>` : ''}
+                <button class="btn-edit-student" style="margin-top:8px;" onclick="openVideoEditModal('${esc(v.id)}','${esc(v.estado||'pendiente')}',${JSON.stringify(v.notas_admin||'')})">Añadir análisis</button>
+            </div>`;
+        }).join('')}</div>`;
+    } else {
+        videosInner = `<div class="detail-section-body"><p class="detail-empty">Sin videos enviados.</p></div>`;
+    }
+
+    // ─ Mensajes section ─
+    const userMsgs = (adminCache?.mensajes || []).filter(m => (m.email||'').toLowerCase() === a.email);
+    let mensajesInner;
+    if (userMsgs.length) {
+        const threadHTML = userMsgs.map(m => {
+            const hora = m.created_at ? new Date(m.created_at).toLocaleString('es', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }) : '';
+            const cls  = m.de_admin ? 'admin-msg' : 'user-msg';
+            const from = m.de_admin ? 'Tú (admin)' : esc(a.nombre || a.email);
+            return `<div class="msg-bubble ${cls}"><p class="msg-meta">${from} &middot; ${hora}</p>${esc(m.contenido).replace(/\n/g,'<br>')}</div>`;
+        }).join('');
+        mensajesInner = `<div class="detail-section-body"><div class="msg-thread" style="margin-bottom:0;">${threadHTML}</div></div>`;
+    } else {
+        mensajesInner = `<div class="detail-section-body"><p class="detail-empty">Sin mensajes.</p></div>`;
+    }
+
     main.innerHTML = `
         <button class="detail-back" onclick="renderAlumnos()">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
@@ -2676,6 +3145,19 @@ function renderAlumnoDetalle(email) {
         <div class="detail-section">
             <div class="detail-section-header"><span class="detail-section-title">Academia Online</span></div>
             ${acadInner}
+        </div>
+        <div class="detail-section">
+            <div class="detail-section-header">
+                <span class="detail-section-title">Análisis de Video</span>
+            </div>
+            ${videosInner}
+        </div>
+        <div class="detail-section">
+            <div class="detail-section-header">
+                <span class="detail-section-title">Mensajes</span>
+                ${plat ? `<div class="detail-hdr-actions"><button class="btn-edit-student" onclick="openMsgReplyModal('${esc(plat.id)}','${esc(a.email)}','${esc(a.nombre)}')">Responder</button></div>` : ''}
+            </div>
+            ${mensajesInner}
         </div>`;
 }
 
@@ -2822,6 +3304,12 @@ async function saveSeguimiento() {
 document.getElementById('seg-modal').addEventListener('click', function(e) {
     if (e.target === this) closeSeguimientoModal();
 });
+document.getElementById('video-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeVideoModal();
+});
+document.getElementById('msg-reply-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeMsgReplyModal();
+});
 
 // Refresh detail view after assign/revoke pack (override to stay in detail)
 const _origAssignSuccess = assignPack;
@@ -2876,6 +3364,317 @@ async function revokePack(userId, pack, btn) {
             }
         }, 800);
     } else { btn.disabled = false; showMsg(userId, 'err', data.error || 'Error al revocar'); }
+}
+
+// ── ADMIN: VIDEOS ─────────────────────────────────────────────────────────
+async function renderVideosAdmin(refresh = false) {
+    const main = document.getElementById('main-content');
+    main.innerHTML = `<div class="content-header"><p class="content-eyebrow">Administración</p><h1 class="content-title">Análisis de Video</h1></div><p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
+    try {
+        const data = await fetchAdminData(refresh);
+        renderVideosAdminPanel(data.videos || [], data.users || []);
+    } catch { main.querySelector('p').textContent = 'Error al cargar.'; }
+}
+
+function renderVideosAdminPanel(videos, users) {
+    const main = document.getElementById('main-content');
+    const pendientes  = videos.filter(v => v.estado === 'pendiente').length;
+    const completados = videos.filter(v => v.estado === 'completado').length;
+
+    const buildList = (vids) => {
+        if (!vids.length) return '<p style="color:var(--text-muted);font-size:13px;">Sin solicitudes todavía.</p>';
+        return vids.map(v => {
+            const u = users.find(u => u.email.toLowerCase() === (v.email||'').toLowerCase());
+            const fecha = v.created_at ? new Date(v.created_at).toLocaleDateString('es', { day:'numeric', month:'short', year:'2-digit' }) : '';
+            const stLabel = { pendiente:'Pendiente', en_revision:'En revisión', completado:'Analizado' }[v.estado] || v.estado;
+            return `<div class="video-card" id="vadmin-${esc(v.id)}">
+                <div class="video-card-header">
+                    <div>
+                        <p class="video-card-title">${esc(v.titulo)}</p>
+                        <p class="video-card-meta">${esc(v.email)} &middot; ${fecha}</p>
+                    </div>
+                    <span class="video-status ${esc(v.estado||'pendiente')}">${esc(stLabel)}</span>
+                </div>
+                <p class="video-card-url"><a href="${esc(v.url_video)}" target="_blank" rel="noopener">${esc(v.url_video)}</a></p>
+                ${v.descripcion ? `<p class="video-card-desc">${esc(v.descripcion)}</p>` : ''}
+                ${v.notas_admin ? `<div class="video-notas">${esc(v.notas_admin)}</div>` : ''}
+                <div class="assign-row" style="margin-top:10px;">
+                    <select class="assign-select" id="vs-${esc(v.id)}">
+                        <option value="pendiente"${v.estado==='pendiente'?' selected':''}>Pendiente</option>
+                        <option value="en_revision"${v.estado==='en_revision'?' selected':''}>En revisión</option>
+                        <option value="completado"${v.estado==='completado'?' selected':''}>Analizado</option>
+                    </select>
+                    <button class="btn-assign" onclick="openVideoEditModal('${esc(v.id)}','${esc(v.estado||'pendiente')}',${JSON.stringify(v.notas_admin||'')})">Añadir análisis</button>
+                    ${u ? `<button class="btn-edit-student" onclick="goToAlumno('${esc(v.email)}')">Ver alumno</button>` : ''}
+                </div>
+            </div>`;
+        }).join('');
+    };
+
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Administración</p>
+            <h1 class="content-title">Análisis de Video</h1>
+            <p class="content-desc">${videos.length} solicitudes &middot; ${pendientes} pendientes &middot; ${completados} completados</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+            <input class="admin-search" id="vadmin-search" placeholder="Buscar..." oninput="filterVideosAdmin(this.value)">
+            <button class="admin-refresh-btn" onclick="renderVideosAdmin(true)">Actualizar</button>
+        </div>
+        <div id="vadmin-list">${buildList(videos)}</div>`;
+
+}
+
+function filterVideosAdmin(q) {
+    if (!adminCache?.videos) return;
+    const lq = q.toLowerCase();
+    const f = lq ? adminCache.videos.filter(v => (v.titulo||'').toLowerCase().includes(lq) || (v.email||'').toLowerCase().includes(lq)) : adminCache.videos;
+    const users = adminCache.users || [];
+    if (!f.length) { document.getElementById('vadmin-list').innerHTML = '<p style="color:var(--text-muted);font-size:13px;">Sin resultados.</p>'; return; }
+    document.getElementById('vadmin-list').innerHTML = f.map(v => {
+        const u = users.find(u => u.email.toLowerCase() === (v.email||'').toLowerCase());
+        const fecha = v.created_at ? new Date(v.created_at).toLocaleDateString('es', { day:'numeric', month:'short', year:'2-digit' }) : '';
+        const stLabel = { pendiente:'Pendiente', en_revision:'En revisión', completado:'Analizado' }[v.estado] || v.estado;
+        return `<div class="video-card">
+            <div class="video-card-header"><div><p class="video-card-title">${esc(v.titulo)}</p><p class="video-card-meta">${esc(v.email)} &middot; ${fecha}</p></div><span class="video-status ${esc(v.estado||'pendiente')}">${esc(stLabel)}</span></div>
+            <p class="video-card-url"><a href="${esc(v.url_video)}" target="_blank" rel="noopener">${esc(v.url_video)}</a></p>
+            ${v.descripcion ? `<p class="video-card-desc">${esc(v.descripcion)}</p>` : ''}
+            ${v.notas_admin ? `<div class="video-notas">${esc(v.notas_admin)}</div>` : ''}
+            <div class="assign-row" style="margin-top:10px;">
+                <select class="assign-select" id="vs-${esc(v.id)}"><option value="pendiente"${v.estado==='pendiente'?' selected':''}>Pendiente</option><option value="en_revision"${v.estado==='en_revision'?' selected':''}>En revisión</option><option value="completado"${v.estado==='completado'?' selected':''}>Analizado</option></select>
+                <button class="btn-assign" onclick="openVideoEditModal('${esc(v.id)}','${esc(v.estado||'pendiente')}',${JSON.stringify(v.notas_admin||'')})">Añadir análisis</button>
+                ${u ? `<button class="btn-edit-student" onclick="goToAlumno('${esc(v.email)}')">Ver alumno</button>` : ''}
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function openVideoEditModal(id, estado, notas) {
+    document.getElementById('modal-record-id').value   = id;
+    document.getElementById('modal-record-type').value = 'video';
+    document.getElementById('modal-student-name').textContent = '';
+    document.getElementById('modal-type-label').textContent = 'Análisis de video';
+    document.getElementById('modal-notas').value = notas || '';
+    document.getElementById('modal-notas').placeholder = 'Escribe tu análisis del video...';
+    document.getElementById('modal-msg').textContent = '';
+    document.getElementById('modal-msg').className = 'modal-msg';
+    const estadoSel = document.getElementById('modal-estado');
+    estadoSel.innerHTML = ['pendiente','en_revision','completado'].map(o =>
+        `<option value="${o}"${o===estado?' selected':''}>${{pendiente:'Pendiente',en_revision:'En revisión',completado:'Analizado'}[o]}</option>`
+    ).join('');
+    document.getElementById('edit-modal').classList.add('open');
+    document.getElementById('modal-save-btn').disabled = false;
+}
+
+// Override saveEdit to handle 'video' type
+const _origSaveEdit = saveEdit;
+async function saveEdit() {
+    const type = document.getElementById('modal-record-type').value;
+    if (type === 'video') {
+        const id    = document.getElementById('modal-record-id').value;
+        const estado = document.getElementById('modal-estado').value;
+        const notas  = document.getElementById('modal-notas').value;
+        const saveBtn = document.getElementById('modal-save-btn');
+        const msgEl   = document.getElementById('modal-msg');
+        saveBtn.disabled = true; saveBtn.textContent = '...';
+        const token = await adminToken();
+        const r = await fetch('/api/admin-action', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify({ action: 'update_video', id, estado, notas_admin: notas })
+        });
+        const data = await r.json();
+        saveBtn.disabled = false; saveBtn.textContent = 'Guardar';
+        if (data.success) {
+            msgEl.textContent = 'Guardado'; msgEl.className = 'modal-msg ok';
+            adminCache = null;
+            setTimeout(() => { closeEditModal(); renderVideosAdmin(); }, 700);
+        } else {
+            msgEl.textContent = data.error || 'Error'; msgEl.className = 'modal-msg err';
+        }
+        return;
+    }
+    _origSaveEdit();
+}
+
+// ── ADMIN: MENSAJES ────────────────────────────────────────────────────────
+async function renderMensajesAdmin(refresh = false) {
+    const main = document.getElementById('main-content');
+    main.innerHTML = `<div class="content-header"><p class="content-eyebrow">Administración</p><h1 class="content-title">Mensajes</h1></div><p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
+    try {
+        const data = await fetchAdminData(refresh);
+        renderMensajesAdminPanel(data.mensajes || [], data.users || []);
+    } catch { main.querySelector('p').textContent = 'Error al cargar.'; }
+}
+
+function renderMensajesAdminPanel(msgs, users) {
+    const main = document.getElementById('main-content');
+    // Group by email
+    const byEmail = {};
+    msgs.forEach(m => {
+        const k = (m.email||'').toLowerCase();
+        if (!byEmail[k]) byEmail[k] = { email: k, msgs: [] };
+        byEmail[k].msgs.push(m);
+    });
+    const threads = Object.values(byEmail).sort((a,b) => {
+        const la = a.msgs[a.msgs.length-1]?.created_at || '';
+        const lb = b.msgs[b.msgs.length-1]?.created_at || '';
+        return lb.localeCompare(la);
+    });
+
+    const listHTML = threads.length ? threads.map(t => {
+        const u = users.find(u => u.email.toLowerCase() === t.email);
+        const nombre = u?.name || t.email;
+        const unread = t.msgs.filter(m => !m.de_admin && !m.leido).length;
+        const last = t.msgs[t.msgs.length-1];
+        const hora = last?.created_at ? new Date(last.created_at).toLocaleString('es', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }) : '';
+        return `<div class="alumno-list-item" onclick="openAdminThread('${esc(t.email)}','${esc(nombre)}')">
+            <div>
+                <p class="alumno-list-name">${esc(nombre)}</p>
+                <p class="alumno-list-email">${esc(t.email)} &middot; ${hora}</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+                ${unread ? `<span class="unread-dot" title="${unread} sin leer"></span>` : ''}
+                <span style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">${t.msgs.length} msgs</span>
+            </div>
+        </div>`;
+    }).join('') : '<p style="color:var(--text-muted);font-size:13px;">Sin mensajes todavía.</p>';
+
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Administración</p>
+            <h1 class="content-title">Mensajes</h1>
+            <p class="content-desc">${threads.length} conversaciones</p>
+        </div>
+        <div id="mensajes-admin-list">${listHTML}</div>`;
+
+    window._adminMsgData = { msgs, users };
+}
+
+function openAdminThread(email, nombre) {
+    if (!window._adminMsgData) return;
+    const { msgs, users } = window._adminMsgData;
+    const u = users.find(u => u.email.toLowerCase() === email.toLowerCase());
+    if (!u) return;
+    const thread = msgs.filter(m => (m.email||'').toLowerCase() === email.toLowerCase());
+    const main = document.getElementById('main-content');
+
+    const threadHTML = thread.length
+        ? thread.map(m => {
+            const hora = m.created_at ? new Date(m.created_at).toLocaleString('es', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }) : '';
+            const cls  = m.de_admin ? 'admin-msg' : 'user-msg';
+            const from = m.de_admin ? 'Tú (admin)' : esc(nombre);
+            return `<div class="msg-bubble ${cls}">
+                <p class="msg-meta">${from} &middot; ${hora}</p>
+                ${esc(m.contenido).replace(/\n/g,'<br>')}
+            </div>`;
+          }).join('')
+        : '<p class="msg-empty">Sin mensajes.</p>';
+
+    main.innerHTML = `
+        <button class="detail-back" onclick="renderMensajesAdmin()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+            Volver a Mensajes
+        </button>
+        <p class="detail-profile-name">${esc(nombre)}</p>
+        <p class="detail-profile-meta">${esc(email)}</p>
+        <div class="msg-thread" style="margin-top:24px;">${threadHTML}</div>
+        <div class="msg-compose" style="max-width:680px;">
+            <textarea class="msg-input" id="admin-reply-input" placeholder="Escribe tu respuesta..."></textarea>
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button class="btn-send-msg" id="admin-reply-btn" onclick="sendAdminReply('${esc(u.id)}','${esc(email)}','${esc(nombre)}')">Enviar</button>
+                <span id="admin-reply-status" style="font-size:12px;"></span>
+            </div>
+        </div>`;
+
+    // Mark unread as read
+    adminToken().then(token => fetch('/api/admin-action', {
+        method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${token}`},
+        body: JSON.stringify({ action:'mark_read', targetUserId: u.id })
+    }));
+}
+
+async function sendAdminReply(targetUserId, targetEmail, nombre) {
+    const btn    = document.getElementById('admin-reply-btn');
+    const input  = document.getElementById('admin-reply-input');
+    const status = document.getElementById('admin-reply-status');
+    const contenido = (input?.value || '').trim();
+    if (!contenido) return;
+    btn.disabled = true; btn.textContent = '...';
+    status.textContent = ''; status.style.color = '';
+    try {
+        const token = await adminToken();
+        const r = await fetch('/api/admin-action', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify({ action: 'send_message', targetUserId, targetEmail, contenido })
+        });
+        const d = await r.json();
+        btn.disabled = false; btn.textContent = 'Enviar';
+        if (d.success) {
+            adminCache = null;
+            const data = await fetchAdminData();
+            window._adminMsgData = { msgs: data.mensajes || [], users: data.users || [] };
+            openAdminThread(targetEmail, nombre);
+        } else {
+            status.textContent = d.error || 'Error'; status.style.color = '#ff5050';
+        }
+    } catch {
+        btn.disabled = false; btn.textContent = 'Enviar';
+        status.textContent = 'Error de red'; status.style.color = '#ff5050';
+    }
+}
+
+// Admin reply modal (from student detail page)
+function openMsgReplyModal(userId, email, nombre) {
+    document.getElementById('mrm-userid').value = userId;
+    document.getElementById('mrm-email').value  = email;
+    document.getElementById('mrm-name').textContent = nombre;
+    document.getElementById('mrm-texto').value  = '';
+    document.getElementById('mrm-msg').textContent = '';
+    document.getElementById('mrm-msg').className = 'modal-msg';
+    document.getElementById('mrm-save-btn').disabled = false;
+    document.getElementById('msg-reply-modal').classList.add('open');
+}
+function closeMsgReplyModal() { document.getElementById('msg-reply-modal').classList.remove('open'); }
+
+async function sendAdminMessage() {
+    const btn  = document.getElementById('mrm-save-btn');
+    const msg  = document.getElementById('mrm-msg');
+    const targetUserId = document.getElementById('mrm-userid').value;
+    const targetEmail  = document.getElementById('mrm-email').value;
+    const contenido    = document.getElementById('mrm-texto').value.trim();
+    if (!contenido) { msg.textContent = 'Mensaje vacío'; msg.className = 'modal-msg err'; return; }
+    btn.disabled = true; btn.textContent = '...';
+    msg.textContent = ''; msg.className = 'modal-msg';
+    try {
+        const token = await adminToken();
+        const r = await fetch('/api/admin-action', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify({ action: 'send_message', targetUserId, targetEmail, contenido })
+        });
+        const d = await r.json();
+        btn.disabled = false; btn.textContent = 'Enviar';
+        if (d.success) {
+            msg.textContent = 'Mensaje enviado'; msg.className = 'modal-msg ok';
+            adminCache = null;
+            setTimeout(() => {
+                closeMsgReplyModal();
+                if (activeDetailEmail) {
+                    fetchAdminData().then(data => {
+                        alumnosIndex = buildAlumnoIndex(data);
+                        renderAlumnoDetalle(activeDetailEmail);
+                    });
+                }
+            }, 700);
+        } else {
+            msg.textContent = d.error || 'Error'; msg.className = 'modal-msg err';
+        }
+    } catch {
+        btn.disabled = false; btn.textContent = 'Enviar';
+        msg.textContent = 'Error de red'; msg.className = 'modal-msg err';
+    }
 }
 
 // ── Start ─────────────────────────────────────────────────────────────────
