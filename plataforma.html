@@ -1589,23 +1589,29 @@ function renderAdminPanel(users) {
         <div id="admin-users-list">${buildUserList(users)}</div>`;
 }
 
+function esc(s) {
+    return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 function buildUserList(users) {
     if (!users.length) return '<p style="color:var(--text-muted);font-size:13px;">Sin usuarios.</p>';
     return users.map(u => {
         const packTags = u.packs.length
             ? u.packs.map(p => `
                 <span class="pack-tag ${expiryStatus(p.expires_at)}">
-                    <span class="pack-tag-name">${p.pack}</span>
+                    <span class="pack-tag-name">${esc(p.pack)}</span>
                     <span class="pack-tag-expiry">${formatExpiry(p.expires_at)}</span>
-                    <button class="pack-revoke" onclick="revokePack('${u.id}','${p.pack}',this)" title="Revocar">&times;</button>
+                    <button class="pack-revoke" onclick="revokePack('${esc(u.id)}','${esc(p.pack)}',this)" title="Revocar">&times;</button>
                 </span>`).join('')
             : '<span class="no-packs-label">Sin acceso</span>';
 
-        return `<div class="user-row" id="urow-${u.id}">
+        return `<div class="user-row" id="urow-${esc(u.id)}">
             <div class="user-row-top">
                 <div>
-                    <p class="user-info-name">${u.name || '—'}</p>
-                    <p class="user-info-email">${u.email}</p>
+                    <p class="user-info-name">${esc(u.name) || '—'}</p>
+                    <p class="user-info-email">${esc(u.email)}</p>
                     <div class="user-badges">
                         <span class="badge ${u.confirmed ? 'badge-ok' : 'badge-pending'}">${u.confirmed ? 'Confirmado' : 'Sin confirmar'}</span>
                         ${u.is_admin ? '<span class="badge badge-admin">Admin</span>' : ''}
@@ -1614,7 +1620,7 @@ function buildUserList(users) {
             </div>
             <div class="user-packs-row" id="ptags-${u.id}">${packTags}</div>
             <div class="assign-row">
-                <select class="assign-select" id="sel-${u.id}">
+                <select class="assign-select" id="sel-${esc(u.id)}">
                     <option value="">— Pack a asignar —</option>
                     <option value="tiro">Pack Tiro</option>
                     <option value="footwork">Pack Footwork</option>
@@ -1624,8 +1630,8 @@ function buildUserList(users) {
                     <option value="completo">Pack Completo</option>
                     <option value="all">Acceso Total</option>
                 </select>
-                <button class="btn-assign" onclick="assignPack('${u.id}',this)">Asignar 1 año</button>
-                <span class="assign-msg" id="msg-${u.id}"></span>
+                <button class="btn-assign" onclick="assignPack('${esc(u.id)}',this)">Asignar 1 año</button>
+                <span class="assign-msg" id="msg-${esc(u.id)}"></span>
             </div>
         </div>`;
     }).join('');

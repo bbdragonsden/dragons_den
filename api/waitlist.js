@@ -132,6 +132,21 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ success: false, error: 'Faltan campos' });
   }
 
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!EMAIL_RE.test(email)) {
+    return res.status(400).json({ success: false, error: 'Email inválido' });
+  }
+  if (nombre.length > 100 || email.length > 254) {
+    return res.status(400).json({ success: false, error: 'Campo demasiado largo' });
+  }
+  const VALID_INTERES = [
+    'Pack Tiro', 'Pack Footwork', 'Pack Defensa',
+    'Pack Físico', 'Pack Mental', 'Pack Completo'
+  ];
+  if (!VALID_INTERES.includes(interes)) {
+    return res.status(400).json({ success: false, error: 'Pack inválido' });
+  }
+
   try {
     await Promise.all([
       resend.emails.send({

@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 
-const SECRET = process.env.JWT_SECRET || 'dragons-den-change-this-secret';
+const SECRET = process.env.JWT_SECRET;
+if (!SECRET) throw new Error('JWT_SECRET env var not set');
 
 function verifyToken(token) {
   if (!token || typeof token !== 'string') return null;

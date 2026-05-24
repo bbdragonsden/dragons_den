@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 
-const SECRET = process.env.JWT_SECRET || 'dragons-den-change-this-secret';
+const SECRET = process.env.JWT_SECRET;
+if (!SECRET) throw new Error('JWT_SECRET env var not set');
 const TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
 function makeToken(payload) {
