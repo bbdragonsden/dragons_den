@@ -30,16 +30,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
+        /* ── DESIGN TOKENS ───────────────────────────── */
         :root {
             --bg: #080808;
-            --bg-2: #0f0f0f;
-            --bg-3: #161616;
+            --bg-2: #0d0d0d;
+            --bg-3: #111111;
+            --bg-4: #161616;
             --gold: #c8a96e;
-            --gold-light: rgba(200,169,110,0.15);
-            --gold-border: rgba(200,169,110,0.2);
+            --gold-light: rgba(200,169,110,0.12);
+            --gold-border: rgba(200,169,110,0.22);
+            --gold-glow: rgba(200,169,110,0.07);
             --text: #f0ede8;
-            --text-muted: #7a7570;
-            --border: rgba(255,255,255,0.06);
+            --text-muted: #6a6560;
+            --text-secondary: #a09890;
+            --border: rgba(255,255,255,0.055);
+            --border-strong: rgba(255,255,255,0.10);
             --radius: 2px;
         }
 
@@ -47,16 +52,25 @@
 
         html { scroll-behavior: smooth; }
 
+        /* ── GRAIN TEXTURE ───────────────────────────── */
+        body::before {
+            content: '';
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
         body {
             font-family: 'Satoshi', sans-serif;
             background: var(--bg);
             color: var(--text);
             font-weight: 400;
-            line-height: 1.7;
+            line-height: 1.75;
             overflow-x: hidden;
         }
 
-        /* ── SELECTION ──────────────────────────────── */
         ::selection {
             background: var(--gold-light);
             color: var(--gold);
@@ -67,7 +81,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 0 60px;
+            padding: 0 80px;
             height: 68px;
             display: flex;
             justify-content: space-between;
@@ -77,6 +91,23 @@
             -webkit-backdrop-filter: blur(20px) saturate(160%);
             border-bottom: 1px solid var(--border);
             transition: backdrop-filter 0.4s ease, background 0.4s ease;
+            overflow: hidden;
+        }
+
+        /* Animated gold underline */
+        nav::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 1px;
+            width: 0;
+            background: var(--gold);
+            animation: nav-line 1.2s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
+        }
+
+        @keyframes nav-line {
+            to { width: 100%; }
         }
 
         nav.scrolled {
@@ -88,7 +119,7 @@
         .nav-logo {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 20px;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             color: var(--gold);
             text-decoration: none;
             flex-shrink: 0;
@@ -104,9 +135,8 @@
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 11px;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
             transition: color 0.25s;
             font-weight: 500;
         }
@@ -115,16 +145,19 @@
         .nav-links a.active { color: var(--gold); }
 
         .nav-links .nav-cta {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 13px;
+            letter-spacing: 3px;
             color: var(--gold);
             border: 1px solid var(--gold-border);
-            padding: 7px 18px;
+            padding: 7px 20px;
             transition: background 0.25s, border-color 0.25s, color 0.25s;
         }
 
         .nav-links .nav-cta:hover {
-            background: var(--gold-light);
-            border-color: rgba(200,169,110,0.5);
-            color: var(--gold);
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #000;
         }
 
         .nav-hamburger {
@@ -172,8 +205,8 @@
             min-height: 100dvh;
             display: grid;
             grid-template-columns: 55fr 45fr;
-            align-items: center;
-            padding: 80px 60px 80px;
+            align-items: end;
+            padding: 140px 80px 100px;
             position: relative;
             overflow: hidden;
             background: var(--bg);
@@ -183,8 +216,9 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse 80% 50% at 70% 50%, rgba(200,169,110,0.04) 0%, transparent 70%);
+            background: radial-gradient(ellipse 50% 60% at 80% 50%, rgba(200,169,110,0.04) 0%, transparent 70%);
             pointer-events: none;
+            z-index: 0;
         }
 
         .hero::after {
@@ -207,11 +241,11 @@
         }
 
         .hero-eyebrow {
-            font-size: 11px;
-            letter-spacing: 5px;
+            font-size: 10px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 32px;
+            margin-bottom: 28px;
             font-weight: 500;
             display: flex;
             align-items: center;
@@ -221,7 +255,7 @@
         .hero-eyebrow::before {
             content: '';
             display: block;
-            width: 32px;
+            width: 28px;
             height: 1px;
             background: var(--gold);
             flex-shrink: 0;
@@ -229,9 +263,9 @@
 
         .hero-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(3.5rem, 8vw, 7rem);
-            line-height: 0.9;
-            letter-spacing: 4px;
+            font-size: clamp(3.5rem, 9vw, 8rem);
+            line-height: 0.88;
+            letter-spacing: 0.02em;
             color: var(--text);
             margin-bottom: 0;
         }
@@ -245,28 +279,27 @@
 
         .hero-title-inner {
             display: block;
-            transform: translateY(100%);
         }
 
         .hero-divider {
             width: 48px;
             height: 1px;
             background: linear-gradient(90deg, var(--gold), transparent);
-            margin: 36px 0;
+            margin: 32px 0;
         }
 
-        .hero-subtitle {
-            font-size: 16px;
-            color: var(--text-muted);
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--text-secondary);
             max-width: 48ch;
             line-height: 1.75;
-            margin-bottom: 52px;
-            font-weight: 300;
+            margin-bottom: 48px;
+            font-weight: 400;
         }
 
-        .hero-cta-row {
+        .hero-ctas {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             align-items: center;
         }
 
@@ -278,12 +311,14 @@
             color: #000;
             text-decoration: none;
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 15px;
+            font-size: 13px;
             letter-spacing: 3px;
             text-transform: uppercase;
             transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s;
             display: inline-block;
             overflow: hidden;
+            cursor: pointer;
+            border: none;
         }
 
         .btn-primary::after {
@@ -293,16 +328,19 @@
             left: -100%;
             width: 60%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.2) 50%, transparent 60%);
             transform: skewX(-20deg);
-            transition: left 0.6s ease;
+            animation: shimmer 2.4s ease infinite;
         }
 
-        .btn-primary:hover::after { left: 150%; }
+        @keyframes shimmer {
+            0% { left: -100%; }
+            50%, 100% { left: 150%; }
+        }
 
         .btn-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 32px rgba(200,169,110,0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(200,169,110,0.25);
         }
 
         .btn-primary:active { transform: scale(0.98); }
@@ -313,16 +351,18 @@
             color: var(--gold);
             text-decoration: none;
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 15px;
+            font-size: 13px;
             letter-spacing: 3px;
             text-transform: uppercase;
             transition: all 0.25s;
             display: inline-block;
+            cursor: pointer;
+            background: transparent;
         }
 
         .btn-outline:hover {
-            border-color: rgba(200,169,110,0.6);
             background: var(--gold-light);
+            border-color: rgba(200,169,110,0.5);
         }
 
         .btn-outline:active { transform: scale(0.98); }
@@ -330,8 +370,9 @@
         /* Hero right — basketball SVG art */
         .hero-right {
             position: relative;
+            z-index: 1;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
             height: 100%;
             min-height: 480px;
@@ -344,10 +385,6 @@
         }
 
         .hero-float-el {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             width: 100%;
             max-width: 460px;
         }
@@ -360,7 +397,7 @@
             line-height: 1;
             position: absolute;
             right: -16px;
-            bottom: 10%;
+            bottom: 8%;
             letter-spacing: -4px;
             pointer-events: none;
             user-select: none;
@@ -368,7 +405,7 @@
 
         /* ── SECTION COMMONS ──────────────────────── */
         .section-eyebrow {
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 4px;
             text-transform: uppercase;
             color: var(--gold);
@@ -378,13 +415,13 @@
 
         .section-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            letter-spacing: 3px;
+            font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+            letter-spacing: 0.02em;
             color: var(--text);
             line-height: 0.95;
             margin-bottom: 0;
             border-left: 3px solid var(--gold);
-            padding-left: 14px;
+            padding-left: 16px;
         }
 
         .section-divider {
@@ -395,100 +432,172 @@
         }
 
         .section-text {
-            font-size: 15px;
-            color: var(--text-muted);
-            max-width: 52ch;
-            margin-bottom: 64px;
-            line-height: 1.8;
-            font-weight: 300;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 62ch;
+            margin-bottom: 56px;
+            line-height: 1.75;
+            font-weight: 400;
         }
 
         /* ── COURSE GRID ──────────────────────────────── */
         .courses-wrap {
-            padding: 120px 60px;
-            max-width: 1240px;
+            padding: 120px 80px;
+            max-width: 1280px;
             margin: 0 auto;
         }
 
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2px;
             background: var(--border);
         }
 
         .course-card {
             background: var(--bg-2);
-            padding: 48px 40px 44px;
+            padding: 44px 36px 40px;
             position: relative;
             display: flex;
             flex-direction: column;
             overflow: hidden;
             transition: background 0.3s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1);
+            border: 1px solid var(--border);
         }
 
         /* Faded background number */
         .course-card::before {
             content: attr(data-num);
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 140px;
+            font-size: 130px;
             color: var(--gold);
             opacity: 0.04;
             line-height: 1;
             position: absolute;
-            top: -16px;
-            left: 20px;
+            top: -12px;
+            left: 16px;
             pointer-events: none;
             user-select: none;
             letter-spacing: -4px;
         }
 
-        /* Gold L-corner accent top-right */
+        /* Gold L-corner accent */
         .course-card::after {
             content: '';
             position: absolute;
             top: 0;
             right: 0;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-top: 1.5px solid var(--gold);
             border-right: 1.5px solid var(--gold);
-            opacity: 0.5;
+            opacity: 0.45;
             transition: opacity 0.3s, width 0.3s, height 0.3s;
         }
 
         .course-card:hover {
             background: var(--bg-3);
-            box-shadow: inset 0 0 0 1px rgba(200,169,110,0.4), 0 20px 60px rgba(0,0,0,0.6);
-            transform: translateY(-6px);
+            border-color: var(--gold-border);
+            box-shadow: 0 12px 40px var(--gold-glow);
+            transform: translateY(-2px);
             z-index: 1;
         }
 
         .course-card:hover::after {
             opacity: 1;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
+        }
+
+        /* Colored accent bar on top */
+        .course-card-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gold);
+            opacity: 0.5;
+        }
+
+        .course-card:nth-child(1) .course-card-bar { opacity: 0.4; }
+        .course-card:nth-child(2) .course-card-bar { opacity: 0.5; background: #d4b87a; }
+        .course-card:nth-child(3) .course-card-bar { opacity: 0.45; background: #b89455; }
+        .course-card:nth-child(4) .course-card-bar { opacity: 0.55; background: #dfc484; }
+        .course-card:nth-child(5) .course-card-bar { opacity: 0.4; background: #c8a96e; }
+
+        .course-icon-wrap {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-4);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+            flex-shrink: 0;
         }
 
         .course-category-tag {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 4px;
             color: var(--gold);
-            margin-bottom: 20px;
+            margin-bottom: 14px;
             position: relative;
             z-index: 1;
         }
 
         .course-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(28px, 3vw, 38px);
-            letter-spacing: 2px;
-            color: var(--text);
+            font-size: clamp(26px, 2.8vw, 36px);
+            letter-spacing: 0.02em;
+            color: var(--gold);
             line-height: 1;
-            margin-bottom: 28px;
+            margin-bottom: 12px;
             position: relative;
             z-index: 1;
+        }
+
+        .course-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+        }
+
+        .course-bullets {
+            list-style: none;
+            margin-bottom: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-bullets li {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .course-bullets li::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0;
+            opacity: 0.7;
         }
 
         .course-meta {
@@ -518,7 +627,7 @@
             font-size: 13px;
             color: var(--text);
             font-weight: 500;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         .course-difficulty {
@@ -529,7 +638,7 @@
             padding: 5px 12px;
             border: 1px solid var(--border);
             color: var(--text-muted);
-            margin-bottom: 32px;
+            margin-bottom: 28px;
             position: relative;
             z-index: 1;
             font-weight: 500;
@@ -544,23 +653,19 @@
         /* Price block */
         .course-price-row {
             margin-top: auto;
-            padding-top: 28px;
+            padding-top: 24px;
             border-top: 1px solid var(--border);
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 16px;
             position: relative;
             z-index: 1;
         }
 
-        .price-block { flex: 1; }
+        .price-block { margin-bottom: 20px; }
 
         .price-market-ref {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             padding: 3px 8px;
             border: 1px solid var(--border);
             background: rgba(255,255,255,0.02);
@@ -608,7 +713,7 @@
 
         .price-year-tag {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             color: var(--gold);
             letter-spacing: 1px;
             padding: 4px 8px;
@@ -628,7 +733,10 @@
         }
 
         .btn-course {
-            padding: 13px 24px;
+            width: 100%;
+            display: block;
+            text-align: center;
+            padding: 14px 24px;
             border: 1px solid var(--border);
             color: var(--gold);
             text-decoration: none;
@@ -637,8 +745,8 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             transition: all 0.25s;
-            white-space: nowrap;
-            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-course:hover {
@@ -649,33 +757,40 @@
 
         .btn-course:active { transform: scale(0.98); }
 
-        /* Featured card */
+        /* Pack Completo — featured card */
         .course-card.featured {
-            background: var(--bg-3);
-            border-bottom: 2px solid var(--gold);
+            background: linear-gradient(135deg, #111111 0%, #1a1208 100%);
+            border-color: var(--gold-border) !important;
+            grid-column: span 2;
         }
 
         .course-card.featured:hover {
-            background: #1c1a16;
+            background: linear-gradient(135deg, #141414 0%, #1e1509 100%);
+            box-shadow: 0 12px 48px rgba(200,169,110,0.12);
+        }
+
+        .course-card.featured .course-card-bar {
+            opacity: 0.9;
+            background: linear-gradient(90deg, var(--gold), #dfc484, var(--gold));
         }
 
         .course-popular-badge {
-            position: absolute;
-            top: 0; left: 40px;
+            display: inline-block;
             background: var(--gold);
             color: #000;
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 11px;
-            letter-spacing: 2.5px;
+            font-size: 10px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             padding: 5px 14px;
-            transform: translateY(-50%);
-            z-index: 2;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
         }
 
         .course-featured-tag {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 12px;
+            font-size: 10px;
             letter-spacing: 3px;
             color: var(--gold);
             margin-bottom: 6px;
@@ -683,12 +798,166 @@
             z-index: 1;
         }
 
-        /* ── WAITLIST SECTION ────────────────────────── */
-        .waitlist-wrap {
+        /* ── HOW IT WORKS ─────────────────────────────── */
+        .how-section {
+            padding: 120px 80px;
+        }
+
+        .how-inner {
+            max-width: 1160px;
+            margin: 0 auto;
+        }
+
+        .how-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 64px;
+            position: relative;
+        }
+
+        /* Connector line */
+        .how-steps::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            border-top: 1px dashed var(--gold-border);
+        }
+
+        .how-step {
+            padding: 44px 44px 44px 0;
+            position: relative;
+        }
+
+        .how-step:not(:last-child) {
+            padding-right: 52px;
+            border-right: 1px solid var(--border);
+        }
+
+        .how-step:not(:first-child) {
+            padding-left: 52px;
+        }
+
+        .how-step-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            color: var(--gold);
+            opacity: 0.15;
+            line-height: 1;
+            margin-bottom: -4px;
+            transition: opacity 0.3s;
+            letter-spacing: 2px;
+            display: block;
+        }
+
+        .how-step:hover .how-step-num { opacity: 0.3; }
+
+        .how-step-icon {
+            margin-bottom: 18px;
+        }
+
+        .how-step-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 2px;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .how-step-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        /* ── OPINIONES ────────────────────────────────── */
+        .opiniones-section {
             background: var(--bg-2);
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
-            padding: 120px 60px;
+            padding: 120px 80px;
+        }
+
+        .opiniones-inner {
+            max-width: 1160px;
+            margin: 0 auto;
+        }
+
+        .opiniones-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 64px;
+        }
+
+        .opiniones-grid + .opiniones-grid {
+            margin-top: 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .opinion-card {
+            padding: 44px 36px;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-3);
+            border-left: 3px solid var(--gold-border);
+            margin: 8px;
+            transition: background 0.3s;
+        }
+
+        .opinion-card:hover { background: rgba(255,255,255,0.025); }
+
+        .opinion-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 18px;
+        }
+
+        .opinion-stars span {
+            color: var(--gold);
+            font-size: 13px;
+        }
+
+        .opinion-text {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            flex: 1;
+            margin-bottom: 24px;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .opinion-author {
+            border-top: 1px solid var(--gold-border);
+            padding-top: 18px;
+        }
+
+        .opinion-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 17px;
+            letter-spacing: 2px;
+            color: var(--gold);
+        }
+
+        .opinion-meta {
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ── WAITLIST SECTION ────────────────────────── */
+        .waitlist-wrap {
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 120px 80px;
         }
 
         .waitlist-inner {
@@ -708,7 +977,7 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 32px;
+            margin-bottom: 28px;
             font-weight: 500;
         }
 
@@ -728,30 +997,30 @@
 
         .waitlist-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.5rem, 5.5vw, 4rem);
-            letter-spacing: 3px;
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            letter-spacing: 0.02em;
             color: var(--text);
             line-height: 0.95;
             margin-bottom: 10px;
             border-left: 3px solid var(--gold);
-            padding-left: 14px;
+            padding-left: 16px;
         }
 
         .waitlist-subtitle {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
             letter-spacing: 4px;
             color: var(--gold);
-            margin-bottom: 32px;
-            padding-left: 17px;
+            margin-bottom: 28px;
+            padding-left: 19px;
         }
 
         .waitlist-text {
-            font-size: 15px;
-            color: var(--text-muted);
-            line-height: 1.85;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
             max-width: 44ch;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         /* Form panel */
@@ -762,11 +1031,11 @@
         }
 
         .waitlist-form-title {
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 36px;
+            margin-bottom: 32px;
             padding-bottom: 16px;
             border-bottom: 1px solid var(--border);
             font-weight: 500;
@@ -781,6 +1050,7 @@
         .wl-form-group {
             display: flex;
             flex-direction: column;
+            gap: 2px;
         }
 
         .wl-label {
@@ -801,12 +1071,12 @@
             color: var(--text);
             font-family: 'Satoshi', sans-serif;
             font-size: 15px;
-            font-weight: 300;
+            font-weight: 400;
             outline: none;
             transition: border-color 0.25s;
         }
 
-        .wl-input:focus { border-bottom-color: var(--gold); }
+        .wl-input:focus { border-bottom-color: var(--gold-border); outline: none; }
 
         .wl-select {
             padding: 10px 20px 16px;
@@ -816,14 +1086,14 @@
             color: var(--text);
             font-family: 'Satoshi', sans-serif;
             font-size: 15px;
-            font-weight: 300;
+            font-weight: 400;
             outline: none;
             transition: border-color 0.25s;
             -webkit-appearance: none;
             appearance: none;
         }
 
-        .wl-select:focus { border-bottom-color: var(--gold); }
+        .wl-select:focus { border-bottom-color: var(--gold-border); }
         .wl-select option { background: #111; }
 
         .wl-rgpd {
@@ -864,7 +1134,7 @@
             color: #000;
             border: none;
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             letter-spacing: 4px;
             text-transform: uppercase;
@@ -883,11 +1153,6 @@
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             transform: skewX(-20deg);
             animation: shimmer 2.5s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            50%, 100% { left: 150%; }
         }
 
         .wl-submit:hover {
@@ -954,188 +1219,46 @@
             line-height: 1.6;
         }
 
-        /* ── HOW IT WORKS ─────────────────────────────── */
-        .how-section {
-            padding: 120px 60px;
-        }
-
-        .how-inner {
-            max-width: 1160px;
-            margin: 0 auto;
-        }
-
-        .how-steps {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            margin-top: 64px;
-        }
-
-        .how-step {
-            padding: 44px 44px 44px 0;
-            border-top: 1px solid var(--border);
-            position: relative;
-        }
-
-        .how-step:not(:last-child) {
-            padding-right: 52px;
-            border-right: 1px solid var(--border);
-        }
-
-        .how-step:not(:first-child) {
-            padding-left: 52px;
-        }
-
-        .how-step-num {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 72px;
-            color: var(--gold);
-            opacity: 0.14;
-            line-height: 1;
-            margin-bottom: -6px;
-            transition: opacity 0.3s;
-            letter-spacing: 2px;
-        }
-
-        .how-step:hover .how-step-num { opacity: 0.3; }
-
-        .how-step-icon {
-            margin-bottom: 20px;
-        }
-
-        .how-step-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 24px;
-            letter-spacing: 2px;
-            color: var(--text);
-            margin-bottom: 14px;
-        }
-
-        .how-step-text {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.8;
-            font-weight: 300;
-        }
-
-        /* ── OPINIONES ────────────────────────────────── */
-        .opiniones-section {
-            background: var(--bg-2);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 120px 60px;
-        }
-
-        .opiniones-inner {
-            max-width: 1160px;
-            margin: 0 auto;
-        }
-
-        .opiniones-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
-            margin-top: 64px;
-        }
-
-        .opiniones-grid + .opiniones-grid {
-            margin-top: 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .opinion-card {
-            padding: 48px 40px;
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            transition: background 0.3s;
-        }
-
-        .opinion-card:last-child { border-right: none; }
-
-        .opinion-card:hover { background: rgba(255,255,255,0.02); }
-
-        .opinion-stars {
-            display: flex;
-            gap: 3px;
-            margin-bottom: 20px;
-        }
-
-        .opinion-stars span {
-            color: var(--gold);
-            font-size: 14px;
-        }
-
-        .opinion-quote {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 4rem;
-            color: var(--gold);
-            opacity: 0.35;
-            line-height: 0.8;
-            margin-bottom: 20px;
-        }
-
-        .opinion-text {
-            font-size: 15px;
-            color: var(--text);
-            line-height: 1.8;
-            flex: 1;
-            margin-bottom: 28px;
-            font-weight: 300;
-        }
-
-        .opinion-author {
-            border-top: 2px solid var(--gold-border);
-            padding-top: 20px;
-        }
-
-        .opinion-name {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 18px;
-            letter-spacing: 2px;
-            color: var(--text);
-        }
-
-        .opinion-meta {
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-top: 5px;
-        }
-
         /* ── FOOTER ───────────────────────────────────── */
         footer {
-            padding: 48px 60px 28px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
+            background: var(--bg-2);
             border-top: 1px solid var(--border);
-            text-align: center;
+            padding: 48px 80px 32px;
         }
+
+        .footer-inner {
+            max-width: 1160px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 60px;
+        }
+
+        .footer-left {}
 
         .footer-logo {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 20px;
             letter-spacing: 5px;
             color: var(--gold);
-            margin-bottom: 4px;
+            margin-bottom: 12px;
+            display: block;
         }
 
-        .footer-text {
-            font-size: 12px;
+        .footer-tagline {
+            font-size: 13px;
             color: var(--text-muted);
             letter-spacing: 0.5px;
             line-height: 1.7;
+            max-width: 32ch;
         }
 
         .footer-contact {
             display: flex;
-            gap: 32px;
-            margin-top: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         .footer-contact a {
@@ -1151,20 +1274,54 @@
 
         .footer-contact a:hover { color: var(--gold); }
 
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 16px;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .footer-nav a {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            transition: color 0.25s;
+        }
+
+        .footer-nav a:hover { color: var(--text); }
+
+        .footer-bottom {
+            max-width: 1160px;
+            margin: 32px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .footer-copy {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
         .footer-legal {
             display: flex;
             gap: 24px;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-            width: 100%;
-            justify-content: center;
-            flex-wrap: wrap;
         }
 
         .footer-legal a {
             font-size: 11px;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             color: var(--text-muted);
             text-decoration: none;
@@ -1187,17 +1344,24 @@
         }
 
         /* ── RESPONSIVE ───────────────────────────────── */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .courses-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
             .course-card.featured {
-                border-bottom: none;
-                border-top: 2px solid var(--gold);
+                grid-column: span 2;
             }
+        }
+
+        @media (max-width: 1024px) {
+            nav { padding: 0 40px; }
+            .hero { padding: 120px 40px 80px; }
+            .courses-wrap { padding: 100px 40px; }
+            .waitlist-wrap { padding: 100px 40px; }
+            .how-section { padding: 100px 40px; }
+            .opiniones-section { padding: 100px 40px; }
+            footer { padding: 48px 40px 32px; }
             .opiniones-grid { grid-template-columns: 1fr 1fr; }
-            .opinion-card:nth-child(2n) { border-right: none; }
-            .opinion-card:nth-child(2) { border-bottom: 1px solid var(--border); }
         }
 
         @media (max-width: 900px) {
@@ -1207,8 +1371,9 @@
 
             .hero {
                 grid-template-columns: 1fr;
-                padding: 60px 24px 80px;
+                padding: 80px 24px 80px;
                 min-height: 100dvh;
+                align-items: end;
             }
 
             .hero-left { padding-right: 0; }
@@ -1216,7 +1381,7 @@
 
             .courses-wrap { padding: 80px 24px; }
             .courses-grid { grid-template-columns: 1fr; }
-            .course-card.featured { border-top: 2px solid var(--gold); border-bottom: none; }
+            .course-card.featured { grid-column: span 1; }
 
             .waitlist-wrap { padding: 80px 24px; }
             .waitlist-inner { grid-template-columns: 1fr; gap: 60px; }
@@ -1224,26 +1389,30 @@
 
             .opiniones-section { padding: 80px 24px; }
             .opiniones-grid { grid-template-columns: 1fr; }
-            .opinion-card { border-right: none; border-bottom: 1px solid var(--border); }
+            .opinion-card { margin: 4px 0; }
 
             .how-section { padding: 80px 24px; }
             .how-steps { grid-template-columns: 1fr; }
+            .how-steps::before { display: none; }
             .how-step {
                 padding: 36px 0;
                 border-right: none;
+                border-top: 1px dashed var(--gold-border);
             }
             .how-step:not(:first-child) { padding-left: 0; }
             .how-step:not(:last-child) { padding-right: 0; }
 
             footer { padding: 40px 24px 24px; }
+            .footer-inner { flex-direction: column; gap: 40px; }
+            .footer-right { align-items: flex-start; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
         }
 
         @media (max-width: 560px) {
-            .hero-cta-row { flex-direction: column; align-items: flex-start; }
+            .hero-ctas { flex-direction: column; align-items: flex-start; }
             .btn-primary, .btn-outline { width: 100%; text-align: center; }
-            .course-price-row { flex-direction: column; align-items: flex-start; gap: 16px; }
-            .btn-course { width: 100%; text-align: center; }
             .waitlist-form-wrap { padding: 36px 24px; }
+            .footer-nav { flex-wrap: wrap; gap: 16px; }
         }
     </style>
 </head>
@@ -1280,14 +1449,14 @@
 <!-- HERO -->
 <div class="hero" role="banner">
     <div class="hero-left">
-        <p class="hero-eyebrow js-fade-up">Formaci&oacute;n Online &mdash; Dragons Den Method</p>
+        <p class="hero-eyebrow">Academia Online</p>
         <h1 class="hero-title">
             <span class="hero-title-line"><span class="hero-title-inner">ACADEMIA</span></span>
             <span class="hero-title-line"><span class="hero-title-inner gold">ONLINE</span></span>
         </h1>
-        <div class="hero-divider js-fade-up" aria-hidden="true"></div>
-        <p class="hero-subtitle js-fade-up">Entrena con los m&eacute;todos de Dragons Den, cuando quieras, donde quieras.</p>
-        <div class="hero-cta-row js-fade-up">
+        <div class="hero-divider" aria-hidden="true"></div>
+        <p class="hero-sub">Entrena con los m&eacute;todos de Dragons Den, cuando quieras, donde quieras.</p>
+        <div class="hero-ctas">
             <a href="#cursos" class="btn-primary">Ver cursos</a>
             <a href="#lista-espera" class="btn-outline">Lista de espera</a>
         </div>
@@ -1351,17 +1520,32 @@
 
 <!-- COURSE GRID -->
 <section id="cursos" class="courses-wrap" aria-labelledby="courses-heading">
-    <p class="section-eyebrow js-fade-up">Packs de entrenamiento</p>
-    <h2 class="section-title js-fade-left" id="courses-heading">Elige tu<br>pack</h2>
+    <p class="section-eyebrow" data-reveal>Packs de entrenamiento</p>
+    <h2 class="section-title js-fade-left" id="courses-heading" data-reveal>Elige tu<br>pack</h2>
     <div class="section-divider js-fade-up" aria-hidden="true"></div>
     <p class="section-text js-fade-up">Los mismos ejercicios que usamos en pista, organizados por &aacute;rea de mejora. Acceso anual renovable, sin permanencia.</p>
 
-    <div class="courses-grid" role="list" aria-label="Packs disponibles">
+    <div class="courses-grid" role="list" aria-label="Packs disponibles" data-reveal-stagger>
 
         <!-- Pack 1 — Tiro -->
         <article class="course-card js-fade-up" data-num="01" role="listitem">
+            <div class="course-card-bar" aria-hidden="true"></div>
+            <div class="course-icon-wrap" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M3.6 9h16.8M3.6 15h16.8"/>
+                    <path d="M12 3a12 12 0 0 1 3 9 12 12 0 0 1-3 9"/>
+                    <path d="M12 3a12 12 0 0 0-3 9 12 12 0 0 0 3 9"/>
+                </svg>
+            </div>
             <p class="course-category-tag">Pack Tiro</p>
             <h3 class="course-title">Fundamentos<br>de Tiro</h3>
+            <p class="course-desc">T&eacute;cnica de lanzamiento, mecánica y repeticiones de calidad.</p>
+            <ul class="course-bullets">
+                <li>Mecánica de lanzamiento paso a paso</li>
+                <li>Ejercicios de repetición con feedback</li>
+                <li>Rutinas para aplicar en pista</li>
+            </ul>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
                     <p class="course-meta-label">Videos</p>
@@ -1390,8 +1574,20 @@
 
         <!-- Pack 2 — Footwork -->
         <article class="course-card js-fade-up" data-num="02" role="listitem">
+            <div class="course-card-bar" aria-hidden="true"></div>
+            <div class="course-icon-wrap" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </div>
             <p class="course-category-tag">Pack Footwork</p>
             <h3 class="course-title">Trabajo de Pies<br>y 1vs1</h3>
+            <p class="course-desc">Desplazamientos, pivotes y ventaja en el uno contra uno.</p>
+            <ul class="course-bullets">
+                <li>Primer paso y cambios de dirección</li>
+                <li>Pivote ofensivo y posición de triple</li>
+                <li>Situaciones reales de 1vs1</li>
+            </ul>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
                     <p class="course-meta-label">Videos</p>
@@ -1420,8 +1616,20 @@
 
         <!-- Pack 3 — Defensa -->
         <article class="course-card js-fade-up" data-num="03" role="listitem">
+            <div class="course-card-bar" aria-hidden="true"></div>
+            <div class="course-icon-wrap" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+            </div>
             <p class="course-category-tag">Pack Defensa</p>
             <h3 class="course-title">Defensa<br>Individual</h3>
+            <p class="course-desc">Fundamentos defensivos para frenar al atacante en todas las situaciones.</p>
+            <ul class="course-bullets">
+                <li>Posición y desplazamiento defensivo</li>
+                <li>Ayuda y rotaciones básicas</li>
+                <li>Presión sobre el balón</li>
+            </ul>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
                     <p class="course-meta-label">Videos</p>
@@ -1450,8 +1658,20 @@
 
         <!-- Pack 4 — Físico -->
         <article class="course-card js-fade-up" data-num="04" role="listitem">
+            <div class="course-card-bar" aria-hidden="true"></div>
+            <div class="course-icon-wrap" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 4v16M18 4v16M3 8h3M18 8h3M3 16h3M18 16h3M6 12h12"/>
+                </svg>
+            </div>
             <p class="course-category-tag">Pack F&iacute;sico</p>
             <h3 class="course-title">F&iacute;sico y<br>Explosividad</h3>
+            <p class="course-desc">Preparación física específica para el baloncesto: fuerza, salto y agilidad.</p>
+            <ul class="course-bullets">
+                <li>Trabajo de salto vertical</li>
+                <li>Agilidad y velocidad de reacción</li>
+                <li>Fuerza funcional para pista</li>
+            </ul>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
                     <p class="course-meta-label">Videos</p>
@@ -1480,8 +1700,21 @@
 
         <!-- Pack 5 — Mentalidad -->
         <article class="course-card js-fade-up" data-num="05" role="listitem">
+            <div class="course-card-bar" aria-hidden="true"></div>
+            <div class="course-icon-wrap" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M12 7v5l3 3"/>
+                </svg>
+            </div>
             <p class="course-category-tag">Pack Mental</p>
             <h3 class="course-title">Mentalidad<br>y T&aacute;ctica</h3>
+            <p class="course-desc">Herramientas mentales y lectura de juego para competir a un nivel superior.</p>
+            <ul class="course-bullets">
+                <li>Gestión de la presión competitiva</li>
+                <li>Lectura de sistemas ofensivos</li>
+                <li>Rutinas pre-partido</li>
+            </ul>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
                     <p class="course-meta-label">Videos</p>
@@ -1508,12 +1741,20 @@
             </div>
         </article>
 
-        <!-- Pack 6 — Completo (Featured) -->
+        <!-- Pack Completo — Featured, spans 2 cols -->
         <article class="course-card featured js-fade-up" data-num="DD" role="listitem" aria-label="Pack destacado">
-            <div class="course-popular-badge" aria-label="Mejor valor">Mejor valor</div>
+            <div class="course-card-bar" aria-hidden="true"></div>
+            <div class="course-popular-badge" aria-label="Recomendado">Recomendado</div>
             <p class="course-category-tag">Pack Completo</p>
             <p class="course-featured-tag">Dragons Den Method</p>
             <h3 class="course-title">Todos los<br>Packs</h3>
+            <p class="course-desc">Acceso completo a los 5 packs más 4 módulos bonus exclusivos del m&eacute;todo Dragons Den.</p>
+            <ul class="course-bullets">
+                <li>5 packs completos desbloqueados</li>
+                <li>4 módulos bonus exclusivos</li>
+                <li>Actualizaciones incluidas todo el año</li>
+                <li>Precio de lanzamiento bloqueado</li>
+            </ul>
             <div class="course-meta" aria-label="Detalles del pack completo">
                 <div class="course-meta-item">
                     <p class="course-meta-label">Videos</p>
@@ -1542,6 +1783,143 @@
 
     </div>
 </section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="como-funciona" aria-labelledby="how-heading">
+    <div class="how-inner">
+        <p class="section-eyebrow js-fade-up" data-reveal>C&oacute;mo funciona</p>
+        <h2 class="section-title js-fade-left" id="how-heading" data-reveal>Tres pasos.<br>Sin complicaci&oacute;n.</h2>
+        <div class="section-divider js-fade-up" aria-hidden="true"></div>
+
+        <div class="how-steps" role="list" data-reveal-stagger>
+
+            <div class="how-step js-how-step" role="listitem">
+                <span class="how-step-num" aria-hidden="true">01</span>
+                <div class="how-step-icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="5" width="22" height="18" rx="2"/>
+                        <path d="M3 10h22"/>
+                        <path d="M9 3v4M19 3v4"/>
+                        <path d="M8 15h4M8 18h7"/>
+                    </svg>
+                </div>
+                <h3 class="how-step-title">Elige tu m&oacute;dulo</h3>
+                <p class="how-step-text">Selecciona el curso que mejor encaje con tu nivel y tu objetivo. Desde iniciaci&oacute;n hasta pack completo.</p>
+            </div>
+
+            <div class="how-step js-how-step" role="listitem">
+                <span class="how-step-num" aria-hidden="true">02</span>
+                <div class="how-step-icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="14" cy="14" r="11"/>
+                        <path d="M11 9.5l7 4.5-7 4.5V9.5z" fill="#c8a96e" stroke="none"/>
+                    </svg>
+                </div>
+                <h3 class="how-step-title">Accede todo el año</h3>
+                <p class="how-step-text">Paga una vez al año. Vuelve al material cuando lo necesites, renueva solo si quieres. Sin permanencia.</p>
+            </div>
+
+            <div class="how-step js-how-step" role="listitem">
+                <span class="how-step-num" aria-hidden="true">03</span>
+                <div class="how-step-icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="14" cy="11" r="6"/>
+                        <path d="M4 25c0-5.523 4.477-9 10-9s10 3.477 10 9"/>
+                        <line x1="20" y1="5" x2="24" y2="3"/>
+                        <line x1="22" y1="9" x2="26" y2="9"/>
+                        <line x1="20" y1="13" x2="24" y2="15"/>
+                    </svg>
+                </div>
+                <h3 class="how-step-title">Aplica en pista</h3>
+                <p class="how-step-text">Cada ejercicio incluye instrucciones para trasladarlo directamente a tu entrenamiento. Ver y hacer, en ese orden.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- OPINIONES -->
+<div class="opiniones-section" id="opiniones">
+    <div class="opiniones-inner">
+        <p class="section-eyebrow js-fade-up" data-reveal>Opiniones</p>
+        <h2 class="section-title js-fade-left" data-reveal>Lo que dicen<br>los jugadores</h2>
+        <div class="section-divider js-fade-up" aria-hidden="true"></div>
+
+        <div class="opiniones-grid">
+
+            <div class="opinion-card js-fade-up">
+                <div class="opinion-stars">
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                </div>
+                <p class="opinion-text">Llevaba meses estancado con el tiro. Con el pack en dos semanas ya notaba diferencia en el porcentaje. Es el tipo de contenido que no encuentras gratis en YouTube &mdash; va directo al problema sin rodeos.</p>
+                <div class="opinion-author">
+                    <div class="opinion-name">Rub&eacute;n A.</div>
+                    <div class="opinion-meta">Base &mdash; 18 a&ntilde;os &mdash; Pack Tiro</div>
+                </div>
+            </div>
+
+            <div class="opinion-card js-fade-up">
+                <div class="opinion-stars">
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                </div>
+                <p class="opinion-text">Compr&eacute; el pack completo sin conocer la academia. Para la siguiente temporada ya ten&iacute;a mi primer paso mucho m&aacute;s limpio y hab&iacute;a dejado de perder el bal&oacute;n en penetraci&oacute;n.</p>
+                <div class="opinion-author">
+                    <div class="opinion-name">Sof&iacute;a M.</div>
+                    <div class="opinion-meta">Alero &mdash; 16 a&ntilde;os &mdash; Pack Completo</div>
+                </div>
+            </div>
+
+            <div class="opinion-card js-fade-up">
+                <div class="opinion-stars">
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                </div>
+                <p class="opinion-text">Mi hijo lo tiene puesto en la tele del sal&oacute;n y repite los ejercicios en el pasillo. No me hab&iacute;a pedido nunca formaci&oacute;n extra, y ahora me pide ir a la pista a probar lo que aprende.</p>
+                <div class="opinion-author">
+                    <div class="opinion-name">Carlos F.</div>
+                    <div class="opinion-meta">Padre de Iker, 13 a&ntilde;os &mdash; Pack Footwork</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="opiniones-grid">
+
+            <div class="opinion-card js-fade-up">
+                <div class="opinion-stars">
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                </div>
+                <p class="opinion-text">Hice el pack de defensa mientras esperaba plaza en el campus. Cuando llegu&eacute;, Yefangyi me pregunt&oacute; d&oacute;nde hab&iacute;a entrenado ese verano. Le dije que con sus propios videos. No se lo esperaba.</p>
+                <div class="opinion-author">
+                    <div class="opinion-name">Daniel V.</div>
+                    <div class="opinion-meta">Escolta &mdash; 21 a&ntilde;os &mdash; Pack Defensa</div>
+                </div>
+            </div>
+
+            <div class="opinion-card js-fade-up">
+                <div class="opinion-stars">
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                </div>
+                <p class="opinion-text">El pack de mentalidad lo escucho mientras voy al entreno de mi club. En el coche, 20 minutos antes de pisar la pista. Ha cambiado completamente c&oacute;mo entro a competir.</p>
+                <div class="opinion-author">
+                    <div class="opinion-name">Claudia R.</div>
+                    <div class="opinion-meta">Base &mdash; 17 a&ntilde;os &mdash; Pack Mentalidad</div>
+                </div>
+            </div>
+
+            <div class="opinion-card js-fade-up">
+                <div class="opinion-stars">
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                </div>
+                <p class="opinion-text">Muy bien organizado por niveles. Mi hija de 12 a&ntilde;os empez&oacute; por los primeros videos del pack de tiro y ahora ya va por el de footwork. A su ritmo, sin presi&oacute;n. Se nota que sabe c&oacute;mo ense&ntilde;ar.</p>
+                <div class="opinion-author">
+                    <div class="opinion-name">Laura G.</div>
+                    <div class="opinion-meta">Madre de Valentina, 12 a&ntilde;os &mdash; Pack Tiro</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <!-- PROXIMAMENTE / WAITLIST -->
 <div class="waitlist-wrap" id="lista-espera">
@@ -1649,176 +2027,49 @@
     </div>
 </div>
 
-<!-- HOW IT WORKS -->
-<section class="how-section" id="como-funciona" aria-labelledby="how-heading">
-    <div class="how-inner">
-        <p class="section-eyebrow js-fade-up">C&oacute;mo funciona</p>
-        <h2 class="section-title js-fade-left" id="how-heading">Tres pasos.<br>Sin complicaci&oacute;n.</h2>
-        <div class="section-divider js-fade-up" aria-hidden="true"></div>
-
-        <div class="how-steps" role="list">
-
-            <div class="how-step js-how-step" role="listitem">
-                <div class="how-step-num" aria-hidden="true">01</div>
-                <div class="how-step-icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="5" width="22" height="18" rx="2"/>
-                        <path d="M3 10h22"/>
-                        <path d="M9 3v4M19 3v4"/>
-                        <path d="M8 15h4M8 18h7"/>
-                    </svg>
-                </div>
-                <h3 class="how-step-title">Elige tu m&oacute;dulo</h3>
-                <p class="how-step-text">Selecciona el curso que mejor encaje con tu nivel y tu objetivo. Desde iniciaci&oacute;n hasta pack completo.</p>
-            </div>
-
-            <div class="how-step js-how-step" role="listitem">
-                <div class="how-step-num" aria-hidden="true">02</div>
-                <div class="how-step-icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="14" cy="14" r="11"/>
-                        <path d="M11 9.5l7 4.5-7 4.5V9.5z" fill="#c8a96e" stroke="none"/>
-                    </svg>
-                </div>
-                <h3 class="how-step-title">Accede todo el año</h3>
-                <p class="how-step-text">Paga una vez al año. Vuelve al material cuando lo necesites, renueva solo si quieres. Sin permanencia.</p>
-            </div>
-
-            <div class="how-step js-how-step" role="listitem">
-                <div class="how-step-num" aria-hidden="true">03</div>
-                <div class="how-step-icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="14" cy="11" r="6"/>
-                        <path d="M4 25c0-5.523 4.477-9 10-9s10 3.477 10 9"/>
-                        <line x1="20" y1="5" x2="24" y2="3"/>
-                        <line x1="22" y1="9" x2="26" y2="9"/>
-                        <line x1="20" y1="13" x2="24" y2="15"/>
-                    </svg>
-                </div>
-                <h3 class="how-step-title">Aplica en pista</h3>
-                <p class="how-step-text">Cada ejercicio incluye instrucciones para trasladarlo directamente a tu entrenamiento. Ver y hacer, en ese orden.</p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- OPINIONES -->
-<div class="opiniones-section" id="opiniones">
-    <div class="opiniones-inner">
-        <p class="section-eyebrow js-fade-up">Opiniones</p>
-        <h2 class="section-title js-fade-left">Lo que dicen<br>los jugadores</h2>
-        <div class="section-divider js-fade-up" aria-hidden="true"></div>
-
-        <div class="opiniones-grid">
-
-            <div class="opinion-card js-fade-up">
-                <div class="opinion-stars">
-                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                </div>
-                <div class="opinion-quote">&ldquo;</div>
-                <p class="opinion-text">Llevaba meses estancado con el tiro. Con el pack en dos semanas ya notaba diferencia en el porcentaje. Es el tipo de contenido que no encuentras gratis en YouTube &mdash; va directo al problema sin rodeos.</p>
-                <div class="opinion-author">
-                    <div class="opinion-name">Rub&eacute;n A.</div>
-                    <div class="opinion-meta">Base &mdash; 18 a&ntilde;os &mdash; Pack Tiro</div>
-                </div>
-            </div>
-
-            <div class="opinion-card js-fade-up">
-                <div class="opinion-stars">
-                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                </div>
-                <div class="opinion-quote">&ldquo;</div>
-                <p class="opinion-text">Compr&eacute; el pack completo sin conocer la academia. Para la siguiente temporada ya ten&iacute;a mi primer paso mucho m&aacute;s limpio y hab&iacute;a dejado de perder el bal&oacute;n en penetraci&oacute;n.</p>
-                <div class="opinion-author">
-                    <div class="opinion-name">Sof&iacute;a M.</div>
-                    <div class="opinion-meta">Alero &mdash; 16 a&ntilde;os &mdash; Pack Completo</div>
-                </div>
-            </div>
-
-            <div class="opinion-card js-fade-up">
-                <div class="opinion-stars">
-                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                </div>
-                <div class="opinion-quote">&ldquo;</div>
-                <p class="opinion-text">Mi hijo lo tiene puesto en la tele del sal&oacute;n y repite los ejercicios en el pasillo. No me hab&iacute;a pedido nunca formaci&oacute;n extra, y ahora me pide ir a la pista a probar lo que aprende.</p>
-                <div class="opinion-author">
-                    <div class="opinion-name">Carlos F.</div>
-                    <div class="opinion-meta">Padre de Iker, 13 a&ntilde;os &mdash; Pack Footwork</div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="opiniones-grid">
-
-            <div class="opinion-card js-fade-up">
-                <div class="opinion-stars">
-                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                </div>
-                <div class="opinion-quote">&ldquo;</div>
-                <p class="opinion-text">Hice el pack de defensa mientras esperaba plaza en el campus. Cuando llegu&eacute;, Yefangyi me pregunt&oacute; d&oacute;nde hab&iacute;a entrenado ese verano. Le dije que con sus propios videos. No se lo esperaba.</p>
-                <div class="opinion-author">
-                    <div class="opinion-name">Daniel V.</div>
-                    <div class="opinion-meta">Escolta &mdash; 21 a&ntilde;os &mdash; Pack Defensa</div>
-                </div>
-            </div>
-
-            <div class="opinion-card js-fade-up">
-                <div class="opinion-stars">
-                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                </div>
-                <div class="opinion-quote">&ldquo;</div>
-                <p class="opinion-text">El pack de mentalidad lo escucho mientras voy al entreno de mi club. En el coche, 20 minutos antes de pisar la pista. Ha cambiado completamente c&oacute;mo entro a competir.</p>
-                <div class="opinion-author">
-                    <div class="opinion-name">Claudia R.</div>
-                    <div class="opinion-meta">Base &mdash; 17 a&ntilde;os &mdash; Pack Mentalidad</div>
-                </div>
-            </div>
-
-            <div class="opinion-card js-fade-up">
-                <div class="opinion-stars">
-                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                </div>
-                <div class="opinion-quote">&ldquo;</div>
-                <p class="opinion-text">Muy bien organizado por niveles. Mi hija de 12 a&ntilde;os empez&oacute; por los primeros videos del pack de tiro y ahora ya va por el de footwork. A su ritmo, sin presi&oacute;n. Se nota que sabe c&oacute;mo ense&ntilde;ar.</p>
-                <div class="opinion-author">
-                    <div class="opinion-name">Laura G.</div>
-                    <div class="opinion-meta">Madre de Valentina, 12 a&ntilde;os &mdash; Pack Tiro</div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
 <!-- FOOTER -->
 <footer>
-    <div class="footer-logo">Dragons Den</div>
-    <p class="footer-text">
-        Dragons Den Basketball Academy &mdash; dragonsden.es<br>
-        &copy; 2026 Yefangyi Hu Garcia. Todos los derechos reservados.
-    </p>
-    <div class="footer-contact" role="list" aria-label="Contacto">
-        <a href="https://wa.me/34646794962" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="WhatsApp: 646 794 962">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-            </svg>
-            646 794 962
-        </a>
-        <a href="mailto:bbdragonsden@gmail.com" role="listitem" aria-label="Email: bbdragonsden@gmail.com">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-            </svg>
-            bbdragonsden@gmail.com
-        </a>
+    <div class="footer-inner">
+        <div class="footer-left">
+            <span class="footer-logo">Dragons Den</span>
+            <p class="footer-tagline">
+                Dragons Den Basketball Academy &mdash; dragonsden.es
+            </p>
+            <div class="footer-contact" role="list" aria-label="Contacto">
+                <a href="https://wa.me/34646794962" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="WhatsApp: 646 794 962">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    </svg>
+                    646 794 962
+                </a>
+                <a href="mailto:bbdragonsden@gmail.com" role="listitem" aria-label="Email: bbdragonsden@gmail.com">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    bbdragonsden@gmail.com
+                </a>
+            </div>
+        </div>
+        <div class="footer-right">
+            <ul class="footer-nav" aria-label="Navegación">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#cursos">Cursos</a></li>
+                <li><a href="#como-funciona">C&oacute;mo funciona</a></li>
+                <li><a href="#opiniones">Opiniones</a></li>
+                <li><a href="#lista-espera">Lista de espera</a></li>
+                <li><a href="login.html">Acceder</a></li>
+            </ul>
+        </div>
     </div>
-    <nav class="footer-legal" aria-label="Enlaces legales">
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <a href="politica-privacidad.html">Privacidad</a>
-        <a href="cookies.html">Cookies</a>
-    </nav>
+    <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Yefangyi Hu Garcia. Todos los derechos reservados.</p>
+        <nav class="footer-legal" aria-label="Enlaces legales">
+            <a href="aviso-legal.html">Aviso Legal</a>
+            <a href="politica-privacidad.html">Privacidad</a>
+            <a href="cookies.html">Cookies</a>
+        </nav>
+    </div>
 </footer>
 
 <script>
@@ -1989,7 +2240,6 @@
 
     // ── 4. Section fade-left (section titles) ─────
     document.querySelectorAll('.js-fade-left').forEach(function (el) {
-        // skip hero elements (handled above)
         if (el.closest('.hero-left')) return;
         gsap.fromTo(el,
             { opacity: 0, x: -24 },
@@ -2009,7 +2259,6 @@
 
     // ── 5. General fade-up on scroll ──────────────
     document.querySelectorAll('.js-fade-up').forEach(function (el) {
-        // skip hero elements (handled above)
         if (el.closest('.hero-left')) return;
         gsap.fromTo(el,
             { opacity: 0, y: 32 },
@@ -2125,6 +2374,25 @@
             }
         );
     }
+
+    // ── 10. data-reveal elements ──────────────────
+    gsap.from('.hero-title', { y: 80, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.1 });
+    gsap.from('.hero-sub', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.35 });
+    gsap.from('.hero-ctas', { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out', delay: 0.55 });
+
+    gsap.utils.toArray('[data-reveal]').forEach(function (el) {
+        gsap.from(el, {
+            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+            y: 50, opacity: 0, duration: 0.75, ease: 'power2.out'
+        });
+    });
+
+    gsap.utils.toArray('[data-reveal-stagger]').forEach(function (parent) {
+        gsap.from(parent.children, {
+            scrollTrigger: { trigger: parent, start: 'top 85%', toggleActions: 'play none none none' },
+            y: 40, opacity: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1
+        });
+    });
 
 }());
 </script>
