@@ -54,11 +54,12 @@ module.exports = async function handler(req, res) {
   const admin = await verifyAdmin(req.headers.authorization);
   if (!admin) return res.status(403).json({ error: 'Acceso denegado' });
 
-  const [usersRes, packsRes, campusRes, waitlistRes] = await Promise.all([
+  const [usersRes, packsRes, campusRes, waitlistRes, segRes] = await Promise.all([
     supabaseService('/auth/v1/admin/users?per_page=1000', 'GET'),
     supabaseService('/rest/v1/user_packs?select=*&order=created_at.desc', 'GET', null, { 'Prefer': '' }),
     supabaseService('/rest/v1/campus_inscripciones?select=*&order=created_at.desc', 'GET', null, { 'Prefer': '' }),
-    supabaseService('/rest/v1/academia_waitlist?select=*&order=created_at.desc', 'GET', null, { 'Prefer': '' })
+    supabaseService('/rest/v1/academia_waitlist?select=*&order=created_at.desc', 'GET', null, { 'Prefer': '' }),
+    supabaseService('/rest/v1/seguimiento_temporada?select=*&order=updated_at.desc', 'GET', null, { 'Prefer': '' })
   ]);
 
   const users = (usersRes.body.users || []).filter(u => u.email);
@@ -77,8 +78,9 @@ module.exports = async function handler(req, res) {
   })).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
   return res.status(200).json({
-    users: result,
-    campus:   Array.isArray(campusRes.body)   ? campusRes.body   : [],
-    waitlist: Array.isArray(waitlistRes.body) ? waitlistRes.body : []
+    users:       result,
+    campus:      Array.isArray(campusRes.body)   ? campusRes.body   : [],
+    waitlist:    Array.isArray(waitlistRes.body) ? waitlistRes.body : [],
+    seguimiento: Array.isArray(segRes.body)      ? segRes.body      : []
   });
 };

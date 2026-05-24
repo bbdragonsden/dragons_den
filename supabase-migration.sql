@@ -45,3 +45,24 @@ ALTER TABLE academia_waitlist ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "service_role_all" ON academia_waitlist;
 CREATE POLICY "service_role_all" ON academia_waitlist
   TO service_role USING (true) WITH CHECK (true);
+
+-- Season follow-up tracking per student
+CREATE TABLE IF NOT EXISTS seguimiento_temporada (
+  id               uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at       timestamptz DEFAULT now(),
+  updated_at       timestamptz DEFAULT now(),
+  email            text NOT NULL,
+  nombre           text,
+  temporada        text DEFAULT '2025-2026',
+  nivel_actual     text,
+  objetivos        text,
+  observaciones    text,
+  sesiones_mes     int DEFAULT 0,
+  proxima_revision text,
+  estado           text DEFAULT 'activo'
+);
+
+ALTER TABLE seguimiento_temporada ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "service_role_all" ON seguimiento_temporada;
+CREATE POLICY "service_role_all" ON seguimiento_temporada
+  TO service_role USING (true) WITH CHECK (true);

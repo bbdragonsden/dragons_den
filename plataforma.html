@@ -1095,6 +1095,69 @@
         }
 
         /* ─────────────────────────────────────────
+           ALUMNOS UNIFIED VIEW
+        ───────────────────────────────────────── */
+        .alumno-list-item {
+            border: 1px solid var(--border);
+            background: var(--bg-2);
+            padding: 14px 18px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            transition: border-color 0.15s, background 0.15s;
+        }
+        .alumno-list-item:hover { border-color: var(--border-strong); background: var(--bg-3); }
+        .alumno-list-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+        .alumno-list-email { font-size: 12px; color: var(--text-muted); }
+        .alumno-source-tags { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; flex-shrink: 0; }
+        .source-tag {
+            font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase;
+            padding: 2px 7px; border: 1px solid var(--border-strong); color: var(--text-muted);
+        }
+        .source-tag.campus   { border-color: rgba(200,169,110,0.4); color: var(--gold); }
+        .source-tag.academia { border-color: rgba(100,160,255,0.35); color: #64a0ff; }
+        .source-tag.plataforma { border-color: rgba(74,222,128,0.3); color: #4ade80; }
+        .source-tag.seguimiento { border-color: rgba(255,180,100,0.3); color: #ffb464; }
+
+        /* Detail view */
+        .detail-back {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--text-muted); cursor: pointer; margin-bottom: 24px;
+            background: none; border: none; padding: 0; font-family: 'Satoshi', sans-serif;
+            transition: color 0.15s;
+        }
+        .detail-back:hover { color: var(--text); }
+        .detail-profile-name { font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+        .detail-profile-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+        .detail-section { border: 1px solid var(--border); margin-bottom: 10px; background: var(--bg-2); }
+        .detail-section-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--bg-3);
+            gap: 8px; flex-wrap: wrap;
+        }
+        .detail-section-title { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+        .detail-section-body { padding: 16px; }
+        .detail-field-row { display: flex; gap: 10px; align-items: baseline; margin-bottom: 7px; }
+        .detail-field-label { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); flex-shrink: 0; width: 110px; }
+        .detail-field-val { font-size: 13px; color: var(--text-secondary); flex: 1; }
+        .detail-empty { font-size: 12px; color: var(--text-muted); font-style: italic; margin-bottom: 10px; }
+        .btn-create-seg {
+            background: none; border: 1px solid var(--gold-border); color: var(--gold);
+            font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+            padding: 6px 14px; cursor: pointer; font-family: 'Satoshi', sans-serif; transition: background 0.15s;
+        }
+        .btn-create-seg:hover { background: var(--gold-light); }
+        .detail-hdr-actions { display: flex; gap: 6px; align-items: center; }
+
+        /* Seguimiento modal extra */
+        .seg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 500px) { .seg-grid { grid-template-columns: 1fr; } }
+
+        /* ─────────────────────────────────────────
            CAMPUS / ACADEMIA ADMIN VIEWS
         ───────────────────────────────────────── */
         .stats-row {
@@ -1450,6 +1513,57 @@
 
     </div>
 
+<!-- Seguimiento modal -->
+<div class="modal-overlay" id="seg-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:500px;">
+        <p class="modal-title" id="seg-modal-type">Seguimiento Temporada</p>
+        <p class="modal-name" id="seg-modal-name"></p>
+        <input type="hidden" id="seg-id">
+        <input type="hidden" id="seg-email">
+        <div class="seg-grid" style="margin-bottom:0;">
+            <div class="modal-field">
+                <label for="seg-temporada">Temporada</label>
+                <input class="modal-select" id="seg-temporada" type="text" placeholder="2025-2026">
+            </div>
+            <div class="modal-field">
+                <label for="seg-sesiones">Sesiones / mes</label>
+                <input class="modal-select" id="seg-sesiones" type="number" min="0" max="30">
+            </div>
+        </div>
+        <div class="modal-field">
+            <label for="seg-nivel">Nivel actual</label>
+            <input class="modal-select" id="seg-nivel" type="text" placeholder="Ej: Intermedio-alto">
+        </div>
+        <div class="modal-field">
+            <label for="seg-objetivos">Objetivos</label>
+            <textarea class="modal-textarea" id="seg-objetivos" rows="2"></textarea>
+        </div>
+        <div class="modal-field">
+            <label for="seg-obs">Observaciones</label>
+            <textarea class="modal-textarea" id="seg-obs" rows="2"></textarea>
+        </div>
+        <div class="seg-grid" style="margin-bottom:0;">
+            <div class="modal-field">
+                <label for="seg-revision">Próxima revisión</label>
+                <input class="modal-select" id="seg-revision" type="date">
+            </div>
+            <div class="modal-field">
+                <label for="seg-estado">Estado</label>
+                <select class="modal-select" id="seg-estado">
+                    <option value="activo">Activo</option>
+                    <option value="pausado">Pausado</option>
+                    <option value="finalizado">Finalizado</option>
+                </select>
+            </div>
+        </div>
+        <p class="modal-msg" id="seg-msg"></p>
+        <div class="modal-actions">
+            <button class="btn-modal-save" id="seg-save-btn" onclick="saveSeguimiento()">Guardar</button>
+            <button class="btn-modal-cancel" onclick="closeSeguimientoModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
 <!-- Edit modal (shared for campus + waitlist) -->
 <div class="modal-overlay" id="edit-modal" role="dialog" aria-modal="true">
     <div class="modal-box">
@@ -1685,15 +1799,34 @@ function renderSidebar() {
         adminBtn.dataset.packId = '__admin__';
         adminBtn.innerHTML = `
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.138.75.43.991l1.004.827c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
             </svg>
-            <span>Alumnos</span>`;
+            <span>Plataforma</span>`;
         adminBtn.addEventListener('click', () => {
             document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
             adminBtn.classList.add('active');
             renderAdmin();
             document.getElementById('sidebar').classList.remove('open');
         });
+
+        const alumnosBtn = document.createElement('button');
+        alumnosBtn.className = 'sidebar-item';
+        alumnosBtn.id = 'sidebar-alumnos-btn';
+        alumnosBtn.dataset.packId = '__alumnos__';
+        alumnosBtn.innerHTML = `
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
+            </svg>
+            <span>Alumnos</span>`;
+        alumnosBtn.addEventListener('click', () => {
+            document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+            alumnosBtn.classList.add('active');
+            renderAlumnos();
+            document.getElementById('sidebar').classList.remove('open');
+        });
+
+        nav.appendChild(alumnosBtn);
         nav.appendChild(adminBtn);
 
         const campusBtn = document.createElement('button');
@@ -1729,6 +1862,23 @@ function renderSidebar() {
             document.getElementById('sidebar').classList.remove('open');
         });
         nav.appendChild(academiaBtn);
+
+        const seguimientoBtn = document.createElement('button');
+        seguimientoBtn.className = 'sidebar-item';
+        seguimientoBtn.id = 'sidebar-seguimiento-btn';
+        seguimientoBtn.dataset.packId = '__seguimiento__';
+        seguimientoBtn.innerHTML = `
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
+            </svg>
+            <span>Seguimiento</span>`;
+        seguimientoBtn.addEventListener('click', () => {
+            document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+            seguimientoBtn.classList.add('active');
+            renderSeguimientoTab();
+            document.getElementById('sidebar').classList.remove('open');
+        });
+        nav.appendChild(seguimientoBtn);
     }
 }
 
@@ -2353,6 +2503,380 @@ async function saveEdit() {
 document.getElementById('edit-modal').addEventListener('click', function(e) {
     if (e.target === this) closeEditModal();
 });
+
+// ── ALUMNOS UNIFICADOS ─────────────────────────────────────────────────────
+let alumnosIndex    = null;
+let activeDetailEmail = null;
+
+function buildAlumnoIndex(data) {
+    const map = {};
+    const touch = email => {
+        const k = (email || '').toLowerCase();
+        if (!k) return null;
+        if (!map[k]) map[k] = { email: k, nombre: '', telefono: '', sources: [], plataforma: null, campus: [], waitlist: null, seguimiento: [] };
+        return map[k];
+    };
+    (data.users    || []).forEach(u => { const a = touch(u.email); if (!a) return; a.plataforma = u; if (!a.nombre) a.nombre = u.name || u.email.split('@')[0]; if (!a.sources.includes('plataforma')) a.sources.push('plataforma'); });
+    (data.campus   || []).forEach(c => { const a = touch(c.email); if (!a) return; a.campus.push(c); if (!a.nombre) a.nombre = c.nombre || ''; if (!a.telefono && c.telefono) a.telefono = c.telefono; if (!a.sources.includes('campus')) a.sources.push('campus'); });
+    (data.waitlist || []).forEach(w => { const a = touch(w.email); if (!a) return; a.waitlist = w;   if (!a.nombre) a.nombre = w.nombre || ''; if (!a.sources.includes('academia')) a.sources.push('academia'); });
+    (data.seguimiento || []).forEach(s => { const a = touch(s.email); if (!a) return; a.seguimiento.push(s); if (!a.nombre) a.nombre = s.nombre || ''; if (!a.sources.includes('seguimiento')) a.sources.push('seguimiento'); });
+    return Object.values(map).sort((a, b) => (a.nombre || a.email).localeCompare(b.nombre || b.email));
+}
+
+async function renderAlumnos(refresh = false) {
+    activeDetailEmail = null;
+    const main = document.getElementById('main-content');
+    main.innerHTML = `<div class="content-header"><p class="content-eyebrow">Administración</p><h1 class="content-title">Alumnos</h1></div><p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
+    try {
+        const data = await fetchAdminData(refresh);
+        alumnosIndex = buildAlumnoIndex(data);
+        renderAlumnosList(alumnosIndex);
+    } catch { main.querySelector('p').textContent = 'Error al cargar.'; }
+}
+
+function renderAlumnosList(list) {
+    const main = document.getElementById('main-content');
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Administración</p>
+            <h1 class="content-title">Alumnos</h1>
+            <p class="content-desc">${list.length} personas en el sistema</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+            <input class="admin-search" id="alumnos-search" placeholder="Buscar por nombre o email..." oninput="filterAlumnos(this.value)">
+            <button class="admin-refresh-btn" onclick="renderAlumnos(true)">Actualizar</button>
+        </div>
+        <div id="alumnos-list">${buildAlumnosListHTML(list)}</div>`;
+}
+
+function buildAlumnosListHTML(list) {
+    if (!list.length) return '<p style="color:var(--text-muted);font-size:13px;">Sin alumnos todavía.</p>';
+    return list.map(a => {
+        const tags = a.sources.map(s => `<span class="source-tag ${s}">${s === 'plataforma' ? 'Plat.' : s === 'academia' ? 'Acad.' : s === 'campus' ? 'Campus' : 'Seg.'}</span>`).join('');
+        return `<div class="alumno-list-item" onclick="renderAlumnoDetalle('${esc(a.email)}')">
+            <div>
+                <p class="alumno-list-name">${esc(a.nombre || a.email)}</p>
+                <p class="alumno-list-email">${esc(a.email)}${a.telefono ? ' · ' + esc(a.telefono) : ''}</p>
+            </div>
+            <div class="alumno-source-tags">${tags}</div>
+        </div>`;
+    }).join('');
+}
+
+function filterAlumnos(q) {
+    if (!alumnosIndex) return;
+    const lq = q.toLowerCase();
+    const f = lq ? alumnosIndex.filter(a => (a.nombre || '').toLowerCase().includes(lq) || a.email.includes(lq)) : alumnosIndex;
+    document.getElementById('alumnos-list').innerHTML = buildAlumnosListHTML(f);
+}
+
+function renderAlumnoDetalle(email) {
+    activeDetailEmail = email.toLowerCase();
+    if (!adminCache) { renderAlumnos(); return; }
+    if (!alumnosIndex) alumnosIndex = buildAlumnoIndex(adminCache);
+    const a = alumnosIndex.find(x => x.email === email.toLowerCase());
+    if (!a) return;
+    const main = document.getElementById('main-content');
+
+    // ─ Campus section ─
+    let campusInner;
+    if (a.campus.length) {
+        const c = a.campus[0];
+        const p = campusPrecio(c);
+        const tipo = (c.anterior || '').toLowerCase().includes('primera vez') ? 'Nuevo' : 'Alumni';
+        const fields = [['Para quién', c.para_quien],['Meses', c.meses],['Nivel', c.nivel],['Posición', c.posicion],['Club', c.club],['Teléfono', c.telefono],['Lesiones', c.lesiones],['Objetivo', c.objetivo],['Origen', c.origen],['Comentarios', c.comentarios]].filter(([,v]) => v && v !== '—');
+        campusInner = `<div class="detail-section-body">
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px;">
+                <span class="status-badge status-${esc(c.estado||'pendiente')}">${esc(c.estado||'pendiente')}</span>
+                <span class="source-tag campus">${tipo}</span>
+                ${p.numMeses > 0 ? `<span class="precio-chip">${p.numMeses} mes${p.numMeses>1?'es':''} × ${p.precioMes}€ = <strong>${p.total}€</strong></span>` : `<span class="precio-chip">${p.precioMes}€/mes</span>`}
+            </div>
+            ${fields.map(([l,v]) => `<div class="detail-field-row"><span class="detail-field-label">${esc(l)}</span><span class="detail-field-val">${esc(v)}</span></div>`).join('')}
+            ${c.notas_admin ? `<p class="notas-admin-display" style="margin-top:10px;">${esc(c.notas_admin)}</p>` : ''}
+        </div>`;
+    } else {
+        campusInner = `<div class="detail-section-body"><p class="detail-empty">Sin inscripción en campus de verano.</p></div>`;
+    }
+    const campusHdrBtns = a.campus.length
+        ? `<button class="btn-edit-student" onclick="openEditModal('campus','${esc(a.campus[0].id)}','${esc(a.campus[0].estado||'pendiente')}',${JSON.stringify(a.campus[0].notas_admin||'')},${JSON.stringify(a.nombre)})">Editar</button>`
+        : '';
+
+    // ─ Seguimiento section ─
+    let segInner;
+    if (a.seguimiento.length) {
+        const s = a.seguimiento[0];
+        const sClass = s.estado === 'activo' ? 'confirmado' : s.estado === 'finalizado' ? 'cancelado' : 'pendiente';
+        const sFields = [['Nivel actual', s.nivel_actual],['Sesiones/mes', s.sesiones_mes != null ? String(s.sesiones_mes) : null],['Próx. revisión', s.proxima_revision],['Objetivos', s.objetivos],['Observaciones', s.observaciones]].filter(([,v]) => v != null && v !== '' && v !== '0');
+        segInner = `<div class="detail-section-body">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+                <span class="status-badge status-${sClass}">${esc(s.estado||'activo')}</span>
+                ${s.temporada ? `<span style="font-size:11px;color:var(--text-muted);">${esc(s.temporada)}</span>` : ''}
+            </div>
+            ${sFields.map(([l,v]) => `<div class="detail-field-row"><span class="detail-field-label">${esc(l)}</span><span class="detail-field-val">${esc(v)}</span></div>`).join('')}
+        </div>`;
+    } else {
+        segInner = `<div class="detail-section-body"><p class="detail-empty">Sin seguimiento de temporada.</p><button class="btn-create-seg" onclick="openSeguimientoModal('${esc(a.email)}','${esc(a.nombre)}',null)">+ Crear seguimiento</button></div>`;
+    }
+    const segHdrBtns = `<div class="detail-hdr-actions">
+        ${a.seguimiento.length ? `<button class="btn-edit-student" onclick="openSeguimientoModal('${esc(a.email)}','${esc(a.nombre)}',${JSON.stringify(a.seguimiento[0])})">Editar</button>` : ''}
+        ${a.seguimiento.length ? `<button class="btn-edit-student" onclick="openSeguimientoModal('${esc(a.email)}','${esc(a.nombre)}',null)">+ Nuevo</button>` : ''}
+    </div>`;
+
+    // ─ Academia section ─
+    let acadInner;
+    const plat = a.plataforma;
+    if (plat) {
+        const packTags = plat.packs && plat.packs.length
+            ? plat.packs.map(p => `<span class="pack-tag ${expiryStatus(p.expires_at)}"><span class="pack-tag-name">${esc(p.pack)}</span><span class="pack-tag-expiry">${formatExpiry(p.expires_at)}</span><button class="pack-revoke" onclick="revokePack('${esc(plat.id)}','${esc(p.pack)}',this)" title="Revocar">&times;</button></span>`).join('')
+            : '<span class="no-packs-label">Sin packs</span>';
+        acadInner = `<div class="detail-section-body">
+            <div class="user-packs-row" id="ptags-${esc(plat.id)}" style="margin-bottom:12px;">${packTags}</div>
+            <div class="assign-row">
+                <select class="assign-select" id="sel-${esc(plat.id)}">
+                    <option value="">— Asignar pack —</option>
+                    <option value="tiro">Pack Tiro</option><option value="footwork">Pack Footwork</option>
+                    <option value="defensa">Pack Defensa</option><option value="fisico">Pack Físico</option>
+                    <option value="mental">Pack Mental</option><option value="completo">Pack Completo</option>
+                    <option value="all">Acceso Total</option>
+                </select>
+                <button class="btn-assign" onclick="assignPack('${esc(plat.id)}',this)">Asignar 1 año</button>
+                <span class="assign-msg" id="msg-${esc(plat.id)}"></span>
+            </div>
+        </div>`;
+    } else if (a.waitlist) {
+        const wl = a.waitlist;
+        acadInner = `<div class="detail-section-body">
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                <span class="status-badge status-${esc(wl.estado||'en_lista')}">${esc((wl.estado||'en_lista').replace('_',' '))}</span>
+                <span class="source-tag academia">${esc(wl.interes||'—')}</span>
+                <span class="precio-chip"><strong>${academiaPrecio(wl.interes)}€</strong>/año</span>
+            </div>
+            ${wl.notas_admin ? `<p class="notas-admin-display" style="margin-top:8px;">${esc(wl.notas_admin)}</p>` : ''}
+            <button class="btn-edit-student" style="margin-top:10px;" onclick="openEditModal('waitlist','${esc(wl.id)}','${esc(wl.estado||'en_lista')}',${JSON.stringify(wl.notas_admin||'')},${JSON.stringify(wl.nombre)})">Editar lista</button>
+        </div>`;
+    } else {
+        acadInner = `<div class="detail-section-body"><p class="detail-empty">No está registrado en academia online.</p></div>`;
+    }
+
+    main.innerHTML = `
+        <button class="detail-back" onclick="renderAlumnos()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+            Volver a Alumnos
+        </button>
+        <p class="detail-profile-name">${esc(a.nombre || a.email)}</p>
+        <p class="detail-profile-meta">${esc(a.email)}${a.telefono ? ' · ' + esc(a.telefono) : ''}</p>
+        <div class="detail-section">
+            <div class="detail-section-header"><span class="detail-section-title">Campus de Verano</span>${campusHdrBtns}</div>
+            ${campusInner}
+        </div>
+        <div class="detail-section">
+            <div class="detail-section-header"><span class="detail-section-title">Seguimiento Temporada</span>${segHdrBtns}</div>
+            ${segInner}
+        </div>
+        <div class="detail-section">
+            <div class="detail-section-header"><span class="detail-section-title">Academia Online</span></div>
+            ${acadInner}
+        </div>`;
+}
+
+// ── SEGUIMIENTO TAB ────────────────────────────────────────────────────────
+async function renderSeguimientoTab(refresh = false) {
+    activeDetailEmail = null;
+    const main = document.getElementById('main-content');
+    main.innerHTML = `<div class="content-header"><p class="content-eyebrow">Administración</p><h1 class="content-title">Seguimiento</h1></div><p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
+    try {
+        const data = await fetchAdminData(refresh);
+        renderSeguimientoPanel(data.seguimiento || []);
+    } catch { main.querySelector('p').textContent = 'Error al cargar.'; }
+}
+
+function renderSeguimientoPanel(entries) {
+    const main = document.getElementById('main-content');
+    const activos = entries.filter(e => e.estado === 'activo').length;
+    main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Administración</p>
+            <h1 class="content-title">Seguimiento</h1>
+            <p class="content-desc">${entries.length} fichas &middot; ${activos} activos</p>
+        </div>
+        <div class="stats-row">
+            <div class="stat-card"><p class="stat-label">Activos</p><p class="stat-value">${activos}</p><p class="stat-sub">En seguimiento</p></div>
+            <div class="stat-card"><p class="stat-label">Finalizados</p><p class="stat-value">${entries.filter(e=>e.estado==='finalizado').length}</p><p class="stat-sub">Temporada cerrada</p></div>
+            <div class="stat-card"><p class="stat-label">Total fichas</p><p class="stat-value">${entries.length}</p><p class="stat-sub">Todas temporadas</p></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+            <input class="admin-search" id="seg-search" placeholder="Buscar..." oninput="filterSeguimientoList(this.value)">
+            <button class="admin-refresh-btn" onclick="renderSeguimientoTab(true)">Actualizar</button>
+        </div>
+        <div id="seguimiento-list">${buildSeguimientoListHTML(entries)}</div>`;
+}
+
+function buildSeguimientoListHTML(entries) {
+    if (!entries.length) return '<p style="color:var(--text-muted);font-size:13px;">Sin fichas de seguimiento todavía.</p>';
+    return entries.map(e => {
+        const sc = e.estado === 'activo' ? 'confirmado' : e.estado === 'finalizado' ? 'cancelado' : 'pendiente';
+        const fecha = e.updated_at ? new Date(e.updated_at).toLocaleDateString('es',{day:'numeric',month:'short',year:'2-digit'}) : '';
+        return `<div class="student-row">
+            <div class="student-row-top">
+                <div>
+                    <p class="student-name">${esc(e.nombre||e.email)}</p>
+                    <p class="student-meta">${esc(e.email)} &middot; ${esc(e.temporada||'—')} &middot; ${fecha}</p>
+                </div>
+                <div class="student-badges">
+                    <span class="status-badge status-${sc}">${esc(e.estado||'activo')}</span>
+                    ${e.sesiones_mes != null ? `<span class="precio-chip">${e.sesiones_mes} ses/mes</span>` : ''}
+                    <button class="btn-edit-student" onclick="openSeguimientoModal('${esc(e.email)}','${esc(e.nombre||e.email)}',${JSON.stringify(e).replace(/'/g,'&#39;')})">Editar</button>
+                    <button class="btn-edit-student" onclick="goToAlumno('${esc(e.email)}')">Ver alumno</button>
+                </div>
+            </div>
+            ${e.nivel_actual||e.proxima_revision ? `<div class="student-detail-grid">
+                ${e.nivel_actual ? `<div class="student-detail-item"><span class="student-detail-label">Nivel</span><span class="student-detail-val">${esc(e.nivel_actual)}</span></div>` : ''}
+                ${e.proxima_revision ? `<div class="student-detail-item"><span class="student-detail-label">Próx. rev.</span><span class="student-detail-val">${esc(e.proxima_revision)}</span></div>` : ''}
+            </div>` : ''}
+            ${e.objetivos ? `<p class="notas-admin-display" style="margin-top:6px;">${esc(e.objetivos)}</p>` : ''}
+        </div>`;
+    }).join('');
+}
+
+function filterSeguimientoList(q) {
+    if (!adminCache) return;
+    const lq = q.toLowerCase();
+    const f = lq ? (adminCache.seguimiento||[]).filter(e=>(e.nombre||'').toLowerCase().includes(lq)||(e.email||'').toLowerCase().includes(lq)) : (adminCache.seguimiento||[]);
+    document.getElementById('seguimiento-list').innerHTML = buildSeguimientoListHTML(f);
+}
+
+function goToAlumno(email) {
+    document.querySelectorAll('.sidebar-item').forEach(el => el.classList.toggle('active', el.dataset.packId === '__alumnos__'));
+    if (!alumnosIndex && adminCache) alumnosIndex = buildAlumnoIndex(adminCache);
+    renderAlumnoDetalle(email);
+}
+
+// ── SEGUIMIENTO MODAL ──────────────────────────────────────────────────────
+function openSeguimientoModal(email, nombre, entry) {
+    document.getElementById('seg-email').value           = email;
+    document.getElementById('seg-id').value              = entry?.id || '';
+    document.getElementById('seg-modal-name').textContent = nombre;
+    document.getElementById('seg-modal-type').textContent = entry ? 'Editar seguimiento' : 'Nuevo seguimiento';
+    document.getElementById('seg-temporada').value       = entry?.temporada        || '2025-2026';
+    document.getElementById('seg-nivel').value           = entry?.nivel_actual     || '';
+    document.getElementById('seg-objetivos').value       = entry?.objetivos        || '';
+    document.getElementById('seg-obs').value             = entry?.observaciones    || '';
+    document.getElementById('seg-sesiones').value        = entry?.sesiones_mes ?? '';
+    document.getElementById('seg-revision').value        = entry?.proxima_revision || '';
+    document.getElementById('seg-estado').value          = entry?.estado           || 'activo';
+    document.getElementById('seg-msg').textContent = '';
+    document.getElementById('seg-msg').className = 'modal-msg';
+    document.getElementById('seg-save-btn').disabled = false;
+    document.getElementById('seg-modal').classList.add('open');
+}
+
+function closeSeguimientoModal() {
+    document.getElementById('seg-modal').classList.remove('open');
+}
+
+async function saveSeguimiento() {
+    const id      = document.getElementById('seg-id').value;
+    const email   = document.getElementById('seg-email').value;
+    const nombre  = document.getElementById('seg-modal-name').textContent;
+    const saveBtn = document.getElementById('seg-save-btn');
+    const msgEl   = document.getElementById('seg-msg');
+    const payload = {
+        temporada:        document.getElementById('seg-temporada').value,
+        nivel_actual:     document.getElementById('seg-nivel').value,
+        objetivos:        document.getElementById('seg-objetivos').value,
+        observaciones:    document.getElementById('seg-obs').value,
+        sesiones_mes:     parseInt(document.getElementById('seg-sesiones').value) || 0,
+        proxima_revision: document.getElementById('seg-revision').value || null,
+        estado:           document.getElementById('seg-estado').value,
+    };
+    const action = id ? 'update_seguimiento' : 'create_seguimiento';
+    if (!id) { payload.email = email; payload.nombre = nombre; } else { payload.id = id; }
+    saveBtn.disabled = true; saveBtn.textContent = '...';
+    msgEl.textContent = ''; msgEl.className = 'modal-msg';
+    const token = await adminToken();
+    const r = await fetch('/api/admin-action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ action, ...payload })
+    });
+    const data = await r.json();
+    saveBtn.disabled = false; saveBtn.textContent = 'Guardar';
+    if (data.success) {
+        msgEl.textContent = 'Guardado'; msgEl.className = 'modal-msg ok';
+        adminCache = null; alumnosIndex = null;
+        setTimeout(async () => {
+            closeSeguimientoModal();
+            if (activeDetailEmail) {
+                const fresh = await fetchAdminData();
+                alumnosIndex = buildAlumnoIndex(fresh);
+                renderAlumnoDetalle(activeDetailEmail);
+            } else {
+                renderSeguimientoTab();
+            }
+        }, 700);
+    } else {
+        msgEl.textContent = data.error || 'Error al guardar'; msgEl.className = 'modal-msg err';
+    }
+}
+
+document.getElementById('seg-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeSeguimientoModal();
+});
+
+// Refresh detail view after assign/revoke pack (override to stay in detail)
+const _origAssignSuccess = assignPack;
+async function assignPack(userId, btn) {
+    const sel = document.getElementById(`sel-${userId}`);
+    const pack = sel.value;
+    if (!pack) return;
+    btn.disabled = true; btn.textContent = '...';
+    const token = await adminToken();
+    const r = await fetch('/api/admin-action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ action: 'assign', userId, pack })
+    });
+    const data = await r.json();
+    btn.disabled = false; btn.textContent = 'Asignar 1 año';
+    if (data.success) {
+        showMsg(userId, 'ok', data.message || 'Pack asignado');
+        adminCache = null; alumnosIndex = null;
+        setTimeout(async () => {
+            if (activeDetailEmail) {
+                const fresh = await fetchAdminData();
+                alumnosIndex = buildAlumnoIndex(fresh);
+                renderAlumnoDetalle(activeDetailEmail);
+            } else {
+                await renderAdmin();
+                document.getElementById(`urow-${userId}`)?.scrollIntoView({ behavior:'smooth', block:'center' });
+            }
+        }, 800);
+    } else { showMsg(userId, 'err', data.error || 'Error al asignar'); }
+}
+
+async function revokePack(userId, pack, btn) {
+    btn.disabled = true;
+    const token = await adminToken();
+    const r = await fetch('/api/admin-action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ action: 'revoke', userId, pack })
+    });
+    const data = await r.json();
+    if (data.success) {
+        showMsg(userId, 'ok', `Pack "${pack}" revocado`);
+        adminCache = null; alumnosIndex = null;
+        setTimeout(async () => {
+            if (activeDetailEmail) {
+                const fresh = await fetchAdminData();
+                alumnosIndex = buildAlumnoIndex(fresh);
+                renderAlumnoDetalle(activeDetailEmail);
+            } else {
+                await renderAdmin();
+            }
+        }, 800);
+    } else { btn.disabled = false; showMsg(userId, 'err', data.error || 'Error al revocar'); }
+}
 
 // ── Start ─────────────────────────────────────────────────────────────────
 checkAuth();

@@ -134,5 +134,39 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Error al actualizar', details: r.body });
   }
 
-  return res.status(400).json({ error: 'Acción no válida. Usa: assign, revoke, update_campus, update_waitlist' });
+  // ── CREATE SEGUIMIENTO ────────────────────────────────────────────────────
+  if (action === 'create_seguimiento') {
+    if (!req.body.email) return res.status(400).json({ error: 'Falta email' });
+    const { email: segEmail, nombre, temporada, nivel_actual, objetivos, observaciones, sesiones_mes, proxima_revision, estado: segEstado } = req.body;
+    const r = await supabaseService('/rest/v1/seguimiento_temporada', 'POST', {
+      email: segEmail, nombre: nombre || null, temporada: temporada || '2025-2026',
+      nivel_actual: nivel_actual || null, objetivos: objetivos || null,
+      observaciones: observaciones || null, sesiones_mes: parseInt(sesiones_mes) || 0,
+      proxima_revision: proxima_revision || null, estado: segEstado || 'activo'
+    }, { 'Prefer': 'return=minimal' });
+    if (r.status === 201 || r.status === 200) return res.status(200).json({ success: true });
+    return res.status(500).json({ error: 'Error al crear seguimiento', details: r.body });
+  }
+
+  // ── UPDATE SEGUIMIENTO ────────────────────────────────────────────────────
+  if (action === 'update_seguimiento') {
+    if (!id) return res.status(400).json({ error: 'Falta id' });
+    const { temporada, nivel_actual, objetivos, observaciones, sesiones_mes, proxima_revision, estado: segEstado } = req.body;
+    const patch = { updated_at: new Date().toISOString() };
+    if (temporada        !== undefined) patch.temporada        = temporada;
+    if (nivel_actual     !== undefined) patch.nivel_actual     = nivel_actual;
+    if (objetivos        !== undefined) patch.objetivos        = objetivos;
+    if (observaciones    !== undefined) patch.observaciones    = observaciones;
+    if (sesiones_mes     !== undefined) patch.sesiones_mes     = parseInt(sesiones_mes) || 0;
+    if (proxima_revision !== undefined) patch.proxima_revision = proxima_revision || null;
+    if (segEstado        !== undefined) patch.estado           = segEstado;
+    const r = await supabaseService(
+      `/rest/v1/seguimiento_temporada?id=eq.${encodeURIComponent(id)}`,
+      'PATCH', patch, { 'Prefer': 'return=minimal' }
+    );
+    if (r.status === 204 || r.status === 200) return res.status(200).json({ success: true });
+    return res.status(500).json({ error: 'Error al actualizar seguimiento', details: r.body });
+  }
+
+  return res.status(400).json({ error: 'Acción no válida. Usa: assign, revoke, update_campus, update_waitlist, create_seguimiento, update_seguimiento' });
 };
