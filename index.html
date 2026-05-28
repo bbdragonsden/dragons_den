@@ -1180,22 +1180,49 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 4px;
+            padding: 8px;
             color: var(--gold);
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-hamburger .bar {
+            transform-origin: center;
+            transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s;
+        }
+
+        .nav-hamburger[aria-expanded="true"] .bar-top {
+            transform: translateY(5px) rotate(45deg);
+        }
+        .nav-hamburger[aria-expanded="true"] .bar-mid {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .nav-hamburger[aria-expanded="true"] .bar-bot {
+            transform: translateY(-5px) rotate(-45deg);
         }
 
         .nav-mobile-menu {
-            display: none;
             position: fixed;
             top: 0; left: 0; right: 0;
             background: #111;
             z-index: 99;
             padding: 80px 24px 32px;
             flex-direction: column;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transition: max-height 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease;
+            display: flex;
         }
 
         .nav-mobile-menu.open {
-            display: flex;
+            max-height: 100dvh;
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .nav-mobile-menu li {
@@ -1204,8 +1231,10 @@
         }
 
         .nav-mobile-menu li a {
-            display: block;
-            padding: 18px 0;
+            display: flex;
+            align-items: center;
+            min-height: 48px;
+            padding: 14px 24px 14px 0;
             color: var(--text);
             text-decoration: none;
             font-size: 13px;
@@ -1267,10 +1296,10 @@
         <li><a href="#inscripcion">Inscripci&oacute;n</a></li>
     </ul>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menú" aria-expanded="false">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <line x1="3" y1="7" x2="21" y2="7"/>
-            <line x1="3" y1="12" x2="21" y2="12"/>
-            <line x1="3" y1="17" x2="21" y2="17"/>
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <line class="bar bar-top" x1="1" y1="2" x2="21" y2="2"/>
+            <line class="bar bar-mid" x1="1" y1="8" x2="21" y2="8"/>
+            <line class="bar bar-bot" x1="1" y1="14" x2="21" y2="14"/>
         </svg>
     </button>
 </nav>
@@ -1983,15 +2012,29 @@
     (function() {
         var btn = document.getElementById('nav-hamburger');
         var menu = document.getElementById('nav-mobile-menu');
+
+        function openMenu() {
+            menu.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            menu.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+
         btn.addEventListener('click', function() {
-            var open = menu.classList.toggle('open');
-            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            menu.classList.contains('open') ? closeMenu() : openMenu();
         });
+
         menu.querySelectorAll('a').forEach(function(link) {
-            link.addEventListener('click', function() {
-                menu.classList.remove('open');
-                btn.setAttribute('aria-expanded', 'false');
-            });
+            link.addEventListener('click', closeMenu);
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeMenu();
         });
     })();
 
