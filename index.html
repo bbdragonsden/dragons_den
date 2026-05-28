@@ -152,7 +152,6 @@
             font-weight: 400;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
         }
 
         body::before {
@@ -1271,8 +1270,25 @@
             .pricing-grid { grid-template-columns: 1fr; }
             .pricing-grid-4 { grid-template-columns: 1fr; }
             #precios [style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr; }
-            .opiniones-wrap { padding: 60px 24px; }
-            .opiniones-grid { grid-template-columns: 1fr; }
+            .opiniones-wrap { padding: 60px 0 60px 24px; }
+            .opiniones-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                gap: 2px;
+                background: transparent;
+                margin-top: 40px;
+                padding-right: 24px;
+            }
+            .opiniones-grid::-webkit-scrollbar { display: none; }
+            .opiniones-grid .opinion-card {
+                flex: 0 0 82%;
+                min-width: 0;
+                scroll-snap-align: start;
+            }
+            #precios [style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
             .blog-wrap { padding: 60px 24px; }
             .blog-grid { grid-template-columns: 1fr; }
             .blog-card.main { grid-row: span 1; }
@@ -1354,7 +1370,7 @@
         <div class="stat-label">Meses de programa</div>
     </div>
     <div class="stat">
-        <div class="stat-number">4</div>
+        <div class="stat-number">5</div>
         <div class="stat-label">Sesiones / semana</div>
     </div>
     <div class="stat">
@@ -1410,7 +1426,7 @@
         <div style="background:var(--surface2);padding:28px 32px;border-top:2px solid var(--gold);">
             <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Dragons Den</p>
             <p style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:#fff;line-height:1;">35&ndash;40<span style="font-size:20px;">&euro;/mes</span></p>
-            <p style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6;">2&ndash;4 sesiones semanales<br>+ An&aacute;lisis de v&iacute;deo incluido</p>
+            <p style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6;">Hasta 5 sesiones semanales<br>+ An&aacute;lisis de v&iacute;deo incluido</p>
         </div>
         <div style="background:var(--surface);padding:28px 32px;">
             <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Academia privada</p>
@@ -1431,7 +1447,7 @@
     <!-- Bloque 1: Verano -->
     <div class="pricing-block-header">
         <span class="pricing-block-tag">&#x2600;&#xFE0F;&nbsp; Campus de Verano &mdash; Junio / Julio / Agosto / Septiembre 2026</span>
-        <p class="pricing-block-desc">Programa intensivo de 1 a 4 meses. Sesiones de 2&ndash;3 h, 2&ndash;4 veces por semana.</p>
+        <p class="pricing-block-desc">Programa intensivo de 1 a 4 meses. Sesiones de 2&ndash;3 h, hasta 5 veces por semana.</p>
     </div>
     <div class="pricing-grid" data-reveal-stagger>
         <div class="price-card">
