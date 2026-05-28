@@ -706,6 +706,14 @@
             grid-template-columns: repeat(4, 1fr);
         }
 
+        .comparativa-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2px;
+            background: var(--border);
+            margin-bottom: 64px;
+        }
+
         /* OPINIONES */
         .opiniones-wrap {
             border-top: 1px solid var(--border);
@@ -1288,7 +1296,7 @@
                 min-width: 0;
                 scroll-snap-align: start;
             }
-            #precios [style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+            .comparativa-grid { grid-template-columns: 1fr; }
             .blog-wrap { padding: 60px 24px; }
             .blog-grid { grid-template-columns: 1fr; }
             .blog-card.main { grid-row: span 1; }
@@ -1417,7 +1425,7 @@
     <div class="divider"></div>
 
     <!-- Comparativa de mercado -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:var(--border);margin-bottom:64px;">
+    <div class="comparativa-grid">
         <div style="background:var(--surface);padding:28px 32px;">
             <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Entrenador personal</p>
             <p style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--muted);line-height:1;">60&ndash;80<span style="font-size:20px;">&euro;/mes</span></p>
