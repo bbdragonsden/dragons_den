@@ -808,8 +808,7 @@
 
         .blog-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            grid-template-rows: auto auto;
+            grid-template-columns: 1fr;
             gap: 2px;
             background: var(--border);
             margin-top: 60px;
@@ -828,8 +827,41 @@
         .blog-card:hover { background: var(--surface2); }
 
         .blog-card.main {
-            grid-row: span 2;
-            padding: 48px;
+            padding: 60px 64px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto 1fr auto;
+            column-gap: 64px;
+            row-gap: 0;
+        }
+
+        .blog-card.main .blog-number {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .blog-card.main .blog-tag {
+            grid-column: 1;
+            grid-row: 2;
+            align-self: start;
+        }
+
+        .blog-card.main .blog-title {
+            grid-column: 1;
+            grid-row: 3;
+            align-self: start;
+        }
+
+        .blog-card.main .blog-excerpt {
+            grid-column: 2;
+            grid-row: 1 / 4;
+            align-self: center;
+            padding-top: 0;
+        }
+
+        .blog-card.main .blog-footer {
+            grid-column: 1 / 3;
+            grid-row: 4;
         }
 
         .blog-tag {
@@ -846,7 +878,7 @@
             letter-spacing: 2px;
         }
 
-        .blog-card.main .blog-title { font-size: 36px; }
+        .blog-card.main .blog-title { font-size: 52px; }
         .blog-card:not(.main) .blog-title { font-size: 22px; }
 
         .blog-excerpt {
@@ -856,12 +888,19 @@
             flex: 1;
         }
 
+        .blog-card.main .blog-excerpt {
+            font-size: 16px;
+            line-height: 1.85;
+            color: var(--muted);
+        }
+
         .blog-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-top: 1px solid var(--border);
-            padding-top: 16px;
+            padding-top: 20px;
+            margin-top: 32px;
         }
 
         .blog-date {
@@ -883,7 +922,7 @@
 
         .blog-number {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 72px;
+            font-size: 100px;
             color: var(--border);
             line-height: 1;
             margin-bottom: -8px;
@@ -1128,6 +1167,252 @@
 
         button[type="submit"]:hover { background: var(--gold-light); }
 
+        /* WIZARD */
+        .wizard-progress-bar-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--surface);
+            padding-bottom: 0;
+        }
+
+        .wizard-progress-track {
+            height: 2px;
+            background: var(--border);
+            width: 100%;
+        }
+
+        .wizard-progress-fill {
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.4s cubic-bezier(0.16,1,0.3,1);
+            width: 0%;
+        }
+
+        .wizard-progress-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: 8px 0 0;
+        }
+
+        /* Desktop step dots */
+        .wizard-step-dots {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+
+        .wizard-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 13px;
+            color: var(--muted);
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .wizard-dot.active {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(200,169,110,0.08);
+        }
+
+        .wizard-dot.done {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: #000;
+        }
+
+        .wizard-dot-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+            transition: background 0.3s;
+        }
+
+        .wizard-dot-line.done { background: var(--gold); }
+
+        /* Steps container */
+        .wizard-steps-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wizard-step {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            animation: none;
+        }
+
+        .wizard-step.active {
+            display: flex;
+        }
+
+        .wizard-step.sliding-out-left {
+            display: flex;
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            animation: slideOutLeft 320ms cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+
+        .wizard-step.sliding-out-right {
+            display: flex;
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            animation: slideOutRight 320ms cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+
+        .wizard-step.sliding-in-left {
+            display: flex;
+            animation: slideInLeft 320ms cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+
+        .wizard-step.sliding-in-right {
+            display: flex;
+            animation: slideInRight 320ms cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+
+        @keyframes slideOutLeft {
+            from { transform: translateX(0); opacity: 1; }
+            to   { transform: translateX(-48px); opacity: 0; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to   { transform: translateX(48px); opacity: 0; }
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(48px); opacity: 0; }
+            to   { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(-48px); opacity: 0; }
+            to   { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Wizard step title */
+        .wizard-step-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 3px;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        /* Navigation buttons */
+        .wizard-nav {
+            display: flex;
+            gap: 4px;
+            margin-top: 12px;
+            align-items: center;
+        }
+
+        .wizard-nav.end {
+            justify-content: flex-end;
+        }
+
+        .wizard-btn-prev {
+            padding: 16px 24px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-family: 'Satoshi', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s;
+            flex-shrink: 0;
+        }
+
+        .wizard-btn-prev:hover { border-color: var(--gold); color: var(--gold); }
+
+        .wizard-btn-next {
+            flex: 1;
+            padding: 18px 24px;
+            background: var(--gold);
+            border: none;
+            color: #000;
+            font-family: 'Satoshi', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.25s;
+            min-height: 52px;
+        }
+
+        .wizard-btn-next:hover { background: var(--gold-light); }
+
+        /* Inline field error */
+        .field-error {
+            font-size: 11px;
+            color: #e05252;
+            letter-spacing: 0.5px;
+            padding: 4px 20px 0;
+            display: none;
+        }
+
+        .field-error.visible { display: block; }
+
+        input.error, select.error, textarea.error {
+            border-bottom-color: #e05252 !important;
+        }
+
+        /* Summary step */
+        .wizard-summary {
+            background: var(--surface2);
+            padding: 24px 28px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 32px;
+            margin-bottom: 4px;
+        }
+
+        .summary-row {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .summary-label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .summary-value {
+            font-size: 14px;
+            color: #fff;
+            font-weight: 300;
+        }
+
+        @media (max-width: 767px) {
+            .wizard-step-dots { display: none; }
+            .wizard-btn-next { min-height: 56px; font-size: 12px; }
+            .wizard-nav { flex-direction: column; }
+            .wizard-btn-prev { width: 100%; }
+            .wizard-summary { grid-template-columns: 1fr; }
+            .wizard-step-title { font-size: 34px; }
+            .wizard-progress-bar-wrap { padding: 0; }
+        }
+
         /* FOOTER */
         footer {
             padding: 40px 60px 24px;
@@ -1299,7 +1584,18 @@
             .comparativa-grid { grid-template-columns: 1fr; }
             .blog-wrap { padding: 60px 24px; }
             .blog-grid { grid-template-columns: 1fr; }
-            .blog-card.main { grid-row: span 1; }
+            .blog-card.main {
+                grid-template-columns: 1fr;
+                padding: 40px 24px;
+                column-gap: 0;
+            }
+            .blog-card.main .blog-excerpt {
+                grid-column: 1;
+                grid-row: auto;
+            }
+            .blog-card.main .blog-footer {
+                grid-column: 1;
+            }
             .form-layout { grid-template-columns: 1fr; gap: 48px; }
             .form-row { grid-template-columns: 1fr; }
             .form-section { padding: 60px 24px; }
@@ -1673,41 +1969,19 @@
     <div class="blog-grid">
         <div class="blog-card main">
             <div class="blog-number">01</div>
-            <span class="blog-tag">Entrenamiento</span>
-            <h3 class="blog-title">C&oacute;mo mejorar tu tiro en 30 d&iacute;as: el m&eacute;todo que usamos en Dragons Den</h3>
-            <p class="blog-excerpt">El tiro no es magia, es repetici&oacute;n inteligente. Existen tres variables que determinan el 80% de tu consistencia: mecánica de salida, ritmo de liberaci&oacute;n y rutina de calentamiento. En este art&iacute;culo desgranamos el protocolo exacto que aplicamos durante el verano para transformar tiradores.</p>
+            <span class="blog-tag">Metodolog&iacute;a</span>
+            <h3 class="blog-title">El verano que te cambia: por qu&eacute; 3 meses de entrenamiento correcto valen m&aacute;s que 3 a&ntilde;os de pr&aacute;ctica sin m&eacute;todo</h3>
+            <p class="blog-excerpt">El verano diferencia a los jugadores que dan el salto de los que se estancan. No es cuesti&oacute;n de talento ni de horas. Es cuesti&oacute;n de m&eacute;todo. Descubre los principios exactos que transforman a jugadores en un verano.</p>
             <div class="blog-footer">
-                <span class="blog-date">Mayo 2026</span>
-                <a href="CONTENIDO/blog-tiro-30-dias.html" class="blog-read">Leer art&iacute;culo &rarr;</a>
-            </div>
-        </div>
-
-        <div class="blog-card">
-            <div class="blog-number">02</div>
-            <span class="blog-tag">F&iacute;sico</span>
-            <h3 class="blog-title">Fuerza para baloncesto: lo que nadie te cuenta sobre el gimnasio</h3>
-            <p class="blog-excerpt">M&aacute;s peso no es m&aacute;s salto. Te explicamos qu&eacute; trabajamos y por qu&eacute;.</p>
-            <div class="blog-footer">
-                <span class="blog-date">Abril 2026</span>
-                <a href="CONTENIDO/blog-fuerza-baloncesto.html" class="blog-read">Leer &rarr;</a>
-            </div>
-        </div>
-
-        <div class="blog-card">
-            <div class="blog-number">03</div>
-            <span class="blog-tag">Mental</span>
-            <h3 class="blog-title">La mentalidad del jugador de alto rendimiento en verano</h3>
-            <p class="blog-excerpt">El verano diferencia a los que suben de nivel de los que se estancan. La clave no es el talento.</p>
-            <div class="blog-footer">
-                <span class="blog-date">Marzo 2026</span>
-                <a href="CONTENIDO/blog-mentalidad-verano.html" class="blog-read">Leer &rarr;</a>
+                <span class="blog-date">Junio 2026</span>
+                <a href="blog/el-verano-que-te-cambia.html" class="blog-read">Leer art&iacute;culo &rarr;</a>
             </div>
         </div>
     </div>
 </div>
 
 <!-- INSCRIPCION -->
-<div class="form-section" id="inscripcion">
+<div class="form-section" id="inscripcion" style="min-height:100dvh;">
     <div class="form-inner">
         <div class="form-layout">
             <div class="form-info">
@@ -1733,177 +2007,248 @@
 
             <form id="inscripcion-form" novalidate>
 
-                <!-- ¿Para quién? -->
-                <p class="form-section-title" style="border-top:none; margin-top:0; padding-top:0;">&iquest;La inscripci&oacute;n es para&hellip;?</p>
-                <div class="toggle-group">
-                    <div class="toggle-option">
-                        <input type="radio" id="para-mi" name="para_quien" value="yo" checked>
-                        <label for="para-mi">&#x1F3C0;&nbsp; Para m&iacute; mismo/a</label>
+                <!-- Progress bar (sticky top of form column) -->
+                <div class="wizard-progress-bar-wrap">
+                    <div class="wizard-progress-track">
+                        <div class="wizard-progress-fill" id="wizard-progress-fill"></div>
                     </div>
-                    <div class="toggle-option">
-                        <input type="radio" id="para-hijo" name="para_quien" value="hijo">
-                        <label for="para-hijo">&#x1F9D2;&nbsp; Para mi hijo/a</label>
-                    </div>
+                    <p class="wizard-progress-label" id="wizard-progress-label">Paso 1 de 6</p>
                 </div>
 
-                <!-- Datos del jugador/a -->
-                <p class="form-section-title">Datos del jugador/a</p>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nombre">Nombre y apellidos *</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="edad">Edad *</label>
-                        <input type="number" id="edad" name="edad" min="5" max="60" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="posicion">Posici&oacute;n</label>
-                        <select id="posicion" name="posicion">
-                            <option value="">Selecciona&hellip;</option>
-                            <option value="base">Base</option>
-                            <option value="escolta">Escolta</option>
-                            <option value="alero">Alero</option>
-                            <option value="alapivot">Ala-p&iacute;vot</option>
-                            <option value="pivot">P&iacute;vot</option>
-                            <option value="no-se">No s&eacute; / todas</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="nivel">Nivel de juego *</label>
-                        <select id="nivel" name="nivel" required>
-                            <option value="">Selecciona&hellip;</option>
-                            <option value="iniciacion">Iniciaci&oacute;n (sin experiencia)</option>
-                            <option value="basico">B&aacute;sico (1&ndash;2 a&ntilde;os)</option>
-                            <option value="intermedio">Intermedio (3&ndash;5 a&ntilde;os)</option>
-                            <option value="avanzado">Avanzado (+5 a&ntilde;os)</option>
-                            <option value="federado">Federado / competici&oacute;n</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="club">Club actual (si tiene)</label>
-                    <input type="text" id="club" name="club" placeholder="Nombre del club&hellip;">
+                <!-- Desktop step dots -->
+                <div class="wizard-step-dots" id="wizard-step-dots" aria-hidden="true">
+                    <div class="wizard-dot active" data-dot="1">1</div>
+                    <div class="wizard-dot-line" data-line="1"></div>
+                    <div class="wizard-dot" data-dot="2">2</div>
+                    <div class="wizard-dot-line" data-line="2"></div>
+                    <div class="wizard-dot" data-dot="3">3</div>
+                    <div class="wizard-dot-line" data-line="3"></div>
+                    <div class="wizard-dot" data-dot="4">4</div>
+                    <div class="wizard-dot-line" data-line="4"></div>
+                    <div class="wizard-dot" data-dot="5">5</div>
+                    <div class="wizard-dot-line" data-line="5"></div>
+                    <div class="wizard-dot" data-dot="6">6</div>
                 </div>
 
-                <!-- Campos extra si es para hijo -->
-                <span id="hijo-fields">
-                    <p class="form-section-title">Datos del padre / madre / tutor</p>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="tutor-nombre">Tu nombre *</label>
-                            <input type="text" id="tutor-nombre" name="tutor_nombre">
+                <!-- Steps container -->
+                <div class="wizard-steps-container" id="wizard-steps-container">
+
+                    <!-- STEP 1: ¿Para quién? -->
+                    <div class="wizard-step active" data-step="1">
+                        <p class="wizard-step-title">&iquest;La inscripci&oacute;n es para&hellip;?</p>
+                        <div class="toggle-group">
+                            <div class="toggle-option">
+                                <input type="radio" id="para-mi" name="para_quien" value="yo" checked>
+                                <label for="para-mi">Para m&iacute; mismo/a</label>
+                            </div>
+                            <div class="toggle-option">
+                                <input type="radio" id="para-hijo" name="para_quien" value="hijo">
+                                <label for="para-hijo">Para mi hijo/a</label>
+                            </div>
+                        </div>
+                        <div class="wizard-nav end">
+                            <button type="button" class="wizard-btn-next" data-next="2">Siguiente &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Datos del jugador/a -->
+                    <div class="wizard-step" data-step="2">
+                        <p class="wizard-step-title">Datos del jugador/a</p>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre">Nombre y apellidos *</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                                <span class="field-error" id="err-nombre">Campo obligatorio</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="edad">Edad *</label>
+                                <input type="number" id="edad" name="edad" min="5" max="60" required>
+                                <span class="field-error" id="err-edad">Campo obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="posicion">Posici&oacute;n</label>
+                                <select id="posicion" name="posicion">
+                                    <option value="">Selecciona&hellip;</option>
+                                    <option value="base">Base</option>
+                                    <option value="escolta">Escolta</option>
+                                    <option value="alero">Alero</option>
+                                    <option value="alapivot">Ala-p&iacute;vot</option>
+                                    <option value="pivot">P&iacute;vot</option>
+                                    <option value="no-se">No s&eacute; / todas</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="nivel">Nivel de juego *</label>
+                                <select id="nivel" name="nivel" required>
+                                    <option value="">Selecciona&hellip;</option>
+                                    <option value="iniciacion">Iniciaci&oacute;n (sin experiencia)</option>
+                                    <option value="basico">B&aacute;sico (1&ndash;2 a&ntilde;os)</option>
+                                    <option value="intermedio">Intermedio (3&ndash;5 a&ntilde;os)</option>
+                                    <option value="avanzado">Avanzado (+5 a&ntilde;os)</option>
+                                    <option value="federado">Federado / competici&oacute;n</option>
+                                </select>
+                                <span class="field-error" id="err-nivel">Campo obligatorio</span>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="tutor-relacion">Relaci&oacute;n con el jugador</label>
-                            <select id="tutor-relacion" name="tutor_relacion">
+                            <label for="club">Club actual (si tiene)</label>
+                            <input type="text" id="club" name="club" placeholder="Nombre del club&hellip;">
+                        </div>
+
+                        <!-- Campos tutor — visible si eligió "para hijo" -->
+                        <span id="hijo-fields">
+                            <p class="form-section-title">Datos del padre / madre / tutor</p>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tutor-nombre">Tu nombre *</label>
+                                    <input type="text" id="tutor-nombre" name="tutor_nombre">
+                                    <span class="field-error" id="err-tutor-nombre">Campo obligatorio</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tutor-relacion">Relaci&oacute;n con el jugador</label>
+                                    <select id="tutor-relacion" name="tutor_relacion">
+                                        <option value="">Selecciona&hellip;</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="tutor">Tutor/a legal</option>
+                                        <option value="otro">Otro familiar</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </span>
+
+                        <div class="wizard-nav">
+                            <button type="button" class="wizard-btn-prev" data-prev="1">&larr; Anterior</button>
+                            <button type="button" class="wizard-btn-next" data-next="3">Siguiente &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Contacto -->
+                    <div class="wizard-step" data-step="3">
+                        <p class="wizard-step-title">Contacto</p>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                                <span class="field-error" id="err-email">Introduce un email v&aacute;lido</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Tel&eacute;fono (WhatsApp) *</label>
+                                <input type="tel" id="telefono" name="telefono" required>
+                                <span class="field-error" id="err-telefono">Campo obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="wizard-nav">
+                            <button type="button" class="wizard-btn-prev" data-prev="2">&larr; Anterior</button>
+                            <button type="button" class="wizard-btn-next" data-next="4">Siguiente &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: Disponibilidad -->
+                    <div class="wizard-step" data-step="4">
+                        <p class="wizard-step-title">Disponibilidad</p>
+                        <div class="form-group">
+                            <label for="tipo">&iquest;Jugador/a anterior de Dragons Den? *</label>
+                            <select id="tipo" name="tipo" required>
                                 <option value="">Selecciona&hellip;</option>
-                                <option value="padre">Padre</option>
-                                <option value="madre">Madre</option>
-                                <option value="tutor">Tutor/a legal</option>
-                                <option value="otro">Otro familiar</option>
+                                <option value="anterior">S&iacute;, ya hemos entrenado juntos</option>
+                                <option value="nuevo">No, es la primera vez</option>
+                            </select>
+                            <span class="field-error" id="err-tipo">Campo obligatorio</span>
+                        </div>
+                        <p style="font-size:11px;letter-spacing:1px;color:var(--muted);padding:12px 0 4px;">&iquest;Qu&eacute; meses te interesan? El programa va por <strong style="color:var(--text);">mes completo</strong> &mdash; puedes marcar varios</p>
+                        <div class="check-group">
+                            <label class="check-option">
+                                <input type="checkbox" name="mes_junio" value="junio">
+                                <span>Junio</span>
+                            </label>
+                            <label class="check-option">
+                                <input type="checkbox" name="mes_julio" value="julio">
+                                <span>Julio</span>
+                            </label>
+                            <label class="check-option">
+                                <input type="checkbox" name="mes_agosto" value="agosto">
+                                <span>Agosto</span>
+                            </label>
+                            <label class="check-option">
+                                <input type="checkbox" name="mes_septiembre" value="septiembre">
+                                <span>Septiembre</span>
+                            </label>
+                            <label class="check-option">
+                                <input type="checkbox" name="mes_todos" value="todos">
+                                <span>Los cuatro &mdash; consultar descuento</span>
+                            </label>
+                        </div>
+                        <p style="font-size:11px;color:var(--muted);padding:6px 0 0;line-height:1.6;">Para packs de varios meses, <strong style="color:var(--gold);">consult&aacute;nos el descuento</strong> al <a href="https://wa.me/34646794962" target="_blank" style="color:var(--text);font-weight:600;text-decoration:none;">646 794 962</a>.</p>
+                        <div class="wizard-nav">
+                            <button type="button" class="wizard-btn-prev" data-prev="3">&larr; Anterior</button>
+                            <button type="button" class="wizard-btn-next" data-next="5">Siguiente &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: Más info -->
+                    <div class="wizard-step" data-step="5">
+                        <p class="wizard-step-title">M&aacute;s informaci&oacute;n</p>
+                        <div class="form-group">
+                            <label for="objetivo">Objetivo principal este verano</label>
+                            <select id="objetivo" name="objetivo">
+                                <option value="">Selecciona&hellip;</option>
+                                <option value="tecnica">Mejorar t&eacute;cnica individual</option>
+                                <option value="fisico">Mejorar condici&oacute;n f&iacute;sica</option>
+                                <option value="tactica">Entender mejor el juego colectivo</option>
+                                <option value="confianza">Ganar confianza y mentalidad</option>
+                                <option value="todo">Todo lo anterior</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="lesiones">Lesiones, alergias o condiciones f&iacute;sicas a tener en cuenta</label>
+                            <textarea id="lesiones" name="lesiones" placeholder="Escribe aqu&iacute; si hay algo que debamos saber&hellip;"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="origen">&iquest;C&oacute;mo nos conociste?</label>
+                            <select id="origen" name="origen">
+                                <option value="">Selecciona&hellip;</option>
+                                <option value="recomendacion">Recomendaci&oacute;n de un jugador</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="tiktok">TikTok</option>
+                                <option value="whatsapp">WhatsApp / grupo</option>
+                                <option value="google">Google / b&uacute;squeda</option>
+                                <option value="club">Mi club de baloncesto</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="comentarios">Comentarios o preguntas</label>
+                            <textarea id="comentarios" name="comentarios" placeholder="Cu&eacute;ntanos cualquier cosa&hellip;"></textarea>
+                        </div>
+                        <div class="wizard-nav">
+                            <button type="button" class="wizard-btn-prev" data-prev="4">&larr; Anterior</button>
+                            <button type="button" class="wizard-btn-next" data-next="6">Siguiente &rarr;</button>
+                        </div>
                     </div>
-                </span>
 
-                <!-- Contacto -->
-                <p class="form-section-title">Contacto</p>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
+                    <!-- STEP 6: Resumen + RGPD + Enviar -->
+                    <div class="wizard-step" data-step="6">
+                        <p class="wizard-step-title">Resumen</p>
+                        <div class="wizard-summary" id="wizard-summary">
+                            <!-- filled by JS -->
+                        </div>
+
+                        <label class="rgpd-group">
+                            <input type="checkbox" name="rgpd" id="rgpd" required>
+                            <span>Acepto que Dragons Den trate mis datos personales para gestionar mi inscripci&oacute;n y comunicarme informaci&oacute;n sobre el programa. No compartimos tus datos con terceros. <a href="politica-privacidad.html" target="_blank">Pol&iacute;tica de privacidad</a>.</span>
+                        </label>
+                        <span class="field-error" id="err-rgpd">Debes aceptar la pol&iacute;tica de privacidad para continuar</span>
+
+                        <div class="wizard-nav">
+                            <button type="button" class="wizard-btn-prev" data-prev="5">&larr; Anterior</button>
+                            <button type="submit" id="submit-btn" class="wizard-btn-next">Reservar mi plaza &rarr;</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="telefono">Tel&eacute;fono (WhatsApp) *</label>
-                        <input type="tel" id="telefono" name="telefono" required>
-                    </div>
-                </div>
 
-                <!-- Disponibilidad -->
-                <p class="form-section-title">Disponibilidad</p>
-                <div class="form-group">
-                    <label for="tipo">&iquest;Jugador/a anterior de Dragons Den?</label>
-                    <select id="tipo" name="tipo" required>
-                        <option value="">Selecciona&hellip;</option>
-                        <option value="anterior">S&iacute;, ya hemos entrenado juntos</option>
-                        <option value="nuevo">No, es la primera vez</option>
-                    </select>
-                </div>
-                <p style="font-size:11px;letter-spacing:1px;color:var(--muted);padding:8px 0 4px;">&iquest;Qu&eacute; meses te interesan? El programa va por <strong style="color:var(--text);">mes completo</strong> &mdash; puedes marcar varios</p>
-                <div class="check-group">
-                    <label class="check-option">
-                        <input type="checkbox" name="mes_junio" value="junio">
-                        <span>Junio</span>
-                    </label>
-                    <label class="check-option">
-                        <input type="checkbox" name="mes_julio" value="julio">
-                        <span>Julio</span>
-                    </label>
-                    <label class="check-option">
-                        <input type="checkbox" name="mes_agosto" value="agosto">
-                        <span>Agosto</span>
-                    </label>
-                    <label class="check-option">
-                        <input type="checkbox" name="mes_septiembre" value="septiembre">
-                        <span>Septiembre</span>
-                    </label>
-                    <label class="check-option">
-                        <input type="checkbox" name="mes_todos" value="todos">
-                        <span>Los cuatro &mdash; consultar descuento</span>
-                    </label>
-                </div>
-                <p style="font-size:11px;color:var(--muted);padding:6px 0 0;line-height:1.6;">Para packs de varios meses, <strong style="color:var(--gold);">consult&aacute;nos el descuento</strong> al <a href="https://wa.me/34646794962" target="_blank" style="color:var(--text);font-weight:600;text-decoration:none;">646 794 962</a>.</p>
-
-                <!-- Salud -->
-                <p class="form-section-title">Salud e informaci&oacute;n adicional</p>
-                <div class="form-group">
-                    <label for="lesiones">Lesiones, alergias o condiciones f&iacute;sicas a tener en cuenta</label>
-                    <textarea id="lesiones" name="lesiones" placeholder="Escribe aqu&iacute; si hay algo que debamos saber&hellip;"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="objetivo">Objetivo principal este verano</label>
-                    <select id="objetivo" name="objetivo">
-                        <option value="">Selecciona&hellip;</option>
-                        <option value="tecnica">Mejorar t&eacute;cnica individual</option>
-                        <option value="fisico">Mejorar condici&oacute;n f&iacute;sica</option>
-                        <option value="tactica">Entender mejor el juego colectivo</option>
-                        <option value="confianza">Ganar confianza y mentalidad</option>
-                        <option value="todo">Todo lo anterior</option>
-                    </select>
-                </div>
-
-                <!-- C&oacute;mo nos conociste -->
-                <p class="form-section-title">&iquest;C&oacute;mo nos conociste?</p>
-                <div class="form-group">
-                    <label for="origen">Fu&eacute;nte</label>
-                    <select id="origen" name="origen">
-                        <option value="">Selecciona&hellip;</option>
-                        <option value="recomendacion">Recomendaci&oacute;n de un jugador</option>
-                        <option value="instagram">Instagram</option>
-                        <option value="tiktok">TikTok</option>
-                        <option value="whatsapp">WhatsApp / grupo</option>
-                        <option value="google">Google / b&uacute;squeda</option>
-                        <option value="club">Mi club de baloncesto</option>
-                        <option value="otro">Otro</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="comentarios">Comentarios o preguntas</label>
-                    <textarea id="comentarios" name="comentarios" placeholder="Cu&eacute;ntanos cualquier cosa&hellip;"></textarea>
-                </div>
-
-                <!-- RGPD -->
-                <label class="rgpd-group">
-                    <input type="checkbox" name="rgpd" required>
-                    <span>Acepto que Dragons Den trate mis datos personales para gestionar mi inscripci&oacute;n y comunicarme informaci&oacute;n sobre el programa. No compartimos tus datos con terceros. <a href="politica-privacidad.html" target="_blank">Pol&iacute;tica de privacidad</a>.</span>
-                </label>
-
-                <div class="form-submit">
-                    <button type="submit" id="submit-btn">Reservar mi plaza &rarr;</button>
-                </div>
+                </div><!-- /wizard-steps-container -->
 
                 <div id="form-success" style="display:none; margin-top:4px; background:#0d1f0d; border-left:3px solid #4caf50; padding:24px 28px;">
                     <p style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#4caf50;margin-bottom:8px;">&#x2714; Plaza reservada</p>
@@ -1952,71 +2297,291 @@
 </div>
 
 <script>
-    const radios = document.querySelectorAll('input[name="para_quien"]');
-    const hijoFields = document.getElementById('hijo-fields');
-    const tutorNombre = document.getElementById('tutor-nombre');
+    // ── WIZARD ────────────────────────────────────────────────────────────────
+    (function() {
+        var TOTAL_STEPS = 6;
+        var currentStep = 1;
+        var isAnimating = false;
 
-    radios.forEach(r => r.addEventListener('change', () => {
-        const esHijo = document.getElementById('para-hijo').checked;
-        hijoFields.classList.toggle('visible', esHijo);
-        tutorNombre.required = esHijo;
-    }));
+        // ¿Para quién? → show/hide hijo fields
+        var radios = document.querySelectorAll('input[name="para_quien"]');
+        var hijoFields = document.getElementById('hijo-fields');
+        var tutorNombre = document.getElementById('tutor-nombre');
 
-    document.getElementById('inscripcion-form').addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        const form = e.target;
-        const btn  = document.getElementById('submit-btn');
-        const v    = id => (document.getElementById(id)?.value || '').trim();
-        const sel  = id => { const el = document.getElementById(id); return el?.options[el.selectedIndex]?.text || ''; };
-
-        const meses = [];
-        ['junio','julio','agosto','septiembre'].forEach(m => {
-            if (form.querySelector('[name="mes_' + m + '"]')?.checked)
-                meses.push(m.charAt(0).toUpperCase() + m.slice(1));
-        });
-        if (form.querySelector('[name="mes_todos"]')?.checked) meses.push('Pack verano completo — consultar descuento');
-
-        const payload = {
-            para_quien:    form.querySelector('[name="para_quien"]:checked')?.value === 'hijo' ? 'Para su hijo/a' : 'Para sí mismo/a',
-            nombre:        v('nombre'),
-            edad:          v('edad'),
-            posicion:      sel('posicion') || '—',
-            nivel:         sel('nivel'),
-            club:          v('club') || '—',
-            tutor_nombre:  v('tutor-nombre') || '—',
-            tutor_relacion:sel('tutor-relacion') || '—',
-            email:         v('email'),
-            telefono:      v('telefono'),
-            anterior:      sel('tipo'),
-            meses:         meses.length ? meses.join(', ') : 'Por confirmar',
-            lesiones:      v('lesiones') || '—',
-            objetivo:      sel('objetivo') || '—',
-            origen:        sel('origen') || '—',
-            comentarios:   v('comentarios') || '—',
-        };
-
-        btn.textContent = 'Enviando…';
-        btn.disabled = true;
-
-        try {
-            const r = await fetch('/api/inscripcion', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-            if (!r.ok) throw new Error('api error');
-
-            form.querySelectorAll('input,select,textarea,button').forEach(el => el.style.display = 'none');
-            document.getElementById('form-success').style.display = 'block';
-
-        } catch(err) {
-            console.error(err);
-            btn.textContent = 'Reservar mi plaza →';
-            btn.disabled = false;
-            document.getElementById('form-error').style.display = 'block';
+        function syncHijoFields() {
+            var esHijo = document.getElementById('para-hijo').checked;
+            hijoFields.classList.toggle('visible', esHijo);
+            tutorNombre.required = esHijo;
         }
-    });
+
+        radios.forEach(function(r) { r.addEventListener('change', syncHijoFields); });
+        syncHijoFields();
+
+        // Progress update
+        function updateProgress(step) {
+            var fill = document.getElementById('wizard-progress-fill');
+            var label = document.getElementById('wizard-progress-label');
+            fill.style.width = ((step / TOTAL_STEPS) * 100) + '%';
+            label.textContent = 'Paso ' + step + ' de ' + TOTAL_STEPS;
+
+            // Dots
+            document.querySelectorAll('.wizard-dot').forEach(function(dot) {
+                var n = parseInt(dot.getAttribute('data-dot'), 10);
+                dot.classList.remove('active', 'done');
+                if (n < step) dot.classList.add('done');
+                else if (n === step) dot.classList.add('active');
+            });
+            document.querySelectorAll('.wizard-dot-line').forEach(function(line) {
+                var n = parseInt(line.getAttribute('data-line'), 10);
+                line.classList.toggle('done', n < step);
+            });
+        }
+
+        // Validate a step's required fields
+        function validateStep(stepEl) {
+            var valid = true;
+            stepEl.querySelectorAll('input[required], select[required], textarea[required]').forEach(function(field) {
+                // Skip hidden tutor fields when not for hijo
+                if (field.closest('#hijo-fields') && !document.getElementById('para-hijo').checked) return;
+
+                var errId = 'err-' + field.id;
+                var errEl = document.getElementById(errId);
+                var isEmpty = field.value.trim() === '';
+
+                // Email validation
+                if (field.type === 'email' && !isEmpty) {
+                    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+                    if (!emailOk) {
+                        field.classList.add('error');
+                        if (errEl) { errEl.textContent = 'Introduce un email válido'; errEl.classList.add('visible'); }
+                        valid = false;
+                        return;
+                    }
+                }
+
+                if (isEmpty) {
+                    field.classList.add('error');
+                    if (errEl) errEl.classList.add('visible');
+                    valid = false;
+                } else {
+                    field.classList.remove('error');
+                    if (errEl) errEl.classList.remove('visible');
+                }
+            });
+            return valid;
+        }
+
+        // Clear errors in a step
+        function clearErrors(stepEl) {
+            stepEl.querySelectorAll('.error').forEach(function(el) { el.classList.remove('error'); });
+            stepEl.querySelectorAll('.field-error.visible').forEach(function(el) { el.classList.remove('visible'); });
+        }
+
+        // Animate transition
+        function goTo(from, to, direction) {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            var container = document.getElementById('wizard-steps-container');
+            var fromEl = container.querySelector('[data-step="' + from + '"]');
+            var toEl   = container.querySelector('[data-step="' + to + '"]');
+
+            // Set fixed height during animation to prevent layout jump
+            container.style.height = fromEl.offsetHeight + 'px';
+
+            var outClass = direction === 'next' ? 'sliding-out-left' : 'sliding-out-right';
+            var inClass  = direction === 'next' ? 'sliding-in-left'  : 'sliding-in-right';
+
+            fromEl.classList.remove('active');
+            fromEl.classList.add(outClass);
+
+            toEl.classList.remove('active');
+            toEl.classList.add(inClass);
+
+            // Pre-show toEl for measurement, keep opacity 0 via animation
+            // (animation handles opacity)
+
+            setTimeout(function() {
+                fromEl.classList.remove(outClass);
+                fromEl.style.display = 'none';
+                toEl.classList.remove(inClass);
+                toEl.classList.add('active');
+                toEl.style.display = '';
+
+                container.style.height = '';
+                currentStep = to;
+                updateProgress(to);
+
+                if (to === 6) buildSummary();
+
+                isAnimating = false;
+
+                // Scroll wizard into view smoothly
+                var inscEl = document.getElementById('inscripcion');
+                if (inscEl) {
+                    var top = inscEl.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({ top: top, behavior: 'smooth' });
+                }
+            }, 330);
+        }
+
+        // Build summary for step 6
+        function buildSummary() {
+            var form = document.getElementById('inscripcion-form');
+            var v = function(id) { return (document.getElementById(id) ? document.getElementById(id).value : '') || '—'; };
+            var sel = function(id) {
+                var el = document.getElementById(id);
+                if (!el) return '—';
+                return el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : '—';
+            };
+            var meses = [];
+            ['junio','julio','agosto','septiembre'].forEach(function(m) {
+                if (form.querySelector('[name="mes_' + m + '"]') && form.querySelector('[name="mes_' + m + '"]').checked)
+                    meses.push(m.charAt(0).toUpperCase() + m.slice(1));
+            });
+            if (form.querySelector('[name="mes_todos"]') && form.querySelector('[name="mes_todos"]').checked)
+                meses.push('Pack completo');
+
+            var esHijo = document.getElementById('para-hijo').checked;
+            var para = esHijo ? 'Para su hijo/a' : 'Para mí mismo/a';
+
+            var rows = [
+                ['Inscripción', para],
+                ['Nombre', v('nombre')],
+                ['Edad', v('edad') ? v('edad') + ' años' : '—'],
+                ['Nivel', sel('nivel')],
+                ['Meses', meses.length ? meses.join(', ') : 'Por confirmar'],
+                ['Email', v('email')],
+                ['Teléfono', v('telefono')]
+            ];
+
+            if (esHijo) {
+                rows.splice(3, 0, ['Tutor/a', v('tutor-nombre')]);
+            }
+
+            var html = rows.map(function(row) {
+                return '<div class="summary-row"><span class="summary-label">' + row[0] + '</span><span class="summary-value">' + row[1] + '</span></div>';
+            }).join('');
+
+            document.getElementById('wizard-summary').innerHTML = html;
+        }
+
+        // Wire up Next buttons
+        document.querySelectorAll('.wizard-btn-next[data-next]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var to = parseInt(btn.getAttribute('data-next'), 10);
+                var container = document.getElementById('wizard-steps-container');
+                var fromEl = container.querySelector('[data-step="' + currentStep + '"]');
+                if (validateStep(fromEl)) {
+                    goTo(currentStep, to, 'next');
+                }
+            });
+        });
+
+        // Wire up Prev buttons
+        document.querySelectorAll('.wizard-btn-prev[data-prev]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var to = parseInt(btn.getAttribute('data-prev'), 10);
+                var container = document.getElementById('wizard-steps-container');
+                var fromEl = container.querySelector('[data-step="' + currentStep + '"]');
+                clearErrors(fromEl);
+                goTo(currentStep, to, 'prev');
+            });
+        });
+
+        // Clear error on input/change
+        document.getElementById('inscripcion-form').querySelectorAll('input, select, textarea').forEach(function(field) {
+            field.addEventListener('input', function() {
+                field.classList.remove('error');
+                var errEl = document.getElementById('err-' + field.id);
+                if (errEl) errEl.classList.remove('visible');
+            });
+            field.addEventListener('change', function() {
+                field.classList.remove('error');
+                var errEl = document.getElementById('err-' + field.id);
+                if (errEl) errEl.classList.remove('visible');
+            });
+        });
+
+        // Init progress
+        updateProgress(1);
+
+        // Submit handler
+        document.getElementById('inscripcion-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Validate RGPD
+            var rgpd = document.getElementById('rgpd');
+            var errRgpd = document.getElementById('err-rgpd');
+            if (!rgpd.checked) {
+                errRgpd.classList.add('visible');
+                return;
+            } else {
+                errRgpd.classList.remove('visible');
+            }
+
+            var form = e.target;
+            var btn  = document.getElementById('submit-btn');
+            var v    = function(id) { return (document.getElementById(id) ? document.getElementById(id).value : '') || ''; };
+            var vt   = function(id) { return v(id).trim(); };
+            var sel  = function(id) {
+                var el = document.getElementById(id);
+                if (!el) return '';
+                return el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : '';
+            };
+
+            var meses = [];
+            ['junio','julio','agosto','septiembre'].forEach(function(m) {
+                if (form.querySelector('[name="mes_' + m + '"]') && form.querySelector('[name="mes_' + m + '"]').checked)
+                    meses.push(m.charAt(0).toUpperCase() + m.slice(1));
+            });
+            if (form.querySelector('[name="mes_todos"]') && form.querySelector('[name="mes_todos"]').checked)
+                meses.push('Pack verano completo — consultar descuento');
+
+            var payload = {
+                para_quien:    form.querySelector('[name="para_quien"]:checked') && form.querySelector('[name="para_quien"]:checked').value === 'hijo' ? 'Para su hijo/a' : 'Para sí mismo/a',
+                nombre:        vt('nombre'),
+                edad:          vt('edad'),
+                posicion:      sel('posicion') || '—',
+                nivel:         sel('nivel'),
+                club:          vt('club') || '—',
+                tutor_nombre:  vt('tutor-nombre') || '—',
+                tutor_relacion:sel('tutor-relacion') || '—',
+                email:         vt('email'),
+                telefono:      vt('telefono'),
+                anterior:      sel('tipo'),
+                meses:         meses.length ? meses.join(', ') : 'Por confirmar',
+                lesiones:      vt('lesiones') || '—',
+                objetivo:      sel('objetivo') || '—',
+                origen:        sel('origen') || '—',
+                comentarios:   vt('comentarios') || '—',
+            };
+
+            btn.textContent = 'Enviando…';
+            btn.disabled = true;
+
+            try {
+                var r = await fetch('/api/inscripcion', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!r.ok) throw new Error('api error');
+
+                form.querySelectorAll('input,select,textarea,button').forEach(function(el) { el.style.display = 'none'; });
+                document.getElementById('wizard-progress-bar-wrap') && (document.getElementById('wizard-progress-bar-wrap').style.display = 'none');
+                document.getElementById('wizard-step-dots') && (document.getElementById('wizard-step-dots').style.display = 'none');
+                document.getElementById('wizard-steps-container') && (document.getElementById('wizard-steps-container').style.display = 'none');
+                document.getElementById('form-success').style.display = 'block';
+
+            } catch(err) {
+                console.error(err);
+                btn.textContent = 'Reservar mi plaza →';
+                btn.disabled = false;
+                document.getElementById('form-error').style.display = 'block';
+            }
+        });
+    })();
 
 
     // Navegación suave — todos los links con href="#id"

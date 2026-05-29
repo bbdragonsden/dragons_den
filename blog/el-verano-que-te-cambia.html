@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El verano que te cambia: 3 meses de entrenamiento correcto vs 3 años sin método | Dragons Den Basketball Academy</title>
+    <meta name="description" content="Por qué un verano de entrenamiento con método real puede avanzar más que tres años de práctica sin retroalimentación. Lo que ningún equipo te enseña durante la temporada, y cómo el verano cambia eso.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c8a96e;
+            --gold-light: #e2c98a;
+            --black: #080808;
+            --surface: #111111;
+            --surface2: #181818;
+            --border: rgba(200, 169, 110, 0.2);
+            --text: #e8e8e8;
+            --muted: #888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Satoshi', sans-serif;
+            background: var(--black);
+            color: var(--text);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 24px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8, 8, 8, 0.97);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 4px;
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .nav-back {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-back:hover { color: var(--gold); }
+
+        /* ARTICLE HERO */
+        .article-hero {
+            padding: 140px 60px 80px;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .article-eyebrow {
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .article-eyebrow::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .article-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(42px, 6vw, 72px);
+            letter-spacing: 3px;
+            color: #fff;
+            line-height: 1.0;
+            margin-bottom: 32px;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 32px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding-bottom: 48px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-meta span { color: var(--gold); }
+
+        /* ARTICLE BODY */
+        .article-body {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 60px 120px;
+        }
+
+        .article-body p {
+            font-size: 17px;
+            color: #c8c8c8;
+            line-height: 1.85;
+            margin-bottom: 28px;
+            font-weight: 300;
+            max-width: 68ch;
+        }
+
+        .article-body p strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .article-section {
+            margin-top: 64px;
+            margin-bottom: 8px;
+        }
+
+        .article-section-label {
+            font-size: 9px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .article-body h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(28px, 4vw, 44px);
+            letter-spacing: 3px;
+            color: #fff;
+            margin-bottom: 24px;
+            line-height: 1.05;
+        }
+
+        .highlight-block {
+            background: var(--surface);
+            border-left: 2px solid var(--gold);
+            padding: 28px 36px;
+            margin: 40px 0;
+        }
+
+        .highlight-block p {
+            margin-bottom: 0;
+            font-size: 16px;
+            color: var(--text);
+        }
+
+        .protocol-list {
+            list-style: none;
+            margin: 28px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .protocol-list li {
+            background: var(--surface);
+            padding: 20px 28px;
+            font-size: 15px;
+            color: var(--muted);
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            line-height: 1.7;
+        }
+
+        .protocol-list li .num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            color: var(--gold);
+            min-width: 32px;
+            line-height: 1.2;
+        }
+
+        .protocol-list li strong {
+            color: var(--text);
+        }
+
+        .divider-line {
+            width: 48px;
+            height: 1px;
+            background: var(--gold);
+            margin: 48px 0;
+        }
+
+        /* CTA */
+        .article-cta {
+            background: var(--surface);
+            border-top: 2px solid var(--gold);
+            padding: 48px;
+            margin-top: 80px;
+        }
+
+        .article-cta-label {
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .article-cta h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(28px, 4vw, 46px);
+            letter-spacing: 3px;
+            color: #fff;
+            margin-bottom: 16px;
+            line-height: 1.0;
+        }
+
+        .article-cta p {
+            font-size: 15px;
+            color: var(--muted);
+            margin-bottom: 32px;
+            max-width: 52ch;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 40px;
+            background: var(--gold);
+            color: #000;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 60px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 4px;
+            color: var(--gold);
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--muted);
+            letter-spacing: 1px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 20px 24px; }
+            .article-hero { padding: 120px 24px 60px; }
+            .article-body { padding: 0 24px 80px; }
+            .article-meta { flex-wrap: wrap; gap: 16px; }
+            .article-cta { padding: 32px 24px; }
+            footer { padding: 40px 24px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="../index.html" class="nav-logo">Dragons Den</a>
+    <a href="../index.html#blog" class="nav-back">&#8592; Volver al blog</a>
+</nav>
+
+<div class="article-hero">
+    <p class="article-eyebrow">Desarrollo del jugador</p>
+    <h1 class="article-title">El verano que te cambia: por que 3 meses de entrenamiento correcto valen mas que 3 anos de practica sin metodo</h1>
+    <div class="article-meta">
+        <div>Mayo 2026</div>
+        <div>&#9679; 12 min de lectura</div>
+        <div>&#9679; Por <span>Yefangyi Hu Garcia</span></div>
+    </div>
+</div>
+
+<div class="article-body">
+
+    <p>
+        Imagina dos jugadores de 16 años. El primero lleva tres temporadas entrenando con su equipo: dos sesiones por semana, partidos los fines de semana, algún torneo de verano suelto. Trabaja. Se presenta. Escucha al entrenador. El segundo hace exactamente lo mismo durante dos temporadas y luego dedica un verano completo —tres meses— a entrenarse con método, con retroalimentación específica y con un plan diseñado para sus carencias concretas. En septiembre, cuando los dos vuelven a sus equipos, el segundo jugador ha dado un salto que el primero no puede explicar. Y el primero lleva más tiempo en esto.
+    </p>
+
+    <p>
+        No es talento. No es genética. Es la diferencia entre practicar y practicar bien. Este artículo es sobre esa diferencia, por qué el verano es el momento donde esa diferencia se construye, y qué tiene que tener un programa de entrenamiento para que el salto sea real.
+    </p>
+
+    <div class="divider-line"></div>
+
+    <div class="article-section">
+        <p class="article-section-label">Por que ahora</p>
+        <h2>El verano es la unica ventana donde tu decides lo que entrenas</h2>
+    </div>
+
+    <p>
+        Durante la temporada regular, el entrenador de tu equipo decide qué se trabaja. Lo que se necesita para el siguiente partido. Los esquemas de ataque y defensa que el equipo usa. El sistema de juego que el bloque ha decidido implementar. Eso es razonable: el objetivo de un equipo es ganar partidos, no desarrollar jugadores de forma individualizada.
+    </p>
+
+    <p>
+        Pero el resultado de eso es que el jugador raramente trabaja sus carencias propias. Si tu punto débil es el bote con la mano izquierda, eso casi nunca va a aparecer en un entrenamiento colectivo. Si tu problema es que te encogues en el uno contra uno cuando el defensa te presiona, nadie tiene tiempo de analizar eso contigo durante la preparación de un partido. La temporada avanza, tú avanzas con ella, y ese defecto sigue ahí enterrado bajo todo lo demás.
+    </p>
+
+    <p>
+        El verano cambia la ecuación de raíz. Sin partidos que preparar, sin sistema colectivo que ensayar, el foco puede ir exactamente donde tiene que ir: en ti. En lo que tú necesitas. En los patrones de movimiento que llevas años haciendo mal sin que nadie te lo haya señalado con precisión suficiente.
+    </p>
+
+    <div class="highlight-block">
+        <p>Hay un concepto en neurociencia del deporte que se llama plasticidad motora. El cerebro es capaz de reescribir patrones de movimiento con mayor eficiencia cuando la práctica está libre de presión de resultado. En temporada, cada error tiene consecuencia inmediata: un partido perdido, menos minutos, la mirada del entrenador. Esa presión cierra la capacidad de asimilar movimiento nuevo. El verano, sin esa presión, activa exactamente la ventana donde el cerebro aprende mejor.</p>
+    </div>
+
+    <p>
+        Esto no es teoría abstracta. Lo vemos cada septiembre cuando los jugadores que han hecho el campus vuelven a sus equipos. La diferencia no es que sepan más cosas. Es que han automatizado patrones que antes eran conscientes. El bote ya no requiere pensar. El catch-and-shoot ya sale sin recolocar. El primer paso en la penetración ya tiene decisión antes de recibir el balón. Eso es lo que da el verano cuando se trabaja bien.
+    </p>
+
+    <div class="divider-line"></div>
+
+    <div class="article-section">
+        <p class="article-section-label">El error mas comun</p>
+        <h2>Por que mas horas no significa mas mejora</h2>
+    </div>
+
+    <p>
+        Si preguntas a cualquier padre o jugador qué hace falta para mejorar en baloncesto, la respuesta casi universal es: más horas. Entrenar más. Tirar más tiros. Botar más. Sudar más. La lógica parece sólida: el baloncesto es una habilidad, las habilidades se desarrollan con práctica, más práctica igual a más desarrollo.
+    </p>
+
+    <p>
+        El problema es que esa lógica ignora la parte más importante de la ecuación: el tipo de práctica. Existe una distinción fundamental en psicología del rendimiento entre práctica naïve y práctica deliberada. La práctica naïve es repetir lo que ya sabes hacer de forma cómoda. La práctica deliberada es trabajar en el límite de tu capacidad actual, con retroalimentación específica e inmediata sobre cada error.
+    </p>
+
+    <p>
+        <strong>Un jugador que tira 300 tiros diarios con mecánica deficiente no está mejorando su tiro. Está consolidando un error.</strong> Cada repetición graba el patrón un poco más profundo en el sistema motor. Después de tres años haciendo eso, el error ya no es un hábito superficial: es una carretera de cuatro carriles en el sistema nervioso. Corregirlo requiere mucho más trabajo que si se hubiera detectado al principio.
+    </p>
+
+    <p>
+        Hay una frase que resume esto mejor que cualquier explicación larga: <strong>la práctica perfecta hace al maestro perfecto, no la práctica a secas.</strong> La cantidad sin calidad no solo no ayuda: a veces activamente perjudica, porque invierte tiempo y energía en reforzar exactamente lo que habría que desaprender.
+    </p>
+
+    <p>
+        Lo que diferencia a los jugadores que progresan rápido de los que se quedan estancados no es cuánto entrenan. Es con qué información entrenan. Si cada sesión tiene un objetivo específico, un punto de atención concreto y alguien capaz de decirte exactamente qué está pasando en tu movimiento, el progreso es cuantificable y acumulable. Si no hay ninguna de esas tres cosas, el tiempo invertido produce muy poco retorno.
+    </p>
+
+    <div class="divider-line"></div>
+
+    <div class="article-section">
+        <p class="article-section-label">El metodo</p>
+        <h2>Que hace diferente un programa con estructura real</h2>
+    </div>
+
+    <p>
+        Después de diez años trabajando con jugadores de distintos niveles —desde iniciación hasta categorías sénior federadas— hemos identificado cuatro principios que separan el entrenamiento que produce resultados del entrenamiento que solo produce sudor. No son principios revolucionarios. Son los que usan los programas de desarrollo que funcionan, y los que casi nunca se aplican juntos en un contexto de campus de verano convencional.
+    </p>
+
+    <ul class="protocol-list">
+        <li>
+            <span class="num">01</span>
+            <div><strong>Análisis de vídeo desde el primer día.</strong> Antes de corregir nada, hay que ver qué está pasando. El vídeo desde tres ángulos distintos revela en treinta segundos lo que un jugador podría tardar meses en percibir solo. No porque el jugador sea poco observador, sino porque cuando estás dentro del movimiento no puedes verte desde fuera. El análisis de vídeo elimina las suposiciones y convierte cada corrección en algo concreto: "tu codo está aquí, tiene que estar aquí". Eso reduce el tiempo de aprendizaje a una fracción de lo que llevaría sin esa información.</div>
+        </li>
+        <li>
+            <span class="num">02</span>
+            <div><strong>Repetición deliberada en bloques de calidad, no de cantidad.</strong> Sesenta repeticiones con atención total en un punto de mejora específico producen más progreso que doscientas repeticiones en piloto automático. Trabajamos en sprints de calidad: bloques de 15-20 minutos con un único foco técnico, seguidos de pausa de análisis, seguidos de otro bloque. El cerebro asimila mejor en esas condiciones que en sesiones de dos horas sin estructura.</div>
+        </li>
+        <li>
+            <span class="num">03</span>
+            <div><strong>Progresión de complejidad controlada.</strong> Primero el movimiento en estático y sin presión. Cuando la mecánica es estable, se añade velocidad. Cuando aguanta la velocidad, se añade defensa pasiva. Cuando aguanta la defensa, se añade cansancio. Este escalado no es caprichoso: es la manera en que el sistema nervioso transfiere un patrón aprendido en condiciones simples a condiciones de partido. Saltar pasos en esta progresión es el motivo por el que muchos jugadores ejecutan bien en entrenamiento y fallan en el partido.</div>
+        </li>
+        <li>
+            <span class="num">04</span>
+            <div><strong>Trabajo del componente mental como parte del protocolo, no como extra.</strong> La confianza en el tiro, la toma de decisiones bajo presión, la gestión del error en partido: todo eso tiene protocolos de entrenamiento específicos. No se desarrolla diciéndole al jugador que "confíe en sí mismo". Se desarrolla exponiéndolo a situaciones de presión graduada en las que tiene que ejecutar, analizando qué ocurre en su toma de decisiones, y ajustando. El componente mental no es separable del componente técnico: se entrenan juntos.</div>
+        </li>
+    </ul>
+
+    <p>
+        La combinación de estos cuatro principios es lo que hace que tres meses de verano con estructura puedan superar en impacto a tres años de práctica sin ella. No porque el entrenador sea un genio. Sino porque el jugador está trabajando con información real sobre su propio movimiento, en la secuencia correcta de dificultad, con atención consciente en cada repetición.
+    </p>
+
+    <div class="divider-line"></div>
+
+    <div class="article-section">
+        <p class="article-section-label">Lo que vemos cada verano</p>
+        <h2>Las 3 transformaciones que ocurren siempre</h2>
+    </div>
+
+    <p>
+        Llevamos suficientes veranos trabajando con jugadores como para reconocer patrones. No cada jugador mejora en las mismas cosas ni al mismo ritmo. Pero hay tres transformaciones que vemos prácticamente sin excepción en quienes completan el programa. Las describimos sin inventar nombres ni historias: son situaciones que se repiten.
+    </p>
+
+    <div class="article-section">
+        <p class="article-section-label">Transformacion 1</p>
+        <h2>Tecnica: el gesto que por fin se consolida</h2>
+    </div>
+
+    <p>
+        Hay jugadores de 15 o 16 años que llegan al campus sin confiar en su mano no dominante. Se les nota en partido: nunca van hacia ese lado si pueden evitarlo, y cuando no tienen otra opción, la decisión sale tarde y el gesto sale tenso. Llevan años sabiendo que es su punto débil. Nadie ha tenido tiempo de trabajarlo con ellos de forma sistemática.
+    </p>
+
+    <p>
+        En seis semanas de trabajo específico —no seis semanas de tocar ese punto un día a la semana, sino seis semanas con ese objetivo integrado en cada sesión— el patrón cambia. No porque ocurra magia, sino porque el volumen de práctica correcta en ese punto concreto alcanza el umbral necesario para que el movimiento se automatice. En septiembre, ese jugador ya no decide evitar el lado izquierdo. Ya no lo piensa. Y esa es exactamente la diferencia entre una habilidad practicada y una habilidad consolidada.
+    </p>
+
+    <p>
+        Lo mismo ocurre con el tiro en suspensión, con el primer paso en la penetración, con la posición defensiva en el uno contra uno. El verano da la densidad de práctica que la temporada regular nunca puede dar en un punto técnico específico.
+    </p>
+
+    <div class="article-section">
+        <p class="article-section-label">Transformacion 2</p>
+        <h2>Fisico: la base atletica que lo cambia todo</h2>
+    </div>
+
+    <p>
+        El atletismo en baloncesto no es solo correr más rápido. Es la capacidad de cambiar de dirección sin perder velocidad. Es la explosividad en el primer paso, que determina si llegas antes que el defensa o no. Es la resistencia para mantener la intensidad defensiva en el cuarto cuarto. Nada de eso se desarrolla jugando partidos.
+    </p>
+
+    <p>
+        Un programa de verano bien estructurado incluye trabajo de fuerza funcional, trabajo de velocidad de reacción y trabajo de resistencia específica para baloncesto. No es atletismo genérico: es trabajo diseñado para las demandas físicas del juego. Aceleraciones de 5 metros. Cambios de dirección en espacios reducidos. Saltos repetidos con tiempo de recuperación controlado.
+    </p>
+
+    <p>
+        <strong>Los jugadores que hacen este trabajo durante el verano vuelven a la temporada con una base atletica que sus compañeros de equipo no tienen.</strong> Esa base no desaparece en septiembre. Dura toda la temporada, y es la diferencia entre aguantar la intensidad defensiva durante 40 minutos o bajar el pistón en el tercer cuarto.
+    </p>
+
+    <div class="article-section">
+        <p class="article-section-label">Transformacion 3</p>
+        <h2>Mentalidad: confiar en lo que has trabajado</h2>
+    </div>
+
+    <p>
+        Esta es la transformación más difícil de explicar y la más fácil de ver cuando ocurre. Hay jugadores que tienen la habilidad para hacer ciertas cosas pero no se deciden a intentarlo en partido. El tiro difícil, el uno contra uno cuando la defensa es dura, el liderazgo vocal cuando el equipo va perdiendo. Se quedan cortos no porque no puedan, sino porque no confían en que van a poder.
+    </p>
+
+    <p>
+        La confianza real —no la que viene de decirse frases motivacionales, sino la que viene de haber ejecutado algo cientos de veces en condiciones difíciles— es el producto directo de la práctica deliberada. Cuando un jugador ha tirado ese tiro concreto, desde esa zona concreta, con cansancio encima y con defensa activa, y lo ha hecho bien suficientes veces, el partido deja de ser el escenario donde puede fallar. Se convierte en el escenario donde va a hacer exactamente lo que ha entrenado.
+    </p>
+
+    <p>
+        Eso es lo que produce tres meses de trabajo bien hecho. No arrogancia. No optimismo sin fundamento. Certeza basada en evidencia propia.
+    </p>
+
+    <div class="divider-line"></div>
+
+    <div class="article-section">
+        <p class="article-section-label">Para los padres</p>
+        <h2>Por que un verano bien invertido es mas rentable que un año de academia</h2>
+    </div>
+
+    <p>
+        Si tu hijo lleva uno o dos años entrenando en algún programa extraescolar, probablemente ya has hecho los cálculos: cuántas horas por semana, cuántos meses al año, cuánto cuesta. Es una inversión de tiempo y dinero considerable. La pregunta que rara vez se hace nadie es: ¿qué mejora concreta ha producido ese tiempo?
+    </p>
+
+    <p>
+        No es una pregunta agresiva. Es la pregunta correcta. Un año de academia deportiva sin evaluación de progreso, sin identificación de carencias individuales y sin trabajo específico en esas carencias produce muy poco retorno en términos de desarrollo real. El jugador está más tiempo en pista. Eso no es lo mismo que estar mejor.
+    </p>
+
+    <p>
+        Tres meses de programa de verano con método —diagnóstico inicial, plan individual, retroalimentación continua y análisis de progreso— pueden producir más desarrollo medible que doce meses de práctica no estructurada. No porque el verano sea mágico, sino porque la densidad de práctica de calidad es incomparablemente mayor.
+    </p>
+
+    <div class="highlight-block">
+        <p>Pero hay algo más importante que los números de rendimiento deportivo. El deporte bien enseñado forma personas, no solo jugadores. La disciplina de presentarse cuando no tienes ganas. La capacidad de recibir retroalimentación crítica sin desmoronarse. La habilidad de trabajar en un objetivo a largo plazo sin ver resultados inmediatos. Aprender a perder sin hundirse y a ganar sin perder el foco. Ninguna de esas cosas se aprende en un equipo donde el objetivo principal es ganar partidos. Se aprenden en un entorno donde el objetivo principal es que el jugador crezca.</p>
+    </div>
+
+    <p>
+        Los jugadores que pasan por programas de desarrollo bien estructurados no solo mejoran en baloncesto. Llegan al instituto o a la universidad con una relación diferente con el esfuerzo. Saben que las cosas difíciles se descomponen en partes trabajables. Saben que el error es información, no veredicto. Saben que la retroalimentación honesta, aunque sea incómoda, es el activo más valioso que puedes tener.
+    </p>
+
+    <p>
+        Si inviertes en el desarrollo de tu hijo, invierte en algo que enseñe eso. El rendimiento deportivo es la consecuencia. La persona es el objetivo.
+    </p>
+
+    <div class="divider-line"></div>
+
+    <div class="article-section">
+        <p class="article-section-label">Cierre</p>
+        <h2>Si esto resuena contigo, ya sabes lo que hace falta</h2>
+    </div>
+
+    <p>
+        No hay un truco. No hay un atajo. Lo que hay es una ventana de tiempo —el verano— que la mayoría de los jugadores usa para descansar o para seguir haciendo lo mismo de siempre sin estructura. Esa ventana es exactamente donde se abre la distancia entre los jugadores que dan el salto y los que siguen igual en septiembre.
+    </p>
+
+    <p>
+        Si has llegado hasta aquí, probablemente ya lo sabes. Ya tienes la sensación de que falta algo en el desarrollo. Que las horas que se invierten no están produciendo el progreso que deberían. Que hay defectos que se repiten temporada tras temporada sin que nadie los haya atacado de verdad.
+    </p>
+
+    <p>
+        Eso no es falta de talento. Es falta de método. Y el método se puede aprender.
+    </p>
+
+    <p>
+        En Dragons Den trabajamos con un número reducido de jugadores precisamente porque el trabajo individualizado requiere tiempo y atención que no se pueden escalar sin comprometer la calidad. No prometemos resultados genéricos. Prometemos un diagnóstico honesto de dónde está el jugador, un plan concreto para las semanas que tenemos juntos, y retroalimentación real en cada sesión.
+    </p>
+
+    <p>
+        Si eso es lo que estás buscando, estás en el sitio correcto.
+    </p>
+
+    <div class="article-cta">
+        <p class="article-cta-label">Campus de Verano 2026</p>
+        <h3>Plazas limitadas.<br>El trabajo empieza en junio.</h3>
+        <p>Programa intensivo de junio a agosto en Torrevieja. Diagnostico individual, analisis de video, trabajo tecnico y atletico con seguimiento real. Plazas reducidas para garantizar la calidad del trabajo.</p>
+        <a href="../index.html#inscripcion" class="btn-primary">Consultar disponibilidad</a>
+    </div>
+
+</div>
+
+<footer>
+    <div class="footer-logo">Dragons Den</div>
+    <p class="footer-text">
+        Yefangyi Hu Garcia &mdash; 646 794 962 &mdash; bbdragonsden@gmail.com<br>
+        &copy; 2026 Dragons Den Basketball Academy
+    </p>
+</footer>
+
+</body>
+</html>
