@@ -1539,6 +1539,152 @@
         .nav-mobile-menu li a:hover { color: var(--gold); }
 
         /* RESPONSIVE */
+        /* ── MOBILE BOTTOM TAB BAR ── */
+        .tab-bar { display: none; }
+
+        @media (max-width: 900px) {
+            /* Tab bar reemplaza hamburger como nav principal */
+            .nav-hamburger { display: none !important; }
+            .nav-links { display: none !important; }
+
+            /* Espacio para tab bar fija */
+            body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+
+            /* iOS momentum scroll + sin overscroll bounce en Chrome Android */
+            body { -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; }
+
+            /* Eliminar flash azul de webkit en tap */
+            * { -webkit-tap-highlight-color: transparent; }
+
+            /* Tab Bar */
+            .tab-bar {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 800;
+                background: rgba(10, 10, 10, 0.94);
+                backdrop-filter: blur(24px) saturate(160%);
+                -webkit-backdrop-filter: blur(24px) saturate(160%);
+                border-top: 1px solid rgba(200, 169, 110, 0.14);
+                padding-bottom: env(safe-area-inset-bottom);
+                padding-top: 0;
+                height: calc(56px + env(safe-area-inset-bottom));
+                align-items: flex-start;
+            }
+
+            .tab-item {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 3px;
+                text-decoration: none;
+                color: #444;
+                padding: 8px 4px 2px;
+                min-height: 44px;
+                transition: color 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+                            transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+                position: relative;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .tab-item span {
+                font-family: 'Satoshi', Arial, sans-serif;
+                font-size: 9px;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+                line-height: 1;
+            }
+
+            .tab-item svg {
+                width: 20px;
+                height: 20px;
+                flex-shrink: 0;
+                transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            .tab-item.active {
+                color: var(--gold);
+            }
+
+            .tab-item.active svg {
+                transform: translateY(-2px) scale(1.1);
+            }
+
+            .tab-item.active::after {
+                content: '';
+                position: absolute;
+                bottom: 2px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background: var(--gold);
+            }
+
+            .tab-item:active {
+                transform: scale(0.88);
+                opacity: 0.65;
+            }
+
+            /* CTA tab diferenciado */
+            .tab-item--cta span {
+                color: inherit;
+            }
+
+            /* Native touch feedback en botones */
+            .btn-primary:active,
+            .btn-secondary:active {
+                transform: scale(0.96) !important;
+                opacity: 0.8 !important;
+                transition: transform 0.1s ease, opacity 0.1s ease !important;
+            }
+
+            /* Native touch en cards */
+            .price-card:active {
+                transform: scale(0.985);
+                transition: transform 0.12s ease !important;
+            }
+
+            .opinion-card:active {
+                transform: scale(0.98);
+                transition: transform 0.12s ease !important;
+            }
+
+            /* Hero más compacto y app-like en mobile */
+            .hero {
+                min-height: 100dvh;
+                padding-top: 72px;
+                padding-bottom: 32px;
+            }
+
+            .hero-title {
+                font-size: clamp(68px, 20vw, 92px);
+            }
+
+            /* Scroll snapping suave */
+            html {
+                scroll-behavior: smooth;
+                scroll-padding-top: 64px;
+            }
+
+            /* Ocultar tab bar cuando el formulario wizard está visible */
+            .tab-bar.hidden {
+                transform: translateY(110%);
+                pointer-events: none;
+                opacity: 0;
+                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+            }
+            .tab-bar {
+                transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+            }
+        }
+
         @media (max-width: 900px) {
             nav { padding: 20px 24px; }
             .nav-links { display: none; }
@@ -1671,7 +1817,7 @@
 </ul>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" id="inicio-section">
     <div class="hero-left">
         <p class="hero-eyebrow">Summer Basketball Academy &mdash; 2026</p>
         <h1 class="hero-title">DRAGONS<br><span>DEN</span></h1>
@@ -2333,6 +2479,41 @@
     </div>
 </div>
 
+<!-- MOBILE BOTTOM TAB BAR -->
+<nav class="tab-bar" id="tab-bar" aria-label="Navegación móvil">
+    <a href="#inicio-section" class="tab-item" data-tab="inicio-section">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9,22 9,12 15,12 15,22"/>
+        </svg>
+        <span>Inicio</span>
+    </a>
+    <a href="#programa" class="tab-item" data-tab="programa">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <span>Programa</span>
+    </a>
+    <a href="#precios" class="tab-item" data-tab="precios">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+        </svg>
+        <span>Precios</span>
+    </a>
+    <a href="#opiniones" class="tab-item" data-tab="opiniones">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+        </svg>
+        <span>Opiniones</span>
+    </a>
+    <a href="#inscripcion" class="tab-item tab-item--cta" data-tab="inscripcion">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>
+        </svg>
+        <span>Unirse</span>
+    </a>
+</nav>
+
 <script>
     // ── WIZARD ────────────────────────────────────────────────────────────────
     (function() {
@@ -2710,6 +2891,74 @@
         try { consent = localStorage.getItem('dd_cookies'); } catch(e) {}
         if (!consent) document.getElementById('cookie-banner').style.display = 'flex';
     })();
+
+    // ── Mobile Bottom Tab Bar ──────────────────────────────────────────────
+    (function() {
+        if (window.innerWidth > 900) return;
+
+        var tabBar = document.getElementById('tab-bar');
+        var tabs = document.querySelectorAll('.tab-item');
+        var sectionIds = ['inicio-section', 'programa', 'precios', 'opiniones', 'inscripcion'];
+
+        // Click: smooth scroll con preventDefault
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                var href = this.getAttribute('href');
+                var target = document.querySelector(href);
+                if (!target) return;
+                var offset = 64;
+                var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top: top, behavior: 'smooth' });
+            });
+        });
+
+        // IntersectionObserver — actualiza tab activo según sección visible
+        var activeTab = 'inicio-section';
+        function setActive(id) {
+            if (id === activeTab) return;
+            activeTab = id;
+            tabs.forEach(function(tab) {
+                var tabId = tab.getAttribute('data-tab');
+                tab.classList.toggle('active', tabId === id);
+            });
+        }
+
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    setActive(entry.target.id);
+                }
+            });
+        }, {
+            threshold: 0.25,
+            rootMargin: '-60px 0px -45% 0px'
+        });
+
+        sectionIds.forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+
+        // Activar primer tab por defecto
+        setActive('inicio-section');
+
+        // Ocultar tab bar cuando se está en el formulario wizard (tiene su propia barra)
+        var inscripcionEl = document.getElementById('inscripcion');
+        if (inscripcionEl && tabBar) {
+            var formObs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        tabBar.classList.add('hidden');
+                    } else {
+                        tabBar.classList.remove('hidden');
+                    }
+                });
+            }, { threshold: 0.2 });
+            formObs.observe(inscripcionEl);
+        }
+    })();
+    // ── End Mobile Tab Bar ────────────────────────────────────────────────
 </script>
 </body>
 </html>
