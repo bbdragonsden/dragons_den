@@ -1598,6 +1598,150 @@
                 opacity: 0.65;
             }
         }
+
+        /* ── DASHBOARD ──────────────────────────────── */
+        .dash-hero {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 28px 0 24px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 28px;
+        }
+        .dash-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--bg-3);
+            border: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 30px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            flex-shrink: 0;
+        }
+        .dash-greeting {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .dash-hero-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 34px;
+            letter-spacing: 2px;
+            color: var(--text);
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+        .dash-hero-email {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .dash-stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+        .dash-stat {
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            padding: 16px 10px;
+            text-align: center;
+        }
+        .dash-stat-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 38px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            line-height: 1;
+            display: block;
+        }
+        .dash-stat-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+        .dash-section-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+        .dash-packs-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 28px;
+        }
+        .dash-pack-pill {
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: 1px solid var(--border);
+            background: var(--bg-3);
+            color: var(--text-muted);
+            cursor: default;
+            transition: all 0.2s;
+        }
+        .dash-pack-pill.unlocked {
+            border-color: var(--gold-border);
+            background: var(--gold-light);
+            color: var(--gold);
+            cursor: pointer;
+        }
+        .dash-pack-pill.unlocked:active { opacity: 0.7; transform: scale(0.97); }
+        .dash-data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .dash-data-item {
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            padding: 12px 16px;
+        }
+        .dash-data-item.full { grid-column: 1 / -1; }
+        .dash-data-dl {
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+        .dash-data-dd {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .dash-data-dd.empty { color: var(--text-muted); font-weight: 400; font-style: italic; }
+        .dash-edit-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-family: 'Satoshi', sans-serif;
+            font-size: 12px;
+            padding: 9px 20px;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+            margin-top: 16px;
+        }
+        .dash-edit-btn:hover { border-color: var(--gold-border); color: var(--gold); }
+        @media (max-width: 500px) {
+            .dash-stats-row { grid-template-columns: repeat(3, 1fr); }
+            .dash-data-grid { grid-template-columns: 1fr 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -1957,7 +2101,7 @@ function init() {
     if (headerNameEl) headerNameEl.textContent = currentUser.name;
 
     renderSidebar();
-    renderWelcome();
+    renderDashboard();
 
     document.getElementById('btn-logout').addEventListener('click', async () => {
         await sb.auth.signOut();
@@ -2051,6 +2195,7 @@ function renderSidebar() {
     nav.appendChild(sepUser);
 
     [
+        { id: '__dashboard__', label: 'Dashboard', fn: renderDashboard, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/>' },
         { id: '__perfil__', label: 'Mi Perfil', fn: renderMiPerfil, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>' },
         { id: '__mis_videos__', label: 'Mis Videos', fn: renderMisVideos, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/>' },
         { id: '__mensajes__', label: 'Mensajes', fn: renderMisMensajes, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>' },
@@ -2201,6 +2346,94 @@ function renderSidebar() {
 }
 
 // ── Welcome screen ────────────────────────────────────────────────────────
+async function renderDashboard(refresh = false) {
+    const main = document.getElementById('main-content');
+    const initial = (currentUser.name || '?')[0].toUpperCase();
+    const firstName = (currentUser.name || 'Jugador').split(' ')[0];
+
+    main.innerHTML = `
+        <div class="dash-hero">
+            <div class="dash-avatar">${initial}</div>
+            <div>
+                <p class="dash-greeting">Bienvenido de vuelta</p>
+                <p class="dash-hero-name">${firstName}</p>
+                <p class="dash-hero-email">${currentUser.email}</p>
+            </div>
+        </div>
+        <p style="color:var(--text-muted);font-size:13px;">Cargando datos...</p>`;
+
+    if (refresh) _userProfileCache = undefined;
+    try {
+        if (_userProfileCache === undefined) {
+            const token = await userToken();
+            const r = await fetch('/api/user-profile', { headers: { 'Authorization': `Bearer ${token}` } });
+            const d = await r.json();
+            _userProfileCache = d.profile || null;
+        }
+    } catch { _userProfileCache = null; }
+
+    const p = _userProfileCache || {};
+    const accessiblePacks = PACKS.filter(pack => hasAccess(pack.id));
+    const totalModules = accessiblePacks.reduce((sum, pack) => sum + pack.modules.length, 0);
+    const lockedCount = PACKS.length - accessiblePacks.length;
+
+    const packPills = PACKS.map(pack => {
+        const ok = hasAccess(pack.id);
+        return `<span class="dash-pack-pill${ok ? ' unlocked' : ''}"
+                     ${ok ? `onclick="selectPackById('${pack.id}')"` : ''}>${pack.name}</span>`;
+    }).join('');
+
+    const fields = [
+        { l: 'Posición', v: p.posicion },
+        { l: 'Nivel',    v: p.nivel },
+        { l: 'Club',     v: p.club },
+        { l: 'Edad',     v: p.edad },
+        { l: 'Teléfono', v: p.telefono },
+        { l: 'Nombre',   v: p.nombre || currentUser.name },
+    ];
+    const dataGrid = fields.map(f => `
+        <div class="dash-data-item">
+            <p class="dash-data-dl">${f.l}</p>
+            <p class="dash-data-dd${f.v ? '' : ' empty'}">${f.v ? esc(f.v) : '—'}</p>
+        </div>`).join('');
+
+    main.innerHTML = `
+        <div class="dash-hero">
+            <div class="dash-avatar">${initial}</div>
+            <div>
+                <p class="dash-greeting">Bienvenido de vuelta</p>
+                <p class="dash-hero-name">${firstName}</p>
+                <p class="dash-hero-email">${currentUser.email}</p>
+            </div>
+        </div>
+
+        <div class="dash-stats-row">
+            <div class="dash-stat">
+                <span class="dash-stat-num">${accessiblePacks.length}</span>
+                <p class="dash-stat-label">Packs activos</p>
+            </div>
+            <div class="dash-stat">
+                <span class="dash-stat-num">${totalModules}</span>
+                <p class="dash-stat-label">Módulos</p>
+            </div>
+            <div class="dash-stat">
+                <span class="dash-stat-num">${lockedCount}</span>
+                <p class="dash-stat-label">Bloqueados</p>
+            </div>
+        </div>
+
+        <p class="dash-section-label">Mis Packs</p>
+        <div class="dash-packs-row">${packPills}</div>
+
+        <p class="dash-section-label">Mis Datos</p>
+        <div class="dash-data-grid">${dataGrid}</div>
+        ${p.bio ? `<div class="dash-data-item full" style="margin-top:8px;">
+            <p class="dash-data-dl">Objetivos</p>
+            <p class="dash-data-dd">${esc(p.bio)}</p>
+        </div>` : ''}
+        <button class="dash-edit-btn" onclick="platTabNav('perfil')">Editar perfil</button>`;
+}
+
 function renderWelcome() {
     const main = document.getElementById('main-content');
     const firstName = (currentUser.name || '').split(' ')[0];
@@ -3849,10 +4082,11 @@ function platTabNav(view) {
     document.getElementById('sidebar-overlay')?.classList.remove('active');
     document.body.style.overflow = '';
     const fns = {
-        packs:    () => renderWelcome(),
-        videos:   () => renderMisVideos(),
-        mensajes: () => renderMisMensajes(),
-        perfil:   () => renderMiPerfil(),
+        dashboard: () => renderDashboard(),
+        packs:     () => renderWelcome(),
+        videos:    () => renderMisVideos(),
+        mensajes:  () => renderMisMensajes(),
+        perfil:    () => renderMiPerfil(),
     };
     if (fns[view]) fns[view]();
 }
@@ -3860,14 +4094,14 @@ function platTabNav(view) {
 
 <!-- MOBILE BOTTOM TAB BAR -->
 <div class="plat-tab-bar" id="plat-tab-bar" role="navigation" aria-label="Navegación móvil">
-    <a href="/" class="plat-tab-item" id="plt-home" aria-label="Volver al inicio">
+    <button class="plat-tab-item active" id="plt-home" onclick="platTabNav('dashboard')" aria-label="Dashboard">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
             <polyline points="9,22 9,12 15,12 15,22"/>
         </svg>
         <span>Inicio</span>
-    </a>
-    <button class="plat-tab-item active" id="plt-packs" onclick="platTabNav('packs')" aria-label="Mis Packs">
+    </button>
+    <button class="plat-tab-item" id="plt-packs" onclick="platTabNav('packs')" aria-label="Mis Packs">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
         </svg>
