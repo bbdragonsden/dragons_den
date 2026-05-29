@@ -1511,6 +1511,93 @@
             .profile-form { grid-template-columns: 1fr; }
             .msg-bubble { max-width: 95%; }
         }
+
+        /* ── MOBILE BOTTOM TAB BAR ── */
+        .plat-tab-bar { display: none; }
+
+        @media (max-width: 768px) {
+            .main-content { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
+            * { -webkit-tap-highlight-color: transparent; }
+
+            .plat-tab-bar {
+                display: flex;
+                position: fixed;
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 900;
+                background: rgba(10, 10, 10, 0.96);
+                backdrop-filter: blur(24px) saturate(160%);
+                -webkit-backdrop-filter: blur(24px) saturate(160%);
+                border-top: 1px solid rgba(200, 169, 110, 0.14);
+                padding-bottom: env(safe-area-inset-bottom);
+                height: calc(56px + env(safe-area-inset-bottom));
+                align-items: flex-start;
+                transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            .plat-tab-item {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 3px;
+                text-decoration: none;
+                color: #555;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 8px 4px 2px;
+                min-height: 44px;
+                font-family: 'Satoshi', sans-serif;
+                transition: color 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+                            transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+                position: relative;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .plat-tab-item span {
+                font-size: 9px;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+                line-height: 1;
+            }
+
+            .plat-tab-item svg {
+                width: 20px;
+                height: 20px;
+                flex-shrink: 0;
+                transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            .plat-tab-item.active {
+                color: var(--gold);
+            }
+
+            .plat-tab-item.active svg {
+                transform: translateY(-2px) scale(1.1);
+            }
+
+            .plat-tab-item.active::after {
+                content: '';
+                position: absolute;
+                bottom: 2px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background: var(--gold);
+            }
+
+            .plat-tab-item:active {
+                transform: scale(0.88);
+                opacity: 0.65;
+            }
+        }
     </style>
 </head>
 <body>
@@ -3751,7 +3838,60 @@ async function sendAdminMessage() {
 
 // ── Start ─────────────────────────────────────────────────────────────────
 checkAuth();
+
+// ── MOBILE BOTTOM TAB BAR ─────────────────────────────────────────────────
+function platTabNav(view) {
+    if (window.innerWidth > 768) return;
+    document.querySelectorAll('.plat-tab-item').forEach(el => el.classList.remove('active'));
+    const tabEl = document.getElementById('plt-' + view);
+    if (tabEl) tabEl.classList.add('active');
+    document.getElementById('sidebar')?.classList.remove('open');
+    document.getElementById('sidebar-overlay')?.classList.remove('active');
+    document.body.style.overflow = '';
+    const fns = {
+        packs:    () => renderWelcome(),
+        videos:   () => renderMisVideos(),
+        mensajes: () => renderMisMensajes(),
+        perfil:   () => renderMiPerfil(),
+    };
+    if (fns[view]) fns[view]();
+}
 </script>
+
+<!-- MOBILE BOTTOM TAB BAR -->
+<div class="plat-tab-bar" id="plat-tab-bar" role="navigation" aria-label="Navegación móvil">
+    <a href="/" class="plat-tab-item" id="plt-home" aria-label="Volver al inicio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9,22 9,12 15,12 15,22"/>
+        </svg>
+        <span>Inicio</span>
+    </a>
+    <button class="plat-tab-item active" id="plt-packs" onclick="platTabNav('packs')" aria-label="Mis Packs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+        </svg>
+        <span>Mis Packs</span>
+    </button>
+    <button class="plat-tab-item" id="plt-videos" onclick="platTabNav('videos')" aria-label="Mis Videos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>
+        </svg>
+        <span>Videos</span>
+    </button>
+    <button class="plat-tab-item" id="plt-mensajes" onclick="platTabNav('mensajes')" aria-label="Mensajes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+        </svg>
+        <span>Mensajes</span>
+    </button>
+    <button class="plat-tab-item" id="plt-perfil" onclick="platTabNav('perfil')" aria-label="Mi Perfil">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span>Perfil</span>
+    </button>
+</div>
 
 </body>
 </html>
