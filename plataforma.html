@@ -425,7 +425,7 @@
         .mobile-topbar {
             display: none;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             padding: 14px 18px;
             background: var(--bg-2);
             border-bottom: 1px solid var(--border);
@@ -442,42 +442,20 @@
             color: var(--gold);
         }
 
-        .mobile-menu-btn {
-            background: none;
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            padding: 6px 12px;
-            font-size: 9px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            font-family: 'Satoshi', sans-serif;
-            transition: color 0.2s, border-color 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            min-height: 36px;
-        }
-
-        .mobile-menu-btn:hover {
-            color: var(--text);
-            border-color: var(--border-strong);
-        }
-
-        .mobile-menu-btn .mmb-bar {
+        #mobile-menu-btn .mmb-bar {
             transform-origin: center;
             transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s;
         }
 
-        .mobile-menu-btn[aria-expanded="true"] .mmb-bar-top {
-            transform: translateY(4px) rotate(45deg);
+        #mobile-menu-btn[aria-expanded="true"] .mmb-bar-top {
+            transform: translateY(5px) rotate(45deg);
         }
-        .mobile-menu-btn[aria-expanded="true"] .mmb-bar-mid {
+        #mobile-menu-btn[aria-expanded="true"] .mmb-bar-mid {
             opacity: 0;
             transform: scaleX(0);
         }
-        .mobile-menu-btn[aria-expanded="true"] .mmb-bar-bot {
-            transform: translateY(-4px) rotate(-45deg);
+        #mobile-menu-btn[aria-expanded="true"] .mmb-bar-bot {
+            transform: translateY(-5px) rotate(-45deg);
         }
 
         /* Mobile sidebar overlay */
@@ -1465,6 +1443,8 @@
         .profile-input:focus { border-color: var(--gold-border); }
         .profile-input::placeholder { color: var(--text-muted); }
         textarea.profile-input { resize: vertical; min-height: 80px; }
+        select.profile-input { -webkit-appearance: none; appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a5550' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+        select.profile-input option { background: var(--bg-3); color: var(--text); }
         .btn-save-profile { display: inline-block; background: var(--gold); color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; padding: 12px 28px; border: none; cursor: pointer; transition: opacity 0.2s, transform 0.15s; }
         .btn-save-profile:hover { opacity: 0.85; }
         .btn-save-profile:active { transform: scale(0.98); }
@@ -1758,14 +1738,6 @@
     <!-- Mobile topbar -->
     <div class="mobile-topbar">
         <span class="mobile-logo">Dragons Den</span>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir men&uacute;" aria-expanded="false">
-            <svg width="18" height="13" viewBox="0 0 18 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <line class="mmb-bar mmb-bar-top" x1="1" y1="1.5" x2="17" y2="1.5"/>
-                <line class="mmb-bar mmb-bar-mid" x1="1" y1="6.5" x2="17" y2="6.5"/>
-                <line class="mmb-bar mmb-bar-bot" x1="1" y1="11.5" x2="17" y2="11.5"/>
-            </svg>
-            <span class="mmb-label">Men&uacute;</span>
-        </button>
     </div>
 
     <!-- Mobile sidebar overlay -->
@@ -3083,6 +3055,10 @@ async function renderMiPerfil(refresh = false) {
 
 function renderProfileForm(profile) {
     const p = profile || {};
+    const sel = (id, val) => {
+        const el = document.getElementById(id);
+        if (el && val) el.value = val;
+    };
     const main = document.getElementById('main-content');
     main.innerHTML = `
         <div class="content-header">
@@ -3092,27 +3068,46 @@ function renderProfileForm(profile) {
         </div>
         <form class="profile-form" onsubmit="saveProfile(event)">
             <div class="profile-field">
+                <label for="pf-email">Email</label>
+                <input class="profile-input" id="pf-email" type="email" value="${esc(currentUser.email||'')}" disabled style="opacity:0.45;cursor:default;">
+            </div>
+            <div class="profile-field">
                 <label for="pf-nombre">Nombre completo</label>
                 <input class="profile-input" id="pf-nombre" type="text" value="${esc(p.nombre||'')}">
             </div>
             <div class="profile-field">
                 <label for="pf-edad">Edad</label>
-                <input class="profile-input" id="pf-edad" type="text" placeholder="Ej: 17 años" value="${esc(p.edad||'')}">
+                <input class="profile-input" id="pf-edad" type="number" min="5" max="60" placeholder="Ej: 17" value="${esc(p.edad||'')}">
             </div>
             <div class="profile-field">
                 <label for="pf-posicion">Posición</label>
-                <input class="profile-input" id="pf-posicion" type="text" placeholder="Ej: Escolta / Base" value="${esc(p.posicion||'')}">
+                <select class="profile-input" id="pf-posicion">
+                    <option value="">Selecciona&hellip;</option>
+                    <option value="base">Base</option>
+                    <option value="escolta">Escolta</option>
+                    <option value="alero">Alero</option>
+                    <option value="alapivot">Ala-p&iacute;vot</option>
+                    <option value="pivot">P&iacute;vot</option>
+                    <option value="no-se">No s&eacute; / todas</option>
+                </select>
             </div>
             <div class="profile-field">
-                <label for="pf-nivel">Nivel</label>
-                <input class="profile-input" id="pf-nivel" type="text" placeholder="Ej: Amateur avanzado" value="${esc(p.nivel||'')}">
+                <label for="pf-nivel">Nivel de juego</label>
+                <select class="profile-input" id="pf-nivel">
+                    <option value="">Selecciona&hellip;</option>
+                    <option value="iniciacion">Iniciaci&oacute;n (sin experiencia)</option>
+                    <option value="basico">B&aacute;sico (1&ndash;2 a&ntilde;os)</option>
+                    <option value="intermedio">Intermedio (3&ndash;5 a&ntilde;os)</option>
+                    <option value="avanzado">Avanzado (+5 a&ntilde;os)</option>
+                    <option value="federado">Federado / competici&oacute;n</option>
+                </select>
             </div>
             <div class="profile-field">
                 <label for="pf-club">Club actual</label>
-                <input class="profile-input" id="pf-club" type="text" placeholder="Ej: CB Ejemplo" value="${esc(p.club||'')}">
+                <input class="profile-input" id="pf-club" type="text" placeholder="Nombre del club&hellip;" value="${esc(p.club||'')}">
             </div>
             <div class="profile-field">
-                <label for="pf-telefono">Teléfono</label>
+                <label for="pf-telefono">Tel&eacute;fono (WhatsApp)</label>
                 <input class="profile-input" id="pf-telefono" type="tel" placeholder="+34 6xx xxx xxx" value="${esc(p.telefono||'')}">
             </div>
             <div class="profile-field full-width">
@@ -3124,6 +3119,8 @@ function renderProfileForm(profile) {
                 <p class="profile-save-msg" id="pf-msg"></p>
             </div>
         </form>`;
+    sel('pf-posicion', p.posicion);
+    sel('pf-nivel', p.nivel);
 }
 
 async function saveProfile(e) {
@@ -4119,11 +4116,13 @@ function platTabNav(view) {
         </svg>
         <span>Mensajes</span>
     </button>
-    <button class="plat-tab-item" id="plt-perfil" onclick="platTabNav('perfil')" aria-label="Mi Perfil">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+    <button class="plat-tab-item" id="mobile-menu-btn" aria-label="Menú" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line class="mmb-bar mmb-bar-top" x1="3" y1="6" x2="21" y2="6"/>
+            <line class="mmb-bar mmb-bar-mid" x1="3" y1="12" x2="21" y2="12"/>
+            <line class="mmb-bar mmb-bar-bot" x1="3" y1="18" x2="21" y2="18"/>
         </svg>
-        <span>Perfil</span>
+        <span>Menú</span>
     </button>
 </div>
 
