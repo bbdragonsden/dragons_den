@@ -173,7 +173,7 @@
         nav {
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 300;
             padding: 0 60px;
             height: 64px;
             display: flex;
@@ -1501,7 +1501,7 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             background: #111;
-            z-index: 99;
+            z-index: 200;
             padding: 80px 24px 32px;
             flex-direction: column;
             max-height: 0;
@@ -1560,9 +1560,29 @@
             .stats { grid-template-columns: 1fr 1fr; }
             .stat { border-right: none; border-bottom: 1px solid var(--border); }
             .features-grid { grid-template-columns: 1fr; }
-            .pricing-grid { grid-template-columns: 1fr; }
-            .pricing-grid-4 { grid-template-columns: 1fr; }
-            #precios [style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr; }
+            .pricing-grid, .pricing-grid-4 {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                gap: 8px;
+                background: transparent;
+                margin-top: 24px;
+                padding-bottom: 8px;
+            }
+            .pricing-grid::-webkit-scrollbar,
+            .pricing-grid-4::-webkit-scrollbar { display: none; }
+            .pricing-grid .price-card,
+            .pricing-grid-4 .price-card {
+                flex: 0 0 85%;
+                min-width: 0;
+                scroll-snap-align: start;
+                padding: 28px 24px;
+            }
+            .price-amount { font-size: 60px; }
+            .price-features { margin-bottom: 24px; }
+            .price-label { margin-bottom: 14px; }
             .opiniones-wrap { padding: 60px 0 60px 24px; }
             .opiniones-grid {
                 display: flex;
@@ -1581,7 +1601,24 @@
                 min-width: 0;
                 scroll-snap-align: start;
             }
-            .comparativa-grid { grid-template-columns: 1fr; }
+            .comparativa-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                gap: 2px;
+                background: transparent;
+                margin-bottom: 40px;
+                padding-bottom: 8px;
+            }
+            .comparativa-grid::-webkit-scrollbar { display: none; }
+            .comparativa-grid > div {
+                flex: 0 0 80%;
+                min-width: 0;
+                scroll-snap-align: start;
+                padding: 20px 22px !important;
+            }
             .blog-wrap { padding: 60px 24px; }
             .blog-grid { grid-template-columns: 1fr; }
             .blog-card.main {
@@ -2606,13 +2643,13 @@
         function openMenu() {
             menu.classList.add('open');
             btn.setAttribute('aria-expanded', 'true');
-            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
         }
 
         function closeMenu() {
             menu.classList.remove('open');
             btn.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
         }
 
         btn.addEventListener('click', function() {
