@@ -36,7 +36,7 @@ async function verifyAdmin(authHeader) {
     'apikey': ANON_KEY, 'Authorization': `Bearer ${token}`
   });
   if (res.status !== 200) return null;
-  if (!res.body.user_metadata?.is_admin) return null;
+  if (!res.body.app_metadata?.is_admin) return null;
   return res.body;
 }
 
@@ -76,7 +76,7 @@ module.exports = async function handler(req, res) {
       email: u.email,
       name: profile?.nombre || u.user_metadata?.name || u.user_metadata?.full_name || '',
       confirmed: !!u.email_confirmed_at,
-      is_admin: !!u.user_metadata?.is_admin,
+      is_admin: !!u.app_metadata?.is_admin,
       created_at: u.created_at,
       profile,
       packs: allPacks

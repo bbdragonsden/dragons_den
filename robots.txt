@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
+
+Disallow: /api/
+Disallow: /plataforma.html
+Disallow: /login.html
+Disallow: /register.html
+Disallow: /ADMIN_SPEC.md
 Disallow: /FINANZAS/
 Disallow: /CLIENTES/
 Disallow: /COWORK_PROMPTS/

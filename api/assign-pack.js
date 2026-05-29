@@ -44,7 +44,7 @@ async function verifyAdmin(authHeader) {
     'apikey': ANON_KEY, 'Authorization': `Bearer ${token}`
   });
   if (res.status !== 200) return null;
-  if (!res.body.user_metadata?.is_admin) return null;
+  if (!res.body.app_metadata?.is_admin) return null;
   return res.body;
 }
 
