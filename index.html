@@ -2913,11 +2913,12 @@
         var tabs = document.querySelectorAll('.tab-item');
         var sectionIds = ['inicio-section', 'programa', 'precios', 'inscripcion'];
 
-        // Click: smooth scroll con preventDefault
+        // Click: smooth scroll para anclas, navegación normal para páginas externas
         tabs.forEach(function(tab) {
             tab.addEventListener('click', function(e) {
-                e.preventDefault();
                 var href = this.getAttribute('href');
+                if (!href || !href.startsWith('#')) return;
+                e.preventDefault();
                 var target = document.querySelector(href);
                 if (!target) return;
                 var offset = 64;
