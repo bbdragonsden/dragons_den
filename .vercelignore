@@ -35,9 +35,5 @@ Dragons_Den/
 # Archivos retirados (no se pueden borrar desde el entorno de trabajo)
 _retirado/
 
-# Registro de noticias del grupo NSD: ya no se carga en esta web
-js/nsd-noticias.js
-js/nsd-actualidad.js
-
 # Propuestas SQL (ya cubiertas por sql/, se repite por claridad)
 sql/propuestas/
