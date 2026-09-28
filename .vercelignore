@@ -13,7 +13,6 @@ CLIENTES/
 COWORK_PROMPTS/
 MARKETING/
 CONTENIDO/
-data/
 
 # Base de datos: esquema y migraciones
 sql/

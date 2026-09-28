@@ -102,7 +102,7 @@ function userHTML({ nombre, nivel, meses }) {
 <tr><td><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="background:#c8a96e;height:1px;font-size:0;">&nbsp;</td></tr></table></td></tr>
 
 <tr><td style="padding:52px 56px 40px;">
-  <p style="margin:0;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:#c8a96e;font-family:Arial,sans-serif;">Basketball Academy &mdash; Torrevieja</p>
+  <p style="margin:0;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:#c8a96e;font-family:Arial,sans-serif;">Basketball Academy &mdash; Madrid</p>
   <h1 style="margin:28px 0 0;font-size:64px;line-height:0.9;letter-spacing:6px;color:#ffffff;font-family:Arial Black,Arial,sans-serif;text-transform:uppercase;font-weight:900;">DRAGONS<br><span style="color:#c8a96e;">DEN</span></h1>
 </td></tr>
 

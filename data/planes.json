@@ -1,11 +1,73 @@
 {
   "version": 1,
-  "actualizado": "2026-09-18",
+  "actualizado": "2026-09-28",
   "nota": "Fuente única de la escalera de precios. Hoy los precios están escritos a mano en academia.html, index.html y dentro del JSON-LD de preguntas frecuentes, y no coinciden entre sí. Cuando la plataforma lea de aquí, cambiar un precio debe ser cambiar este archivo y nada más.",
   "fiscal": {
     "iva_incluido": true,
     "tipo_iva": 21,
     "razon": "Servicio digital a consumidor final en España: el precio anunciado tiene que ser el precio final con IVA. Si la pasarela añade el IVA por encima, el importe mostrado en la web es ilegal."
+  },
+  "servicios_presenciales": {
+    "nota": "Entrenamiento presencial en grupo reducido (4-6 jugadores), en Madrid (Carabanchel). Sabados por la manana o segun horario coordinado por grupo, sin franja fija por defecto. Distinto de la plataforma online (ver 'planes' arriba: Rookie/PRO/Elite/B2B), que sigue activa en paralelo.",
+    "ubicacion": "Madrid (Carabanchel)",
+    "tamano_grupo": {
+      "min": 4,
+      "max": 6
+    },
+    "matricula": {
+      "precio_normal": 30,
+      "precio_octubre": 0,
+      "nota": "Matricula gratis en octubre (promo de bienvenida); el resto del ano, 30 euros. No aplica al campus de invierno, que no tiene matricula.",
+      "aplica_a": [
+        "seguimiento",
+        "campus_verano"
+      ]
+    },
+    "planes": [
+      {
+        "id": "seguimiento",
+        "nombre": "Seguimiento",
+        "periodo": "Octubre - Mayo (temporada)",
+        "facturacion": "mensual",
+        "precio_normal_mes": 100,
+        "precio_lanzamiento_mes": 60,
+        "lanzamiento": {
+          "activo": true,
+          "plazas_limite": null,
+          "fecha_limite": null,
+          "pendiente": "FALTA CONFIRMAR con Fan: numero de plazas y/o fecha limite de la promo (el eligio 'ambos, lo que llegue antes'). No publicar el precio de 60 EUR/mes como indefinido hasta rellenar esto."
+        },
+        "extra_analisis_partido": {
+          "precio_mes": 10,
+          "nota": "Precio del extra solo valido en el precio de lanzamiento, para nuevas inscripciones ahora."
+        }
+      },
+      {
+        "id": "campus_verano",
+        "nombre": "Campus de verano",
+        "periodo": "Junio - Septiembre (ambos incluidos)",
+        "facturacion": "mensual",
+        "precio_normal_mes": 100,
+        "precio_lanzamiento_mes": 60,
+        "lanzamiento": {
+          "activo": true,
+          "plazas_limite": null,
+          "fecha_limite": null,
+          "pendiente": "Mismo limite de lanzamiento que 'seguimiento': falta confirmar plazas/fecha."
+        }
+      },
+      {
+        "id": "campus_invierno",
+        "nombre": "Campus de invierno",
+        "periodo": "3 sabados durante las vacaciones escolares de Navidad",
+        "facturacion": "pack cerrado, pago unico",
+        "precio_lanzamiento": 45,
+        "precio_normal": 70,
+        "matricula": 0,
+        "fechas": null,
+        "pendiente": "FALTA VERIFICAR: calendario escolar de Navidad de la Comunidad de Madrid, curso 2026-2027, para confirmar que caen exactamente 3 sabados en el periodo no lectivo. No publicar fechas concretas hasta confirmarlo; si no coinciden 3 sabados exactos, ajustar el numero del pack."
+      }
+    ]
   },
   "planes": [
     {
@@ -20,8 +82,14 @@
         "Dragons IQ Clash sin límite de duelos",
         "Ranking y progresión de nivel"
       ],
-      "no_incluye": ["Análisis personal de vídeo", "Sesiones presenciales"],
-      "limites": { "tickets_mes": 0, "sesiones_presenciales_mes": 0 },
+      "no_incluye": [
+        "Análisis personal de vídeo",
+        "Sesiones presenciales"
+      ],
+      "limites": {
+        "tickets_mes": 0,
+        "sesiones_presenciales_mes": 0
+      },
       "coste_tiempo_coach_mes_min": 0,
       "plazas": null
     },
@@ -37,8 +105,14 @@
         "Respuesta en 72 h laborables",
         "Retos de carga alta reservados a PRO"
       ],
-      "no_incluye": ["Sesiones presenciales"],
-      "limites": { "tickets_mes": 2, "sesiones_presenciales_mes": 0, "acumulables": false },
+      "no_incluye": [
+        "Sesiones presenciales"
+      ],
+      "limites": {
+        "tickets_mes": 2,
+        "sesiones_presenciales_mes": 0,
+        "acumulables": false
+      },
       "coste_tiempo_coach_mes_min": 40,
       "plazas": null
     },
@@ -55,7 +129,11 @@
         "Prioridad en los análisis de vídeo: 24 h"
       ],
       "no_incluye": [],
-      "limites": { "tickets_mes": 2, "sesiones_presenciales_mes": 4, "acumulables": false },
+      "limites": {
+        "tickets_mes": 2,
+        "sesiones_presenciales_mes": 4,
+        "acumulables": false
+      },
       "coste_tiempo_coach_mes_min": 280,
       "plazas": 8,
       "nota_plazas": "El tope no es marketing: 8 alumnos son 32 sesiones al mes más los análisis. Por encima de ahí no cabe en la agenda."
@@ -72,7 +150,9 @@
         "Revisión del microciclo y de las dinámicas de pista",
         "Documento de salida con la planificación corregida"
       ],
-      "limites": { "sesiones_mes": null },
+      "limites": {
+        "sesiones_mes": null
+      },
       "coste_tiempo_coach_mes_min": 90,
       "plazas": null,
       "publico": "entrenadores noveles, no jugadores"
