@@ -34,8 +34,8 @@
         "lanzamiento": {
           "activo": true,
           "plazas_limite": null,
-          "fecha_limite": null,
-          "pendiente": "FALTA CONFIRMAR con Fan: numero de plazas y/o fecha limite de la promo (el eligio 'ambos, lo que llegue antes'). No publicar el precio de 60 EUR/mes como indefinido hasta rellenar esto."
+          "fecha_limite": "2026-10-31",
+          "condicion": "Hasta agotar plazas o hasta el 31 de octubre de 2026, lo que ocurra antes."
         },
         "extra_analisis_partido": {
           "precio_mes": 10,
@@ -52,8 +52,8 @@
         "lanzamiento": {
           "activo": true,
           "plazas_limite": null,
-          "fecha_limite": null,
-          "pendiente": "Mismo limite de lanzamiento que 'seguimiento': falta confirmar plazas/fecha."
+          "fecha_limite": "2026-10-31",
+          "condicion": "Hasta agotar plazas o hasta el 31 de octubre de 2026, lo que ocurra antes."
         }
       },
       {
@@ -65,7 +65,8 @@
         "precio_normal": 70,
         "matricula": 0,
         "fechas": null,
-        "pendiente": "FALTA VERIFICAR: calendario escolar de Navidad de la Comunidad de Madrid, curso 2026-2027, para confirmar que caen exactamente 3 sabados en el periodo no lectivo. No publicar fechas concretas hasta confirmarlo; si no coinciden 3 sabados exactos, ajustar el numero del pack."
+        "pendiente": "FALTA VERIFICAR: calendario escolar de Navidad de la Comunidad de Madrid, curso 2026-2027, para confirmar que caen exactamente 3 sabados en el periodo no lectivo. No publicar fechas concretas hasta confirmarlo; si no coinciden 3 sabados exactos, ajustar el numero del pack.",
+        "lanzamiento_condicion": "Hasta agotar plazas o hasta el 31 de octubre de 2026, lo que ocurra antes."
       }
     ]
   },
