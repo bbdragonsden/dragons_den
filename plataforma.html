@@ -2,14 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma — Dragons Den Academy</title>
+    <meta name="description" content="Plataforma de alumnos de Dragons Den Academy.">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F409;</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23c8a96e'/%3E%3Cg fill='none' stroke='%230a0a0a' stroke-width='5'%3E%3Cpath d='M4 50h92M50 4v92'/%3E%3Cpath d='M18 18c14 14 14 50 0 64M82 18c-14 14-14 50 0 64'/%3E%3C/g%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/css/comun.css">
+    <script src="/vendor/supabase-js-2.45.4/supabase.js"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -26,7 +25,7 @@
             --gold-glow:      rgba(200,169,110,0.06);
             --text:           #f0ede8;
             --text-secondary: #a09890;
-            --text-muted:     #5a5550;
+            --text-muted:     #948d86; /* antes #5a5550: 2,8:1 sobre el fondo; ahora > 6:1 */
             --border:         rgba(255,255,255,0.055);
             --border-strong:  rgba(255,255,255,0.10);
             --red-dim:        rgba(255,80,80,0.08);
@@ -46,7 +45,7 @@
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: 'Satoshi', system-ui, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
             min-height: 100dvh;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
@@ -207,7 +206,7 @@
             gap: 10px;
             padding: 10px 20px;
             font-size: 13px;
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
             letter-spacing: 0.3px;
             color: var(--text-muted);
             cursor: pointer;
@@ -333,7 +332,7 @@
             cursor: pointer;
             transition: color 0.2s, border-color 0.2s, background 0.2s;
             flex-shrink: 0;
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         .btn-logout:hover {
@@ -801,7 +800,7 @@
             background: var(--bg-3);
             border: 1px solid var(--border-strong);
             color: var(--text);
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 13px;
             padding: 10px 14px;
             outline: none;
@@ -825,7 +824,7 @@
             text-transform: uppercase;
             padding: 9px 14px;
             cursor: pointer;
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
             transition: color 0.2s, border-color 0.2s, background 0.2s;
         }
 
@@ -895,7 +894,7 @@
             text-transform: uppercase;
             padding: 3px 7px;
             border: 1px solid;
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-weight: 500;
         }
 
@@ -989,7 +988,7 @@
             background: var(--bg);
             border: 1px solid var(--border-strong);
             color: var(--text);
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 12px;
             padding: 8px 12px;
             outline: none;
@@ -1025,7 +1024,7 @@
 
         .assign-msg {
             font-size: 11.5px;
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
             padding: 5px 10px;
             white-space: nowrap;
             display: none;
@@ -1131,7 +1130,7 @@
             display: inline-flex; align-items: center; gap: 8px;
             font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
             color: var(--text-muted); cursor: pointer; margin-bottom: 24px;
-            background: none; border: none; padding: 0; font-family: 'Satoshi', sans-serif;
+            background: none; border: none; padding: 0; font-family: 'Inter', sans-serif;
             transition: color 0.15s;
         }
         .detail-back:hover { color: var(--text); }
@@ -1152,7 +1151,7 @@
         .btn-create-seg {
             background: none; border: 1px solid var(--gold-border); color: var(--gold);
             font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
-            padding: 6px 14px; cursor: pointer; font-family: 'Satoshi', sans-serif; transition: background 0.15s;
+            padding: 6px 14px; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.15s;
         }
         .btn-create-seg:hover { background: var(--gold-light); }
         .detail-hdr-actions { display: flex; gap: 6px; align-items: center; }
@@ -1315,7 +1314,7 @@
             padding: 5px 12px;
             cursor: pointer;
             transition: color 0.15s, border-color 0.15s;
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         .btn-edit-student:hover {
@@ -1336,6 +1335,15 @@
         }
 
         .modal-overlay.open { display: flex; }
+        .sidebar-legal { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 14px; }
+        .sidebar-legal a { font-size: 10px; color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px; }
+        .sidebar-legal a:hover { color: var(--gold); }
+        .vm-ayuda { font-size: 11px; color: var(--text-muted); line-height: 1.6; margin-top: 6px; }
+        .vm-ayuda a { color: var(--gold); }
+        .vm-consent { border: 1px solid var(--border-strong); padding: 12px 14px; margin: 4px 0 12px; }
+        .vm-consent legend { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); padding: 0 6px; }
+        .vm-check { display: flex; gap: 10px; align-items: flex-start; font-size: 12px; color: var(--text); line-height: 1.5; margin: 8px 0; cursor: pointer; }
+        .vm-check input { margin-top: 3px; accent-color: #c8a96e; flex-shrink: 0; }
 
         .modal-box {
             background: var(--bg-3);
@@ -1376,7 +1384,7 @@
             background: var(--bg-5);
             border: 1px solid var(--border-strong);
             color: var(--text);
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 13px;
             padding: 9px 12px;
             outline: none;
@@ -1406,7 +1414,7 @@
             text-transform: uppercase;
             font-weight: 700;
             cursor: pointer;
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
             transition: opacity 0.15s;
         }
 
@@ -1422,7 +1430,7 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         .modal-msg {
@@ -1439,7 +1447,7 @@
         .profile-form .full-width { grid-column: 1 / -1; }
         .profile-field { display: flex; flex-direction: column; gap: 6px; }
         .profile-field label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
-        .profile-input { background: var(--bg-3); border: 1px solid var(--border-strong); color: var(--text); font-family: 'Satoshi', sans-serif; font-size: 13px; padding: 10px 12px; outline: none; transition: border-color 0.2s; width: 100%; }
+        .profile-input { background: var(--bg-3); border: 1px solid var(--border-strong); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; padding: 10px 12px; outline: none; transition: border-color 0.2s; width: 100%; }
         .profile-input:focus { border-color: var(--gold-border); }
         .profile-input::placeholder { color: var(--text-muted); }
         textarea.profile-input { resize: vertical; min-height: 80px; }
@@ -1467,7 +1475,7 @@
         .video-status.en_revision { background: rgba(59,130,246,0.12);  color: #60a5fa; }
         .video-status.completado  { background: rgba(74,222,128,0.10);  color: #4ade80; }
         .video-notas { font-size: 12px; color: var(--text-secondary); background: var(--bg-4); border-left: 2px solid var(--gold-border); padding: 8px 12px; margin-top: 8px; line-height: 1.6; }
-        .btn-submit-video { background: none; border: 1px solid var(--gold-border); color: var(--gold); font-family: 'Satoshi', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 10px 20px; cursor: pointer; transition: background 0.2s; }
+        .btn-submit-video { background: none; border: 1px solid var(--gold-border); color: var(--gold); font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 10px 20px; cursor: pointer; transition: background 0.2s; }
         .btn-submit-video:hover { background: var(--gold-light); }
 
         /* ── MESSAGE THREAD ── */
@@ -1477,7 +1485,7 @@
         .msg-bubble.admin-msg { background: rgba(200,169,110,0.07); border: 1px solid var(--gold-border); align-self: flex-start; color: var(--text); }
         .msg-meta { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; }
         .msg-compose { display: flex; flex-direction: column; gap: 10px; max-width: 680px; border-top: 1px solid var(--border); padding-top: 20px; }
-        .msg-input { background: var(--bg-3); border: 1px solid var(--border-strong); color: var(--text); font-family: 'Satoshi', sans-serif; font-size: 13px; padding: 12px 14px; outline: none; resize: vertical; min-height: 80px; transition: border-color 0.2s; }
+        .msg-input { background: var(--bg-3); border: 1px solid var(--border-strong); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; padding: 12px 14px; outline: none; resize: vertical; min-height: 80px; transition: border-color 0.2s; }
         .msg-input:focus { border-color: var(--gold-border); }
         .msg-input::placeholder { color: var(--text-muted); }
         .btn-send-msg { background: var(--gold); color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; padding: 11px 26px; border: none; cursor: pointer; align-self: flex-start; transition: opacity 0.2s, transform 0.15s; }
@@ -1531,7 +1539,7 @@
                 cursor: pointer;
                 padding: 8px 4px 2px;
                 min-height: 44px;
-                font-family: 'Satoshi', sans-serif;
+                font-family: 'Inter', sans-serif;
                 transition: color 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
                             transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
                 position: relative;
@@ -1710,7 +1718,7 @@
             background: none;
             border: 1px solid var(--border);
             color: var(--text-muted);
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 12px;
             padding: 9px 20px;
             cursor: pointer;
@@ -1725,6 +1733,7 @@
     </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
 
 <!-- Loading screen -->
 <div id="loading-screen">
@@ -1777,6 +1786,13 @@
                     </div>
                     <button class="btn-logout" id="btn-logout">Salir</button>
                 </div>
+                <nav class="sidebar-legal" aria-label="Legal">
+                    <a href="aviso-legal.html">Aviso legal</a>
+                    <a href="condiciones.html">Condiciones</a>
+                    <a href="politica-privacidad.html">Privacidad</a>
+                    <a href="cookies.html">Cookies</a>
+                    <a href="proteccion-infancia.html">Protecci&oacute;n de la infancia</a>
+                </nav>
             </div>
         </aside>
 
@@ -1797,7 +1813,8 @@
             </header>
 
             <!-- Main -->
-            <main class="main-content" id="main-content" aria-live="polite">
+            <p id="plat-status" class="sr-only" role="status" aria-live="polite"></p>
+            <main class="main-content" id="main-content" tabindex="-1">
                 <!-- JS renders content here -->
             </main>
 
@@ -1806,7 +1823,7 @@
     </div>
 
 <!-- Seguimiento modal -->
-<div class="modal-overlay" id="seg-modal" role="dialog" aria-modal="true">
+<div class="modal-overlay" id="seg-modal" role="dialog" aria-modal="true" aria-labelledby="seg-modal-type">
     <div class="modal-box" style="max-width:500px;">
         <p class="modal-title" id="seg-modal-type">Seguimiento Temporada</p>
         <p class="modal-name" id="seg-modal-name"></p>
@@ -1857,7 +1874,7 @@
 </div>
 
 <!-- Edit modal (shared for campus + waitlist) -->
-<div class="modal-overlay" id="edit-modal" role="dialog" aria-modal="true">
+<div class="modal-overlay" id="edit-modal" role="dialog" aria-modal="true" aria-labelledby="modal-type-label">
     <div class="modal-box">
         <p class="modal-title" id="modal-type-label">Editar</p>
         <p class="modal-name" id="modal-student-name"></p>
@@ -1880,22 +1897,30 @@
 </div>
 
 <!-- Video submit modal (user) -->
-<div class="modal-overlay" id="video-modal" role="dialog" aria-modal="true">
+<div class="modal-overlay" id="video-modal" role="dialog" aria-modal="true" aria-labelledby="vm-title">
     <div class="modal-box" style="max-width:480px;">
-        <p class="modal-title">Enviar video para análisis</p>
+        <p class="modal-title" id="vm-title">Enviar vídeo para análisis</p>
         <div class="video-modal-field modal-field">
             <label for="vm-titulo">Título o descripción corta *</label>
             <input class="modal-select" id="vm-titulo" type="text" placeholder="Ej: Mecánica de tiro — sesión 12 jun">
         </div>
         <div class="video-modal-field modal-field">
-            <label for="vm-url">URL del video *</label>
-            <input class="modal-select" id="vm-url" type="url" placeholder="YouTube, Google Drive, Dropbox...">
+            <label for="vm-url">Enlace al vídeo (https) *</label>
+            <input class="modal-select" id="vm-url" type="url" inputmode="url" placeholder="https://..." aria-describedby="vm-url-ayuda">
+            <p class="vm-ayuda" id="vm-url-ayuda">Comparte el vídeo como <strong>oculto / no listado</strong> (YouTube) o con enlace privado (Google Drive, Dropbox), nunca en abierto. Solo lo verá el entrenador.</p>
         </div>
         <div class="video-modal-field modal-field">
             <label for="vm-desc">Qué quieres que analice (opcional)</label>
             <textarea class="modal-textarea" id="vm-desc" rows="3" placeholder="Ej: Revisar posición de codos en el release..."></textarea>
         </div>
-        <p class="modal-msg" id="vm-msg"></p>
+        <fieldset class="vm-consent">
+            <legend>Consentimiento para el vídeo *</legend>
+            <label class="vm-check"><input type="radio" name="vm-por" value="jugador" checked> Lo doy yo: soy el jugador y tengo 14 años o más</label>
+            <label class="vm-check"><input type="radio" name="vm-por" value="tutor"> Lo doy como padre, madre o tutor legal (obligatorio si el jugador tiene menos de 14 años)</label>
+            <label class="vm-check"><input type="checkbox" id="vm-consent"> Consiento que Dragons Den use este vídeo, en el que aparece la imagen del jugador, solo para su análisis técnico. No se publicará ni se compartirá con nadie.</label>
+            <p class="vm-ayuda">Conservamos el enlace y las notas del análisis hasta el final de la temporada (30 de junio) y después los borramos. Puedes pedir que se borren antes en bbdragonsden@gmail.com. <a href="politica-privacidad.html" target="_blank" rel="noopener">Privacidad</a>.</p>
+        </fieldset>
+        <p class="modal-msg" id="vm-msg" role="status" aria-live="polite"></p>
         <div class="modal-actions">
             <button class="btn-modal-save" id="vm-save-btn" onclick="submitVideo()">Enviar</button>
             <button class="btn-modal-cancel" onclick="closeVideoModal()">Cancelar</button>
@@ -1904,9 +1929,9 @@
 </div>
 
 <!-- Admin reply modal (send message to user) -->
-<div class="modal-overlay" id="msg-reply-modal" role="dialog" aria-modal="true">
+<div class="modal-overlay" id="msg-reply-modal" role="dialog" aria-modal="true" aria-labelledby="mrm-title">
     <div class="modal-box" style="max-width:460px;">
-        <p class="modal-title">Responder a <span id="mrm-name"></span></p>
+        <p class="modal-title" id="mrm-title">Responder a <span id="mrm-name"></span></p>
         <input type="hidden" id="mrm-userid">
         <input type="hidden" id="mrm-email">
         <div class="modal-field">
@@ -2042,7 +2067,10 @@ async function checkAuth() {
 
     const user = session.user;
     const name = user.user_metadata?.name || user.user_metadata?.full_name || user.email.split('@')[0];
-    isAdmin = user.user_metadata?.is_admin === true;
+    // app_metadata solo lo puede escribir el servidor (service_role); user_metadata
+    // lo puede cambiar el propio usuario. Esto solo decide qué menú se ve: los
+    // datos de administración los protege /api/admin-* comprobando app_metadata.
+    isAdmin = user.app_metadata?.is_admin === true;
 
     // Fetch pack permissions from DB
     const { data: packsData } = await sb.from('user_packs').select('pack_id');
@@ -2080,24 +2108,11 @@ function init() {
         window.location.href = 'login.html';
     });
 
-    // ── Mobile sidebar controls ───────────────────────────────────────────────
+    // ── Mobile sidebar controls (closeMobileSidebar/openMobileSidebar son
+    //    globales: renderSidebar() también las usa) ─────────────────────────
     var _menuBtn = document.getElementById('mobile-menu-btn');
     var _sidebarEl = document.getElementById('sidebar');
     var _overlayEl = document.getElementById('sidebar-overlay');
-
-    function closeMobileSidebar() {
-        _sidebarEl.classList.remove('open');
-        _overlayEl.classList.remove('active');
-        _menuBtn.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-    }
-
-    function openMobileSidebar() {
-        _sidebarEl.classList.add('open');
-        _overlayEl.classList.add('active');
-        _menuBtn.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden';
-    }
 
     _menuBtn.addEventListener('click', function() {
         _sidebarEl.classList.contains('open') ? closeMobileSidebar() : openMobileSidebar();
@@ -2133,6 +2148,40 @@ function init() {
     })();
 }
 
+// ── Sidebar móvil ─────────────────────────────────────────────────────────
+function closeMobileSidebar() {
+    var sidebarEl = document.getElementById('sidebar');
+    var overlayEl = document.getElementById('sidebar-overlay');
+    var menuBtn = document.getElementById('mobile-menu-btn');
+    if (sidebarEl) sidebarEl.classList.remove('open');
+    if (overlayEl) overlayEl.classList.remove('active');
+    if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+}
+
+function openMobileSidebar() {
+    var sidebarEl = document.getElementById('sidebar');
+    var overlayEl = document.getElementById('sidebar-overlay');
+    var menuBtn = document.getElementById('mobile-menu-btn');
+    if (sidebarEl) sidebarEl.classList.add('open');
+    if (overlayEl) overlayEl.classList.add('active');
+    if (menuBtn) menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+}
+
+// Enlace seguro: solo https (evita javascript:, data: ... en href)
+function safeHref(u) {
+    try { return new URL(String(u)).protocol === 'https:' ? String(u) : '#'; } catch (e) { return '#'; }
+}
+
+// Anuncio para lectores de pantalla al cambiar de vista
+function anunciar(texto) {
+    var el = document.getElementById('plat-status');
+    if (!el) return;
+    el.textContent = '';
+    setTimeout(function() { el.textContent = texto; }, 50);
+}
+
 // ── Sidebar ───────────────────────────────────────────────────────────────
 function renderSidebar() {
     const nav = document.getElementById('sidebar-nav');
@@ -2146,7 +2195,7 @@ function renderSidebar() {
         btn.innerHTML = `
             <span class="pack-num">${pack.num}</span>
             <span>${pack.name}</span>
-            ${accessible ? '' : '<span class="lock-icon">&#x1F512;</span>'}
+            ${accessible ? '' : '<span class="lock-icon" aria-label="Bloqueado"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>'}
         `;
         if (accessible) {
             btn.addEventListener('click', () => {
@@ -2169,7 +2218,7 @@ function renderSidebar() {
     [
         { id: '__dashboard__', label: 'Dashboard', fn: renderDashboard, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/>' },
         { id: '__perfil__', label: 'Mi Perfil', fn: renderMiPerfil, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>' },
-        { id: '__mis_videos__', label: 'Mis Videos', fn: renderMisVideos, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/>' },
+        { id: '__mis_videos__', label: 'Mis vídeos', fn: renderMisVideos, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/>' },
         { id: '__mensajes__', label: 'Mensajes', fn: renderMisMensajes, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>' },
     ].forEach(({ id, label, fn, icon }) => {
         const btn = document.createElement('button');
@@ -2289,7 +2338,7 @@ function renderSidebar() {
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 010 1.972l-11.54 6.347a1.125 1.125 0 01-1.667-.986V5.653z"/>
             </svg>
-            <span>Análisis Video</span>`;
+            <span>Análisis de vídeo</span>`;
         videosAdminBtn.addEventListener('click', () => {
             document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
             videosAdminBtn.classList.add('active');
@@ -2626,7 +2675,7 @@ function buildUserList(users) {
                 <span class="pack-tag ${expiryStatus(p.expires_at)}">
                     <span class="pack-tag-name">${esc(p.pack)}</span>
                     <span class="pack-tag-expiry">${formatExpiry(p.expires_at)}</span>
-                    <button class="pack-revoke" onclick="revokePack('${esc(u.id)}','${esc(p.pack)}',this)" title="Revocar">&times;</button>
+                    <button class="pack-revoke" onclick="revokePack('${esc(u.id)}','${esc(p.pack)}',this)" title="Revocar" aria-label="Revocar pack ${esc(p.pack)}">&times;</button>
                 </span>`).join('')
             : '<span class="no-packs-label">Sin acceso</span>';
 
@@ -3076,8 +3125,9 @@ function renderProfileForm(profile) {
                 <input class="profile-input" id="pf-nombre" type="text" value="${esc(p.nombre||'')}">
             </div>
             <div class="profile-field">
-                <label for="pf-edad">Edad</label>
-                <input class="profile-input" id="pf-edad" type="number" min="5" max="60" placeholder="Ej: 17" value="${esc(p.edad||'')}">
+                <label for="pf-edad">Edad del jugador/a</label>
+                <input class="profile-input" id="pf-edad" type="number" min="5" max="99" placeholder="Ej: 17" value="${esc(p.edad||'')}" aria-describedby="pf-edad-ayuda">
+                <p class="vm-ayuda" id="pf-edad-ayuda">Si el jugador tiene menos de 14 años, la cuenta la gestiona su padre, madre o tutor.</p>
             </div>
             <div class="profile-field">
                 <label for="pf-posicion">Posición</label>
@@ -3164,7 +3214,7 @@ async function saveProfile(e) {
 // ── MIS VIDEOS ─────────────────────────────────────────────────────────────
 async function renderMisVideos(refresh = false) {
     const main = document.getElementById('main-content');
-    main.innerHTML = `<div class="content-header"><p class="content-eyebrow">Mi espacio</p><h1 class="content-title">Mis Videos</h1></div><p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
+    main.innerHTML = `<div class="content-header"><p class="content-eyebrow">Mi espacio</p><h1 class="content-title">Mis vídeos</h1></div><p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
     if (refresh) _userVideosCache = null;
     try {
         if (!_userVideosCache) {
@@ -3188,22 +3238,22 @@ function renderVideosList(videos) {
                     <span class="video-card-title">${esc(v.titulo)}</span>
                     <span class="video-status ${esc(v.estado||'pendiente')}">${esc(stLabel)}</span>
                 </div>
-                <p class="video-card-url"><a href="${esc(v.url_video)}" target="_blank" rel="noopener">${esc(v.url_video)}</a></p>
+                <p class="video-card-url"><a href="${esc(safeHref(v.url_video))}" target="_blank" rel="noopener noreferrer">${esc(v.url_video)}</a></p>
                 ${v.descripcion ? `<p class="video-card-desc">${esc(v.descripcion)}</p>` : ''}
                 <p class="video-card-meta">${fecha}</p>
                 ${v.notas_admin ? `<div class="video-notas"><strong style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;">Análisis del entrenador</strong>${esc(v.notas_admin)}</div>` : ''}
             </div>`;
           }).join('')
-        : '<p style="color:var(--text-muted);font-size:13px;padding:16px 0;">Todavía no has enviado ningún video.</p>';
+        : '<p style="color:var(--text-muted);font-size:13px;padding:16px 0;">Todavía no has enviado ningún vídeo.</p>';
 
     main.innerHTML = `
         <div class="content-header">
             <p class="content-eyebrow">Mi espacio</p>
-            <h1 class="content-title">Mis Videos</h1>
+            <h1 class="content-title">Mis vídeos</h1>
             <p class="content-desc">Envía clips para que el entrenador los analice.</p>
         </div>
         <div style="margin-bottom:24px;">
-            <button class="btn-submit-video" onclick="openVideoModal()">+ Enviar nuevo video</button>
+            <button class="btn-submit-video" onclick="openVideoModal()">Enviar nuevo vídeo</button>
         </div>
         <div id="user-videos-list">${listHTML}</div>`;
 }
@@ -3215,7 +3265,16 @@ function openVideoModal() {
     document.getElementById('vm-msg').textContent = '';
     document.getElementById('vm-msg').className = 'modal-msg';
     document.getElementById('vm-save-btn').disabled = false;
+    document.getElementById('vm-consent').checked = false;
+    // Si el perfil dice que el jugador tiene menos de 14 años, el consentimiento lo da el tutor.
+    const edadPerfil = parseInt((_userProfileCache && _userProfileCache.edad) || '', 10);
+    const menor14 = Number.isFinite(edadPerfil) && edadPerfil < 14;
+    const rJug = document.querySelector('input[name="vm-por"][value="jugador"]');
+    const rTut = document.querySelector('input[name="vm-por"][value="tutor"]');
+    rJug.disabled = menor14;
+    if (menor14) rTut.checked = true; else rJug.checked = true;
     document.getElementById('video-modal').classList.add('open');
+    document.getElementById('vm-titulo').focus();
 }
 function closeVideoModal() { document.getElementById('video-modal').classList.remove('open'); }
 
@@ -3226,7 +3285,20 @@ async function submitVideo() {
     const url_video = document.getElementById('vm-url').value.trim();
     const descripcion = document.getElementById('vm-desc').value.trim();
     if (!titulo || !url_video) {
-        msg.textContent = 'Título y URL son obligatorios'; msg.className = 'modal-msg err'; return;
+        msg.textContent = 'Título y enlace son obligatorios'; msg.className = 'modal-msg err'; return;
+    }
+    if (safeHref(url_video) === '#') {
+        msg.textContent = 'El enlace debe empezar por https://'; msg.className = 'modal-msg err';
+        document.getElementById('vm-url').setAttribute('aria-invalid', 'true');
+        document.getElementById('vm-url').focus(); return;
+    }
+    document.getElementById('vm-url').removeAttribute('aria-invalid');
+    const consentimiento_video = document.getElementById('vm-consent').checked;
+    const porEl = document.querySelector('input[name="vm-por"]:checked');
+    const consentimiento_por = porEl ? porEl.value : 'jugador';
+    if (!consentimiento_video) {
+        msg.textContent = 'Marca la casilla de consentimiento para enviar el vídeo'; msg.className = 'modal-msg err';
+        document.getElementById('vm-consent').focus(); return;
     }
     btn.disabled = true; btn.textContent = '...';
     msg.textContent = ''; msg.className = 'modal-msg';
@@ -3235,7 +3307,7 @@ async function submitVideo() {
         const r = await fetch('/api/analisis-videos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-            body: JSON.stringify({ titulo, url_video, descripcion })
+            body: JSON.stringify({ titulo, url_video, descripcion, consentimiento_video, consentimiento_por })
         });
         const d = await r.json();
         btn.disabled = false; btn.textContent = 'Enviar';
@@ -3447,7 +3519,7 @@ function renderAlumnoDetalle(email) {
     const plat = a.plataforma;
     if (plat) {
         const packTags = plat.packs && plat.packs.length
-            ? plat.packs.map(p => `<span class="pack-tag ${expiryStatus(p.expires_at)}"><span class="pack-tag-name">${esc(p.pack)}</span><span class="pack-tag-expiry">${formatExpiry(p.expires_at)}</span><button class="pack-revoke" onclick="revokePack('${esc(plat.id)}','${esc(p.pack)}',this)" title="Revocar">&times;</button></span>`).join('')
+            ? plat.packs.map(p => `<span class="pack-tag ${expiryStatus(p.expires_at)}"><span class="pack-tag-name">${esc(p.pack)}</span><span class="pack-tag-expiry">${formatExpiry(p.expires_at)}</span><button class="pack-revoke" onclick="revokePack('${esc(plat.id)}','${esc(p.pack)}',this)" title="Revocar" aria-label="Revocar pack ${esc(p.pack)}">&times;</button></span>`).join('')
             : '<span class="no-packs-label">Sin packs</span>';
         acadInner = `<div class="detail-section-body">
             <div class="user-packs-row" id="ptags-${esc(plat.id)}" style="margin-bottom:12px;">${packTags}</div>
@@ -3490,7 +3562,7 @@ function renderAlumnoDetalle(email) {
                     <span class="video-card-title">${esc(v.titulo)}</span>
                     <span class="video-status ${esc(v.estado||'pendiente')}">${esc(stLabel)}</span>
                 </div>
-                <p class="video-card-url"><a href="${esc(v.url_video)}" target="_blank" rel="noopener">${esc(v.url_video)}</a></p>
+                <p class="video-card-url"><a href="${esc(safeHref(v.url_video))}" target="_blank" rel="noopener noreferrer">${esc(v.url_video)}</a></p>
                 ${v.descripcion ? `<p class="video-card-desc">${esc(v.descripcion)}</p>` : ''}
                 <p class="video-card-meta">${fecha}</p>
                 ${v.notas_admin ? `<div class="video-notas">${esc(v.notas_admin)}</div>` : ''}
@@ -3498,7 +3570,7 @@ function renderAlumnoDetalle(email) {
             </div>`;
         }).join('')}</div>`;
     } else {
-        videosInner = `<div class="detail-section-body"><p class="detail-empty">Sin videos enviados.</p></div>`;
+        videosInner = `<div class="detail-section-body"><p class="detail-empty">Sin vídeos enviados.</p></div>`;
     }
 
     // ─ Mensajes section ─
@@ -3537,7 +3609,7 @@ function renderAlumnoDetalle(email) {
         </div>
         <div class="detail-section">
             <div class="detail-section-header">
-                <span class="detail-section-title">Análisis de Video</span>
+                <span class="detail-section-title">Análisis de vídeo</span>
             </div>
             ${videosInner}
         </div>
@@ -3758,7 +3830,7 @@ async function revokePack(userId, pack, btn) {
 // ── ADMIN: VIDEOS ─────────────────────────────────────────────────────────
 async function renderVideosAdmin(refresh = false) {
     const main = document.getElementById('main-content');
-    main.innerHTML = `<div class="content-header"><p class="content-eyebrow">Administración</p><h1 class="content-title">Análisis de Video</h1></div><p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
+    main.innerHTML = `<div class="content-header"><p class="content-eyebrow">Administración</p><h1 class="content-title">Análisis de vídeo</h1></div><p style="color:var(--text-muted);font-size:13px;padding:20px 0;">Cargando...</p>`;
     try {
         const data = await fetchAdminData(refresh);
         renderVideosAdminPanel(data.videos || [], data.users || []);
@@ -3784,7 +3856,7 @@ function renderVideosAdminPanel(videos, users) {
                     </div>
                     <span class="video-status ${esc(v.estado||'pendiente')}">${esc(stLabel)}</span>
                 </div>
-                <p class="video-card-url"><a href="${esc(v.url_video)}" target="_blank" rel="noopener">${esc(v.url_video)}</a></p>
+                <p class="video-card-url"><a href="${esc(safeHref(v.url_video))}" target="_blank" rel="noopener noreferrer">${esc(v.url_video)}</a></p>
                 ${v.descripcion ? `<p class="video-card-desc">${esc(v.descripcion)}</p>` : ''}
                 ${v.notas_admin ? `<div class="video-notas">${esc(v.notas_admin)}</div>` : ''}
                 <div class="assign-row" style="margin-top:10px;">
@@ -3803,7 +3875,7 @@ function renderVideosAdminPanel(videos, users) {
     main.innerHTML = `
         <div class="content-header">
             <p class="content-eyebrow">Administración</p>
-            <h1 class="content-title">Análisis de Video</h1>
+            <h1 class="content-title">Análisis de vídeo</h1>
             <p class="content-desc">${videos.length} solicitudes &middot; ${pendientes} pendientes &middot; ${completados} completados</p>
         </div>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
@@ -3826,7 +3898,7 @@ function filterVideosAdmin(q) {
         const stLabel = { pendiente:'Pendiente', en_revision:'En revisión', completado:'Analizado' }[v.estado] || v.estado;
         return `<div class="video-card">
             <div class="video-card-header"><div><p class="video-card-title">${esc(v.titulo)}</p><p class="video-card-meta">${esc(v.email)} &middot; ${fecha}</p></div><span class="video-status ${esc(v.estado||'pendiente')}">${esc(stLabel)}</span></div>
-            <p class="video-card-url"><a href="${esc(v.url_video)}" target="_blank" rel="noopener">${esc(v.url_video)}</a></p>
+            <p class="video-card-url"><a href="${esc(safeHref(v.url_video))}" target="_blank" rel="noopener noreferrer">${esc(v.url_video)}</a></p>
             ${v.descripcion ? `<p class="video-card-desc">${esc(v.descripcion)}</p>` : ''}
             ${v.notas_admin ? `<div class="video-notas">${esc(v.notas_admin)}</div>` : ''}
             <div class="assign-row" style="margin-top:10px;">
@@ -3844,7 +3916,7 @@ function openVideoEditModal(id, estado, notas) {
     document.getElementById('modal-student-name').textContent = '';
     document.getElementById('modal-type-label').textContent = 'Análisis de video';
     document.getElementById('modal-notas').value = notas || '';
-    document.getElementById('modal-notas').placeholder = 'Escribe tu análisis del video...';
+    document.getElementById('modal-notas').placeholder = 'Escribe tu análisis del vídeo...';
     document.getElementById('modal-msg').textContent = '';
     document.getElementById('modal-msg').className = 'modal-msg';
     const estadoSel = document.getElementById('modal-estado');
@@ -4087,6 +4159,18 @@ function platTabNav(view) {
     };
     if (fns[view]) fns[view]();
 }
+
+// Anuncia el título de cada vista nueva (en vez de aria-live sobre todo <main>).
+(function() {
+    var main = document.getElementById('main-content');
+    if (!main || !window.MutationObserver) return;
+    var ultimo = '';
+    new MutationObserver(function() {
+        var h = main.querySelector('h1');
+        var t = h ? h.textContent.trim() : '';
+        if (t && t !== ultimo) { ultimo = t; anunciar(t); }
+    }).observe(main, { childList: true });
+})();
 </script>
 
 <!-- MOBILE BOTTOM TAB BAR -->
@@ -4104,11 +4188,11 @@ function platTabNav(view) {
         </svg>
         <span>Mis Packs</span>
     </button>
-    <button class="plat-tab-item" id="plt-videos" onclick="platTabNav('videos')" aria-label="Mis Videos">
+    <button class="plat-tab-item" id="plt-videos" onclick="platTabNav('videos')" aria-label="Mis vídeos">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>
         </svg>
-        <span>Videos</span>
+        <span>Vídeos</span>
     </button>
     <button class="plat-tab-item" id="plt-mensajes" onclick="platTabNav('mensajes')" aria-label="Mensajes">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

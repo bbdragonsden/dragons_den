@@ -1,0 +1,358 @@
+{
+  "version": 1,
+  "actualizado": "2026-09-18",
+  "reglamento_base": "FIBA",
+  "AVISO": "Este archivo contiene las respuestas correctas. NO se sirve nunca al navegador. El endpoint público entrega las preguntas sin los campos 'correcta' ni 'explicacion', y la corrección se hace en el servidor. Si este JSON llega al cliente, el ranking deja de valer nada el mismo día.",
+  "config": {
+    "segundos_por_pregunta": 10,
+    "preguntas_por_duelo": 5,
+    "xp_victoria": 25,
+    "xp_derrota": 10,
+    "tope_xp_semanal": 150
+  },
+  "temas": [
+    { "id": "pick_and_roll", "nombre": "Bloqueo directo" },
+    { "id": "closeout", "nombre": "Closeouts" },
+    { "id": "ayudas", "nombre": "Ayudas y rotaciones" },
+    { "id": "transicion", "nombre": "Contraataque" },
+    { "id": "reglamento", "nombre": "Reglamento" }
+  ],
+  "preguntas": [
+    {
+      "id": "iq-pnr-001",
+      "tema": "pick_and_roll",
+      "dificultad": 1,
+      "escenario": "Te llega el bloqueo. Tu defensor decide pasar por debajo del bloqueador y tú estás a distancia de triple cómoda, con los pies ya orientados al aro.",
+      "opciones": [
+        { "id": "a", "texto": "Tirar" },
+        { "id": "b", "texto": "Rechazar el bloqueo y penetrar" },
+        { "id": "c", "texto": "Pasar al bloqueador" },
+        { "id": "d", "texto": "Salir del bloqueo y resetear el ataque" }
+      ],
+      "correcta": "a",
+      "explicacion": "Si pasa por debajo te está regalando el tiro. Castígalo. En cuanto metas dos, dejará de pasar por debajo y se te abrirá la penetración."
+    },
+    {
+      "id": "iq-pnr-002",
+      "tema": "pick_and_roll",
+      "dificultad": 2,
+      "escenario": "Usas el bloqueo y el defensor del bloqueador se queda muy hundido, casi dentro de la zona, protegiendo el aro. Tu defensor viene por detrás persiguiéndote.",
+      "opciones": [
+        { "id": "a", "texto": "Seguir hasta el aro y forzar la bandeja" },
+        { "id": "b", "texto": "Parar y tirar de media distancia" },
+        { "id": "c", "texto": "Pasar al alero del lado contrario" },
+        { "id": "d", "texto": "Botar hacia la esquina para ganar tiempo" }
+      ],
+      "correcta": "b",
+      "explicacion": "Contra una defensa hundida el espacio está justo donde nadie lo ocupa: la media distancia. Si sigues hasta el aro te metes en el cuerpo del grande con tu defensor pegado a la espalda."
+    },
+    {
+      "id": "iq-pnr-003",
+      "tema": "pick_and_roll",
+      "dificultad": 2,
+      "escenario": "Al usar el bloqueo, el defensor del bloqueador salta a por ti y tu defensor no ha pasado todavía. Te vienen dos.",
+      "opciones": [
+        { "id": "a", "texto": "Botar entre los dos para romper el dos contra uno" },
+        { "id": "b", "texto": "Pasar al bloqueador, que se va al aro" },
+        { "id": "c", "texto": "Tirar antes de que lleguen" },
+        { "id": "d", "texto": "Retroceder y esperar a que se recoloquen" }
+      ],
+      "correcta": "b",
+      "explicacion": "Si te vienen dos, hay uno libre en algún sitio, y el primero es el bloqueador que rueda. Pasar ahí abre un cuatro contra tres. Botar entre los dos es justo lo que quiere la defensa."
+    },
+    {
+      "id": "iq-clo-001",
+      "tema": "closeout",
+      "dificultad": 1,
+      "escenario": "Recibes en la esquina. Tu defensor llega corriendo a toda velocidad, con el cuerpo erguido y sin frenar los pies.",
+      "opciones": [
+        { "id": "a", "texto": "Tirar rápido antes de que llegue" },
+        { "id": "b", "texto": "Botar atacando el hombro que lleva adelantado" },
+        { "id": "c", "texto": "Fintar el tiro y volver a botar hacia la línea de fondo" },
+        { "id": "d", "texto": "Pasar y cortar" }
+      ],
+      "correcta": "b",
+      "explicacion": "Un defensor que llega descontrolado no puede cambiar de dirección. Atacar el hombro adelantado lo deja sentado. Tirar encima de un closeout a toda velocidad es el tiro que él quiere que tomes."
+    },
+    {
+      "id": "iq-clo-002",
+      "tema": "closeout",
+      "dificultad": 2,
+      "escenario": "Recibes arriba. El defensor llega frenando bien, con pasos cortos, las manos abajo y el peso equilibrado.",
+      "opciones": [
+        { "id": "a", "texto": "Tirar" },
+        { "id": "b", "texto": "Atacar en bote" },
+        { "id": "c", "texto": "Esperar a que se acerque más" },
+        { "id": "d", "texto": "Devolver el pase" }
+      ],
+      "correcta": "a",
+      "explicacion": "Manos abajo es una invitación. Un closeout controlado te quita la penetración, pero si no levanta la mano el tiro está disponible y es el más limpio que vas a ver en esa posesión."
+    },
+    {
+      "id": "iq-ayu-001",
+      "tema": "ayudas",
+      "dificultad": 2,
+      "escenario": "Penetras por la línea de fondo. El defensor del lado débil abandona a su hombre en la esquina para cortarte el camino al aro.",
+      "opciones": [
+        { "id": "a", "texto": "Seguir y buscar la falta" },
+        { "id": "b", "texto": "Pase a la esquina del lado débil" },
+        { "id": "c", "texto": "Doble paso atrás y tirar" },
+        { "id": "d", "texto": "Pase al poste bajo" }
+      ],
+      "correcta": "b",
+      "explicacion": "Quien ayuda deja a alguien solo, y en una penetración de fondo el que queda solo es el de la esquina del lado débil. Ese pase es el tiro más eficiente del baloncesto moderno."
+    },
+    {
+      "id": "iq-ayu-002",
+      "tema": "ayudas",
+      "dificultad": 3,
+      "escenario": "Defiendes al hombre de la esquina del lado débil. El balón penetra por el lado contrario y tu compañero se queda cortado. Tú eres el siguiente en la rotación.",
+      "opciones": [
+        { "id": "a", "texto": "Quedarte con tu hombre: nunca se deja a un tirador de esquina" },
+        { "id": "b", "texto": "Ayudar al aro y confiar en que alguien cubra tu esquina" },
+        { "id": "c", "texto": "Ir a por el balón para intentar el robo" },
+        { "id": "d", "texto": "Bajar a la zona y quedarte entre los dos sin comprometerte" }
+      ],
+      "correcta": "b",
+      "explicacion": "La regla es que nadie tiene dueño: se defiende en escalera. Tú ayudas al aro y el siguiente rota a tu esquina. La opción d, quedarse a medias, es la que hace que se pierdan las dos cosas."
+    },
+    {
+      "id": "iq-tra-001",
+      "tema": "transicion",
+      "dificultad": 1,
+      "escenario": "Corres el contraataque tres contra dos. Llevas tú el balón por el centro y tienes un compañero abierto por cada banda.",
+      "opciones": [
+        { "id": "a", "texto": "Pasar pronto a una banda para que finalice" },
+        { "id": "b", "texto": "Atacar el centro hasta la línea de tiros libres y decidir ahí" },
+        { "id": "c", "texto": "Parar el balón y esperar a los compañeros" },
+        { "id": "d", "texto": "Entrar directo al aro" }
+      ],
+      "correcta": "b",
+      "explicacion": "El tres contra dos se gana obligando a uno de los dos defensores a comprometerse. Eso solo pasa si atacas el centro. Si pasas antes de llegar, los dos defensores llegan a tiempo y ya es tres contra dos parado."
+    },
+    {
+      "id": "iq-reg-001",
+      "tema": "reglamento",
+      "dificultad": 2,
+      "escenario": "Vas botando, recoges el balón apoyando un pie en el suelo en ese mismo momento y después das dos pasos más antes de lanzar.",
+      "opciones": [
+        { "id": "a", "texto": "Son pasos: solo se permiten dos apoyos en total" },
+        { "id": "b", "texto": "Es legal: el apoyo de la recogida es el paso cero" },
+        { "id": "c", "texto": "Es legal solo si acabas en bandeja, no en tiro" },
+        { "id": "d", "texto": "Depende de si el defensor te toca" }
+      ],
+      "correcta": "b",
+      "explicacion": "Desde la modificación de FIBA de 2017 existe el paso cero: el apoyo durante la recogida no cuenta, y después tienes dos pasos. Es exactamente lo que hace legal al euro step."
+    },
+    {
+      "id": "iq-reg-002",
+      "tema": "reglamento",
+      "dificultad": 2,
+      "escenario": "Tu equipo tira, el balón toca el aro y cogéis el rebote ofensivo. ¿Con cuántos segundos de posesión continuáis?",
+      "opciones": [
+        { "id": "a", "texto": "24 segundos nuevos" },
+        { "id": "b", "texto": "14 segundos" },
+        { "id": "c", "texto": "Se continúa con los que quedaban" },
+        { "id": "d", "texto": "8 segundos" }
+      ],
+      "correcta": "b",
+      "explicacion": "En FIBA, el rebote ofensivo tras tocar aro reinicia el reloj a 14, no a 24. Saberlo cambia la decisión: tienes tiempo para una acción, no para reconstruir el ataque entero."
+    },
+    {
+      "id": "iq-pnr-004",
+      "tema": "pick_and_roll",
+      "dificultad": 2,
+      "escenario": "Llega el bloqueo y los dos defensores se cambian. Ahora te defiende el pívot, mucho más grande y más lento, y tu compañero pequeño está abajo con el defensor pequeño.",
+      "opciones": [
+        { "id": "a", "texto": "Atacarlo en bote de inmediato, antes de que la defensa se reordene" },
+        { "id": "b", "texto": "Sacar el balón fuera y volver a empezar el ataque" },
+        { "id": "c", "texto": "Tirar por encima porque es más lento saltando" },
+        { "id": "d", "texto": "Pasar al pívot, que tiene al pequeño encima" }
+      ],
+      "correcta": "a",
+      "explicacion": "El desajuste dura dos segundos: es el tiempo que tarda la ayuda en llegar. Si sacas el balón fuera y reorganizas, la defensa se recoloca y has tirado la ventaja. La opción d también vale, pero es más lenta y da tiempo a que doblen."
+    },
+    {
+      "id": "iq-pnr-005",
+      "tema": "pick_and_roll",
+      "dificultad": 3,
+      "escenario": "Tu defensor decide pasar por encima del bloqueo, pegado a ti, para no dejarte tirar. El bloqueador todavía no ha llegado a colocarse del todo.",
+      "opciones": [
+        { "id": "a", "texto": "Esperar a que el bloqueo se coloque bien y usarlo igual" },
+        { "id": "b", "texto": "Rechazar el bloqueo y atacar por el lado contrario" },
+        { "id": "c", "texto": "Tirar encima de él" },
+        { "id": "d", "texto": "Pasar y cortar" }
+      ],
+      "correcta": "b",
+      "explicacion": "Si pasa por encima está anticipando el bloqueo, y al anticipar deja libre el lado contrario. Rechazar el bloqueo lo castiga. Es la lectura que separa a un base que ejecuta jugadas de uno que lee defensas."
+    },
+    {
+      "id": "iq-clo-003",
+      "tema": "closeout",
+      "dificultad": 3,
+      "escenario": "Recibes y el defensor llega con la mano derecha muy alta para tapar el tiro, pero con el cuerpo cargado hacia ese mismo lado.",
+      "opciones": [
+        { "id": "a", "texto": "Atacar hacia el lado de la mano levantada" },
+        { "id": "b", "texto": "Atacar hacia el lado contrario a la mano levantada" },
+        { "id": "c", "texto": "Tirar de todas formas" },
+        { "id": "d", "texto": "Fintar y esperar a que baje la mano" }
+      ],
+      "correcta": "b",
+      "explicacion": "La mano que sube arrastra el peso del cuerpo hacia ese lado. El lado contrario está vacío y no puede recuperarlo a tiempo. Regla corta: ataca siempre al lado de la mano baja."
+    },
+    {
+      "id": "iq-clo-004",
+      "tema": "closeout",
+      "dificultad": 2,
+      "escenario": "Te toca defender a un jugador que tira muy mal de fuera pero que penetra muy bien. Recibe en el perímetro y tienes que salir.",
+      "opciones": [
+        { "id": "a", "texto": "Salir a fondo a taparle el tiro" },
+        { "id": "b", "texto": "Salir a media distancia, con el peso atrás y cerrándole la penetración" },
+        { "id": "c", "texto": "No salir y quedarte en la zona" },
+        { "id": "d", "texto": "Salir saltando para intentar el tapón" }
+      ],
+      "correcta": "b",
+      "explicacion": "Defender es quitarle lo que hace bien, no lo que hace mal. A un mal tirador le dejas el tiro y le cierras el bote. Salir a fondo contra alguien que penetra es regalarle exactamente lo que busca."
+    },
+    {
+      "id": "iq-ayu-003",
+      "tema": "ayudas",
+      "dificultad": 1,
+      "escenario": "El contrario tira desde el perímetro. Tú estás defendiendo a un jugador que está a tres metros de ti, en el lado contrario.",
+      "opciones": [
+        { "id": "a", "texto": "Correr hacia el aro a por el rebote" },
+        { "id": "b", "texto": "Ir primero a buscar el contacto con tu hombre y luego al balón" },
+        { "id": "c", "texto": "Salir corriendo al contraataque" },
+        { "id": "d", "texto": "Quedarte quieto viendo si entra" }
+      ],
+      "correcta": "b",
+      "explicacion": "El rebote defensivo empieza bloqueando, no corriendo. Si sales directo al balón, tu hombre te pasa por la espalda y coge el rebote ofensivo. Primero el contacto, después el balón."
+    },
+    {
+      "id": "iq-ayu-004",
+      "tema": "ayudas",
+      "dificultad": 3,
+      "escenario": "Defiendes a su mejor tirador. Le ponen un bloqueo indirecto para que salga del lado débil hacia el balón.",
+      "opciones": [
+        { "id": "a", "texto": "Pasar por detrás del bloqueo para no chocar" },
+        { "id": "b", "texto": "Perseguirlo pegado, pasando por delante del bloqueo" },
+        { "id": "c", "texto": "Cambiar con el defensor del bloqueador" },
+        { "id": "d", "texto": "Quedarte en la zona y esperarlo" }
+      ],
+      "correcta": "b",
+      "explicacion": "A un tirador nunca se le da espacio. Pasar por detrás te deja medio metro, y medio metro para un buen tirador es un triple limpio. Se persigue pegado aunque cueste, y si hay cambio, que lo pida el compañero."
+    },
+    {
+      "id": "iq-tra-002",
+      "tema": "transicion",
+      "dificultad": 1,
+      "escenario": "Contraataque dos contra uno. Tú llevas el balón, tu compañero corre por el otro carril y solo hay un defensor, que se coloca entre los dos.",
+      "opciones": [
+        { "id": "a", "texto": "Pasar enseguida para que finalice el compañero" },
+        { "id": "b", "texto": "Atacar al defensor y pasar solo cuando se comprometa contigo" },
+        { "id": "c", "texto": "Botar hasta el aro sin mirar al compañero" },
+        { "id": "d", "texto": "Frenar y esperar apoyo" }
+      ],
+      "correcta": "b",
+      "explicacion": "El dos contra uno se resuelve obligando al defensor a elegir. Si pasas antes de que se comprometa, se limita a seguir el pase y el dos contra uno desaparece. Si no elige nunca, entras tú."
+    },
+    {
+      "id": "iq-tra-003",
+      "tema": "transicion",
+      "dificultad": 2,
+      "escenario": "Coges el rebote defensivo y quieres correr. ¿Cuál es el primer pase que más veces abre un contraataque?",
+      "opciones": [
+        { "id": "a", "texto": "Un pase largo al jugador más adelantado" },
+        { "id": "b", "texto": "Un pase corto hacia la banda, al carril lateral" },
+        { "id": "c", "texto": "Botar tú mismo hasta el centro del campo" },
+        { "id": "d", "texto": "Esperar a que suba el base" }
+      ],
+      "correcta": "b",
+      "explicacion": "El pase a la banda abre el campo y es el que menos se pierde. El pase largo sale una de cada cinco veces y las otras cuatro es una pérdida que acaba en canasta fácil del contrario."
+    },
+    {
+      "id": "iq-tra-004",
+      "tema": "transicion",
+      "dificultad": 3,
+      "escenario": "Vais dos puntos por debajo, quedan 6 segundos y sacáis vosotros de banda en campo contrario. La defensa no tiene faltas de sobra.",
+      "opciones": [
+        { "id": "a", "texto": "Buscar un triple para ganar de una" },
+        { "id": "b", "texto": "Atacar el aro buscando los dos puntos y la posible falta" },
+        { "id": "c", "texto": "Botar hasta que queden 2 segundos y tirar lo que salga" },
+        { "id": "d", "texto": "Pedir tiempo muerto y pensarlo" }
+      ],
+      "correcta": "b",
+      "explicacion": "Dos abajo se juega el de dos: entras, empatas y, si te hacen falta, tienes la oportunidad de ganarlo desde la línea. El triple se busca cuando vas tres abajo. Perder un partido por tirar un triple yendo dos abajo es el error táctico más repetido del baloncesto de formación."
+    },
+    {
+      "id": "iq-tra-005",
+      "tema": "transicion",
+      "dificultad": 2,
+      "escenario": "Defiendes un contraataque en inferioridad: vienen dos y estás tú solo. Van a canasta segura.",
+      "opciones": [
+        { "id": "a", "texto": "Ir a por el balón para intentar robarlo" },
+        { "id": "b", "texto": "Retrasarte hasta el aro y frenar la bandeja obligando al pase" },
+        { "id": "c", "texto": "Hacer falta antes de que lleguen" },
+        { "id": "d", "texto": "Colocarte en medio sin comprometerte hasta que uno recoja el balón" }
+      ],
+      "correcta": "d",
+      "explicacion": "En inferioridad se gana tiempo, no balones. Colocarte en medio sin decidir retrasa su decisión y da segundos a que llegue tu compañero. Ir a por el balón te elimina de la jugada y deja una bandeja sin oposición."
+    },
+    {
+      "id": "iq-reg-003",
+      "tema": "reglamento",
+      "dificultad": 1,
+      "escenario": "Tu equipo coge el balón en su campo. ¿Cuánto tiempo hay para pasarlo al campo contrario?",
+      "opciones": [
+        { "id": "a", "texto": "5 segundos" },
+        { "id": "b", "texto": "8 segundos" },
+        { "id": "c", "texto": "10 segundos" },
+        { "id": "d", "texto": "No hay límite mientras se bote" }
+      ],
+      "correcta": "b",
+      "explicacion": "Ocho segundos en FIBA. Los 10 son de la NBA antigua y de ahí viene la confusión de media pista de vestuario."
+    },
+    {
+      "id": "iq-reg-004",
+      "tema": "reglamento",
+      "dificultad": 3,
+      "escenario": "Has pasado el balón a campo contrario. Recibes un pase con un pie a cada lado de la línea central y botas hacia atrás.",
+      "opciones": [
+        { "id": "a", "texto": "Es legal: mientras un pie esté delante, sigues en campo contrario" },
+        { "id": "b", "texto": "Es campo atrás" },
+        { "id": "c", "texto": "Es legal solo si no has botado todavía" },
+        { "id": "d", "texto": "Depende de dónde esté el balón, no los pies" }
+      ],
+      "correcta": "b",
+      "explicacion": "Para estar en campo contrario tienen que estar los dos pies y el balón. Con un pie a cada lado sigues en campo propio, así que volver atrás es campo atrás. Es de las que más se protestan y casi siempre se protestan mal."
+    },
+    {
+      "id": "iq-reg-005",
+      "tema": "reglamento",
+      "dificultad": 2,
+      "escenario": "Un rival se escapa solo a canasta y un compañero tuyo lo agarra por detrás desde atrás, sin opción de jugar el balón.",
+      "opciones": [
+        { "id": "a", "texto": "Falta personal normal, saque de banda" },
+        { "id": "b", "texto": "Falta antideportiva: dos tiros libres y posesión" },
+        { "id": "c", "texto": "Falta técnica" },
+        { "id": "d", "texto": "Falta en ataque del que corre" }
+      ],
+      "correcta": "b",
+      "explicacion": "Sin intención legítima de jugar el balón y con el contraataque en curso, es antideportiva. Dos tiros y posesión. Por eso el clásico agarrón para cortar el contraataque sale mucho más caro de lo que cree el que lo hace."
+    },
+    {
+      "id": "iq-lec-001",
+      "tema": "ayudas",
+      "dificultad": 2,
+      "escenario": "El rival defiende en zona 2-3 cerrada y no hay tiro exterior claro. ¿Dónde está el punto débil de esa zona?",
+      "opciones": [
+        { "id": "a", "texto": "Las esquinas" },
+        { "id": "b", "texto": "El poste alto, en la línea de tiros libres" },
+        { "id": "c", "texto": "El centro de la zona, debajo del aro" },
+        { "id": "d", "texto": "El perímetro por encima del balón" }
+      ],
+      "correcta": "b",
+      "explicacion": "La 2-3 deja el poste alto sin dueño: está entre los dos de arriba y los tres de abajo. Un jugador que recibe ahí mirando al aro obliga a cerrar a alguien y abre todo lo demás. Es la primera lectura contra cualquier zona."
+    }
+  ]
+}

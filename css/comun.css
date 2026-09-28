@@ -1,0 +1,39 @@
+/* Comun a todas las paginas de Dragons Den.
+   Fuentes alojadas en la propia web (sin Google Fonts): Bebas Neue + Inter.
+   Archivos woff2 de @fontsource/bebas-neue@5.1.0 y @fontsource/inter@5.1.0
+   (licencia SIL OFL 1.1, ver fonts/LICENSE-*.txt). */
+@font-face { font-family: 'Bebas Neue'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/bebas-neue-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300; font-display: swap; src: url('/fonts/inter-latin-300-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/inter-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/inter-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/inter-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/inter-latin-700-normal.woff2') format('woff2'); }
+
+/* Enlace para saltar al contenido: invisible hasta que recibe el foco. */
+.skip-link {
+    position: fixed; left: 16px; top: 12px; z-index: 10000;
+    background: #c8a96e; color: #000; font: 600 13px/1 'Inter', Arial, sans-serif;
+    letter-spacing: 1px; padding: 12px 18px; text-decoration: none;
+    transform: translateY(-200%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* Foco visible en todo lo que se puede usar con teclado. Gana a los
+   "outline: none" que quedan en los estilos de cada pagina. */
+:focus-visible { outline: 2px solid #c8a96e !important; outline-offset: 2px; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline-offset: 0; }
+
+.sr-only {
+    position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Iconos SVG en linea dentro de texto */
+.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.125em; flex-shrink: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important; scroll-behavior: auto !important;
+    }
+}

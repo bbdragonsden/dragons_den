@@ -40,7 +40,7 @@ async function verifyAdmin(authHeader) {
   return res.body;
 }
 
-const ALLOWED_ORIGINS = ['https://dragonsden.es', 'https://www.dragonsden.es'];
+const ALLOWED_ORIGINS = ['https://dragonsden.es', 'https://www.dragonsden.es', 'https://dragons-den-eight.vercel.app'];
 
 module.exports = async function handler(req, res) {
   const origin = req.headers.origin || '';

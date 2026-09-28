@@ -1,0 +1,44 @@
+# Lo que no se publica.
+#
+# Todo lo que queda en la carpeta al desplegar se sirve como archivo
+# estático: cualquiera podría abrir /config.txt o /sql/002-....sql
+# escribiendo la dirección. Aquí se queda fuera lo interno.
+
+# Datos personales y de negocio
+config.txt
+FINANZAS/
+CLIENTES/
+
+# Trabajo interno: guiones, contenido y material de marketing
+COWORK_PROMPTS/
+MARKETING/
+CONTENIDO/
+data/
+
+# Base de datos: esquema y migraciones
+sql/
+supabase-migration.sql
+
+# Documentación del proyecto
+ADMIN_SPEC.md
+README.md
+email-template.html
+
+# Sistema
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Carpeta de trabajo privada (datos de clientes y finanzas)
+Dragons_Den/
+.claude/
+
+# Archivos retirados (no se pueden borrar desde el entorno de trabajo)
+_retirado/
+
+# Registro de noticias del grupo NSD: ya no se carga en esta web
+js/nsd-noticias.js
+js/nsd-actualidad.js
+
+# Propuestas SQL (ya cubiertas por sql/, se repite por claridad)
+sql/propuestas/

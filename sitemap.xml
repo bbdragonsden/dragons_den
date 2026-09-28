@@ -1,47 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
+<!-- Solo páginas indexables (las legales y las de acceso llevan noindex). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.dragonsden.es/</loc>
-    <lastmod>2026-05-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <loc>https://dragons-den-eight.vercel.app/</loc>
+    <lastmod>2026-09-25</lastmod>
   </url>
-
   <url>
-    <loc>https://www.dragonsden.es/academia.html</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://dragons-den-eight.vercel.app/academia.html</loc>
+    <lastmod>2026-09-25</lastmod>
   </url>
-
   <url>
-    <loc>https://www.dragonsden.es/blog/el-verano-que-te-cambia.html</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://dragons-den-eight.vercel.app/blog/estrenamos-web.html</loc>
+    <lastmod>2026-09-25</lastmod>
   </url>
-
   <url>
-    <loc>https://www.dragonsden.es/aviso-legal.html</loc>
-    <lastmod>2026-05-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <loc>https://dragons-den-eight.vercel.app/blog/el-verano-que-te-cambia.html</loc>
+    <lastmod>2026-09-25</lastmod>
   </url>
-
   <url>
-    <loc>https://www.dragonsden.es/politica-privacidad.html</loc>
-    <lastmod>2026-05-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <loc>https://dragons-den-eight.vercel.app/proteccion-infancia.html</loc>
+    <lastmod>2026-09-25</lastmod>
   </url>
-
-  <url>
-    <loc>https://www.dragonsden.es/cookies.html</loc>
-    <lastmod>2026-05-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-
 </urlset>

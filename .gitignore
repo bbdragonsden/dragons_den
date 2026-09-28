@@ -10,3 +10,11 @@ config.txt
 Thumbs.db
 .DS_Store
 desktop.ini
+
+.vercel
+
+# Carpeta de trabajo privada: datos de clientes y finanzas reales. Nunca al repo.
+Dragons_Den/
+
+# Archivos retirados/basura de entornos anteriores (incluye un index.lock viejo).
+_retirado/

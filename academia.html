@@ -9,25 +9,23 @@
     <meta name="author" content="Yefangyi Hu Garcia — Dragons Den Basketball Academy">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#c8a96e">
-    <link rel="canonical" href="https://www.dragonsden.es/academia.html">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F409;</text></svg>">
+    <link rel="canonical" href="https://dragons-den-eight.vercel.app/academia.html">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23c8a96e'/%3E%3Cg fill='none' stroke='%230a0a0a' stroke-width='5'%3E%3Cpath d='M4 50h92M50 4v92'/%3E%3Cpath d='M18 18c14 14 14 50 0 64M82 18c-14 14-14 50 0 64'/%3E%3C/g%3E%3C/svg%3E">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Dragons Den Basketball Academy">
     <meta property="og:title" content="Academia Online — Dragons Den Basketball">
     <meta property="og:description" content="Cursos de baloncesto online con los métodos de Dragons Den. Tiro, trabajo de pies y packs completos. Acceso anual desde 19€.">
-    <meta property="og:url" content="https://www.dragonsden.es/academia.html">
-    <meta property="og:image" content="https://picsum.photos/seed/dragonsden-academia/1200/630">
+    <meta property="og:url" content="https://dragons-den-eight.vercel.app/academia.html">
+    <meta property="og:image" content="https://dragons-den-eight.vercel.app/og/academia.png">
     <meta property="og:locale" content="es_ES">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Academia Online — Dragons Den Basketball">
     <meta name="twitter:description" content="Cursos de baloncesto online con los métodos de Dragons Den. Acceso anual desde 19€, aplica en pista.">
-    <meta name="twitter:image" content="https://picsum.photos/seed/dragonsden-academia/1200/630">
+    <meta name="twitter:image" content="https://dragons-den-eight.vercel.app/og/academia.png">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/comun.css">
 
     <style>
         /* ── DESIGN TOKENS ───────────────────────────── */
@@ -41,7 +39,7 @@
             --gold-border: rgba(200,169,110,0.22);
             --gold-glow: rgba(200,169,110,0.07);
             --text: #f0ede8;
-            --text-muted: #6a6560;
+            --text-muted: #8a8580;
             --text-secondary: #a09890;
             --border: rgba(255,255,255,0.055);
             --border-strong: rgba(255,255,255,0.10);
@@ -63,7 +61,7 @@
         }
 
         body {
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--bg);
             color: var(--text);
             font-weight: 400;
@@ -707,7 +705,6 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--text-muted);
-            opacity: 0.5;
         }
 
         .price-market-val {
@@ -715,7 +712,6 @@
             font-size: 13px;
             color: var(--text-muted);
             text-decoration: line-through;
-            opacity: 0.35;
             letter-spacing: 0.5px;
         }
 
@@ -760,7 +756,6 @@
             color: var(--text-muted);
             letter-spacing: 0.5px;
             margin-top: 6px;
-            opacity: 0.55;
         }
 
         .btn-course {
@@ -874,7 +869,7 @@
             font-family: 'Bebas Neue', sans-serif;
             font-size: 5rem;
             color: var(--gold);
-            opacity: 0.15;
+            opacity: 0.65;
             line-height: 1;
             margin-bottom: -4px;
             transition: opacity 0.3s;
@@ -882,7 +877,7 @@
             display: block;
         }
 
-        .how-step:hover .how-step-num { opacity: 0.3; }
+        .how-step:hover .how-step-num { opacity: 0.85; }
 
         .how-step-icon {
             margin-bottom: 18px;
@@ -1099,7 +1094,7 @@
             border: none;
             border-bottom: 1px solid transparent;
             color: var(--text);
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 15px;
             font-weight: 400;
             outline: none;
@@ -1114,7 +1109,7 @@
             border: none;
             border-bottom: 1px solid transparent;
             color: var(--text);
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 15px;
             font-weight: 400;
             outline: none;
@@ -1153,7 +1148,7 @@
             line-height: 1.6;
         }
 
-        .wl-rgpd a { color: var(--gold); text-decoration: none; }
+        .wl-rgpd a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
 
         .wl-submit {
             position: relative;
@@ -1468,7 +1463,7 @@
                 justify-content: center;
                 gap: 3px;
                 text-decoration: none;
-                color: #444;
+                color: #8f8f8f;
                 padding: 8px 4px 2px;
                 min-height: 44px;
                 transition: color 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -1478,7 +1473,7 @@
             }
 
             .tab-acad-item span {
-                font-family: 'Satoshi', Arial, sans-serif;
+                font-family: 'Inter', Arial, sans-serif;
                 font-size: 9px;
                 font-weight: 600;
                 letter-spacing: 0.5px;
@@ -1522,18 +1517,20 @@
                 color: inherit;
             }
         }
+        .wl-form-msg { font-size: 12px; line-height: 1.5; min-height: 0; margin: 0; }
+        .wl-form-msg.err { color: #ff8a8a; margin: 4px 0 8px; }
     </style>
 </head>
 <body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
 
 <!-- NAV -->
 <nav id="main-nav">
     <a href="index.html" class="nav-logo">Dragons Den</a>
     <ul class="nav-links">
-        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html">Inicio <span aria-hidden="true" style="font-size:.78em;opacity:.65;vertical-align:1px">&#8599;</span></a></li>
         <li><a href="#cursos">Cursos</a></li>
         <li><a href="#como-funciona">C&oacute;mo funciona</a></li>
-        <li><a href="#opiniones">Opiniones</a></li>
         <li><a href="#lista-espera">Lista de espera</a></li>
         <li><a href="login.html" class="nav-cta">Acceder</a></li>
     </ul>
@@ -1545,17 +1542,17 @@
         </svg>
     </button>
 </nav>
-<ul class="nav-mobile-menu" id="nav-mobile-menu" role="menu">
-    <li><a href="index.html" role="menuitem">Inicio</a></li>
-    <li><a href="#cursos" role="menuitem">Cursos</a></li>
-    <li><a href="#como-funciona" role="menuitem">C&oacute;mo funciona</a></li>
-    <li><a href="#opiniones" role="menuitem">Opiniones</a></li>
-    <li><a href="#lista-espera" role="menuitem">Lista de espera</a></li>
-    <li><a href="login.html" role="menuitem" style="color:var(--gold);">Acceder</a></li>
+<ul class="nav-mobile-menu" id="nav-mobile-menu">
+    <li><a href="index.html">Inicio <span aria-hidden="true" style="font-size:.78em;opacity:.65;vertical-align:1px">&#8599;</span></a></li>
+    <li><a href="#cursos">Cursos</a></li>
+    <li><a href="#como-funciona">C&oacute;mo funciona</a></li>
+    <li><a href="#lista-espera">Lista de espera</a></li>
+    <li><a href="login.html" style="color:var(--gold);">Acceder</a></li>
 </ul>
+<main id="contenido">
 
 <!-- HERO -->
-<div class="hero" id="acad-inicio" role="banner">
+<div class="hero" id="acad-inicio">
     <div class="hero-left">
         <p class="hero-eyebrow">Academia Online</p>
         <h1 class="hero-title">
@@ -1631,9 +1628,9 @@
     <p class="section-eyebrow">Packs de entrenamiento</p>
     <h2 class="section-title" id="courses-heading">Elige tu<br>pack</h2>
     <div class="section-divider" aria-hidden="true"></div>
-    <p class="section-text">Los mismos ejercicios que usamos en pista, organizados por &aacute;rea de mejora. Acceso anual renovable, sin permanencia.</p>
+    <p class="section-text">Los mismos ejercicios que usamos en pista, organizados por &aacute;rea de mejora. Acceso anual renovable, sin permanencia. <strong style="color:var(--gold);">Pr&oacute;ximamente:</strong> el contenido est&aacute; en preparaci&oacute;n y todav&iacute;a no se puede comprar; de momento solo puedes apuntarte a la lista de espera. N&uacute;mero de v&iacute;deos y duraci&oacute;n son previstos.</p>
 
-    <div class="courses-grid" role="list" aria-label="Packs disponibles"-stagger>
+    <div class="courses-grid" role="list" aria-label="Packs disponibles">
 
         <!-- Pack 1 — Tiro -->
         <article class="course-card" data-num="01" role="listitem">
@@ -1656,8 +1653,8 @@
             </ul>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
-                    <p class="course-meta-label">Videos</p>
-                    <p class="course-meta-value">8 videos</p>
+                    <p class="course-meta-label">V&iacute;deos</p>
+                    <p class="course-meta-value">8 v&iacute;deos (previstos)</p>
                 </div>
                 <div class="course-meta-item">
                     <p class="course-meta-label">Duraci&oacute;n</p>
@@ -1667,16 +1664,12 @@
             <span class="course-difficulty" aria-label="Nivel: Iniciaci&oacute;n y Medio">Iniciaci&oacute;n &mdash; Medio</span>
             <div class="course-price-row">
                 <div class="price-block">
-                    <div class="price-market-ref">
-                        <span class="price-market-label">Mercado</span>
-                        <span class="price-market-val">~15&euro;/mes</span>
-                    </div>
                     <div class="price-main-row">
                         <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span class="price-year-tag">/a&ntilde;o</span>
                     </div>
                     <p class="price-monthly-equiv">&asymp;&nbsp;1,58&nbsp;&euro;&nbsp;al mes</p>
                 </div>
-                <a href="#lista-espera" class="btn-course">Unirme</a>
+                <a href="#lista-espera" class="btn-course">Lista de espera</a>
             </div>
         </article>
 
@@ -1698,8 +1691,8 @@
             </ul>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
-                    <p class="course-meta-label">Videos</p>
-                    <p class="course-meta-value">6 videos</p>
+                    <p class="course-meta-label">V&iacute;deos</p>
+                    <p class="course-meta-value">6 v&iacute;deos (previstos)</p>
                 </div>
                 <div class="course-meta-item">
                     <p class="course-meta-label">Duraci&oacute;n</p>
@@ -1709,16 +1702,12 @@
             <span class="course-difficulty" aria-label="Nivel: Medio">Medio</span>
             <div class="course-price-row">
                 <div class="price-block">
-                    <div class="price-market-ref">
-                        <span class="price-market-label">Mercado</span>
-                        <span class="price-market-val">~15&euro;/mes</span>
-                    </div>
                     <div class="price-main-row">
                         <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span class="price-year-tag">/a&ntilde;o</span>
                     </div>
                     <p class="price-monthly-equiv">&asymp;&nbsp;1,58&nbsp;&euro;&nbsp;al mes</p>
                 </div>
-                <a href="#lista-espera" class="btn-course">Unirme</a>
+                <a href="#lista-espera" class="btn-course">Lista de espera</a>
             </div>
         </article>
 
@@ -1740,8 +1729,8 @@
             </ul>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
-                    <p class="course-meta-label">Videos</p>
-                    <p class="course-meta-value">5 videos</p>
+                    <p class="course-meta-label">V&iacute;deos</p>
+                    <p class="course-meta-value">5 v&iacute;deos (previstos)</p>
                 </div>
                 <div class="course-meta-item">
                     <p class="course-meta-label">Duraci&oacute;n</p>
@@ -1751,16 +1740,12 @@
             <span class="course-difficulty" aria-label="Nivel: Iniciaci&oacute;n y Medio">Iniciaci&oacute;n &mdash; Medio</span>
             <div class="course-price-row">
                 <div class="price-block">
-                    <div class="price-market-ref">
-                        <span class="price-market-label">Mercado</span>
-                        <span class="price-market-val">~15&euro;/mes</span>
-                    </div>
                     <div class="price-main-row">
                         <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span class="price-year-tag">/a&ntilde;o</span>
                     </div>
                     <p class="price-monthly-equiv">&asymp;&nbsp;1,58&nbsp;&euro;&nbsp;al mes</p>
                 </div>
-                <a href="#lista-espera" class="btn-course">Unirme</a>
+                <a href="#lista-espera" class="btn-course">Lista de espera</a>
             </div>
         </article>
 
@@ -1782,8 +1767,8 @@
             </ul>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
-                    <p class="course-meta-label">Videos</p>
-                    <p class="course-meta-value">6 videos</p>
+                    <p class="course-meta-label">V&iacute;deos</p>
+                    <p class="course-meta-value">6 v&iacute;deos (previstos)</p>
                 </div>
                 <div class="course-meta-item">
                     <p class="course-meta-label">Duraci&oacute;n</p>
@@ -1793,16 +1778,12 @@
             <span class="course-difficulty all-levels" aria-label="Nivel: Todos">Todos los niveles</span>
             <div class="course-price-row">
                 <div class="price-block">
-                    <div class="price-market-ref">
-                        <span class="price-market-label">Mercado</span>
-                        <span class="price-market-val">~15&euro;/mes</span>
-                    </div>
                     <div class="price-main-row">
                         <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span class="price-year-tag">/a&ntilde;o</span>
                     </div>
                     <p class="price-monthly-equiv">&asymp;&nbsp;1,58&nbsp;&euro;&nbsp;al mes</p>
                 </div>
-                <a href="#lista-espera" class="btn-course">Unirme</a>
+                <a href="#lista-espera" class="btn-course">Lista de espera</a>
             </div>
         </article>
 
@@ -1825,8 +1806,8 @@
             </ul>
             <div class="course-meta" aria-label="Detalles del pack">
                 <div class="course-meta-item">
-                    <p class="course-meta-label">Videos</p>
-                    <p class="course-meta-value">4 videos</p>
+                    <p class="course-meta-label">V&iacute;deos</p>
+                    <p class="course-meta-value">4 v&iacute;deos (previstos)</p>
                 </div>
                 <div class="course-meta-item">
                     <p class="course-meta-label">Duraci&oacute;n</p>
@@ -1836,16 +1817,12 @@
             <span class="course-difficulty all-levels" aria-label="Nivel: Todos">Todos los niveles</span>
             <div class="course-price-row">
                 <div class="price-block">
-                    <div class="price-market-ref">
-                        <span class="price-market-label">Mercado</span>
-                        <span class="price-market-val">~15&euro;/mes</span>
-                    </div>
                     <div class="price-main-row">
                         <span class="course-price-currency">&euro;</span><span class="course-price">19</span><span class="price-year-tag">/a&ntilde;o</span>
                     </div>
                     <p class="price-monthly-equiv">&asymp;&nbsp;1,58&nbsp;&euro;&nbsp;al mes</p>
                 </div>
-                <a href="#lista-espera" class="btn-course">Unirme</a>
+                <a href="#lista-espera" class="btn-course">Lista de espera</a>
             </div>
         </article>
 
@@ -1861,12 +1838,11 @@
                 <li>5 packs completos desbloqueados</li>
                 <li>4 módulos bonus exclusivos</li>
                 <li>Actualizaciones incluidas todo el año</li>
-                <li>Precio de lanzamiento bloqueado</li>
             </ul>
             <div class="course-meta" aria-label="Detalles del pack completo">
                 <div class="course-meta-item">
-                    <p class="course-meta-label">Videos</p>
-                    <p class="course-meta-value">29+ videos</p>
+                    <p class="course-meta-label">V&iacute;deos</p>
+                    <p class="course-meta-value">29+ v&iacute;deos (previstos)</p>
                 </div>
                 <div class="course-meta-item">
                     <p class="course-meta-label">Duraci&oacute;n</p>
@@ -1876,16 +1852,12 @@
             <span class="course-difficulty all-levels" aria-label="Nivel: Todos">Todos los niveles</span>
             <div class="course-price-row">
                 <div class="price-block">
-                    <div class="price-market-ref">
-                        <span class="price-market-label">Mercado</span>
-                        <span class="price-market-val">~30&euro;/mes</span>
-                    </div>
                     <div class="price-main-row">
                         <span class="course-price-currency">&euro;</span><span class="course-price">49</span><span class="price-year-tag">/a&ntilde;o</span>
                     </div>
                     <p class="price-monthly-equiv">&asymp;&nbsp;4,08&nbsp;&euro;&nbsp;al mes &middot; 5 packs + 4 bonus</p>
                 </div>
-                <a href="#lista-espera" class="btn-course">Unirme</a>
+                <a href="#lista-espera" class="btn-course">Lista de espera</a>
             </div>
         </article>
 
@@ -1899,7 +1871,7 @@
         <h2 class="section-title" id="how-heading">Tres pasos.<br>Sin complicaci&oacute;n.</h2>
         <div class="section-divider" aria-hidden="true"></div>
 
-        <div class="how-steps" role="list"-stagger>
+        <div class="how-steps" role="list">
 
             <div class="how-step" role="listitem">
                 <span class="how-step-num" aria-hidden="true">01</span>
@@ -1946,89 +1918,6 @@
     </div>
 </section>
 
-<!-- OPINIONES -->
-<div class="opiniones-section" id="opiniones">
-    <div class="opiniones-inner">
-        <p class="section-eyebrow">Opiniones</p>
-        <h2 class="section-title">Lo que dicen<br>los jugadores</h2>
-        <div class="section-divider" aria-hidden="true"></div>
-
-        <div class="opiniones-grid">
-
-            <div class="opinion-card">
-                <div class="opinion-stars">
-                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                </div>
-                <p class="opinion-text">Llevaba meses estancado con el tiro. Con el pack en dos semanas ya notaba diferencia en el porcentaje. Es el tipo de contenido que no encuentras gratis en YouTube &mdash; va directo al problema sin rodeos.</p>
-                <div class="opinion-author">
-                    <div class="opinion-name">Rub&eacute;n A.</div>
-                    <div class="opinion-meta">Base &mdash; 18 a&ntilde;os &mdash; Pack Tiro</div>
-                </div>
-            </div>
-
-            <div class="opinion-card">
-                <div class="opinion-stars">
-                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                </div>
-                <p class="opinion-text">Compr&eacute; el pack completo sin conocer la academia. Para la siguiente temporada ya ten&iacute;a mi primer paso mucho m&aacute;s limpio y hab&iacute;a dejado de perder el bal&oacute;n en penetraci&oacute;n.</p>
-                <div class="opinion-author">
-                    <div class="opinion-name">Sof&iacute;a M.</div>
-                    <div class="opinion-meta">Alero &mdash; 16 a&ntilde;os &mdash; Pack Completo</div>
-                </div>
-            </div>
-
-            <div class="opinion-card">
-                <div class="opinion-stars">
-                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                </div>
-                <p class="opinion-text">Mi hijo lo tiene puesto en la tele del sal&oacute;n y repite los ejercicios en el pasillo. No me hab&iacute;a pedido nunca formaci&oacute;n extra, y ahora me pide ir a la pista a probar lo que aprende.</p>
-                <div class="opinion-author">
-                    <div class="opinion-name">Carlos F.</div>
-                    <div class="opinion-meta">Padre de Iker, 13 a&ntilde;os &mdash; Pack Footwork</div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="opiniones-grid">
-
-            <div class="opinion-card">
-                <div class="opinion-stars">
-                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                </div>
-                <p class="opinion-text">Hice el pack de defensa mientras esperaba plaza en el campus. Cuando llegu&eacute;, Yefangyi me pregunt&oacute; d&oacute;nde hab&iacute;a entrenado ese verano. Le dije que con sus propios videos. No se lo esperaba.</p>
-                <div class="opinion-author">
-                    <div class="opinion-name">Daniel V.</div>
-                    <div class="opinion-meta">Escolta &mdash; 21 a&ntilde;os &mdash; Pack Defensa</div>
-                </div>
-            </div>
-
-            <div class="opinion-card">
-                <div class="opinion-stars">
-                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                </div>
-                <p class="opinion-text">El pack de mentalidad lo escucho mientras voy al entreno de mi club. En el coche, 20 minutos antes de pisar la pista. Ha cambiado completamente c&oacute;mo entro a competir.</p>
-                <div class="opinion-author">
-                    <div class="opinion-name">Claudia R.</div>
-                    <div class="opinion-meta">Base &mdash; 17 a&ntilde;os &mdash; Pack Mentalidad</div>
-                </div>
-            </div>
-
-            <div class="opinion-card">
-                <div class="opinion-stars">
-                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                </div>
-                <p class="opinion-text">Muy bien organizado por niveles. Mi hija de 12 a&ntilde;os empez&oacute; por los primeros videos del pack de tiro y ahora ya va por el de footwork. A su ritmo, sin presi&oacute;n. Se nota que sabe c&oacute;mo ense&ntilde;ar.</p>
-                <div class="opinion-author">
-                    <div class="opinion-name">Laura G.</div>
-                    <div class="opinion-meta">Madre de Valentina, 12 a&ntilde;os &mdash; Pack Tiro</div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
 <!-- PROXIMAMENTE / WAITLIST -->
 <div class="waitlist-wrap" id="lista-espera">
     <div class="waitlist-inner">
@@ -2037,31 +1926,28 @@
                 <span class="status-dot" aria-hidden="true"></span>
                 Pr&oacute;ximamente
             </div>
-            <h2 class="waitlist-title">El contenido<br>se graba este<br>verano.</h2>
-            <p class="waitlist-subtitle">Verano 2026</p>
+            <h2 class="waitlist-title">El contenido<br>est&aacute; en<br>preparaci&oacute;n.</h2>
+            <p class="waitlist-subtitle">Sin fecha de lanzamiento cerrada</p>
             <p class="waitlist-text">
-                Estamos filmando todos los m&oacute;dulos en pista durante el verano de 2026.
-                &Uacute;nete a la lista de espera y accede primero con descuento de lanzamiento.
-                Packs individuales desde 19&euro;/a&ntilde;o. Pack completo con todos los m&oacute;dulos a 49&euro;/a&ntilde;o. Las primeras 50 personas bloquean el precio de lanzamiento.
+                Estamos grabando los m&oacute;dulos en pista. Cuando est&eacute;n listos avisaremos por email a quien est&eacute; en la lista de espera, con la fecha y el precio final.
+                Precios previstos: packs individuales, 19&nbsp;&euro;/a&ntilde;o; pack completo, 49&nbsp;&euro;/a&ntilde;o. Apuntarte no te compromete a nada ni supone ning&uacute;n pago.
             </p>
         </div>
         <div class="waitlist-form-wrap">
 
             <!-- Estado de confirmación (oculto hasta envío) -->
-            <div id="wl-confirm" class="wl-confirm">
+            <div id="wl-confirm" class="wl-confirm" role="status" tabindex="-1">
                 <div class="wl-confirm-icon" aria-hidden="true">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <polyline points="3,10 8,15 17,5" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <p class="wl-confirm-eyebrow">Plaza reservada</p>
-                <h3 class="wl-confirm-title">Est&aacute;s dentro.</h3>
+                <p class="wl-confirm-eyebrow">Lista de espera</p>
+                <h3 class="wl-confirm-title">Te avisaremos.</h3>
                 <p class="wl-confirm-body">
-                    Eres de los primeros en apuntarte. Cuando el contenido est&eacute; listo este verano,
-                    ser&aacute;s el primero en saberlo &mdash; y tendr&aacute;s el precio de lanzamiento
-                    bloqueado antes de que suba.
+                    Te hemos apuntado. Cuando el contenido est&eacute; publicado te escribiremos con la fecha y el precio final.
+                    Si quieres salir de la lista, escr&iacute;benos a bbdragonsden@gmail.com.
                 </p>
-                <p class="wl-confirm-sub">Revisa tu bandeja de entrada. Te hemos enviado una confirmaci&oacute;n.</p>
             </div>
 
             <!-- Formulario (se oculta tras envío exitoso) -->
@@ -2073,7 +1959,7 @@
                     aria-label="Formulario lista de espera"
                     novalidate
                 >
-                    <input type="text" name="_honey" style="display:none" tabindex="-1" aria-hidden="true">
+                    <input type="text" name="_honey" id="wl-honey" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" tabindex="-1" autocomplete="off" aria-hidden="true">
 
                     <div class="wl-form-group">
                         <label class="wl-label" for="wl-name">Nombre</label>
@@ -2118,17 +2004,19 @@
                     <label class="wl-rgpd">
                         <input type="checkbox" name="rgpd" id="wl-rgpd" required>
                         <span>
-                            He le&iacute;do y acepto la
-                            <a href="politica-privacidad.html" target="_blank">Pol&iacute;tica de Privacidad</a>.
-                            Mis datos se usar&aacute;n exclusivamente para notificarme del lanzamiento.
+                            He le&iacute;do la
+                            <a href="politica-privacidad.html" target="_blank" rel="noopener">pol&iacute;tica de privacidad</a>
+                            y acepto que Dragons Den use mi nombre y email solo para avisarme del lanzamiento de la Academia Online.
                         </span>
                     </label>
 
+                    <p class="wl-form-msg" id="wl-msg" role="status" aria-live="polite"></p>
+
                     <button type="submit" class="wl-submit" id="wl-submit-btn">
-                        Reservar mi plaza
+                        Apuntarme a la lista de espera
                     </button>
 
-                    <p class="wl-form-note">Sin spam. Solo te avisamos cuando lancemos.</p>
+                    <p class="wl-form-note">Solo te escribiremos para avisarte del lanzamiento. Responsable: Yefangyi Hu Garcia. Derechos en bbdragonsden@gmail.com.</p>
                 </form>
             </div><!-- /wl-form-inner -->
         </div>
@@ -2136,6 +2024,7 @@
 </div>
 
 <!-- FOOTER -->
+</main>
 <footer>
     <div class="footer-inner">
         <div class="footer-left">
@@ -2161,10 +2050,9 @@
         </div>
         <div class="footer-right">
             <ul class="footer-nav" aria-label="Navegación">
-                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html">Inicio <span aria-hidden="true" style="font-size:.78em;opacity:.65;vertical-align:1px">&#8599;</span></a></li>
                 <li><a href="#cursos">Cursos</a></li>
                 <li><a href="#como-funciona">C&oacute;mo funciona</a></li>
-                <li><a href="#opiniones">Opiniones</a></li>
                 <li><a href="#lista-espera">Lista de espera</a></li>
                 <li><a href="login.html">Acceder</a></li>
             </ul>
@@ -2173,9 +2061,11 @@
     <div class="footer-bottom">
         <p class="footer-copy">&copy; 2026 Yefangyi Hu Garcia. Todos los derechos reservados.</p>
         <nav class="footer-legal" aria-label="Enlaces legales">
-            <a href="aviso-legal.html">Aviso Legal</a>
+            <a href="aviso-legal.html">Aviso legal</a>
+            <a href="condiciones.html">Condiciones de contrataci&oacute;n</a>
             <a href="politica-privacidad.html">Privacidad</a>
             <a href="cookies.html">Cookies</a>
+            <a href="proteccion-infancia.html">Protecci&oacute;n de la infancia</a>
         </nav>
     </div>
 </footer>
@@ -2236,50 +2126,55 @@
                 var interestEl = document.getElementById('wl-interest');
                 var rgpdEl = document.getElementById('wl-rgpd');
 
-                var valid = true;
-                if (!nameEl.value.trim()) { nameEl.focus(); valid = false; }
-                else if (!emailEl.value.trim() || !emailEl.value.includes('@')) { emailEl.focus(); valid = false; }
-                else if (!interestEl.value) { interestEl.focus(); valid = false; }
-                else if (!rgpdEl.checked) { valid = false; }
-
-                if (!valid) {
-                    form.style.transition = 'transform 0.08s ease';
-                    form.style.transform = 'translateX(-4px)';
-                    setTimeout(function () { form.style.transform = 'translateX(4px)'; }, 80);
-                    setTimeout(function () { form.style.transform = 'translateX(0)'; }, 160);
-                    return;
-                }
+                var msgEl = document.getElementById('wl-msg');
+                var fallo = function(el, texto) {
+                    [nameEl, emailEl, interestEl, rgpdEl].forEach(function(x) { x.removeAttribute('aria-invalid'); });
+                    if (el) { el.setAttribute('aria-invalid', 'true'); el.setAttribute('aria-describedby', 'wl-msg'); el.focus(); }
+                    msgEl.textContent = texto;
+                    msgEl.className = 'wl-form-msg err';
+                };
+                if (!nameEl.value.trim()) return fallo(nameEl, 'Escribe tu nombre.');
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) return fallo(emailEl, 'Escribe un email válido.');
+                if (!interestEl.value) return fallo(interestEl, 'Elige un pack.');
+                if (!rgpdEl.checked) return fallo(rgpdEl, 'Marca la casilla de privacidad para poder avisarte.');
+                msgEl.textContent = '';
+                msgEl.className = 'wl-form-msg';
 
                 submitBtn.textContent = 'Enviando…';
                 submitBtn.disabled = true;
 
+                var reset = function(texto) {
+                    submitBtn.textContent = 'Apuntarme a la lista de espera';
+                    submitBtn.disabled = false;
+                    fallo(null, texto || 'No se ha podido enviar. Inténtalo de nuevo o escríbenos a bbdragonsden@gmail.com.');
+                };
+
                 fetch('/api/waitlist', {
                     method: 'POST',
                     body: JSON.stringify({
+                        _honey: document.getElementById('wl-honey').value,
                         nombre: nameEl.value.trim(),
                         email: emailEl.value.trim(),
-                        interes: interestEl.value
+                        interes: interestEl.value,
+                        acepta_privacidad: rgpdEl.checked
                     }),
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     }
                 })
-                .then(function (res) { return res.json(); })
+                .then(function (res) { return res.json().catch(function () { return {}; }); })
                 .then(function (json) {
                     if (json.success) {
                         document.getElementById('wl-form-inner').style.display = 'none';
                         var confirm = document.getElementById('wl-confirm');
                         confirm.style.display = 'block';
+                        confirm.focus();
                     } else {
-                        submitBtn.textContent = 'Reservar mi plaza';
-                        submitBtn.disabled = false;
+                        reset(json.error);
                     }
                 })
-                .catch(function () {
-                    submitBtn.textContent = 'Reservar mi plaza';
-                    submitBtn.disabled = false;
-                });
+                .catch(function () { reset(); });
             });
         }
 
@@ -2300,13 +2195,15 @@
 </script>
 
 <!-- GSAP + ScrollTrigger -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="/vendor/gsap-3.12.5/gsap.min.js"></script>
+<script src="/vendor/gsap-3.12.5/ScrollTrigger.min.js"></script>
 
 <script>
 (function () {
     'use strict';
     if (typeof gsap === 'undefined') return;
+    // Con "reducir movimiento" no hay animaciones: el contenido ya es visible.
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     gsap.registerPlugin(ScrollTrigger);
 
     var E = 'power3.out';

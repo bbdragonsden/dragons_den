@@ -1,13 +1,13 @@
 User-agent: *
 Allow: /
 
+# Zona de alumnos y funciones del servidor: sin interés para buscadores.
+# (Las carpetas internas no se publican: las excluye .vercelignore,
+#  así que no hace falta nombrarlas aquí.)
 Disallow: /api/
 Disallow: /plataforma.html
 Disallow: /login.html
 Disallow: /register.html
-Disallow: /ADMIN_SPEC.md
-Disallow: /FINANZAS/
-Disallow: /CLIENTES/
-Disallow: /COWORK_PROMPTS/
+Disallow: /reset-password.html
 
-Sitemap: https://www.dragonsden.es/sitemap.xml
+Sitemap: https://dragons-den-eight.vercel.app/sitemap.xml

@@ -6,7 +6,7 @@ const ANON_KEY      = 'sb_publishable_W4UBtORpWtWnKGzw-x9VbA_gPsDQfzQ';
 
 const VALID_PACKS = ['tiro', 'footwork', 'defensa', 'fisico', 'mental', 'completo', 'all'];
 
-const ALLOWED_ORIGINS = ['https://dragonsden.es', 'https://www.dragonsden.es'];
+const ALLOWED_ORIGINS = ['https://dragonsden.es', 'https://www.dragonsden.es', 'https://dragons-den-eight.vercel.app'];
 
 function supabase(path, method, body, extraHeaders = {}) {
   return new Promise((resolve, reject) => {

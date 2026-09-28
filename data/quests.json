@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "actualizado": "2026-09-18",
+  "moneda_xp": "Dragons XP",
+  "ciclo": {
+    "id": "ciclo-2026-otono",
+    "nombre": "Otoño 2026",
+    "primera_semana": "2026-W40",
+    "ultima_semana": "2026-W45"
+  },
+  "retos": [
+    {
+      "id": "q-2026-w40-shot-pocket",
+      "semana": "2026-W40",
+      "abre": "2026-09-28T00:00:00+02:00",
+      "cierra": "2026-10-04T23:59:00+02:00",
+      "titulo": "20 recepciones al shot pocket",
+      "gancho": "El tiro se gana antes de que el balón llegue a tus manos.",
+      "bloque": "tiro",
+      "dificultad": 1,
+      "xp_base": 100,
+      "edad_min": 10,
+      "edad_max": 99,
+      "planes": ["rookie", "pro", "elite"],
+      "espacio": "casa",
+      "material": ["balón"],
+      "duracion_min": 6,
+      "leccion": { "modulo": 1, "video": 1, "titulo": "La mecánica perfecta del tiro" },
+      "ejecucion": [
+        "De pie, sin canasta, con el agarre correcto: hueco entre palma y balón.",
+        "Lanza el balón verticalmente un metro por encima de la cabeza.",
+        "Recíbelo directamente en el shot pocket, a la altura de la cadera del lado dominante.",
+        "20 repeticiones seguidas, sin parar entre una y otra."
+      ],
+      "requiere_clip": true,
+      "clip": {
+        "duracion_max_s": 45,
+        "angulo": "frontal",
+        "encuadre": "cuerpo entero, cadera y manos visibles",
+        "indicacion": "Graba las 10 últimas repeticiones. No hace falta que salga la cara."
+      },
+      "criterios": [
+        { "id": "c1", "texto": "Hay hueco visible entre la palma y el balón en el agarre", "peso": 30, "obligatorio": true },
+        { "id": "c2", "texto": "El balón se recibe a la altura de la cadera, no en el pecho", "peso": 30, "obligatorio": true },
+        { "id": "c3", "texto": "Los codos no se abren hacia fuera al recibir", "peso": 20, "obligatorio": false },
+        { "id": "c4", "texto": "Completa 20 repeticiones sin recolocar el balón entre una y otra", "peso": 20, "obligatorio": false }
+      ],
+      "errores_comunes": [
+        "Recibir en el pecho y bajar después: pierdes justo el tiempo que querías ganar.",
+        "Mirar el balón durante todo el vuelo en lugar de sentir la recepción."
+      ]
+    },
+    {
+      "id": "q-2026-w41-gauntlet-conos",
+      "semana": "2026-W41",
+      "abre": "2026-10-05T00:00:00+02:00",
+      "cierra": "2026-10-11T23:59:00+02:00",
+      "titulo": "Gauntlet: 6 conos, dos manos, sin mirar",
+      "gancho": "Si miras el balón, el defensor ya sabe lo que vas a hacer.",
+      "bloque": "manejo",
+      "dificultad": 2,
+      "xp_base": 130,
+      "edad_min": 10,
+      "edad_max": 99,
+      "planes": ["rookie", "pro", "elite"],
+      "espacio": "media pista",
+      "material": ["balón", "6 conos o marcas"],
+      "duracion_min": 10,
+      "leccion": { "modulo": 2, "video": 3, "titulo": "Cambios de dirección: crossover y behind the back" },
+      "ejecucion": [
+        "Coloca 6 conos en línea, separados metro y medio.",
+        "Recorre el zigzag con crossover bajo en cada cono.",
+        "Ida a media velocidad, vuelta a velocidad máxima.",
+        "Tres pasadas completas."
+      ],
+      "requiere_clip": true,
+      "clip": {
+        "duracion_max_s": 60,
+        "angulo": "lateral",
+        "encuadre": "la línea de conos completa dentro del plano",
+        "indicacion": "Graba la pasada rápida. Deja el móvil fijo en el suelo."
+      },
+      "criterios": [
+        { "id": "c1", "texto": "El bote del crossover no sube por encima de la rodilla", "peso": 30, "obligatorio": true },
+        { "id": "c2", "texto": "La mirada va al frente, no al balón, al menos en la mitad del recorrido", "peso": 25, "obligatorio": true },
+        { "id": "c3", "texto": "El cuerpo protege el balón: hombro bajo y por delante en cada cambio", "peso": 25, "obligatorio": false },
+        { "id": "c4", "texto": "No pierde el balón en ninguna de las tres pasadas", "peso": 20, "obligatorio": false }
+      ],
+      "errores_comunes": [
+        "Cambiar de mano antes de llegar al cono: el defensor real no se traga ese amago.",
+        "Subir el bote a la cintura en cuanto se acelera."
+      ]
+    },
+    {
+      "id": "q-2026-w42-1-2-step",
+      "semana": "2026-W42",
+      "abre": "2026-10-12T00:00:00+02:00",
+      "cierra": "2026-10-18T23:59:00+02:00",
+      "titulo": "1-2 step desde recepción, los dos lados",
+      "gancho": "Los pies que nadie entrena son los que deciden el partido.",
+      "bloque": "footwork",
+      "dificultad": 2,
+      "xp_base": 130,
+      "edad_min": 11,
+      "edad_max": 99,
+      "planes": ["rookie", "pro", "elite"],
+      "espacio": "media pista",
+      "material": ["balón", "2 marcas de suelo", "canasta"],
+      "duracion_min": 12,
+      "leccion": { "modulo": 1, "video": 3, "titulo": "Los pies: la base que nadie entrena" },
+      "ejecucion": [
+        "Marca en el suelo el punto de recepción.",
+        "Recibe de un pasador o del tablero y ejecuta el 1-2 step hacia el tiro.",
+        "8 repeticiones entrando desde la derecha, 8 desde la izquierda.",
+        "Velocidad lenta: aquí se busca el patrón, no el porcentaje."
+      ],
+      "requiere_clip": true,
+      "clip": {
+        "duracion_max_s": 45,
+        "angulo": "lateral",
+        "encuadre": "de la rodilla para abajo tiene que verse siempre",
+        "indicacion": "Con cuatro repeticiones de cada lado me vale."
+      },
+      "criterios": [
+        { "id": "c1", "texto": "El primer pie que cae es siempre el mismo dentro de cada serie", "peso": 30, "obligatorio": true },
+        { "id": "c2", "texto": "Las rodillas están flexionadas en la recepción, el peso no cae en los talones", "peso": 30, "obligatorio": true },
+        { "id": "c3", "texto": "El patrón se mantiene igual entrando por los dos lados", "peso": 25, "obligatorio": false },
+        { "id": "c4", "texto": "No hay pasos extra de ajuste antes del tiro", "peso": 15, "obligatorio": false }
+      ],
+      "errores_comunes": [
+        "Cambiar el orden de los pies según el lado: es el fallo número uno en sub-16.",
+        "Llegar erguido y tener que flexionar después."
+      ]
+    },
+    {
+      "id": "q-2026-w43-catch-and-shoot",
+      "semana": "2026-W43",
+      "abre": "2026-10-19T00:00:00+02:00",
+      "cierra": "2026-10-25T23:59:00+02:00",
+      "titulo": "Catch and shoot: 8 de 10 desde la esquina",
+      "gancho": "Una posición fija. Un número. Sin excusas.",
+      "bloque": "tiro",
+      "dificultad": 3,
+      "xp_base": 160,
+      "edad_min": 12,
+      "edad_max": 99,
+      "planes": ["rookie", "pro", "elite"],
+      "espacio": "pista completa",
+      "material": ["balón", "pasador o reboteador", "canasta"],
+      "duracion_min": 15,
+      "leccion": { "modulo": 1, "video": 5, "titulo": "Catch and shoot: velocidad de decisión" },
+      "ejecucion": [
+        "Colócate en la esquina, a la distancia que te corresponda por categoría.",
+        "Pies activos mientras el balón viaja hacia ti.",
+        "Recibe y tira sin ajustar: el pre-load ya está hecho.",
+        "Series de 10. Anota los aciertos de cada serie hasta llegar a 8 de 10."
+      ],
+      "requiere_clip": true,
+      "clip": {
+        "duracion_max_s": 60,
+        "angulo": "lateral o desde la prolongación del fondo",
+        "encuadre": "jugador y aro en el mismo plano",
+        "indicacion": "Graba la serie buena entera, los 10 tiros seguidos y sin cortes."
+      },
+      "criterios": [
+        { "id": "c1", "texto": "La serie está sin cortar: se ven los 10 tiros seguidos", "peso": 25, "obligatorio": true },
+        { "id": "c2", "texto": "Los pies ya se están moviendo antes de que el balón llegue", "peso": 25, "obligatorio": true },
+        { "id": "c3", "texto": "No hay ajuste de balón entre la recepción y el tiro", "peso": 25, "obligatorio": true },
+        { "id": "c4", "texto": "8 o más aciertos de 10", "peso": 25, "obligatorio": false }
+      ],
+      "errores_comunes": [
+        "Recibir con los pies parados y tener que dar un paso de ajuste.",
+        "Cortar el vídeo entre tiro y tiro: eso invalida el reto."
+      ],
+      "nota_coach": "El criterio c4 no es obligatorio a propósito: si la mecánica es correcta y falla el porcentaje, el reto se aprueba con XP parcial. Se premia el patrón, no la suerte."
+    },
+    {
+      "id": "q-2026-w44-euro-step",
+      "semana": "2026-W44",
+      "abre": "2026-10-26T00:00:00+01:00",
+      "cierra": "2026-11-01T23:59:00+01:00",
+      "titulo": "Euro step: dos pasos, ni uno más",
+      "gancho": "El paso legal que medio mundo pita mal.",
+      "bloque": "footwork",
+      "dificultad": 3,
+      "xp_base": 160,
+      "edad_min": 12,
+      "edad_max": 99,
+      "planes": ["rookie", "pro", "elite"],
+      "espacio": "media pista",
+      "material": ["balón", "canasta", "defensor pasivo opcional"],
+      "duracion_min": 12,
+      "leccion": { "modulo": 2, "video": 4, "titulo": "El arte del hesitation y el euro step" },
+      "ejecucion": [
+        "Entra desde 45 grados con bote de velocidad.",
+        "Recoge el balón, primer paso hacia un lado, segundo paso cruzando al contrario.",
+        "Finaliza en bandeja protegida.",
+        "6 repeticiones por lado."
+      ],
+      "requiere_clip": true,
+      "clip": {
+        "duracion_max_s": 45,
+        "angulo": "frontal desde el fondo",
+        "encuadre": "los pies tienen que verse en el momento de la recogida",
+        "indicacion": "Con tres repeticiones por lado es suficiente."
+      },
+      "criterios": [
+        { "id": "c1", "texto": "Se ve con claridad el momento de la recogida del bote", "peso": 25, "obligatorio": true },
+        { "id": "c2", "texto": "Son exactamente dos pasos después de recoger, sin arrastre", "peso": 35, "obligatorio": true },
+        { "id": "c3", "texto": "El segundo paso cambia de verdad de dirección, no es un paso recto", "peso": 25, "obligatorio": false },
+        { "id": "c4", "texto": "El balón va protegido, lejos del lado del defensor", "peso": 15, "obligatorio": false }
+      ],
+      "errores_comunes": [
+        "Un pasito de más al recoger: eso son pasos y en partido te lo pitan.",
+        "Los dos pasos en la misma dirección: entonces no es euro step, es una bandeja normal."
+      ]
+    },
+    {
+      "id": "q-2026-w45-tiro-en-fatiga",
+      "semana": "2026-W45",
+      "abre": "2026-11-02T00:00:00+01:00",
+      "cierra": "2026-11-08T23:59:00+01:00",
+      "titulo": "Tiro en fatiga: 5 sprints y a la línea",
+      "gancho": "Tu mecánica real es la que te queda en el minuto 38.",
+      "bloque": "fisico",
+      "dificultad": 3,
+      "xp_base": 180,
+      "edad_min": 13,
+      "edad_max": 99,
+      "planes": ["pro", "elite"],
+      "espacio": "pista completa",
+      "material": ["balón", "20 m libres", "cronómetro", "canasta"],
+      "duracion_min": 18,
+      "leccion": { "modulo": 1, "video": 6, "titulo": "Tiro en fatiga: entrenar el final del partido" },
+      "ejecucion": [
+        "Cinco sprints de 20 metros ida y vuelta, sin pausa entre ellos.",
+        "Al terminar el quinto, directo a la línea de tiros libres.",
+        "Dos tiros libres con tu rutina completa, sin recuperar antes.",
+        "Anota el porcentaje en fatiga y compáralo con el que tienes en fresco."
+      ],
+      "requiere_clip": true,
+      "clip": {
+        "duracion_max_s": 60,
+        "angulo": "lateral",
+        "encuadre": "los dos últimos sprints y los dos tiros, sin corte",
+        "indicacion": "Si cortas entre el sprint y el tiro, el reto no cuenta."
+      },
+      "criterios": [
+        { "id": "c1", "texto": "No hay corte entre el último sprint y el primer tiro", "peso": 30, "obligatorio": true },
+        { "id": "c2", "texto": "La rutina previa al tiro libre es la misma que en fresco", "peso": 25, "obligatorio": true },
+        { "id": "c3", "texto": "El codo se mantiene dentro del plano pese al cansancio", "peso": 25, "obligatorio": false },
+        { "id": "c4", "texto": "Envía los dos porcentajes, el de fresco y el de fatiga", "peso": 20, "obligatorio": false }
+      ],
+      "errores_comunes": [
+        "Recuperar veinte segundos antes de tirar: eso ya no es tiro en fatiga.",
+        "Acortar la rutina porque se va sin aire. La rutina es justo lo que hay que sostener."
+      ],
+      "nota_coach": "Reservado a PRO y Élite: es carga alta y quiero poder corregirla con ticket si la mecánica se rompe."
+    }
+  ]
+}

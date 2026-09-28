@@ -39,7 +39,7 @@ async function verifyUser(authHeader) {
   return res.body;
 }
 
-const ALLOWED_ORIGINS = ['https://dragonsden.es', 'https://www.dragonsden.es'];
+const ALLOWED_ORIGINS = ['https://dragonsden.es', 'https://www.dragonsden.es', 'https://dragons-den-eight.vercel.app'];
 
 module.exports = async function handler(req, res) {
   const origin = req.headers.origin || '';
@@ -66,6 +66,10 @@ module.exports = async function handler(req, res) {
 
     if (nombre && nombre.length > 100) return res.status(400).json({ error: 'Nombre demasiado largo' });
     if (telefono && telefono.length > 30) return res.status(400).json({ error: 'Teléfono inválido' });
+    if (edad != null && edad !== '') {
+      const n = parseInt(edad, 10);
+      if (!Number.isFinite(n) || n < 5 || n > 99) return res.status(400).json({ error: 'Edad no válida (5 a 99)' });
+    }
 
     const record = {
       user_id:    user.id,

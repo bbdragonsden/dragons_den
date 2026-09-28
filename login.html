@@ -2,14 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceder — Dragons Den Academy</title>
+    <meta name="description" content="Accede a tu cuenta de Dragons Den Academy.">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F409;</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23c8a96e'/%3E%3Cg fill='none' stroke='%230a0a0a' stroke-width='5'%3E%3Cpath d='M4 50h92M50 4v92'/%3E%3Cpath d='M18 18c14 14 14 50 0 64M82 18c-14 14-14 50 0 64'/%3E%3C/g%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/css/comun.css">
+    <script src="/vendor/supabase-js-2.45.4/supabase.js"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
@@ -19,9 +18,9 @@
             --surface2: #141414;
             --border: #1e1e1e;
             --text: #e8e8e8;
-            --muted: #555;
+            --muted: #9a9a9a;
         }
-        body { background: var(--bg); color: var(--text); font-family: 'Satoshi', Arial, sans-serif; min-height: 100dvh; display: flex; flex-direction: column; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', Arial, sans-serif; min-height: 100dvh; display: flex; flex-direction: column; }
 
         .login-wrap { flex: 1; display: grid; grid-template-columns: 1fr 480px; min-height: 100dvh; }
 
@@ -30,7 +29,7 @@
         .login-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 7vw, 96px); line-height: 0.92; letter-spacing: -1px; color: #fff; text-transform: uppercase; }
         .login-headline span { color: var(--gold); }
         .login-sub { font-size: 14px; color: var(--muted); line-height: 1.7; margin-top: 20px; max-width: 340px; }
-        .login-footer-text { font-size: 10px; color: #2a2a2a; letter-spacing: 1.5px; text-transform: uppercase; }
+        .login-footer-text { font-size: 10px; color: #8a8a8a; letter-spacing: 1.5px; text-transform: uppercase; }
 
         .login-right { background: var(--bg); padding: 80px 56px; display: flex; flex-direction: column; justify-content: center; }
         .login-form-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; }
@@ -40,7 +39,7 @@
             background: var(--surface);
             border: 1px solid var(--border);
             color: var(--text);
-            font-family: 'Satoshi', Arial, sans-serif;
+            font-family: 'Inter', Arial, sans-serif;
             font-size: 14px;
             padding: 14px 20px;
             cursor: pointer;
@@ -56,12 +55,12 @@
 
         .divider { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
         .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-        .divider span { font-size: 10px; color: #333; letter-spacing: 2px; text-transform: uppercase; }
+        .divider span { font-size: 10px; color: #8a8a8a; letter-spacing: 2px; text-transform: uppercase; }
 
         .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
         .form-group label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-        .form-group input { background: var(--surface); border: 1px solid var(--border); color: var(--text); font-family: 'Satoshi', Arial, sans-serif; font-size: 15px; padding: 14px 16px; outline: none; transition: border-color 0.2s; width: 100%; border-radius: 0; -webkit-appearance: none; }
-        .form-group input::placeholder { color: #333; }
+        .form-group input { background: var(--surface); border: 1px solid var(--border); color: var(--text); font-family: 'Inter', Arial, sans-serif; font-size: 15px; padding: 14px 16px; outline: none; transition: border-color 0.2s; width: 100%; border-radius: 0; -webkit-appearance: none; }
+        .form-group input::placeholder { color: #777; }
         .form-group input:focus { border-color: rgba(200,169,110,0.5); }
 
         .forgot-link { display: block; text-align: right; font-size: 11px; color: var(--muted); text-decoration: none; margin-top: -8px; margin-bottom: 20px; transition: color 0.2s; }
@@ -75,7 +74,7 @@
         .auth-error { display: none; background: rgba(255,60,60,0.07); border: 1px solid rgba(255,60,60,0.2); color: #ff6b6b; font-size: 12px; padding: 12px 16px; margin-top: 16px; line-height: 1.5; }
         .auth-links { margin-top: 28px; display: flex; flex-direction: column; gap: 10px; }
         .auth-links p { font-size: 12px; color: var(--muted); }
-        .auth-links a { color: var(--gold); text-decoration: none; opacity: 0.8; transition: opacity 0.2s; }
+        .auth-links a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; opacity: 0.8; transition: opacity 0.2s; }
         .auth-links a:hover { opacity: 1; }
 
         .login-mobile-logo { display: none; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 5px; color: var(--gold); margin-bottom: 48px; text-decoration: none; }
@@ -86,9 +85,13 @@
             .login-right { padding: 56px 28px; min-height: 100dvh; justify-content: flex-start; padding-top: 80px; }
             .login-mobile-logo { display: block; }
         }
+        .auth-legal { margin-top: 32px; font-size: 11px; color: #9a9a9a; line-height: 1.9; }
+        .auth-legal a { color: #b5b5b5; text-decoration: underline; text-underline-offset: 2px; }
+        .auth-legal a:hover { color: var(--gold); }
     </style>
 </head>
 <body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
 <div class="login-wrap">
     <div class="login-left">
         <a href="academia.html" class="login-logo">Dragons Den Academy</a>
@@ -99,7 +102,7 @@
         <p class="login-footer-text">Dragons Den Basketball &middot; dragonsden.es</p>
     </div>
 
-    <div class="login-right">
+    <main class="login-right" id="contenido">
         <a href="academia.html" class="login-mobile-logo">Dragons Den Academy</a>
         <p class="login-form-title">Accede a tu cuenta</p>
 
@@ -121,14 +124,15 @@
             </div>
             <a href="reset-password.html" class="forgot-link">¿Olvidaste la contraseña?</a>
             <button type="submit" class="btn-login" id="login-btn">Entrar</button>
-            <div class="auth-error" id="login-error"></div>
+            <div class="auth-error" id="login-error" role="alert"></div>
         </form>
 
         <div class="auth-links">
             <p>¿No tienes cuenta? <a href="register.html">Regístrate gratis</a></p>
             <p><a href="academia.html" style="color:var(--muted);">Volver a la academia</a></p>
         </div>
-    </div>
+        <nav class="auth-legal" aria-label="Legal"><a href="aviso-legal.html">Aviso legal</a> &middot; <a href="condiciones.html">Condiciones</a> &middot; <a href="politica-privacidad.html">Privacidad</a> &middot; <a href="cookies.html">Cookies</a> &middot; <a href="proteccion-infancia.html">Protecci&oacute;n de la infancia</a></nav>
+    </main>
 </div>
 
 <script>

@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "actualizado": "2026-09-18",
+  "nota": "Fuente única de la escalera de precios. Hoy los precios están escritos a mano en academia.html, index.html y dentro del JSON-LD de preguntas frecuentes, y no coinciden entre sí. Cuando la plataforma lea de aquí, cambiar un precio debe ser cambiar este archivo y nada más.",
+  "fiscal": {
+    "iva_incluido": true,
+    "tipo_iva": 21,
+    "razon": "Servicio digital a consumidor final en España: el precio anunciado tiene que ser el precio final con IVA. Si la pasarela añade el IVA por encima, el importe mostrado en la web es ilegal."
+  },
+  "planes": [
+    {
+      "id": "rookie",
+      "nombre": "Rookie",
+      "precio_mes": 30,
+      "facturacion": "mensual",
+      "promesa": "Entrena solo, pero no a ciegas.",
+      "incluye": [
+        "Videoteca completa: manejo, form shooting y mecánica",
+        "Reto semanal Dragons Quest con corrección automática por criterios",
+        "Dragons IQ Clash sin límite de duelos",
+        "Ranking y progresión de nivel"
+      ],
+      "no_incluye": ["Análisis personal de vídeo", "Sesiones presenciales"],
+      "limites": { "tickets_mes": 0, "sesiones_presenciales_mes": 0 },
+      "coste_tiempo_coach_mes_min": 0,
+      "plazas": null
+    },
+    {
+      "id": "pro",
+      "nombre": "Dragons Den PRO",
+      "precio_mes": 80,
+      "facturacion": "mensual",
+      "promesa": "Alguien mira tu vídeo y te dice exactamente qué corregir.",
+      "incluye": [
+        "Todo lo de Rookie",
+        "2 análisis de vídeo al mes: subes un clip de partido y recibes informe técnico y biomecánico",
+        "Respuesta en 72 h laborables",
+        "Retos de carga alta reservados a PRO"
+      ],
+      "no_incluye": ["Sesiones presenciales"],
+      "limites": { "tickets_mes": 2, "sesiones_presenciales_mes": 0, "acumulables": false },
+      "coste_tiempo_coach_mes_min": 40,
+      "plazas": null
+    },
+    {
+      "id": "elite",
+      "nombre": "Élite Híbrido",
+      "precio_mes": 197,
+      "facturacion": "mensual",
+      "promesa": "Cuatro horas al mes conmigo en pista, y el resto del mes trabajando con lo corregido.",
+      "incluye": [
+        "Todo lo de PRO",
+        "4 sesiones presenciales 1v1 al mes",
+        "Plan mensual individual por escrito",
+        "Prioridad en los análisis de vídeo: 24 h"
+      ],
+      "no_incluye": [],
+      "limites": { "tickets_mes": 2, "sesiones_presenciales_mes": 4, "acumulables": false },
+      "coste_tiempo_coach_mes_min": 280,
+      "plazas": 8,
+      "nota_plazas": "El tope no es marketing: 8 alumnos son 32 sesiones al mes más los análisis. Por encima de ahí no cabe en la agenda."
+    },
+    {
+      "id": "b2b",
+      "nombre": "Auditoría táctica para entrenadores",
+      "precio_sesion_min": 150,
+      "precio_sesion_max": 200,
+      "facturacion": "por sesión",
+      "promesa": "Estructura tu microciclo con alguien que ya lo ha montado.",
+      "incluye": [
+        "Sesión de 90 minutos en vídeo o presencial",
+        "Revisión del microciclo y de las dinámicas de pista",
+        "Documento de salida con la planificación corregida"
+      ],
+      "limites": { "sesiones_mes": null },
+      "coste_tiempo_coach_mes_min": 90,
+      "plazas": null,
+      "publico": "entrenadores noveles, no jugadores"
+    }
+  ],
+  "capacidad": {
+    "horas_disponibles_mes": 60,
+    "nota": "Con 8 Élite (32 h) quedan 28 h al mes para análisis PRO, B2B y grabación de YouTube. Cada 10 suscriptores PRO consumen unas 7 h. Antes de abrir más plazas Élite hay que restar de aquí."
+  }
+}

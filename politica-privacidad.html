@@ -3,118 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidad | Dragons Den Basketball Academy</title>
+    <title>Política de privacidad | Dragons Den Basketball Academy</title>
+    <meta name="description" content="Cómo trata Dragons Den Basketball Academy los datos personales de jugadores y familias.">
     <meta name="robots" content="noindex, follow">
-    <link rel="canonical" href="https://www.dragonsden.es/politica-privacidad.html">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="canonical" href="https://dragons-den-eight.vercel.app/politica-privacidad.html">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23c8a96e'/%3E%3Cg fill='none' stroke='%230a0a0a' stroke-width='5'%3E%3Cpath d='M4 50h92M50 4v92'/%3E%3Cpath d='M18 18c14 14 14 50 0 64M82 18c-14 14-14 50 0 64'/%3E%3C/g%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/css/comun.css">
     <style>
-        :root { --gold:#c8a96e; --black:#080808; --surface:#111; --border:rgba(200,169,110,0.2); --muted:#888; --text:#e8e8e8; }
+        :root { --gold:#c8a96e; --black:#080808; --surface:#111; --border:rgba(200,169,110,0.2); --muted:#8f8f8f; --text:#e8e8e8; }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Inter',sans-serif; background:var(--black); color:var(--text); font-weight:300; line-height:1.8; }
-        nav { padding:24px 60px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); }
+        body { font-family:'Inter',Arial,sans-serif; background:var(--black); color:var(--text); font-weight:300; line-height:1.8; }
+        .top { padding:24px 60px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); }
         .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:4px; color:var(--gold); text-decoration:none; }
         .back { font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); text-decoration:none; }
         .back:hover { color:var(--gold); }
-        main { max-width:800px; margin:0 auto; padding:80px 40px; }
-        h1 { font-family:'Bebas Neue',sans-serif; font-size:56px; letter-spacing:3px; color:#fff; margin-bottom:8px; }
+        main { max-width:820px; margin:0 auto; padding:80px 40px; }
+        h1 { font-family:'Bebas Neue',sans-serif; font-size:56px; letter-spacing:3px; color:#fff; margin-bottom:8px; line-height:1.05; }
         .eyebrow { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
         .divider { width:48px; height:1px; background:var(--gold); margin:24px 0 48px; }
-        h2 { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; color:var(--gold); margin:40px 0 12px; }
+        h2 { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; color:var(--gold); margin:44px 0 12px; }
+        h3 { font-size:15px; font-weight:600; color:#fff; margin:24px 0 8px; }
         p { font-size:15px; color:var(--muted); margin-bottom:16px; }
-        ul { margin:0 0 16px 24px; color:var(--muted); font-size:15px; }
+        strong { color:#d6d6d6; font-weight:600; }
+        ul, ol { margin:0 0 16px 24px; color:var(--muted); font-size:15px; }
         li { margin-bottom:8px; }
         a { color:var(--gold); }
         .data-table { width:100%; border-collapse:collapse; margin:16px 0 32px; }
-        .data-table th { text-align:left; padding:12px 16px; border-bottom:1px solid var(--gold); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); }
+        .table-wrap { overflow-x:auto; margin:16px 0 32px; }
+        .table-wrap .data-table { margin:0; min-width:640px; }
+        .data-table th { text-align:left; padding:12px 16px; border-bottom:1px solid var(--gold); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:500; }
         .data-table td { padding:12px 16px; border-bottom:1px solid var(--border); font-size:14px; color:var(--muted); vertical-align:top; }
         .data-table td:first-child { color:#fff; font-weight:500; }
-        .rights-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0 32px; }
-        .right-card { background:#111; border:1px solid var(--border); border-left:3px solid var(--gold); padding:16px; }
-        .right-card strong { display:block; color:#fff; font-size:13px; margin-bottom:6px; }
-        .right-card span { font-size:13px; color:var(--muted); }
-        footer { border-top:1px solid var(--border); padding:24px 60px; text-align:center; font-size:12px; color:var(--muted); }
-        @media(max-width:768px){nav,footer{padding:20px 24px;}main{padding:48px 24px;}h1{font-size:40px;}.rights-grid{grid-template-columns:1fr;}}
+        .box { background:var(--surface); border-left:3px solid var(--gold); padding:20px 24px; margin:16px 0 28px; }
+        .box p:last-child { margin-bottom:0; }
+        .modelo { background:var(--surface); border:1px solid var(--border); padding:24px 28px; margin:16px 0 28px; font-size:14px; color:var(--muted); }
+        .modelo p { font-size:14px; }
+        [data-pendiente] { color:#ffcf70; background:rgba(255,207,112,0.08); padding:0 4px; }
+        .btn { display:inline-block; margin-top:8px; padding:12px 28px; background:transparent; border:1px solid var(--gold); color:var(--gold); font-family:'Inter',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; text-decoration:none; }
+        .btn:hover { background:rgba(200,169,110,0.08); }
+        .updated { margin-top:48px; font-size:13px; }
+        footer { border-top:1px solid var(--border); padding:24px 60px; text-align:center; font-size:12px; color:var(--muted); line-height:2; }
+        footer a { color:#b9b9b9; margin:0 6px; }
+        @media(max-width:768px){ .top,footer{padding:20px 16px;} main{padding:48px 16px;} h1{font-size:40px;} }
+
     </style>
 </head>
 <body>
-<nav>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="top">
     <a href="index.html" class="nav-logo">Dragons Den</a>
     <a href="index.html" class="back">&larr; Volver</a>
-</nav>
-<main>
+</header>
+<main id="contenido">
     <p class="eyebrow">Protecci&oacute;n de datos</p>
-    <h1>Pol&iacute;tica de Privacidad</h1>
+    <h1>Pol&iacute;tica de privacidad</h1>
     <div class="divider"></div>
 
-    <p>En Dragons Den respetamos tu privacidad y la de tus hijos. Esta pol&iacute;tica explica qu&eacute; datos recogemos, para qu&eacute; los usamos y qu&eacute; derechos tienes, en cumplimiento del <strong>Reglamento (UE) 2016/679 (RGPD)</strong> y la <strong>Ley Org&aacute;nica 3/2018, de 5 de diciembre, de Protecci&oacute;n de Datos Personales y garant&iacute;a de los derechos digitales (LOPD-GDD)</strong>.</p>
+    <p>Aqu&iacute; explicamos qu&eacute; datos personales tratamos, para qu&eacute;, con qu&eacute; base legal, qui&eacute;n m&aacute;s los ve, cu&aacute;nto tiempo los guardamos y c&oacute;mo puedes ejercer tus derechos, conforme al art&iacute;culo 13 del <strong>Reglamento (UE) 2016/679 (RGPD)</strong> y a la <strong>Ley Org&aacute;nica 3/2018 (LOPDGDD)</strong>.</p>
 
     <h2>1. Responsable del tratamiento</h2>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla, desplazable horizontalmente">
     <table class="data-table">
-        <tr><td>Identidad</td><td>Yefangyi Hu Garcia</td></tr>
-        <tr><td>Actividad</td><td>Academia deportiva — Dragons Den Basketball Academy</td></tr>
-        <tr><td>Contacto</td><td><a href="mailto:bbdragonsden@gmail.com">bbdragonsden@gmail.com</a> &mdash; 646 794 962</td></tr>
+        <tbody>
+            <tr><td>Responsable</td><td>Yefangyi Hu Garcia (Dragons Den Basketball Academy)</td></tr>
+            <tr><td>NIF</td><td><span data-pendiente="nif">[NIF]</span></td></tr>
+            <tr><td>Domicilio</td><td><span data-pendiente="domicilio">[Domicilio]</span></td></tr>
+            <tr><td>Contacto</td><td><a href="mailto:bbdragonsden@gmail.com">bbdragonsden@gmail.com</a> &middot; 646 794 962</td></tr>
+        </tbody>
     </table>
+    </div>
 
-    <h2>2. Datos que recogemos y finalidades</h2>
+    <h2>2. Qu&eacute; datos tratamos, para qu&eacute; y con qu&eacute; base</h2>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla, desplazable horizontalmente">
     <table class="data-table">
-        <thead>
-            <tr><th>Dato</th><th>Finalidad</th><th>Base legal</th><th>Plazo</th></tr>
-        </thead>
+        <thead><tr><th>Tratamiento</th><th>Datos</th><th>Finalidad</th><th>Base legal</th><th>Conservaci&oacute;n</th></tr></thead>
         <tbody>
             <tr>
-                <td>Nombre, apellidos, edad, tel&eacute;fono, email</td>
-                <td>Gesti&oacute;n de inscripciones y comunicaci&oacute;n con el interesado</td>
-                <td>Ejecuci&oacute;n de contrato (art. 6.1.b RGPD)</td>
-                <td>Durante la relaci&oacute;n y 3 a&ntilde;os tras su fin</td>
+                <td>Solicitudes de plaza (formulario de inscripci&oacute;n)</td>
+                <td>Jugador: nombre, fecha de nacimiento, nivel, posici&oacute;n, club, objetivo. Padre, madre o tutor (si es menor): nombre y relaci&oacute;n. Contacto: email y tel&eacute;fono. Programa, c&oacute;mo nos conociste y comentarios.</td>
+                <td>Estudiar la solicitud, responderte y confirmar plaza, horario y precio.</td>
+                <td>Medidas precontractuales a petici&oacute;n tuya (art. 6.1.b RGPD).</td>
+                <td>Si no se llega a contratar, 1 a&ntilde;o desde la solicitud. Si se contrata, pasa al tratamiento siguiente.</td>
             </tr>
             <tr>
-                <td>Posici&oacute;n, nivel, club, lesiones, objetivos</td>
-                <td>Personalizaci&oacute;n del entrenamiento y prevenci&oacute;n de riesgos</td>
-                <td>Consentimiento (art. 6.1.a RGPD) + inter&eacute;s leg&iacute;timo</td>
-                <td>Durante la relaci&oacute;n</td>
+                <td>Contrato de entrenamiento</td>
+                <td>Los anteriores, asistencia, plan contratado, pagos (importe, fecha y forma: Bizum o efectivo).</td>
+                <td>Prestar el servicio, organizar sesiones y cobrar.</td>
+                <td>Ejecuci&oacute;n del contrato (art. 6.1.b). Obligaciones fiscales y contables (art. 6.1.c).</td>
+                <td>Mientras dure el contrato. Despu&eacute;s, lo que exige la ley: 6 a&ntilde;os los documentos contables y fiscales (art. 30 del C&oacute;digo de Comercio).</td>
             </tr>
             <tr>
-                <td>Datos del tutor (menores)</td>
-                <td>Gesti&oacute;n de consentimiento parental y comunicaci&oacute;n con la familia</td>
-                <td>Obligaci&oacute;n legal + consentimiento (art. 8 RGPD; art. 7 LOPD-GDD)</td>
-                <td>Igual que el menor</td>
+                <td>Notas del entrenador</td>
+                <td>Nivel, objetivos, observaciones t&eacute;cnicas, pr&oacute;ximas revisiones.</td>
+                <td>Hacer el seguimiento del jugador.</td>
+                <td>Ejecuci&oacute;n del contrato (art. 6.1.b).</td>
+                <td>Mientras dure el contrato y 1 a&ntilde;o m&aacute;s, para dar continuidad si vuelves.</td>
             </tr>
             <tr>
-                <td>Im&aacute;genes / v&iacute;deo (si se graban sesiones)</td>
-                <td>An&aacute;lisis t&eacute;cnico y feedback personalizado</td>
-                <td>Consentimiento expreso (art. 6.1.a RGPD)</td>
-                <td>Hasta revocaci&oacute;n del consentimiento</td>
+                <td>Datos de salud (opcional)</td>
+                <td>Lesiones, alergias o condiciones f&iacute;sicas que decidas contarnos.</td>
+                <td>Solo adaptar los entrenamientos y entrenar con seguridad.</td>
+                <td><strong>Consentimiento expl&iacute;cito</strong> (art. 9.2.a RGPD), que se marca en una casilla aparte. Si no la marcas, no guardamos ese texto.</td>
+                <td>Hasta el final de la temporada en curso (30 de junio) o hasta que retires el consentimiento.</td>
+            </tr>
+            <tr>
+                <td>Im&aacute;genes y v&iacute;deo para an&aacute;lisis</td>
+                <td>Enlaces a v&iacute;deos del jugador que nos env&iacute;as por la plataforma o grabaciones de sesiones.</td>
+                <td>Solo el an&aacute;lisis t&eacute;cnico del jugador. No se publican ni se comparten.</td>
+                <td>Consentimiento espec&iacute;fico (art. 6.1.a). Si el jugador tiene menos de 14 a&ntilde;os, lo da su padre, madre o tutor.</td>
+                <td>Hasta el final de la temporada (30 de junio) o hasta que retires el consentimiento.</td>
+            </tr>
+            <tr>
+                <td>Comunicaciones comerciales y WhatsApp</td>
+                <td>Nombre, email y tel&eacute;fono.</td>
+                <td>Avisarte de nuevos programas, del campus de verano y de otras novedades.</td>
+                <td>Consentimiento (art. 6.1.a RGPD y art. 21 LSSI), en una casilla opcional.</td>
+                <td>Hasta que te des de baja.</td>
+            </tr>
+            <tr>
+                <td>Cuenta de la plataforma</td>
+                <td>Nombre, email, contrase&ntilde;a (guardada cifrada por Supabase), declaraci&oacute;n de tener 14 a&ntilde;os o m&aacute;s, packs asignados y datos de perfil que quieras a&ntilde;adir (edad, posici&oacute;n, nivel, club, tel&eacute;fono, presentaci&oacute;n).</td>
+                <td>Darte acceso a la plataforma y a los contenidos contratados.</td>
+                <td>Ejecuci&oacute;n del contrato (art. 6.1.b).</td>
+                <td>Mientras la cuenta est&eacute; activa. Se borra si lo pides o tras 2 a&ntilde;os sin acceder.</td>
+            </tr>
+            <tr>
+                <td>Mensajes en la plataforma</td>
+                <td>Contenido de los mensajes entre el jugador y el entrenador.</td>
+                <td>Atender tus consultas.</td>
+                <td>Ejecuci&oacute;n del contrato (art. 6.1.b).</td>
+                <td>2 a&ntilde;os desde el &uacute;ltimo mensaje.</td>
+            </tr>
+            <tr>
+                <td>Listas de espera (Academia Online y campus 2027)</td>
+                <td>Nombre, email, pack o programa de inter&eacute;s.</td>
+                <td>Avisarte cuando haya fechas y precios.</td>
+                <td>Consentimiento (art. 6.1.a).</td>
+                <td>Hasta el aviso de lanzamiento y, como m&aacute;ximo, 2 a&ntilde;os, o hasta que pidas salir.</td>
             </tr>
         </tbody>
     </table>
-
-    <h2>3. Menores de edad</h2>
-    <p>De conformidad con el art. 8 del RGPD y el art. 7 de la LOPD-GDD, el tratamiento de datos de menores de <strong>14 a&ntilde;os</strong> requiere el consentimiento del padre, madre o tutor legal. Al marcar la casilla de inscripci&oacute;n para un menor, el adulto declarante confirma estar legitimado para otorgar dicho consentimiento.</p>
-    <p>No solicitamos a menores de 14 a&ntilde;os que proporcionen m&aacute;s datos de los estrictamente necesarios.</p>
-
-    <h2>4. Destinatarios</h2>
-    <p>No cedemos tus datos a terceros, salvo obligaci&oacute;n legal. No realizamos transferencias internacionales de datos.</p>
-
-    <h2>5. Tus derechos</h2>
-    <div class="rights-grid">
-        <div class="right-card"><strong>Acceso</strong><span>Obtener confirmaci&oacute;n de si tratamos tus datos y una copia de ellos.</span></div>
-        <div class="right-card"><strong>Rectificaci&oacute;n</strong><span>Corregir datos inexactos o incompletos.</span></div>
-        <div class="right-card"><strong>Supresi&oacute;n</strong><span>Pedir que eliminemos tus datos cuando ya no sean necesarios.</span></div>
-        <div class="right-card"><strong>Oposici&oacute;n</strong><span>Oponerte al tratamiento basado en inter&eacute;s leg&iacute;timo.</span></div>
-        <div class="right-card"><strong>Limitaci&oacute;n</strong><span>Solicitar que suspendamos el tratamiento en determinados supuestos.</span></div>
-        <div class="right-card"><strong>Portabilidad</strong><span>Recibir tus datos en formato estructurado y legible por m&aacute;quina.</span></div>
     </div>
-    <p>Para ejercer cualquier derecho, escr&iacute;benos a <a href="mailto:bbdragonsden@gmail.com">bbdragonsden@gmail.com</a> indicando tu nombre y el derecho que deseas ejercer. Responderemos en el plazo m&aacute;ximo de <strong>1 mes</strong>.</p>
-    <p>Si consideras que el tratamiento no se ajusta a la normativa, puedes presentar una reclamaci&oacute;n ante la <a href="https://www.aepd.es" target="_blank" rel="noopener">Agencia Espa&ntilde;ola de Protecci&oacute;n de Datos (AEPD)</a>.</p>
 
-    <h2>6. Seguridad</h2>
-    <p>Aplicamos medidas t&eacute;cnicas y organizativas adecuadas para proteger tus datos contra accesos no autorizados, p&eacute;rdida o destrucci&oacute;n, de acuerdo con el art. 32 del RGPD.</p>
+    <h2>3. Qu&eacute; datos son obligatorios</h2>
+    <p>En cada formulario, los campos obligatorios llevan asterisco (*). Sin ellos no podemos gestionar tu solicitud o tu cuenta. Los datos de salud, el env&iacute;o de v&iacute;deos y las comunicaciones comerciales son siempre <strong>voluntarios</strong>: no dar tu consentimiento no te impide contratar.</p>
 
-    <h2>7. Cambios en esta pol&iacute;tica</h2>
-    <p>Podemos actualizar esta pol&iacute;tica para adaptarla a cambios normativos o en nuestros servicios. Te notificaremos cualquier cambio relevante.</p>
+    <h2>4. Menores de edad</h2>
+    <p>Pedimos la fecha de nacimiento antes que ning&uacute;n otro dato. Si el jugador es menor de 18 a&ntilde;os, la solicitud y el contrato los hace su padre, su madre o su tutor legal. <strong>Por debajo de 14 a&ntilde;os, el consentimiento lo presta siempre el padre, la madre o el tutor</strong> (art. 7 LOPDGDD). Para crear una cuenta en la plataforma hay que tener 14 a&ntilde;os o m&aacute;s; si no, la crea el padre, la madre o el tutor. Consulta tambi&eacute;n nuestra p&aacute;gina de <a href="proteccion-infancia.html">protecci&oacute;n de la infancia</a>.</p>
 
-    <p style="margin-top:48px;font-size:13px;">Última actualizaci&oacute;n: mayo de 2026</p>
+    <h2>5. Qui&eacute;n m&aacute;s trata tus datos</h2>
+    <p>No vendemos ni cedemos tus datos. Solo los comunicamos a la Agencia Tributaria u otras autoridades cuando la ley lo exige. Para funcionar usamos estos <strong>encargados del tratamiento</strong>, con contrato conforme al art. 28 RGPD:</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla, desplazable horizontalmente">
+    <table class="data-table">
+        <thead><tr><th>Proveedor</th><th>Para qu&eacute;</th><th>D&oacute;nde y garant&iacute;as</th></tr></thead>
+        <tbody>
+            <tr><td>Vercel Inc.</td><td>Alojamiento de la web y de las funciones que reciben los formularios.</td><td>EE. UU. Transferencia amparada en el Marco de Privacidad de Datos UE-EE. UU. y cl&aacute;usulas contractuales tipo.</td></tr>
+            <tr><td>Supabase (contrato con Supabase Pte. Ltd., Singapur)</td><td>Base de datos y sistema de acceso (cuentas) de la plataforma.</td><td>Los datos se guardan en la regi&oacute;n <span data-pendiente="region-supabase">[regi&oacute;n del proyecto Supabase]</span>. Transferencias amparadas en cl&aacute;usulas contractuales tipo de la Comisi&oacute;n Europea.</td></tr>
+            <tr><td>Resend</td><td>Env&iacute;o de los emails de aviso y confirmaci&oacute;n de las solicitudes.</td><td>EE. UU. Marco de Privacidad de Datos UE-EE. UU. o cl&aacute;usulas contractuales tipo.</td></tr>
+            <tr><td>Google (Google Ireland Ltd. / Google LLC)</td><td>Buz&oacute;n de correo bbdragonsden@gmail.com, donde recibimos los avisos y tus emails; e inicio de sesi&oacute;n con Google, solo si lo eliges.</td><td>UE y EE. UU. Marco de Privacidad de Datos UE-EE. UU.</td></tr>
+            <tr><td>WhatsApp (WhatsApp Ireland Ltd., grupo Meta)</td><td>Solo si decides escribirnos o que te escribamos por WhatsApp.</td><td>UE y EE. UU. (Meta Platforms, Inc.). Marco de Privacidad de Datos UE-EE. UU.</td></tr>
+        </tbody>
+    </table>
+    </div>
+    <p>Si nos env&iacute;as un v&iacute;deo alojado en YouTube, Google Drive, Dropbox u otro servicio, ese servicio lo trata seg&uacute;n sus propias condiciones, porque la cuenta es tuya. Te recomendamos compartirlo como oculto o privado.</p>
+
+    <h2>6. Tus derechos</h2>
+    <p>Puedes pedir en cualquier momento <strong>acceso</strong> a tus datos, su <strong>rectificaci&oacute;n</strong> o <strong>supresi&oacute;n</strong>, la <strong>limitaci&oacute;n</strong> del tratamiento, la <strong>portabilidad</strong> y oponerte a &eacute;l. Tambi&eacute;n puedes <strong>retirar cualquier consentimiento</strong> (salud, v&iacute;deo, comunicaciones, listas de espera) sin que eso afecte a lo tratado antes. Escr&iacute;benos a <a href="mailto:bbdragonsden@gmail.com">bbdragonsden@gmail.com</a> indicando qu&eacute; derecho quieres ejercer; si hace falta comprobar tu identidad te lo pediremos. Respondemos en un mes como m&aacute;ximo.</p>
+    <p>No tomamos decisiones automatizadas ni hacemos perfiles con efectos sobre ti.</p>
+    <p>Si crees que no hemos tratado bien tus datos, puedes reclamar ante la <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">Agencia Espa&ntilde;ola de Protecci&oacute;n de Datos (AEPD)</a>.</p>
+
+    <h2>7. Seguridad</h2>
+    <p>Aplicamos medidas t&eacute;cnicas y organizativas adecuadas (art. 32 RGPD): conexiones cifradas, acceso con contrase&ntilde;a, permisos de administraci&oacute;n solo en el servidor y el m&iacute;nimo de datos necesario.</p>
+
+    <h2>8. Cambios</h2>
+    <p>Si cambiamos esta pol&iacute;tica de forma relevante, lo indicaremos en esta p&aacute;gina y, si tenemos tu contacto, te avisaremos.</p>
+
+    <p class="updated">&Uacute;ltima actualizaci&oacute;n: septiembre de 2026</p>
+
 </main>
-<footer>&copy; 2026 Dragons Den Basketball Academy &mdash; <a href="index.html">Inicio</a> &middot; <a href="aviso-legal.html">Aviso Legal</a> &middot; <a href="cookies.html">Cookies</a></footer>
+<footer>
+    <nav aria-label="Legal">
+        <a href="index.html">Inicio</a>
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="condiciones.html">Condiciones de contrataci&oacute;n</a>
+        <a href="politica-privacidad.html">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="proteccion-infancia.html">Protecci&oacute;n de la infancia</a>
+    </nav>
+    &copy; 2026 Dragons Den Basketball Academy &middot; Yefangyi Hu Garcia
+</footer>
+
 </body>
 </html>

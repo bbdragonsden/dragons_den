@@ -1,0 +1,155 @@
+{
+  "version": 2,
+  "actualizado": "2026-09-18",
+  "nota_economia": "Hay dos ritmos, y el que manda para calcular coste es el rápido. Ritmo normal: solo retos, unos 573 XP al mes. Ritmo rápido: retos + racha + el tope de 150 XP semanales del trivial, unos 1.273 XP al mes, que es el techo real que permite tope_semanal. Toda recompensa que cuesta dinero o tiempo se calibra contra meses_ritmo_rapido, nunca contra el normal: el que llega antes es siempre el que más juega.",
+  "regla_margen": "Ninguna recompensa debe superar el 25 % de lo facturado al jugador hasta ese nivel en el ritmo rápido. Por eso las sesiones 1v1 exigen plan PRO o Élite: a 30 €/mes no salen los números, a 80 € sí. El coste en euros es solo material y logística; el tiempo del entrenador se valora aparte a 49 €/hora, que es lo que sale de dividir el Élite entre sus cuatro sesiones.",
+  "valor_hora_coach_eur": 49,
+  "niveles": [
+    {
+      "nivel": 1,
+      "nombre": "Cantera",
+      "xp_desde": 0,
+      "divisa": "hierro",
+      "meses_ritmo_normal": 0,
+      "meses_ritmo_rapido": 0,
+      "recompensa": null,
+      "coste_recompensa_eur": 0,
+      "coste_tiempo_min": 0
+    },
+    {
+      "nivel": 2,
+      "nombre": "Escudero",
+      "xp_desde": 400,
+      "divisa": "bronce",
+      "meses_ritmo_normal": 0.7,
+      "meses_ritmo_rapido": 0.3,
+      "plan_minimo": null,
+      "recompensa": {
+        "tipo": "digital",
+        "titulo": "Insignia de Escudero y dorsal en el muro del Den",
+        "detalle": "Aparece en el ranking con su insignia. Solo si el tutor aceptó el ranking público."
+      },
+      "coste_recompensa_eur": 0,
+      "coste_tiempo_min": 0
+    },
+    {
+      "nivel": 3,
+      "nombre": "Guardián",
+      "xp_desde": 1000,
+      "divisa": "bronce",
+      "meses_ritmo_normal": 1.7,
+      "meses_ritmo_rapido": 0.8,
+      "plan_minimo": null,
+      "recompensa": {
+        "tipo": "fisica",
+        "titulo": "Muñequera Dragons Den",
+        "detalle": "Se manda con el siguiente pedido agrupado, nunca por unidad: el envío suelto cuesta más que la muñequera."
+      },
+      "coste_recompensa_eur": 4,
+      "coste_tiempo_min": 0
+    },
+    {
+      "nivel": 4,
+      "nombre": "Ala de Fuego",
+      "xp_desde": 1900,
+      "divisa": "plata",
+      "meses_ritmo_normal": 3.3,
+      "meses_ritmo_rapido": 1.5,
+      "plan_minimo": null,
+      "recompensa": {
+        "tipo": "servicio",
+        "titulo": "Un análisis de vídeo gratuito",
+        "detalle": "Es el producto PRO en versión degustación. Para un Rookie es la primera vez que recibe corrección personal, y es ahí donde se decide el salto a PRO. Se mantiene abierto a todos los planes a propósito, aunque cueste tiempo: es la conversión, no el premio.",
+        "convierte_a": "pro"
+      },
+      "coste_recompensa_eur": 0,
+      "coste_tiempo_min": 20,
+      "excepcion_margen": "Sí, se salta la regla del 25 %: 20 minutos contra lo facturado por un Rookie en mes y medio. Es deliberado. Este nivel no es un premio, es la puerta al plan PRO, y el coste se recupera con una sola conversión."
+    },
+    {
+      "nivel": 5,
+      "nombre": "Ígneo",
+      "xp_desde": 3200,
+      "divisa": "plata",
+      "meses_ritmo_normal": 5.6,
+      "meses_ritmo_rapido": 2.5,
+      "plan_minimo": null,
+      "recompensa": {
+        "tipo": "fisica",
+        "titulo": "Camiseta de entrenamiento Dragons Den",
+        "detalle": "Con el nivel bordado. Es la recompensa que se fotografía y se comparte, así que vale más de lo que cuesta."
+      },
+      "coste_recompensa_eur": 12,
+      "coste_tiempo_min": 0
+    },
+    {
+      "nivel": 6,
+      "nombre": "Colmillo",
+      "xp_desde": 5000,
+      "divisa": "oro",
+      "meses_ritmo_normal": 8.7,
+      "meses_ritmo_rapido": 3.9,
+      "plan_minimo": "pro",
+      "recompensa": {
+        "tipo": "servicio",
+        "titulo": "Sesión 1v1 presencial gratuita",
+        "detalle": "Una hora. Sujeta a agenda y a que el jugador pueda desplazarse.",
+        "convierte_a": "elite"
+      },
+      "recompensa_si_no_llega_al_plan": {
+        "tipo": "digital",
+        "titulo": "Análisis en vídeo de 10 minutos, grabado",
+        "detalle": "Alternativa para Rookie: mismo valor percibido, sin hora de pista. A 30 €/mes una sesión presencial se come la mitad de lo facturado."
+      },
+      "coste_recompensa_eur": 0,
+      "coste_tiempo_min": 60
+    },
+    {
+      "nivel": 7,
+      "nombre": "Ancestral",
+      "xp_desde": 7500,
+      "divisa": "oro",
+      "meses_ritmo_normal": 13.1,
+      "meses_ritmo_rapido": 5.9,
+      "plan_minimo": null,
+      "recompensa": {
+        "tipo": "digital",
+        "titulo": "Acceso permanente al bloque avanzado de la videoteca",
+        "detalle": "Coste marginal cero y valor percibido alto. Se queda aunque baje de plan, que es justo lo que hace que no se dé de baja."
+      },
+      "coste_recompensa_eur": 0,
+      "coste_tiempo_min": 0
+    },
+    {
+      "nivel": 8,
+      "nombre": "Leyenda del Den",
+      "xp_desde": 11000,
+      "divisa": "oro",
+      "meses_ritmo_normal": 19.2,
+      "meses_ritmo_rapido": 8.6,
+      "plan_minimo": "pro",
+      "recompensa": {
+        "tipo": "mixta",
+        "titulo": "Sesión 1v1 y dorsal permanente en el muro",
+        "detalle": "El nombre se queda fijo en la plataforma. Es el trofeo, no el premio."
+      },
+      "recompensa_si_no_llega_al_plan": {
+        "tipo": "digital",
+        "titulo": "Dorsal permanente en el muro y plan de temporada por escrito",
+        "detalle": "Alternativa para Rookie, sin hora de pista."
+      },
+      "coste_recompensa_eur": 0,
+      "coste_tiempo_min": 60
+    }
+  ],
+  "reglas_xp": {
+    "aprobado_total": "Se conceden los xp_base completos del reto.",
+    "aprobado_parcial": "Se concede la proporción de los pesos cumplidos, redondeada hacia abajo. Un criterio obligatorio sin cumplir bloquea el aprobado: el reto vuelve como 'a corregir'.",
+    "a_corregir": "El jugador puede reenviar el clip una vez dentro del plazo. El reenvío no penaliza.",
+    "fuera_de_plazo": "Se concede el 50 % del XP y se rompe la racha.",
+    "racha": "4 semanas seguidas con reto aprobado dan 100 XP extra. Se cuenta por bloques de 4, no indefinidamente.",
+    "iq_clash": "25 XP por duelo ganado, 10 por perdido, con tope de 150 XP semanales para que nadie suba de nivel solo jugando al trivial.",
+    "tope_semanal": 400,
+    "nota_tope": "400 semanales son 1.600 al mes en teoría, pero el tope del trivial y el ritmo de los retos dejan el techo real en unos 1.273. Si algún día se sube el tope del trivial, hay que rehacer meses_ritmo_rapido y volver a comprobar la regla de margen."
+  }
+}
