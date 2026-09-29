@@ -6,7 +6,7 @@
 
     <!-- SEO primario -->
     <title>Dragons Den Basketball Academy | Baloncesto en Madrid (Carabanchel) · Temporada 2026-27</title>
-    <meta name="description" content="Academia de baloncesto en Madrid (Carabanchel), en grupos reducidos de 4 a 6 jugadores: seguimiento de octubre a mayo, campus de verano de junio a septiembre y campus de Navidad, con análisis de vídeo opcional.">
+    <meta name="description" content="Academia de baloncesto en Madrid (Carabanchel), en grupos reducidos, organizados por edad y nivel: seguimiento de octubre a mayo, campus de verano de junio a septiembre y campus de Navidad, con análisis de vídeo opcional.">
     <meta name="keywords" content="academia baloncesto verano, campamento baloncesto, baloncesto niños verano, entrenamiento baloncesto intensivo, dragons den baloncesto, baloncesto madrid, baloncesto carabanchel, seguimiento baloncesto temporada, campus baloncesto navidad">
     <meta name="author" content="Yefangyi Hu Garcia — Dragons Den Basketball Academy">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -39,7 +39,7 @@
           "@id": "https://dragons-den-eight.vercel.app/#organization",
           "name": "Dragons Den Basketball Academy",
           "alternateName": "Dragons Den",
-          "description": "Academia de baloncesto independiente en Madrid (Carabanchel). Entrenamiento en grupos reducidos de 4 a 6 jugadores: seguimiento de octubre a mayo, campus de verano de junio a septiembre y campus de Navidad, con análisis de vídeo opcional.",
+          "description": "Academia de baloncesto independiente en Madrid (Carabanchel). Entrenamiento en grupos reducidos, organizados por edad y nivel: seguimiento de octubre a mayo, campus de verano de junio a septiembre y campus de Navidad, con análisis de vídeo opcional.",
           "url": "https://dragons-den-eight.vercel.app/",
           "telephone": "+34646794962",
           "email": "bbdragonsden@gmail.com",
@@ -70,7 +70,7 @@
             {
               "@type": "Question",
               "name": "¿Cuánto cuesta el seguimiento?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Entrenamos en grupos reducidos de 4 a 6 jugadores en Madrid (Carabanchel), los sábados por la mañana o según el horario que se acuerde con el grupo. El seguimiento de temporada (octubre a mayo) y el campus de verano (junio a septiembre) cuestan 59 € al mes en la fase fundador (99 € en consolidación, 139 € en referencia; sube de fase por ocupación, no por fecha). El análisis de vídeo de partido es un extra opcional de 10 € al mes en fase fundador. La matrícula es gratis mientras dure la fase fundador y cuesta 30 € en consolidación y referencia. Son precios finales e incluyen los impuestos aplicables." }
+              "acceptedAnswer": { "@type": "Answer", "text": "Entrenamos en grupos reducidos, organizados por edad y nivel, en Madrid (Carabanchel), los sábados por la mañana o según el horario que se acuerde con el grupo. El seguimiento de temporada (octubre a mayo) cuesta 59 € al mes en la fase fundador (99 € en consolidación, 139 € en referencia; sube de fase por ocupación, no por fecha). El campus de verano (junio a septiembre) y el campus de Navidad cuestan 49 € en fase fundador y 79 € de precio normal (otras academias cobran desde 150 € por un campus similar). El análisis de vídeo de partido es un extra opcional de 10 € al mes en fase fundador del seguimiento (25 € en referencia). La matrícula del seguimiento es gratis mientras dure la fase fundador y cuesta 30 € en consolidación y referencia; los campus nunca llevan matrícula. Son precios finales e incluyen los impuestos aplicables." }
             },
             {
               "@type": "Question",
@@ -525,6 +525,59 @@
             font-size: 14px;
             color: var(--text-secondary);
             line-height: 1.75;
+        }
+
+        /* PRICING: pestañas */
+        .precios-tabs {
+            display: flex;
+            gap: 2px;
+            background: var(--border);
+            margin-top: 48px;
+        }
+        .precios-tab {
+            flex: 1;
+            background: var(--surface);
+            border: none;
+            padding: 18px 16px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 15px;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .precios-tab[aria-selected="true"] {
+            background: var(--gold);
+            color: #000;
+        }
+        .precios-tab:hover:not([aria-selected="true"]) { color: var(--text); }
+        .precios-panel { display: none; }
+        .precios-panel.is-activo { display: block; animation: precios-fade .3s ease; }
+        @media (prefers-reduced-motion: reduce) { .precios-panel.is-activo { animation: none; } }
+        @keyframes precios-fade { from { opacity: 0; } to { opacity: 1; } }
+        .precio-fase-lista {
+            display: grid;
+            gap: 1px;
+            background: var(--border);
+            margin: 24px 0 28px;
+        }
+        .precio-fase-fila {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            background: var(--surface2);
+            padding: 14px 20px;
+            flex-wrap: wrap;
+        }
+        .precio-fase-fila.es-activa { background: linear-gradient(145deg, var(--surface2) 0%, #160f04 100%); border-left: 2px solid var(--gold); }
+        .precio-fase-nombre { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); }
+        .precio-fase-nombre small { display: block; font-size: 10px; color: var(--muted); text-transform: none; letter-spacing: 0.2px; margin-top: 3px; }
+        .precio-fase-valor { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--gold); white-space: nowrap; }
+        .precio-fase-valor.es-mercado { color: var(--muted); font-size: 16px; }
+        @media (max-width: 720px) {
+            .precios-tabs { flex-direction: column; }
+            .precio-fase-fila { flex-direction: column; align-items: flex-start; gap: 4px; }
         }
 
         /* PRICING */
@@ -2027,7 +2080,7 @@
         <p class="hero-eyebrow">Basketball Academy &mdash; Temporada 26/27</p>
         <h1 class="hero-title">DRAGONS<br><span>DEN</span></h1>
         <p class="hero-subtitle">La Guarida de los Campeones</p>
-        <p class="hero-description">Programa presencial en Madrid (Carabanchel): grupos reducidos de 4 a 6 jugadores, seguimiento de octubre a mayo, campus de verano de junio a septiembre y campus de Navidad. S&aacute;bados por la ma&ntilde;ana o seg&uacute;n el horario del grupo.</p>
+        <p class="hero-description">Programa presencial en Madrid (Carabanchel): grupos reducidos, organizados por edad y nivel, seguimiento de octubre a mayo, campus de verano de junio a septiembre y campus de Navidad. S&aacute;bados por la ma&ntilde;ana o seg&uacute;n el horario del grupo.</p>
         <div class="hero-cta">
             <a href="#inscripcion" class="btn-primary">Solicitar plaza</a>
             <a href="#programa" class="btn-secondary">Ver programa</a>
@@ -2054,8 +2107,8 @@
 <!-- STATS -->
 <div class="stats" data-reveal-stagger>
     <div class="stat">
-        <div class="stat-number">4&ndash;6</div>
-        <div class="stat-label">Jugadores por grupo</div>
+        <div class="stat-number">Reducido</div>
+        <div class="stat-label">Grupo por edad y nivel</div>
     </div>
     <div class="stat">
         <div class="stat-number">Oct&ndash;May</div>
@@ -2082,7 +2135,7 @@
         <div class="feature-card">
             <span class="feature-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold)"><circle cx="14" cy="14" r="11"/><path d="M14 3 Q18 8 18 14 Q18 20 14 25"/><path d="M14 3 Q10 8 10 14 Q10 20 14 25"/><path d="M3 14 Q8 10 14 10 Q20 10 25 14"/></svg></span>
             <h3 class="feature-title">Entrenamientos</h3>
-            <p class="feature-text">S&aacute;bados por la ma&ntilde;ana o seg&uacute;n el horario que se acuerde con el grupo, en Madrid (Carabanchel). Trabajo t&eacute;cnico, t&aacute;ctico y competitivo en grupos reducidos de 4 a 6 jugadores.</p>
+            <p class="feature-text">S&aacute;bados por la ma&ntilde;ana o seg&uacute;n el horario que se acuerde con el grupo, en Madrid (Carabanchel). Trabajo t&eacute;cnico, t&aacute;ctico y competitivo en grupos reducidos, organizados por edad y nivel.</p>
         </div>
         <div class="feature-card">
             <span class="feature-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold)"><rect x="2" y="12" width="4" height="5" rx="1"/><rect x="22" y="12" width="4" height="5" rx="1"/><rect x="6" y="10" width="4" height="9" rx="1"/><rect x="18" y="10" width="4" height="9" rx="1"/><line x1="10" y1="14.5" x2="18" y2="14.5"/></svg></span>
@@ -2117,59 +2170,111 @@
         <a href="https://wa.me/34646794962" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="white-space:nowrap;flex-shrink:0;">Pedirla por WhatsApp</a>
     </div>
 
-    <!-- Seguimiento, campus de verano y campus de invierno -->
+    <!-- Seguimiento, campus de verano y campus de invierno: tres programas distintos, en pestañas -->
     <div class="pricing-block-header">
-        <span class="pricing-block-tag">Entrena todo el a&ntilde;o en grupo reducido</span>
-        <p class="pricing-block-desc">Grupos de 4 a 6 jugadores, en Madrid (Carabanchel). S&aacute;bados por la ma&ntilde;ana o seg&uacute;n el horario que coordinamos con el grupo. Mismo formato y mismo precio en temporada y en verano.</p>
+        <span class="pricing-block-tag">Tres programas, cada uno con su precio</span>
+        <p class="pricing-block-desc">Grupos reducidos organizados por edad y nivel, en Madrid (Carabanchel). Elige el programa para ver fechas, horario y precio de cada fase.</p>
     </div>
-    <div class="pricing-grid" data-reveal-stagger>
-        <div class="price-card featured">
-            <div class="price-badge">Precio fundador</div>
-            <p class="price-label">Seguimiento</p>
-            <div><span class="price-currency">&euro;</span><span class="price-amount">59</span><span class="price-period-tag">/mes</span></div>
-            <p class="price-market-note">Precio de fundador, plazas limitadas hasta que se agoten o hasta el 31 de octubre &middot; consolidaci&oacute;n 99&nbsp;&euro;/mes &middot; referencia 139&nbsp;&euro;/mes.</p>
-            <ul class="price-features">
-                <li>Octubre a mayo</li>
-                <li>Grupo reducido de 4 a 6 jugadores</li>
-                <li>S&aacute;bados por la ma&ntilde;ana o seg&uacute;n el grupo</li>
-                <li>Sin permanencia, baja con efecto a fin de mes</li>
-                <li>An&aacute;lisis de v&iacute;deo de partido: +10&nbsp;&euro;/mes (opcional, precio fundador)</li>
-            </ul>
-            <a href="#inscripcion" data-programa="seguimiento" class="btn-secondary" style="display:block;text-align:center;">Solicitar</a>
-        </div>
 
-        <div class="price-card featured">
-            <div class="price-badge">Precio fundador</div>
-            <p class="price-label">Campus de verano</p>
-            <div><span class="price-currency">&euro;</span><span class="price-amount">59</span><span class="price-period-tag">/mes</span></div>
-            <p class="price-market-note">Precio de fundador, plazas limitadas hasta que se agoten o hasta el 31 de octubre &middot; consolidaci&oacute;n 99&nbsp;&euro;/mes &middot; referencia 139&nbsp;&euro;/mes.</p>
-            <ul class="price-features">
-                <li>Junio a septiembre</li>
-                <li>Mismo formato que el seguimiento de temporada</li>
-                <li>Grupo reducido de 4 a 6 jugadores</li>
-                <li>Facturaci&oacute;n mensual, sin permanencia</li>
-            </ul>
-            <a href="#inscripcion" data-programa="campus-verano" class="btn-secondary" style="display:block;text-align:center;">Solicitar</a>
-        </div>
+    <div class="precios-tabs" role="tablist" aria-label="Programas y precios">
+        <button type="button" class="precios-tab" role="tab" id="tab-seguimiento" aria-controls="panel-seguimiento" aria-selected="true">Seguimiento</button>
+        <button type="button" class="precios-tab" role="tab" id="tab-invierno" aria-controls="panel-invierno" aria-selected="false">Campus de invierno</button>
+        <button type="button" class="precios-tab" role="tab" id="tab-verano" aria-controls="panel-verano" aria-selected="false">Campus de verano</button>
+    </div>
 
-        <div class="price-card">
-            <p class="price-label">Campus de invierno</p>
-            <div><span class="price-currency">&euro;</span><span class="price-amount">39</span></div>
-            <p class="price-market-note">Precio fundador &middot; precio de referencia: 99&nbsp;&euro; &middot; sin matr&iacute;cula.</p>
-            <ul class="price-features">
-                <li>Pack cerrado de 3 s&aacute;bados</li>
-                <li>Durante las vacaciones escolares de Navidad</li>
-                <li>Fechas exactas: por confirmar</li>
-                <li>No lleva matr&iacute;cula</li>
-            </ul>
-            <a href="#inscripcion" data-programa="campus-invierno" class="btn-secondary" style="display:block;text-align:center;">Solicitar</a>
+    <!-- Seguimiento -->
+    <div class="precios-panel is-activo" id="panel-seguimiento" role="tabpanel" aria-labelledby="tab-seguimiento">
+        <div class="pricing-grid" style="grid-template-columns:1fr;max-width:640px;margin-top:32px;">
+            <div class="price-card featured">
+                <div class="price-badge">Programa base</div>
+                <p class="price-label">Seguimiento de temporada</p>
+                <ul class="price-features" style="margin-bottom:20px;">
+                    <li>Octubre a mayo (curso escolar)</li>
+                    <li>Grupo reducido, organizado por edad y nivel</li>
+                    <li>S&aacute;bados por la ma&ntilde;ana o seg&uacute;n el grupo</li>
+                    <li>Sin permanencia, baja con efecto a fin de mes</li>
+                    <li>An&aacute;lisis de v&iacute;deo de partido: +10&nbsp;&euro;/mes en fundador, +25&nbsp;&euro;/mes en referencia (opcional)</li>
+                </ul>
+                <div class="precio-fase-lista">
+                    <div class="precio-fase-fila es-activa">
+                        <span class="precio-fase-nombre">Fase fundador<small>Plazas limitadas hasta que se agoten o hasta el 31 de octubre</small></span>
+                        <span class="precio-fase-valor">59&nbsp;&euro;/mes</span>
+                    </div>
+                    <div class="precio-fase-fila">
+                        <span class="precio-fase-nombre">Fase consolidaci&oacute;n<small>Cuando se llenen las plazas de fundador</small></span>
+                        <span class="precio-fase-valor">99&nbsp;&euro;/mes</span>
+                    </div>
+                    <div class="precio-fase-fila">
+                        <span class="precio-fase-nombre">Fase referencia<small>Objetivo a medio plazo, en l&iacute;nea con otras academias privadas de Madrid</small></span>
+                        <span class="precio-fase-valor">139&nbsp;&euro;/mes</span>
+                    </div>
+                </div>
+                <p style="font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;">Matr&iacute;cula: gratis en fundador &middot; 30&nbsp;&euro; &uacute;nicos en consolidaci&oacute;n y referencia.</p>
+                <a href="#inscripcion" data-programa="seguimiento" class="btn-secondary" style="display:block;text-align:center;">Solicitar</a>
+            </div>
         </div>
     </div>
 
-    <!-- Matrícula -->
-    <div style="margin-top:32px;background:var(--surface);border-left:2px solid var(--gold);padding:20px 28px;">
-        <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Matr&iacute;cula</p>
-        <p style="font-size:14px;color:var(--text);line-height:1.6;">Gratis mientras dure la fase fundador. En consolidaci&oacute;n y referencia, 30&nbsp;&euro; de matr&iacute;cula &uacute;nica. No aplica al campus de invierno, que nunca lleva matr&iacute;cula.</p>
+    <!-- Campus de invierno -->
+    <div class="precios-panel" id="panel-invierno" role="tabpanel" aria-labelledby="tab-invierno" hidden>
+        <div class="pricing-grid" style="grid-template-columns:1fr;max-width:640px;margin-top:32px;">
+            <div class="price-card">
+                <div class="price-badge">Promo de lanzamiento</div>
+                <p class="price-label">Campus de Navidad</p>
+                <ul class="price-features" style="margin-bottom:20px;">
+                    <li>Principios de diciembre de 2026 (fechas exactas por confirmar)</li>
+                    <li>Probablemente s&aacute;bados por la ma&ntilde;ana, u horario flexible seg&uacute;n el grupo</li>
+                    <li>Sin matr&iacute;cula</li>
+                    <li>Pensado como prueba de entrada, sin compromiso de seguir despu&eacute;s</li>
+                </ul>
+                <div class="precio-fase-lista">
+                    <div class="precio-fase-fila es-activa">
+                        <span class="precio-fase-nombre">Fase fundador<small>Fechas por confirmar, principios de diciembre</small></span>
+                        <span class="precio-fase-valor">49&nbsp;&euro;</span>
+                    </div>
+                    <div class="precio-fase-fila">
+                        <span class="precio-fase-nombre">Precio normal</span>
+                        <span class="precio-fase-valor">79&nbsp;&euro;</span>
+                    </div>
+                    <div class="precio-fase-fila">
+                        <span class="precio-fase-nombre">Precio de mercado<small>Lo que suelen cobrar otras academias por un campus similar</small></span>
+                        <span class="precio-fase-valor es-mercado">desde 150&nbsp;&euro;</span>
+                    </div>
+                </div>
+                <a href="#inscripcion" data-programa="campus-invierno" class="btn-secondary" style="display:block;text-align:center;">Solicitar</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Campus de verano -->
+    <div class="precios-panel" id="panel-verano" role="tabpanel" aria-labelledby="tab-verano" hidden>
+        <div class="pricing-grid" style="grid-template-columns:1fr;max-width:640px;margin-top:32px;">
+            <div class="price-card">
+                <p class="price-label">Campus de verano</p>
+                <ul class="price-features" style="margin-bottom:20px;">
+                    <li>Junio a septiembre (4 meses)</li>
+                    <li>Mismo grupo del seguimiento, horario flexible (no limitado a s&aacute;bados)</li>
+                    <li>Facturaci&oacute;n mensual, sin permanencia</li>
+                    <li>Sin matr&iacute;cula</li>
+                </ul>
+                <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Mismos precios que el campus de invierno, en formato mensual durante los 4 meses de verano:</p>
+                <div class="precio-fase-lista">
+                    <div class="precio-fase-fila es-activa">
+                        <span class="precio-fase-nombre">Fase fundador<small>Plazas limitadas hasta que se agoten o hasta el 31 de octubre</small></span>
+                        <span class="precio-fase-valor">49&nbsp;&euro;/mes</span>
+                    </div>
+                    <div class="precio-fase-fila">
+                        <span class="precio-fase-nombre">Precio normal</span>
+                        <span class="precio-fase-valor">79&nbsp;&euro;/mes</span>
+                    </div>
+                    <div class="precio-fase-fila">
+                        <span class="precio-fase-nombre">Precio de mercado<small>Lo que suelen cobrar otras academias por un campus similar</small></span>
+                        <span class="precio-fase-valor es-mercado">desde 150&nbsp;&euro;/mes</span>
+                    </div>
+                </div>
+                <a href="#inscripcion" data-programa="campus-verano" class="btn-secondary" style="display:block;text-align:center;">Solicitar</a>
+            </div>
+        </div>
     </div>
 
     <!-- Nota aclaratoria -->
@@ -2317,7 +2422,7 @@
         </details>
         <details class="faq-item">
             <summary>&iquest;Cu&aacute;nto cuesta el seguimiento?</summary>
-            <p>Entrenamos en grupos reducidos de 4 a 6 jugadores en Madrid (Carabanchel), los s&aacute;bados por la ma&ntilde;ana o seg&uacute;n el horario que se acuerde con el grupo. El seguimiento de temporada (octubre a mayo) y el campus de verano (junio a septiembre) cuestan 59&nbsp;&euro; al mes en la fase fundador (99&nbsp;&euro; en consolidaci&oacute;n, 139&nbsp;&euro; en referencia; se sube de fase por ocupaci&oacute;n, no por fecha). El an&aacute;lisis de v&iacute;deo de partido es un extra opcional de 10&nbsp;&euro; al mes en fase fundador. La matr&iacute;cula es gratis mientras dure la fase fundador y cuesta 30&nbsp;&euro; en consolidaci&oacute;n y referencia. Son precios finales e incluyen los impuestos aplicables.</p>
+            <p>Entrenamos en grupos reducidos, organizados por edad y nivel, en Madrid (Carabanchel), los s&aacute;bados por la ma&ntilde;ana o seg&uacute;n el horario que se acuerde con el grupo. El seguimiento de temporada (octubre a mayo) cuesta 59&nbsp;&euro; al mes en la fase fundador (99&nbsp;&euro; en consolidaci&oacute;n, 139&nbsp;&euro; en referencia; se sube de fase por ocupaci&oacute;n, no por fecha). El campus de verano (junio a septiembre) y el campus de Navidad cuestan 49&nbsp;&euro; en fase fundador y 79&nbsp;&euro; de precio normal (otras academias cobran desde 150&nbsp;&euro; por un campus similar). El an&aacute;lisis de v&iacute;deo de partido es un extra opcional de 10&nbsp;&euro; al mes en fase fundador del seguimiento (25&nbsp;&euro; en referencia). La matr&iacute;cula del seguimiento es gratis mientras dure la fase fundador y cuesta 30&nbsp;&euro; en consolidaci&oacute;n y referencia; los campus nunca llevan matr&iacute;cula. Son precios finales e incluyen los impuestos aplicables.</p>
         </details>
         <details class="faq-item">
             <summary>&iquest;Y el campus de Navidad?</summary>
@@ -2529,8 +2634,8 @@
                             <legend class="form-legend">&iquest;Qu&eacute; te interesa? *</legend>
                             <div class="check-group check-group-1">
                                 <label class="check-option"><input type="radio" name="programa" value="seguimiento" data-label="Seguimiento (59 &euro;/mes, precio fundador)"><span>Seguimiento, octubre&ndash;mayo &mdash; 59&nbsp;&euro;/mes (precio fundador; 99&nbsp;&euro;/mes en consolidaci&oacute;n, 139&nbsp;&euro;/mes en referencia)</span></label>
-                                <label class="check-option"><input type="radio" name="programa" value="campus-verano" data-label="Campus de verano (59 &euro;/mes, precio fundador)"><span>Campus de verano, junio&ndash;septiembre &mdash; 59&nbsp;&euro;/mes (precio fundador; 99&nbsp;&euro;/mes en consolidaci&oacute;n, 139&nbsp;&euro;/mes en referencia)</span></label>
-                                <label class="check-option"><input type="radio" name="programa" value="campus-invierno" data-label="Campus de invierno (pack 3 sabados, 39 euro fundador)"><span>Campus de invierno &mdash; pack de 3 s&aacute;bados, 39&nbsp;&euro; (precio fundador; 99&nbsp;&euro; en referencia), sin matr&iacute;cula</span></label>
+                                <label class="check-option"><input type="radio" name="programa" value="campus-verano" data-label="Campus de verano (49 &euro;/mes, precio fundador)"><span>Campus de verano, junio&ndash;septiembre &mdash; 49&nbsp;&euro;/mes (precio fundador; 79&nbsp;&euro;/mes precio normal)</span></label>
+                                <label class="check-option"><input type="radio" name="programa" value="campus-invierno" data-label="Campus de invierno (49 euro fundador)"><span>Campus de invierno, principios de diciembre (fechas por confirmar) &mdash; 49&nbsp;&euro; precio fundador (79&nbsp;&euro; precio normal), sin matr&iacute;cula</span></label>
                                 <label class="check-option"><input type="radio" name="programa" value="informacion" data-label="Primera sesion de evaluacion / informacion"><span>A&uacute;n no lo s&eacute;: quiero la sesi&oacute;n de evaluaci&oacute;n sin coste o m&aacute;s informaci&oacute;n</span></label>
                             </div>
                         </fieldset>
@@ -3192,6 +3297,28 @@
 <script src="/js/nsd-spring.js" defer></script>
 <script src="/js/nsd-noticias.js" defer></script>
 <script src="/js/nsd-actualidad.js" defer></script>
+<script>
+(function () {
+  'use strict';
+  var tabs = document.querySelectorAll('.precios-tab');
+  if (!tabs.length) return;
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var panelId = tab.getAttribute('aria-controls');
+      tabs.forEach(function (t) {
+        var activo = t === tab;
+        t.setAttribute('aria-selected', activo ? 'true' : 'false');
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (!panel) return;
+        if (activo) { panel.hidden = false; panel.classList.add('is-activo'); }
+        else { panel.hidden = true; panel.classList.remove('is-activo'); }
+      });
+      var panel = document.getElementById(panelId);
+      if (panel) panel.focus({ preventScroll: true });
+    });
+  });
+})();
+</script>
 <script src="/js/nsd-arriba.js" defer></script>
 <script defer>
   // Respuesta táctil (muelles), consistente con el resto del ecosistema:

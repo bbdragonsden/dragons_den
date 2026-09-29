@@ -8,11 +8,10 @@
     "razon": "Servicio digital a consumidor final en Espana: el precio anunciado tiene que ser el precio final con IVA. Si la pasarela anade el IVA por encima, el importe mostrado en la web es ilegal."
   },
   "servicios_presenciales": {
-    "nota": "Entrenamiento presencial en grupo reducido (4-6 jugadores), en Madrid (Carabanchel). Sabados por la manana o segun horario coordinado por grupo. Escalera en tres fases -- fundador, consolidacion, referencia -- se sube de fase por ocupacion real, nunca por fecha del calendario.",
+    "nota": "Entrenamiento presencial en grupo reducido, en Madrid (Carabanchel), organizado por edad y nivel -- sin un numero fijo de jugadores por grupo. Sabados por la manana o segun horario coordinado por grupo. Escalera en tres fases -- fundador, consolidacion, referencia -- se sube de fase por ocupacion real, nunca por fecha del calendario.",
     "ubicacion": "Madrid (Carabanchel)",
     "tamano_grupo": {
-      "min": 4,
-      "max": 6
+      "nota": "Sin un numero fijo de jugadores por grupo (no publicar cifras tipo \"4-6 jugadores\"): los organiza el propio Fan segun edad y nivel."
     },
     "fases": {
       "activa": "fundador",
@@ -34,10 +33,9 @@
       "consolidacion": 30,
       "referencia": 30,
       "aplica_a": [
-        "seguimiento",
-        "campus_verano"
+        "seguimiento"
       ],
-      "nota": "Gratis mientras dure la fase fundador -- mensaje principal en cualquier anuncio, cartel o publicacion. 30 euros de referencia en consolidacion y referencia. No aplica al campus de invierno, que no tiene matricula."
+      "nota": "Gratis mientras dure la fase fundador del SEGUIMIENTO -- mensaje principal en cualquier anuncio, cartel o publicacion. 30 euros de matricula unica en consolidacion y referencia. No aplica a los campus (verano e invierno), que nunca llevan matricula."
     },
     "planes": [
       {
@@ -59,26 +57,28 @@
       {
         "id": "campus_verano",
         "nombre": "Campus de verano",
-        "periodo": "Junio - Septiembre (ambos incluidos)",
-        "formato": "Mismo formato de grupo, sabados",
+        "periodo": "Junio - Septiembre (4 meses)",
+        "formato": "Mismo grupo del seguimiento, horario flexible (no limitado a sabados)",
         "facturacion": "mensual",
-        "precio_fundador_mes": 59,
-        "precio_consolidacion_mes": 99,
-        "precio_referencia_mes": 139,
-        "descripcion": "La misma sesion de sabado del seguimiento, en la epoca sin colegio. No es una promocion de verano: es continuidad del mismo grupo, a la misma fase de precio activa."
+        "precio_fundador_mes": 49,
+        "precio_referencia_mes": 79,
+        "descripcion": "Continuidad del grupo en los meses sin colegio, con el mismo precio y estructura que el campus de invierno (fundador / precio normal), pero en horario flexible durante los 4 meses de verano en vez de limitado a sabados por la manana.",
+        "precio_normal_mes": 79,
+        "precio_mercado_mes": 150
       },
       {
         "id": "campus_invierno",
         "nombre": "Campus de invierno",
-        "periodo": "3 sabados durante las vacaciones escolares de Navidad",
-        "formato": "Pack cerrado de 3 sesiones, sin alta ni permanencia",
-        "facturacion": "pack cerrado, pago unico",
-        "precio_fundador": 39,
-        "precio_referencia": 99,
+        "periodo": "Principios de diciembre de 2026 (fechas exactas por confirmar), promocion de lanzamiento",
+        "formato": "Probablemente sabados por la manana, o en horario flexible segun el grupo (por confirmar)",
+        "facturacion": "pago unico del pack",
+        "precio_fundador": 49,
         "matricula": 0,
         "fechas": null,
-        "pendiente": "FALTA VERIFICAR: calendario escolar de Navidad de la Comunidad de Madrid, curso 2026-2027, para confirmar que caen exactamente 3 sabados en el periodo no lectivo. No publicar fechas concretas hasta confirmarlo.",
-        "descripcion": "Prueba de entrada para quien todavia no se ha apuntado al seguimiento de temporada. Comunicar siempre como actividad de fin de semana, para no compararlo con los campus intensivos entre semana de la competencia."
+        "pendiente": "Confirmar fechas exactas de principios de diciembre de 2026 y si el horario sera sabados por la manana o flexible, antes de publicarlas en la web.",
+        "descripcion": "Prueba de entrada para quien todavia no se ha apuntado al seguimiento de temporada. Precio de mercado (150 euros) como referencia de lo que cobran otras academias por un campus similar -- nunca se factura a ese precio, es solo para dar contexto.",
+        "precio_normal": 79,
+        "precio_mercado": 150
       },
       {
         "id": "clase_suelta",
