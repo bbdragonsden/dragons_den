@@ -279,6 +279,16 @@
             position: relative;
         }
 
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         .hero-title {
             font-family: 'Bebas Neue', sans-serif;
             font-size: clamp(80px, 12vw, 150px);
@@ -2175,7 +2185,7 @@
 <div class="hero" id="inicio-section">
     <div class="hero-left">
         <p class="hero-eyebrow">Basketball Academy &mdash; Temporada 26/27</p>
-        <h1 class="hero-title">DRAGONS<br><span>DEN</span></h1>
+        <h1 class="hero-title">DRAGONS<br><span>DEN</span><span class="sr-only"> Basketball Academy · Baloncesto en Madrid, Carabanchel</span></h1>
         <p class="hero-subtitle">La Guarida de los Campeones</p>
         <p class="hero-description">Programa presencial en Madrid (Carabanchel): grupos reducidos, organizados por edad y nivel, seguimiento de octubre a mayo, campus de verano de junio a septiembre y campus de Navidad. S&aacute;bados por la ma&ntilde;ana o seg&uacute;n el horario del grupo.</p>
         <div class="hero-cta">
