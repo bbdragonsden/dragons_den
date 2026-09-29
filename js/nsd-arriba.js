@@ -15,7 +15,10 @@
    ========================================================= */
 (function () {
   'use strict';
-  if (document.querySelector('.volver-arriba')) return;
+  // Si la pagina ya trae su propio boton de volver arriba (colegio tiene
+  // el suyo, .to-top, integrado con la barra fija inferior del movil), no
+  // se crea un segundo: se quedaria duplicado, uno encima del otro.
+  if (document.querySelector('.volver-arriba, .to-top')) return;
 
   var estilo = document.createElement('style');
   estilo.textContent = [
