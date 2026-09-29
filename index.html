@@ -828,6 +828,101 @@
             border-top: 2px solid var(--gold);
         }
 
+        /* EMBAJADORES */
+        .embajadores-wrap {
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+            padding: 100px 60px;
+        }
+
+        .embajadores-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .embajadores-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: var(--border);
+            margin-top: 60px;
+        }
+
+        .embajador-card {
+            background: var(--surface2);
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 14px;
+            transition: background 0.25s cubic-bezier(0.16,1,0.3,1), transform 0.25s;
+        }
+
+        .embajador-card:hover { background: var(--surface3); transform: translateY(-2px); }
+
+        .embajador-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: #0a0806;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .embajador-categoria {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .embajador-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .embajador-meta {
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: var(--muted);
+        }
+
+        .embajador-bio {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .embajadores-cta {
+            margin-top: 48px;
+            text-align: center;
+        }
+
+        .embajadores-cta p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 860px) {
+            .embajadores-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 520px) {
+            .embajadores-wrap { padding: 60px 24px; }
+            .embajadores-grid { grid-template-columns: 1fr; }
+        }
+
         /* BLOG */
         .blog-wrap {
             padding: 100px 60px;
@@ -2052,6 +2147,7 @@
         <li><a href="#programa">Programa</a></li>
         <li><a href="#precios">Precios</a></li>
         <li><a href="#opiniones">Opiniones</a></li>
+        <li><a href="#embajadores">Embajadores</a></li>
         <li><a href="#blog">Blog</a></li>
         <li><a href="academia.html" style="color:var(--gold);">Academia Online <span aria-hidden="true" style="font-size:.78em;opacity:.65;vertical-align:1px">&#8599;</span></a></li>
         <li><a href="#inscripcion">Inscripci&oacute;n</a></li>
@@ -2068,6 +2164,7 @@
     <li><a href="#programa">Programa</a></li>
     <li><a href="#precios">Precios</a></li>
     <li><a href="#opiniones">Opiniones</a></li>
+        <li><a href="#embajadores">Embajadores</a></li>
     <li><a href="#blog">Blog</a></li>
     <li><a href="academia.html" style="color:var(--gold);">Academia Online <span aria-hidden="true" style="font-size:.78em;opacity:.65;vertical-align:1px">&#8599;</span></a></li>
     <li><a href="#inscripcion">Inscripci&oacute;n</a></li>
@@ -2374,6 +2471,52 @@
                     <div class="opinion-meta">Padres de dos jugadores de 8 y 13 a&ntilde;os</div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- EMBAJADORES -->
+<div class="embajadores-wrap" id="embajadores">
+    <div class="embajadores-inner">
+        <p class="section-eyebrow" data-reveal>Comunidad</p>
+        <h2 class="section-title" data-reveal>Nuestros<br>Embajadores</h2>
+        <div class="divider"></div>
+        <p class="section-text" data-reveal>Jugadores y familias que representan Dragons Den dentro y fuera de la pista: cuentan su progreso, invitan a sus amigos a probar un entrenamiento y llevan el nombre del club por Carabanchel. <em>Perfiles de ejemplo &mdash; se sustituir&aacute;n por embajadores reales del club en cuanto se incorporen al programa.</em></p>
+
+        <div class="embajadores-grid" data-reveal-stagger>
+            <div class="embajador-card">
+                <div class="embajador-avatar" aria-hidden="true">H.</div>
+                <span class="embajador-categoria">Iniciaci&oacute;n</span>
+                <div class="embajador-name">Hugo R.</div>
+                <div class="embajador-meta">9 a&ntilde;os &mdash; 2&ordm; a&ntilde;o en Dragons Den</div>
+                <p class="embajador-bio">Trae cada semana a un amigo del cole a probar un entrenamiento. Ya lleva tres altas nuevas &eacute;l solo.</p>
+            </div>
+            <div class="embajador-card">
+                <div class="embajador-avatar" aria-hidden="true">L.</div>
+                <span class="embajador-categoria">Juvenil</span>
+                <div class="embajador-name">Luc&iacute;a F.</div>
+                <div class="embajador-meta">15 a&ntilde;os &mdash; seguimiento de temporada</div>
+                <p class="embajador-bio">Comparte sus entrenos con la camiseta del club; varias familias del barrio han venido preguntando por ella.</p>
+            </div>
+            <div class="embajador-card">
+                <div class="embajador-avatar" aria-hidden="true">M.</div>
+                <span class="embajador-categoria">Alumni</span>
+                <div class="embajador-name">Marcos T.</div>
+                <div class="embajador-meta">18 a&ntilde;os &mdash; ex alumno, hoy en equipo federado</div>
+                <p class="embajador-bio">Empez&oacute; en el primer campus de verano. Vuelve cada septiembre a entrenar un d&iacute;a con los m&aacute;s peque&ntilde;os.</p>
+            </div>
+            <div class="embajador-card">
+                <div class="embajador-avatar" aria-hidden="true">S.</div>
+                <span class="embajador-categoria">Familia</span>
+                <div class="embajador-name">Sonia P.</div>
+                <div class="embajador-meta">Madre de dos jugadores</div>
+                <p class="embajador-bio">Lleva el grupo de WhatsApp de familias y es la primera en recomendar el club a otros padres del barrio.</p>
+            </div>
+        </div>
+
+        <div class="embajadores-cta">
+            <p>&iquest;Quieres representar a Dragons Den? Los embajadores tienen descuento en su seguimiento de temporada y acceso preferente a los campus.</p>
+            <a href="https://wa.me/34646794962" target="_blank" rel="noopener noreferrer" class="btn-secondary">Quiero ser Embajador</a>
         </div>
     </div>
 </div>
