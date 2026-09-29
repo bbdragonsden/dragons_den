@@ -10,12 +10,15 @@
   "servicios_presenciales": {
     "nota": "Entrenamiento presencial en grupo reducido (4-6 jugadores), en Madrid (Carabanchel). Sabados por la manana o segun horario coordinado por grupo. Escalera en tres fases -- fundador, consolidacion, referencia -- se sube de fase por ocupacion real, nunca por fecha del calendario.",
     "ubicacion": "Madrid (Carabanchel)",
-    "tamano_grupo": { "min": 4, "max": 6 },
+    "tamano_grupo": {
+      "min": 4,
+      "max": 6
+    },
     "fases": {
       "activa": "fundador",
       "fundador": {
         "nombre": "Fundador",
-        "condicion": "PENDIENTE: definir con Fan el numero exacto de plazas de esta fase (por ejemplo, 'las primeras 10 plazas') y comunicarlo desde el primer mensaje a cada familia. Sin ese numero, fundador se convierte en el precio real sin que nadie lo decida."
+        "condicion": "Plazas limitadas: fase fundador activa hasta que se agoten o hasta el 31 de octubre de 2026 (lo primero que ocurra), por la promocion de lanzamiento. No hay un numero de plazas publicado como tal: se comunica como \"plazas limitadas por la promocion de lanzamiento\", nunca como una cifra concreta que luego haya que sostener."
       },
       "consolidacion": {
         "nombre": "Consolidacion",
@@ -30,7 +33,10 @@
       "fundador": 0,
       "consolidacion": 30,
       "referencia": 30,
-      "aplica_a": ["seguimiento", "campus_verano"],
+      "aplica_a": [
+        "seguimiento",
+        "campus_verano"
+      ],
       "nota": "Gratis mientras dure la fase fundador -- mensaje principal en cualquier anuncio, cartel o publicacion. 30 euros de referencia en consolidacion y referencia. No aplica al campus de invierno, que no tiene matricula."
     },
     "planes": [

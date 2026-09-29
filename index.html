@@ -1704,6 +1704,17 @@
 
         .nav-mobile-menu li a:hover { color: var(--gold); }
 
+        /* Boton "volver arriba": colores de la marca y hueco para la tab bar movil */
+        :root {
+            --nsd-arriba-bg: var(--gold);
+            --nsd-arriba-fg: #0a0806;
+            --nsd-arriba-bg-hover: #d9bc82;
+            --nsd-arriba-borde: rgba(200,169,110,0.35);
+        }
+        @media (max-width: 900px) {
+            .volver-arriba { bottom: calc(64px + env(safe-area-inset-bottom) + 14px) !important; z-index: 850; }
+        }
+
         /* RESPONSIVE */
         /* ── MOBILE BOTTOM TAB BAR ── */
         .tab-bar { display: none; }
@@ -2116,7 +2127,7 @@
             <div class="price-badge">Precio fundador</div>
             <p class="price-label">Seguimiento</p>
             <div><span class="price-currency">&euro;</span><span class="price-amount">59</span><span class="price-period-tag">/mes</span></div>
-            <p class="price-market-note">Precio de fundador, v&aacute;lido para las primeras plazas &middot; consolidaci&oacute;n 99&nbsp;&euro;/mes &middot; referencia 139&nbsp;&euro;/mes.</p>
+            <p class="price-market-note">Precio de fundador, plazas limitadas hasta que se agoten o hasta el 31 de octubre &middot; consolidaci&oacute;n 99&nbsp;&euro;/mes &middot; referencia 139&nbsp;&euro;/mes.</p>
             <ul class="price-features">
                 <li>Octubre a mayo</li>
                 <li>Grupo reducido de 4 a 6 jugadores</li>
@@ -2131,7 +2142,7 @@
             <div class="price-badge">Precio fundador</div>
             <p class="price-label">Campus de verano</p>
             <div><span class="price-currency">&euro;</span><span class="price-amount">59</span><span class="price-period-tag">/mes</span></div>
-            <p class="price-market-note">Precio de fundador, v&aacute;lido para las primeras plazas &middot; consolidaci&oacute;n 99&nbsp;&euro;/mes &middot; referencia 139&nbsp;&euro;/mes.</p>
+            <p class="price-market-note">Precio de fundador, plazas limitadas hasta que se agoten o hasta el 31 de octubre &middot; consolidaci&oacute;n 99&nbsp;&euro;/mes &middot; referencia 139&nbsp;&euro;/mes.</p>
             <ul class="price-features">
                 <li>Junio a septiembre</li>
                 <li>Mismo formato que el seguimiento de temporada</li>
@@ -3181,6 +3192,7 @@
 <script src="/js/nsd-spring.js" defer></script>
 <script src="/js/nsd-noticias.js" defer></script>
 <script src="/js/nsd-actualidad.js" defer></script>
+<script src="/js/nsd-arriba.js" defer></script>
 <script defer>
   // Respuesta táctil (muelles), consistente con el resto del ecosistema:
   // feedback al pulsar, no al soltar; interrumpible.
