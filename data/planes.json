@@ -1,74 +1,91 @@
 {
-  "version": 1,
-  "actualizado": "2026-09-28",
-  "nota": "Fuente única de la escalera de precios. Hoy los precios están escritos a mano en academia.html, index.html y dentro del JSON-LD de preguntas frecuentes, y no coinciden entre sí. Cuando la plataforma lea de aquí, cambiar un precio debe ser cambiar este archivo y nada más.",
+  "version": 2,
+  "actualizado": "2026-09-29",
+  "nota": "Fuente unica de precios de los DOS productos de Dragons Den, que son distintos y conviven en paralelo: 'servicios_presenciales' es el entrenamiento en grupo reducido en Madrid (Carabanchel); 'planes' es la plataforma online de video/gamificacion (Rookie/PRO/Elite Hibrido/B2B), que sigue activa. index.html, academia.html y el JSON-LD de preguntas frecuentes deben leer de aqui o, como minimo, coincidir exactamente con las cifras de 'servicios_presenciales'. Dragons Den no tiene sede en Torrevieja: opera solo en Madrid (Carabanchel).",
   "fiscal": {
     "iva_incluido": true,
     "tipo_iva": 21,
-    "razon": "Servicio digital a consumidor final en España: el precio anunciado tiene que ser el precio final con IVA. Si la pasarela añade el IVA por encima, el importe mostrado en la web es ilegal."
+    "razon": "Servicio digital a consumidor final en Espana: el precio anunciado tiene que ser el precio final con IVA. Si la pasarela anade el IVA por encima, el importe mostrado en la web es ilegal."
   },
   "servicios_presenciales": {
-    "nota": "Entrenamiento presencial en grupo reducido (4-6 jugadores), en Madrid (Carabanchel). Sabados por la manana o segun horario coordinado por grupo, sin franja fija por defecto. Distinto de la plataforma online (ver 'planes' arriba: Rookie/PRO/Elite/B2B), que sigue activa en paralelo.",
+    "nota": "Entrenamiento presencial en grupo reducido (4-6 jugadores), en Madrid (Carabanchel). Sabados por la manana o segun horario coordinado por grupo. Escalera en tres fases -- fundador, consolidacion, referencia -- se sube de fase por ocupacion real, nunca por fecha del calendario.",
     "ubicacion": "Madrid (Carabanchel)",
-    "tamano_grupo": {
-      "min": 4,
-      "max": 6
+    "tamano_grupo": { "min": 4, "max": 6 },
+    "fases": {
+      "activa": "fundador",
+      "fundador": {
+        "nombre": "Fundador",
+        "condicion": "PENDIENTE: definir con Fan el numero exacto de plazas de esta fase (por ejemplo, 'las primeras 10 plazas') y comunicarlo desde el primer mensaje a cada familia. Sin ese numero, fundador se convierte en el precio real sin que nadie lo decida."
+      },
+      "consolidacion": {
+        "nombre": "Consolidacion",
+        "condicion": "Cuando las plazas de la fase fundador esten llenas y haya referencias reales de familias."
+      },
+      "referencia": {
+        "nombre": "Referencia",
+        "condicion": "Precio de mercado real, objetivo a medio plazo (varias temporadas), con marca y trayectoria ya asentadas."
+      }
     },
     "matricula": {
-      "precio_normal": 30,
-      "precio_octubre": 0,
-      "nota": "Matricula gratis en octubre (promo de bienvenida); el resto del ano, 30 euros. No aplica al campus de invierno, que no tiene matricula.",
-      "aplica_a": [
-        "seguimiento",
-        "campus_verano"
-      ]
+      "fundador": 0,
+      "consolidacion": 30,
+      "referencia": 30,
+      "aplica_a": ["seguimiento", "campus_verano"],
+      "nota": "Gratis mientras dure la fase fundador -- mensaje principal en cualquier anuncio, cartel o publicacion. 30 euros de referencia en consolidacion y referencia. No aplica al campus de invierno, que no tiene matricula."
     },
     "planes": [
       {
         "id": "seguimiento",
-        "nombre": "Seguimiento",
-        "periodo": "Octubre - Mayo (temporada)",
+        "nombre": "Seguimiento en temporada",
+        "periodo": "Octubre - Mayo (curso escolar)",
+        "formato": "Grupo reducido, sabados por la manana",
         "facturacion": "mensual",
-        "precio_normal_mes": 100,
-        "precio_lanzamiento_mes": 60,
-        "lanzamiento": {
-          "activo": true,
-          "plazas_limite": null,
-          "fecha_limite": "2026-10-31",
-          "condicion": "Hasta agotar plazas o hasta el 31 de octubre de 2026, lo que ocurra antes."
-        },
+        "precio_fundador_mes": 59,
+        "precio_consolidacion_mes": 99,
+        "precio_referencia_mes": 139,
+        "descripcion": "El producto base, todo el curso escolar. Pensado para compaginar con los partidos y entrenamientos del club de cada jugador, no para competir con ellos.",
         "extra_analisis_partido": {
-          "precio_mes": 10,
-          "nota": "Precio del extra solo valido en el precio de lanzamiento, para nuevas inscripciones ahora."
+          "precio_fundador_mes": 10,
+          "precio_referencia_mes": 25,
+          "nota": "Add-on de revision de video del partido, todo el ano."
         }
       },
       {
         "id": "campus_verano",
         "nombre": "Campus de verano",
         "periodo": "Junio - Septiembre (ambos incluidos)",
+        "formato": "Mismo formato de grupo, sabados",
         "facturacion": "mensual",
-        "precio_normal_mes": 100,
-        "precio_lanzamiento_mes": 60,
-        "lanzamiento": {
-          "activo": true,
-          "plazas_limite": null,
-          "fecha_limite": "2026-10-31",
-          "condicion": "Hasta agotar plazas o hasta el 31 de octubre de 2026, lo que ocurra antes."
-        }
+        "precio_fundador_mes": 59,
+        "precio_consolidacion_mes": 99,
+        "precio_referencia_mes": 139,
+        "descripcion": "La misma sesion de sabado del seguimiento, en la epoca sin colegio. No es una promocion de verano: es continuidad del mismo grupo, a la misma fase de precio activa."
       },
       {
         "id": "campus_invierno",
         "nombre": "Campus de invierno",
         "periodo": "3 sabados durante las vacaciones escolares de Navidad",
+        "formato": "Pack cerrado de 3 sesiones, sin alta ni permanencia",
         "facturacion": "pack cerrado, pago unico",
-        "precio_lanzamiento": 45,
-        "precio_normal": 70,
+        "precio_fundador": 39,
+        "precio_referencia": 99,
         "matricula": 0,
         "fechas": null,
-        "pendiente": "FALTA VERIFICAR: calendario escolar de Navidad de la Comunidad de Madrid, curso 2026-2027, para confirmar que caen exactamente 3 sabados en el periodo no lectivo. No publicar fechas concretas hasta confirmarlo; si no coinciden 3 sabados exactos, ajustar el numero del pack.",
-        "lanzamiento_condicion": "Hasta agotar plazas o hasta el 31 de octubre de 2026, lo que ocurra antes."
+        "pendiente": "FALTA VERIFICAR: calendario escolar de Navidad de la Comunidad de Madrid, curso 2026-2027, para confirmar que caen exactamente 3 sabados en el periodo no lectivo. No publicar fechas concretas hasta confirmarlo.",
+        "descripcion": "Prueba de entrada para quien todavia no se ha apuntado al seguimiento de temporada. Comunicar siempre como actividad de fin de semana, para no compararlo con los campus intensivos entre semana de la competencia."
+      },
+      {
+        "id": "clase_suelta",
+        "nombre": "Clase suelta (sin compromiso)",
+        "periodo": "Todo el ano, sujeta a plaza libre",
+        "formato": "Una sesion de grupo, sin alta ni permanencia",
+        "facturacion": "por hora",
+        "precio_hora_dolores_dragons": 35,
+        "precio_hora_resto": 40,
+        "nota": "Tarifa real ya en uso, ancla frente al mensual. No anunciar esta tarifa con el nombre 'Dolores Dragons' por delante en ningun texto publico. Usarla solo internamente o en el propio flujo de reserva si hace falta distinguir al jugador."
       }
-    ]
+    ],
+    "aviso_transparencia": "Entrenar en privado y cobrar a jugadores del mismo club sin que el club lo sepa es un conflicto de interes real. La tarifa diferenciada de clase suelta (35 euros Dolores Dragons / 40 euros resto) nunca debe mostrarse como un descuento anunciado con el nombre del club."
   },
   "planes": [
     {
