@@ -70,7 +70,10 @@
       if (!this._lastT) this._lastT = t || performance.now();
       const now = t || performance.now();
       let dt = (now - this._lastT) / 1000;
-      dt = Math.min(dt, 0.032); // evita saltos si la pestana estuvo en segundo plano
+      // Evita saltos si la pestana estuvo en segundo plano. Nunca negativo:
+      // el primer fotograma puede traer una marca de tiempo anterior a la
+      // del evento que lo lanzo, y un paso negativo mete energia al muelle.
+      dt = Math.min(Math.max(dt, 0), 0.032);
       this._lastT = now;
 
       // Conversion damping/response -> rigidez/friccion (parametrizacion de
@@ -80,12 +83,16 @@
       const dampingCoef = 2 * this.damping * angularFreq;
 
       const displacement = this.value - this.target;
-      const springForce = -stiffness * displacement;
-      const dampingForce = -dampingCoef * this.velocity;
-      const accel = springForce + dampingForce;
-
-      this.velocity += accel * dt;
-      this.value += this.velocity * dt;
+      // Se integra en pasos de 1/240 s como maximo: con un paso de
+      // fotograma entero a 30 fps (modo ahorro, moviles modestos) el muelle
+      // rapido de "tacto" se volvia inestable y el boton oscilaba cada vez mas.
+      const pasos = Math.max(1, Math.ceil(dt * 240));
+      const h = dt / pasos;
+      for (let i = 0; i < pasos; i++) {
+        const accel = -stiffness * (this.value - this.target) - dampingCoef * this.velocity;
+        this.velocity += accel * h;
+        this.value += this.velocity * h;
+      }
 
       this.onUpdate && this.onUpdate(this.value);
 
@@ -125,11 +132,23 @@
     if (!el || el.__nsdTactoInit) return;
     el.__nsdTactoInit = true;
     const cfg = PRESETS[preset] || PRESETS.tacto;
+    // Se anima la propiedad independiente `scale` (no `transform`): asi el
+    // muelle no pisa el transform del :hover de la hoja de estilos (antes,
+    // tras el primer clic quedaba un transform en linea que anulaba para
+    // siempre la elevacion del hover) ni se mezcla con las transiciones CSS
+    // declaradas sobre transform, que suavizaban cada fotograma y hacian la
+    // respuesta perezosa. Navegadores sin `scale`: se mantiene transform.
+    const usaScale = 'scale' in el.style;
+    el.setAttribute('data-tacto', '');
     const s = new Spring(1, {
       ...cfg,
-      onUpdate: (v) => { el.style.transform = `scale(${v})`; },
+      onUpdate: (v) => {
+        if (usaScale) el.style.scale = v === 1 ? '' : String(v);
+        else el.style.transform = v === 1 ? '' : `scale(${v})`;
+      },
     });
-    const bajar = () => s.to(escala);
+    // Con movimiento reducido no se escala: el :active de color basta.
+    const bajar = () => { if (!reduceMotion()) s.to(escala); };
     const soltar = () => s.to(1);
     el.addEventListener('pointerdown', bajar, { passive: true });
     el.addEventListener('pointerup', soltar, { passive: true });

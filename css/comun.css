@@ -37,3 +37,41 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline-offs
         transition-duration: 0.01ms !important; scroll-behavior: auto !important;
     }
 }
+
+/* =====================================================================
+   Pulido de detalles (base comun). Inspirado en "Designing Fluid
+   Interfaces" (Apple, WWDC 2018). Va en esta hoja porque se carga ANTES
+   del <style> de cada pagina: son valores por defecto que cualquier regla
+   propia de una pagina puede seguir sobrescribiendo. Lo que tiene que
+   ganar a los estilos de cada pagina esta en css/detalles.css.
+   ===================================================================== */
+
+/* Curvas y duraciones. --ease-fluido: amortiguamiento critico (sin
+   rebote), para casi todo. --ease-muelle: rebote leve (~0.8), SOLO para
+   lo que el usuario lanza o arrastra, nunca para algo que aparece. */
+:root {
+    --ease-fluido: cubic-bezier(.22, 1, .36, 1);
+    --ease-muelle: linear(0, .006, .025 2.8%, .101 6.1%, .539 18.9%, .721 25.3%, .849 31.5%, .937 38.1%, .968 41.8%, .991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%, 1.001 85.9%, 1);
+    --dur-pulsar: 100ms;
+    --dur-aparecer: 220ms;
+    --dur-panel: 350ms;
+}
+@supports not (transition-timing-function: linear(0, 1)) {
+    :root { --ease-muelle: var(--ease-fluido); }
+}
+
+/* iOS no agranda el texto al girar el movil; tamano optico si la fuente lo trae. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; font-optical-sizing: auto; }
+
+/* Respuesta inmediata: sin el retraso del doble toque en lo que se pulsa. */
+a, button, [role="button"], input, select, textarea, label, summary { touch-action: manipulation; }
+
+/* Titulares repartidos en lineas parejas; parrafos sin palabras huerfanas. */
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+
+/* Seleccion de texto con el dorado de la marca, legible sobre fondo oscuro. */
+::selection { background: rgba(200, 169, 110, 0.32); color: #fff; }
+
+/* Controles de formulario con el color de la marca. */
+input, select, textarea { accent-color: #c8a96e; caret-color: #c8a96e; }
