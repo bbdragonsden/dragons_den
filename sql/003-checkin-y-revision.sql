@@ -171,3 +171,32 @@ RETURNS BOOLEAN LANGUAGE sql STABLE AS $$
      FROM consentimiento_bienestar b WHERE b.user_id = p_user),
     FALSE);
 $$;
+
+
+-- ── 8. Temporadas: recompensas de nivel por temporada ────────────────────────
+-- Cada temporada empieza en Novato, así que la misma recompensa de nivel puede
+-- volver a ganarse la temporada siguiente.
+ALTER TABLE recompensas_entregadas ADD COLUMN IF NOT EXISTS temporada TEXT NOT NULL DEFAULT '2026-27';
+ALTER TABLE recompensas_entregadas DROP CONSTRAINT IF EXISTS recompensas_entregadas_user_id_nivel_key;
+CREATE UNIQUE INDEX IF NOT EXISTS idx_recompensas_temporada_nivel
+  ON recompensas_entregadas(user_id, temporada, nivel);
+
+
+-- ── 9. Tienda de Escamas ─────────────────────────────────────────────────────
+-- Las Escamas ganadas se calculan desde el libro de XP (Semanas Dragón, bloques
+-- y niveles); aquí solo se guardan los canjes. Saldo = ganadas − canjes no rechazados.
+CREATE TABLE IF NOT EXISTS canjes (
+  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id       UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  temporada     TEXT NOT NULL,
+  item          TEXT NOT NULL,
+  escamas       SMALLINT NOT NULL CHECK (escamas > 0),
+  estado        TEXT NOT NULL DEFAULT 'pendiente' CHECK (estado IN ('pendiente','entregado','rechazado')),
+  nota          TEXT,
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  entregado_en  TIMESTAMPTZ
+);
+CREATE INDEX IF NOT EXISTS idx_canjes_user ON canjes(user_id, temporada);
+ALTER TABLE canjes ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "canjes_self_read" ON canjes;
+CREATE POLICY "canjes_self_read" ON canjes FOR SELECT USING (auth.uid() = user_id);

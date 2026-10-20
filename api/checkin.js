@@ -79,6 +79,12 @@ async function concederFuente(userId, fuenteId, referencia, fecha, nota) {
   const f = gam.fuentes_xp.find((x) => x.id === fuenteId);
   if (!f || f.activo === false || typeof f.xp !== 'number') return 0;
   const sem = semanaClave(fecha || fechaMadrid(0));
+  if (f.grupo === 'acelerador') {
+    const r = await rest.get('xp_movimientos', 'user_id=eq.' + userId + '&select=cantidad,motivo,referencia,nota,created_at&limit=5000');
+    const T = progreso.temporadaActual(gam);
+    const x = progreso.xpTemporada(gam, T, Array.isArray(r.body) ? r.body : []);
+    if (x.aceleradores_brutos + f.xp > gam.reglas.tope_temporada_aceleradores) return 0;
+  }
   if (f.tope_semanal_veces) {
     const r = await rest.get('xp_movimientos', 'user_id=eq.' + userId + '&motivo=eq.' + fuenteId + '&nota=like.' + encodeURIComponent(sem + '*') + '&select=id');
     if (Array.isArray(r.body) && r.body.length >= f.tope_semanal_veces) return 0;
@@ -88,28 +94,27 @@ async function concederFuente(userId, fuenteId, referencia, fecha, nota) {
 }
 
 async function datosProgreso(uid) {
-  const [mov, hist, med] = await Promise.all([
-    rest.get('xp_movimientos', 'user_id=eq.' + uid + '&select=cantidad,motivo,referencia,created_at&order=created_at.desc&limit=5000'),
+  const [mov, hist, med, can] = await Promise.all([
+    rest.get('xp_movimientos', 'user_id=eq.' + uid + '&select=cantidad,motivo,referencia,nota,created_at&order=created_at.desc&limit=5000'),
     historial(uid, 400),
     rest.get('mediciones', 'user_id=eq.' + uid + '&select=fecha,estatura_cm&order=fecha.desc&limit=24'),
+    rest.get('canjes', 'user_id=eq.' + uid + '&select=id,temporada,item,escamas,estado,created_at&order=created_at.desc&limit=200'),
   ]);
-  return { movimientos: Array.isArray(mov.body) ? mov.body : [], historial: hist, mediciones: Array.isArray(med.body) ? med.body : [] };
+  return { movimientos: Array.isArray(mov.body) ? mov.body : [], historial: hist, mediciones: Array.isArray(med.body) ? med.body : [], canjes: Array.isArray(can.body) ? can.body : [] };
 }
 
 // Anota el XP de rachas cerradas y las recompensas de nivel alcanzadas (idempotente).
 async function sincronizarProgreso(uid, d) {
-  const p0 = progreso.calcular(gam, d.historial, d.movimientos);
   const yaRef = new Set(d.movimientos.filter((m) => m.motivo === 'racha').map((m) => m.referencia));
-  let nuevos = 0;
-  for (const r of progreso.rachasPorAnotar(gam, p0.semanas_cumplidas)) {
+  for (const r of progreso.rachasPorAnotar(gam, d.historial, d.movimientos)) {
     if (yaRef.has(r.referencia)) continue;
     const ins = await rest.insert('xp_movimientos', { user_id: uid, cantidad: r.cantidad, motivo: 'racha', referencia: r.referencia, nota: r.nota });
-    if (ins.status < 300) { d.movimientos.push({ cantidad: r.cantidad, motivo: 'racha', referencia: r.referencia, created_at: new Date().toISOString() }); nuevos++; }
+    if (ins.status < 300) d.movimientos.push({ cantidad: r.cantidad, motivo: 'racha', referencia: r.referencia, nota: r.nota, created_at: new Date().toISOString() });
   }
-  const p = nuevos ? progreso.calcular(gam, d.historial, d.movimientos) : p0;
+  const p = progreso.calcular(gam, d.historial, d.movimientos, null, { canjes: d.canjes });
   for (const n of gam.niveles) {
-    if (n.recompensa && p.xp >= n.xp_desde) {
-      await peticion('/rest/v1/recompensas_entregadas?on_conflict=user_id,nivel', { method: 'POST', body: { user_id: uid, nivel: n.nivel }, headers: { Prefer: 'resolution=ignore-duplicates,return=minimal' } });
+    if (n.recompensa && n.nivel <= p.nivel.numero) {
+      await peticion('/rest/v1/recompensas_entregadas?on_conflict=user_id,temporada,nivel', { method: 'POST', body: { user_id: uid, temporada: p.temporada.id, nivel: n.nivel }, headers: { Prefer: 'resolution=ignore-duplicates,return=minimal' } });
     }
   }
   return p;
@@ -140,6 +145,8 @@ async function estadoJugador(u) {
     forma: consejos.forma(hist, 5),
     hoy: fechaMadrid(0),
     progreso: prog,
+    tienda: (gam.tienda || []).filter((t) => t.activo !== false).map((t) => ({ id: t.id, nombre: t.nombre, detalle: t.detalle || '', escamas: t.escamas })),
+    canjes: d.canjes.filter((c) => c.temporada === prog.temporada.id),
     crecimiento: bien ? { ultima: d.mediciones[0] || null, cm_anio: progreso.crecimiento(d.mediciones) } : null,
     edad: progreso.edad(fn),
   };
@@ -402,16 +409,20 @@ async function guardarBienestar(u, body, req) {
 // ── Entrenador ───────────────────────────────────────────────────────────────
 async function panelRevision() {
   const hace14 = fechaMadrid(14);
-  const [pend, sinVal, recientes, usuarios, recomp, movs] = await Promise.all([
+  const [pend, sinVal, recientes, usuarios, recomp, movs, canj] = await Promise.all([
     rest.get('revisiones', 'estado=in.(pendiente,repetido)&select=*&order=created_at.asc&limit=200'),
     rest.get('checkins', 'validado_por=eq.sin_validar&equipo_tipo=eq.dragons_den&fecha=gte.' + hace14 + '&select=id,user_id,fecha,tipo,duracion_min,rpe&order=fecha.desc&limit=300'),
     rest.get('checkins', 'fecha=gte.' + hace14 + '&select=id,user_id,fecha,tipo,equipo_tipo,rpe,duracion_min,carga,energia,animo,dolor,dolor_zona,mejor,mejorar,causa,proximo,consejo,validado_por&order=fecha.desc&limit=600'),
     usuariosPorId(),
     rest.get('recompensas_entregadas', 'estado=in.(pendiente,preparada)&select=*&order=created_at.asc&limit=200'),
-    rest.get('xp_movimientos', 'select=user_id,cantidad&limit=20000'),
+    rest.get('xp_movimientos', 'select=user_id,cantidad,motivo,referencia,nota,created_at&limit=20000'),
+    rest.get('canjes', 'estado=eq.pendiente&select=*&order=created_at.asc&limit=200'),
   ]);
+  const T = progreso.temporadaActual(gam);
+  const movPor = {};
+  for (const m of (Array.isArray(movs.body) ? movs.body : [])) (movPor[m.user_id] = movPor[m.user_id] || []).push(m);
   const xpPor = {};
-  for (const m of (Array.isArray(movs.body) ? movs.body : [])) xpPor[m.user_id] = (xpPor[m.user_id] || 0) + m.cantidad;
+  for (const id of Object.keys(movPor)) xpPor[id] = progreso.xpTemporada(gam, T, movPor[id]);
   const quien = (id) => usuarios[id] || { email: '', nombre: 'Jugador' };
   const pendientes = [];
   for (const x of (Array.isArray(pend.body) ? pend.body : [])) {
@@ -431,8 +442,8 @@ async function panelRevision() {
   }
   const jugadores = Object.keys(porJugador).map((id) => {
     const h = porJugador[id];
-    const xp = Math.max(0, xpPor[id] || 0);
-    return { user_id: id, jugador: quien(id), sesiones: h.length, semana: consejos.resumenSemana(h), forma: consejos.forma(h, 5), ultimo: h[0], xp, nivel: progreso.nivelDe(xp, gam.niveles).actual.nombre };
+    const x = xpPor[id] || { xp: 0, aceleradores_brutos: 0 };
+    return { user_id: id, jugador: quien(id), sesiones: h.length, semana: consejos.resumenSemana(h), forma: consejos.forma(h, 5), ultimo: h[0], xp: x.xp, aceleradores: x.aceleradores_brutos, nivel: progreso.nivelDe(x.xp, gam.niveles).actual.nombre };
   }).sort((a, b) => (b.semana.relacion || 0) - (a.semana.relacion || 0));
   return {
     pendientes,
@@ -442,6 +453,11 @@ async function panelRevision() {
     recompensas: (Array.isArray(recomp.body) ? recomp.body : []).map((r) => {
       const n = gam.niveles.find((x) => x.nivel === r.nivel) || {};
       return Object.assign({}, r, { jugador: quien(r.user_id), nivel_nombre: n.nombre, titulo: n.recompensa ? n.recompensa.titulo : '' });
+    }),
+    temporada: { id: T.id, nombre: T.nombre, tope_aceleradores: gam.reglas.tope_temporada_aceleradores },
+    canjes: (Array.isArray(canj.body) ? canj.body : []).map((c) => {
+      const it = (gam.tienda || []).find((t) => t.id === c.item) || {};
+      return Object.assign({}, c, { jugador: quien(c.user_id), nombre: it.nombre || c.item });
     }),
     fuentes_manuales: gam.fuentes_xp.filter((f) => f.concede === 'entrenador' && f.activo !== false).map((f) => ({ id: f.id, nombre: f.nombre, xp: f.xp })),
   };
@@ -462,7 +478,12 @@ async function revisar(admin, body) {
   let xp = 0;
   if (decision === 'aprobar') {
     const motivo = x.tipo === 'prueba_video' ? 'prueba_video' : 'checkin_comentario';
-    const ins = await rest.insert('xp_movimientos', { user_id: x.user_id, cantidad: x.xp_si_aprueba, motivo, referencia: x.id });
+    let notaSem = null;
+    if (x.checkin_id) {
+      const cf = await rest.get('checkins', 'id=eq.' + x.checkin_id + '&select=fecha');
+      if (Array.isArray(cf.body) && cf.body[0]) notaSem = semanaClave(cf.body[0].fecha);
+    }
+    const ins = await rest.insert('xp_movimientos', { user_id: x.user_id, cantidad: x.xp_si_aprueba, motivo, referencia: x.id, nota: notaSem });
     if (ins.status < 300) xp += x.xp_si_aprueba;
     if (x.tipo === 'prueba_video' && x.checkin_id) {
       const c = await rest.update('checkins', 'id=eq.' + x.checkin_id, { validado_por: 'prueba' });
@@ -502,7 +523,42 @@ async function darXp(body) {
   const f = gam.fuentes_xp.find((x) => x.id === body.fuente);
   if (!f || f.concede !== 'entrenador' || f.activo === false) return { status: 400, body: { error: 'Esa fuente de XP no se concede a mano' } };
   const xp = await concederFuente(body.user_id, f.id, null, null, body.nota);
-  return { status: 200, body: { ok: true, xp, aviso: xp ? null : 'Ya ha llegado al tope semanal de esa fuente' } };
+  const aviso = xp ? null : f.grupo === 'acelerador'
+    ? 'No suma: ya ha llegado al tope de aceleradores de la temporada o al tope semanal de ese motivo.'
+    : 'No suma: ya ha llegado al tope semanal de ese motivo.';
+  return { status: 200, body: { ok: true, xp, aviso } };
+}
+
+// Protege una semana por lesión o enfermedad: no da XP pero no rompe la racha.
+async function protegerSemana(body) {
+  if (!uuidOk(body.user_id)) return { status: 400, body: { error: 'Jugador no válido' } };
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(body.fecha || ''))) return { status: 400, body: { error: 'Fecha no válida' } };
+  const k = semanaClave(body.fecha).slice(7);
+  const ins = await rest.insert('xp_movimientos', { user_id: body.user_id, cantidad: 0, motivo: 'ajuste_manual', referencia: 'protegida:' + k, nota: 'semana:' + k + ' · Semana protegida' + (body.nota ? ': ' + String(body.nota).slice(0, 150) : '') });
+  return ins.status < 300 ? { status: 200, body: { ok: true, semana: k } } : { status: 500, body: { error: 'No se pudo guardar' } };
+}
+
+// Canje de Escamas en la tienda. Queda pendiente hasta que el entrenador lo entrega.
+async function canjear(u, body) {
+  const item = (gam.tienda || []).find((t) => t.id === body.item && t.activo !== false);
+  if (!item) return { status: 400, body: { error: 'Ese artículo no está en la tienda' } };
+  const d = await datosProgreso(u.id);
+  const p = progreso.calcular(gam, d.historial, d.movimientos, null, { canjes: d.canjes });
+  const hoy = fechaMadrid(0);
+  if (hoy > p.temporada.cierre_canjes) return { status: 400, body: { error: 'Los canjes de esta temporada ya están cerrados' } };
+  if (p.escamas.saldo < item.escamas) return { status: 400, body: { error: 'Te faltan ' + (item.escamas - p.escamas.saldo) + ' Escamas' } };
+  const ins = await rest.insert('canjes', { user_id: u.id, temporada: p.temporada.id, item: item.id, escamas: item.escamas });
+  if (ins.status >= 300) return { status: 500, body: { error: 'No se pudo guardar' } };
+  return { status: 200, body: { ok: true, saldo: p.escamas.saldo - item.escamas, canje: Array.isArray(ins.body) ? ins.body[0] : null } };
+}
+
+async function cambiarCanje(body) {
+  if (!uuidOk(body.id)) return { status: 400, body: { error: 'Canje no válido' } };
+  if (!['entregado', 'rechazado'].includes(body.estado)) return { status: 400, body: { error: 'Estado no válido' } };
+  const cambios = { estado: body.estado, nota: String(body.nota || '').slice(0, 300) || null };
+  if (body.estado === 'entregado') cambios.entregado_en = new Date().toISOString();
+  await rest.update('canjes', 'id=eq.' + body.id + '&estado=eq.pendiente', cambios);
+  return { status: 200, body: { ok: true } };
 }
 
 async function cambiarRecompensa(body) {
@@ -563,6 +619,9 @@ module.exports = async function handler(req, res) {
         dar_xp: () => (admin ? darXp(body) : { status: 403, body: { error: 'Solo el entrenador' } }),
         recompensa: () => (admin ? cambiarRecompensa(body) : { status: 403, body: { error: 'Solo el entrenador' } }),
         medicion: () => guardarMedicion(u, body),
+        canjear: () => canjear(u, body),
+        canje: () => (admin ? cambiarCanje(body) : { status: 403, body: { error: 'Solo el entrenador' } }),
+        proteger: () => (admin ? protegerSemana(body) : { status: 403, body: { error: 'Solo el entrenador' } }),
       };
       const fn = ACCIONES[body.accion];
       if (!fn) return res.status(400).json({ error: 'Acción desconocida' });

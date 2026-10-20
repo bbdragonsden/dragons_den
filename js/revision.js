@@ -63,6 +63,13 @@
         (r.estado === 'pendiente' ? '<button class="ci-btn ci-btn--sec ci-btn--peq" data-est="preparada" type="button">Preparada</button>' : '') +
         '<button class="ci-btn ci-btn--ok ci-btn--peq" data-est="entregada" type="button">Entregada</button><button class="ci-link" data-est="rechazada" type="button">Descartar</button></div></td></tr>';
     }).join('') : '<tr><td colspan="5" class="ci-vacio">No hay recompensas por entregar.</td></tr>';
+    var cj = D.canjes || [];
+    $('n-rec').textContent = rec.length + cj.length;
+    $('rv-canjes').innerHTML = cj.length ? cj.map(function (c) {
+      return '<tr data-canje="' + c.id + '"><td>' + esc(c.jugador.nombre) + '</td><td>' + esc(c.nombre) + '</td><td class="ci-num">' + c.escamas + '</td><td>' + fecha(c.created_at) + '</td><td><div class="rv-acciones"><button class="ci-btn ci-btn--ok ci-btn--peq" data-cest="entregado" type="button">Entregado</button><button class="ci-link" data-cest="rechazado" type="button">Rechazar</button></div></td></tr>';
+    }).join('') : '<tr><td colspan="5" class="ci-vacio">No hay canjes pendientes.</td></tr>';
+    if (D.temporada) $('rv-xp-tope').textContent = 'Los aceleradores (hitos, métricas, referidos) tienen un tope de ' + D.temporada.tope_aceleradores + ' XP por jugador en la ' + D.temporada.nombre + '. Pasado el tope no suman.';
+    $('prot-jug').innerHTML = D.jugadores.map(function (j) { return '<option value="' + esc(j.user_id) + '">' + esc(j.jugador.nombre) + '</option>'; }).join('');
     $('xp-jug').innerHTML = D.jugadores.map(function (j) { return '<option value="' + esc(j.user_id) + '">' + esc(j.jugador.nombre) + '</option>'; }).join('');
     $('xp-fuente').innerHTML = (D.fuentes_manuales || []).map(function (f) { return '<option value="' + esc(f.id) + '">' + esc(f.nombre) + ' (+' + f.xp + ')</option>'; }).join('');
     $('rv-pend').innerHTML = D.pendientes.length ? D.pendientes.map(item).join('') : '<p class="ci-vacio">No hay nada pendiente.</p>';
@@ -74,7 +81,7 @@
     }).join('') : '<tr><td colspan="3" class="ci-vacio">Sin alertas en los últimos 14 días.</td></tr>';
     $('rv-jug').innerHTML = D.jugadores.length ? D.jugadores.map(function (j) {
       var rel = j.semana.relacion;
-      return '<tr><td>' + esc(j.jugador.nombre) + '</td><td class="ci-num">' + j.sesiones + '</td><td class="ci-num">' + j.semana.carga_semana + '</td><td class="ci-num"' + (rel >= 1.5 ? ' style="color:var(--warn)"' : '') + '>' + (rel ? Math.round(rel * 100) + ' %' : '–') + '</td><td class="ci-num">' + (j.forma == null ? '–' : j.forma.toFixed(1)) + '</td><td>' + (j.xp != null ? j.xp + ' · ' + esc(j.nivel) : '–') + '</td><td>' + esc(j.ultimo && j.ultimo.proximo || '–') + (j.ultimo && j.ultimo.causa ? '<br><small style="color:var(--muted)">Le costó por ' + CAUSAS[j.ultimo.causa] + '</small>' : '') + '</td></tr>';
+      return '<tr><td>' + esc(j.jugador.nombre) + '</td><td class="ci-num">' + j.sesiones + '</td><td class="ci-num">' + j.semana.carga_semana + '</td><td class="ci-num"' + (rel >= 1.5 ? ' style="color:var(--warn)"' : '') + '>' + (rel ? Math.round(rel * 100) + ' %' : '–') + '</td><td class="ci-num">' + (j.forma == null ? '–' : j.forma.toFixed(1)) + '</td><td>' + (j.xp != null ? j.xp + ' · ' + esc(j.nivel) + (D.temporada ? '<br><small style="color:var(--muted)">Aceleradores ' + (j.aceleradores || 0) + '/' + D.temporada.tope_aceleradores + '</small>' : '') : '–') + '</td><td>' + esc(j.ultimo && j.ultimo.proximo || '–') + (j.ultimo && j.ultimo.causa ? '<br><small style="color:var(--muted)">Le costó por ' + CAUSAS[j.ultimo.causa] + '</small>' : '') + '</td></tr>';
     }).join('') : '<tr><td colspan="7" class="ci-vacio">Sin check-ins en los últimos 14 días.</td></tr>';
   }
 
@@ -145,6 +152,28 @@
         pintar();
       } catch (e) { $('rv-error').textContent = e.message; b.disabled = false; }
     });
+    $('rv-canjes').addEventListener('click', async function (ev) {
+      var b = ev.target.closest('[data-cest]');
+      if (!b) return;
+      var id = b.closest('tr').dataset.canje;
+      b.disabled = true;
+      try {
+        await api('POST', { accion: 'canje', id: id, estado: b.dataset.cest });
+        D.canjes = D.canjes.filter(function (x) { return x.id !== id; });
+        pintar();
+      } catch (e) { $('rv-error').textContent = e.message; b.disabled = false; }
+    });
+    $('rv-prot-form').addEventListener('submit', async function (ev) {
+      ev.preventDefault();
+      $('rv-prot-ok').textContent = '';
+      var btn = this.querySelector('button'); btn.disabled = true;
+      try {
+        var out = await api('POST', { accion: 'proteger', user_id: $('prot-jug').value, fecha: $('prot-fecha').value, nota: $('prot-nota').value });
+        $('rv-prot-ok').textContent = 'Semana del ' + fecha(out.semana || $('prot-fecha').value) + ' protegida.';
+        $('prot-nota').value = '';
+      } catch (e) { $('rv-error').textContent = e.message; }
+      btn.disabled = false;
+    });
     $('rv-xp-form').addEventListener('submit', async function (ev) {
       ev.preventDefault();
       $('rv-xp-ok').textContent = '';
@@ -182,7 +211,7 @@
     var J = function (n) { return { nombre: n, email: '' }; };
     return new Promise(function (ok) {
       setTimeout(function () {
-        if (metodo !== 'GET') return ok({ ok: true, xp: 150 });
+        if (metodo !== 'GET') return ok({ ok: true, xp: 150, semana: '2026-11-09' });
         ok({
           pendientes: [
             { id: 'p1', tipo: 'comentario_checkin', jugador: J('Naomi C.'), created_at: hoy, xp_si_aprueba: 5, texto: 'Hoy he fallado muchos tiros libres al final porque llegaba cansada, pero en defensa he hablado en todos los bloqueos.', prefiltro: { puntos: 95, sugerencia: 'aprobar', motivos: [] } },
@@ -191,8 +220,10 @@
           ],
           sin_validar: [{ id: 's1', jugador: J('Naomi C.'), fecha: hoy.slice(0, 10), tipo: 'entreno', duracion_min: 60, rpe: 6 }, { id: 's2', jugador: J('Jugador de ejemplo'), fecha: hoy.slice(0, 10), tipo: 'entreno', duracion_min: 60, rpe: 5 }],
           alertas: [{ jugador: J('Jugador de ejemplo'), fecha: hoy.slice(0, 10), nivel: 'alta', texto: 'Molestia que le ha limitado (tobillo)' }],
-          jugadores: [{ user_id: '11111111-1111-4111-8111-111111111111', jugador: J('Naomi C.'), sesiones: 6, semana: { carga_semana: 1820, relacion: 1.6 }, forma: 3.8, xp: 620, nivel: 'Cantera', ultimo: { proximo: 'Botar con la cabeza levantada', causa: 'cansancio' } }],
-          recompensas: [{ id: 'rc1', jugador: J('Naomi C.'), nivel: 2, nivel_nombre: 'Cantera', titulo: 'Insignia de Cantera en tu carta', estado: 'pendiente' }],
+          jugadores: [{ user_id: '11111111-1111-4111-8111-111111111111', jugador: J('Naomi C.'), sesiones: 6, semana: { carga_semana: 1820, relacion: 1.6 }, forma: 3.8, xp: 1240, aceleradores: 150, nivel: 'Sexto Hombre', ultimo: { proximo: 'Botar con la cabeza levantada', causa: 'cansancio' } }],
+          recompensas: [{ id: 'rc1', jugador: J('Naomi C.'), nivel: 4, nivel_nombre: 'Sexto Hombre', titulo: 'Un análisis de vídeo extra de 15 minutos', estado: 'pendiente' }],
+          temporada: { id: '2026-27', nombre: 'Temporada 2026-27', tope_aceleradores: 600 },
+          canjes: [{ id: 'cj1', jugador: J('Naomi C.'), nombre: 'Capitán de una sesión', escamas: 10, created_at: hoy }],
           fuentes_manuales: [{ id: 'sesion_pista', nombre: 'Sesión en pista (la marca el entrenador)', xp: 25 }, { id: 'hito_tecnico', nombre: 'Hito técnico conseguido (lo marca el entrenador)', xp: 150 }],
         });
       }, 250);

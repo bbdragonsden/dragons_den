@@ -86,21 +86,48 @@
     var p = EST.progreso;
     if (!p) return;
     $('ci-xp').classList.remove('ci-oculto');
+    var t = p.temporada || {};
     $('ci-xp-nivel').textContent = 'Nivel ' + p.nivel.numero + ' · ' + p.nivel.nombre;
     var barra = $('ci-xp-barra');
     barra.setAttribute('aria-valuenow', String(p.pct));
     barra.setAttribute('aria-valuetext', p.pct + ' % hasta el siguiente nivel');
     requestAnimationFrame(function () { barra.querySelector('i').style.transform = 'scaleX(' + Math.max(0, Math.min(1, p.pct / 100)) + ')'; });
-    $('ci-xp-sig').textContent = p.siguiente
-      ? 'Te faltan ' + p.siguiente.faltan + ' XP para ' + p.siguiente.nombre + (p.siguiente.recompensa ? '. Recompensa: ' + p.siguiente.recompensa + '.' : '.')
-      : 'Has llegado al nivel más alto.';
+    var fmt = function (f) { return new Date(f + 'T12:00:00Z').toLocaleDateString('es-ES', { day: 'numeric', month: 'long' }); };
+    var sig;
+    if (!t.en_curso && t.inicio && EST.hoy < t.inicio) sig = 'La ' + (t.nombre || 'temporada') + ' empieza el ' + fmt(t.inicio) + '. Desde ese lunes, cada semana cuenta.';
+    else if (p.bloqueado_hasta) sig = 'Ya tienes el XP de Leyenda del Den. Se corona a partir del ' + fmt(p.bloqueado_hasta) + ': aguanta hasta el final.';
+    else if (p.siguiente) sig = 'Te faltan ' + p.siguiente.faltan + ' XP para ' + p.siguiente.nombre + (p.siguiente.recompensa ? '. Recompensa: ' + p.siguiente.recompensa + '.' : '.');
+    else sig = 'Has llegado al nivel más alto de la temporada.';
+    $('ci-xp-sig').textContent = sig;
+    if (t.en_curso && p.proyeccion) {
+      $('ci-xp-proy').innerHTML = 'Quedan ' + t.semanas_quedan + ' semanas. A tu ritmo de las últimas 4, acabas la temporada en <b>' + esc(p.proyeccion.nombre) + '</b>.' + (p.proyeccion.nivel < 9 ? ' Leyenda del Den pide no fallar casi ninguna semana.' : '');
+    }
+    $('ci-semanas').innerHTML = (p.semanas || []).map(function (w) {
+      var txt = { cumplida: 'Semana Dragón', protegida: 'protegida', comodin: 'salvada con comodín', fallada: 'sin cumplir', en_curso: 'en curso' }[w.estado];
+      return '<li class="' + w.estado + '" title="' + fmt(w.lunes) + ': ' + txt + '"><span class="sr-only">Semana del ' + fmt(w.lunes) + ': ' + txt + '</span></li>';
+    }).join('');
     var sa = p.semana_actual || {};
     $('ci-xp-datos').innerHTML =
       '<div><b class="ci-num">' + p.xp + '</b><span>XP</span></div>' +
       '<div><b class="ci-num">' + p.racha + '</b><span>Semanas Dragón seguidas</span></div>' +
-      '<div><b class="ci-num">' + (sa.checkins >= 1 && sa.otras >= 1 ? 'Sí' : 'Aún no') + '</b><span>Esta semana cuenta</span></div>';
-    $('ci-logros').innerHTML = (p.logros || []).map(function (l) {
+      '<div><b class="ci-num">' + (p.comodines || 0) + '</b><span>Comodines</span></div>';
+    $('ci-logros').innerHTML = (p.aspecto ? '<li class="si">' + esc(p.aspecto.nombre) + '</li>' : '') + (p.logros || []).map(function (l) {
       return '<li class="' + (l.conseguido ? 'si' : '') + '">' + esc(l.nombre) + (l.conseguido ? '' : ' · ' + Math.min(l.valor, l.minimo) + '/' + l.minimo) + '<span class="sr-only">' + (l.conseguido ? ', conseguido' : ', pendiente') + '</span></li>';
+    }).join('') + (p.temporadas_anteriores || []).map(function (a) { return '<li class="si">' + esc(a.nombre) + ' ' + esc(a.temporada) + '</li>'; }).join('');
+    pintarTienda();
+  }
+
+  function pintarTienda() {
+    var p = EST.progreso;
+    if (!p || !p.escamas || !(EST.tienda || []).length) return;
+    $('ci-tienda').classList.remove('ci-oculto');
+    $('ci-escamas').textContent = p.escamas.saldo;
+    var pend = {};
+    (EST.canjes || []).forEach(function (c) { if (c.estado === 'pendiente') pend[c.item] = (pend[c.item] || 0) + 1; });
+    $('ci-tienda-lista').innerHTML = EST.tienda.map(function (it) {
+      var puede = p.escamas.saldo >= it.escamas;
+      return '<li><div><b>' + esc(it.nombre) + '</b><small>' + it.escamas + ' Escamas' + (it.detalle ? ' · ' + esc(it.detalle) : '') + (pend[it.id] ? ' · Pedido, pendiente de entrega' : '') + '</small></div>' +
+        '<button class="ci-btn ci-btn--sec ci-btn--peq" type="button" data-canje="' + esc(it.id) + '"' + (puede ? '' : ' disabled') + ' aria-label="Canjear ' + esc(it.nombre) + ' por ' + it.escamas + ' Escamas">' + (puede ? 'Canjear' : 'Faltan ' + (it.escamas - p.escamas.saldo)) + '</button></li>';
     }).join('');
   }
 
@@ -422,6 +449,20 @@
       var edad = (Date.now() - Date.parse(this.value)) / (365.25 * 86400000);
       $('ci-tutor-wrap').classList.toggle('ci-oculto', !(edad < CAT.consentimiento_bienestar.edad_minima_propia));
     });
+    $('ci-tienda-lista').addEventListener('click', async function (ev) {
+      var b = ev.target.closest('[data-canje]');
+      if (!b) return;
+      $('ci-tienda-error').textContent = ''; $('ci-tienda-ok').textContent = '';
+      b.disabled = true;
+      try {
+        var out = await api('POST', { accion: 'canjear', item: b.dataset.canje });
+        EST.progreso.escamas.saldo = out.saldo;
+        EST.progreso.escamas.gastadas += EST.tienda.find(function (x) { return x.id === b.dataset.canje; }).escamas;
+        EST.canjes = (EST.canjes || []).concat([{ item: b.dataset.canje, estado: 'pendiente' }]);
+        pintarTienda();
+        $('ci-tienda-ok').textContent = 'Pedido hecho. Tu entrenador te lo da en la próxima sesión.';
+      } catch (e) { $('ci-tienda-error').textContent = e.message; b.disabled = false; }
+    });
     $('ci-crec-form').addEventListener('submit', async function (ev) {
       ev.preventDefault();
       $('ci-crec-error').textContent = '';
@@ -485,10 +526,15 @@
       semana: { sesiones_semana: 2, carga_semana: 885, media_semanas_previas: 1100, relacion: 0.8 },
       forma: 3.6,
       edad: 13,
-      progreso: { xp: 340, nivel: { numero: 1, nombre: 'Novato' }, siguiente: { numero: 2, nombre: 'Cantera', xp_desde: 500, faltan: 160, recompensa: 'Insignia de Cantera en tu carta' }, pct: 68, racha: 3, mejor_racha: 3,
+      progreso: { temporada: { id: '2026-27', nombre: 'Temporada 2026-27', inicio: '2026-11-02', fin: '2027-05-30', en_curso: true, semanas_quedan: 21 }, xp: 1240, nivel: { numero: 4, nombre: 'Sexto Hombre' }, aspecto: { id: 'bronce', nombre: 'Carta de bronce' }, siguiente: { numero: 5, nombre: 'Titular', xp_desde: 1550, faltan: 310, recompensa: 'Carta plateada y capitán de una sesión' }, pct: 48, racha: 6, mejor_racha: 6, comodines: 1,
+        proyeccion: { xp: 4100, nivel: 8, nombre: 'MVP' }, escamas: { ganadas: 37, gastadas: 10, saldo: 27 },
+        semanas: ['cumplida', 'cumplida', 'fallada', 'cumplida', 'cumplida', 'cumplida', 'protegida', 'cumplida', 'cumplida', 'en_curso'].map(function (e, i) { return { lunes: new Date(Date.UTC(2026, 10, 2 + i * 7)).toISOString().slice(0, 10), estado: e }; }),
+        temporadas_anteriores: [],
         semana_actual: { checkins: 2, otras: 1 },
         logros: [{ id: 'primer_parte', nombre: 'Primer parte', conseguido: true, valor: 3, minimo: 1 }, { id: 'constante', nombre: 'Constante', conseguido: false, valor: 3, minimo: 10 }, { id: 'mes_dragon', nombre: 'Mes Dragón', conseguido: false, valor: 3, minimo: 4 }] },
       crecimiento: { ultima: { fecha: hace(40), estatura_cm: 158.5 }, cm_anio: 8.2 },
+      tienda: [{ id: 'capitan', nombre: 'Capitán de una sesión', detalle: 'Eliges el calentamiento y diriges un ejercicio.', escamas: 10 }, { id: 'munequera', nombre: 'Muñequera Dragons Den', escamas: 25 }, { id: 'descuento_10', nombre: '10 € de descuento en equipación', escamas: 40 }, { id: 'camiseta', nombre: 'Camiseta oficial de entrenamiento', escamas: 80 }, { id: 'sudadera', nombre: 'Sudadera oficial', escamas: 120 }],
+      canjes: [{ item: 'capitan', estado: 'pendiente' }],
     };
     var e = DEMO_EST;
     return new Promise(function (ok) {
@@ -497,6 +543,7 @@
         if (cuerpo.accion === 'equipo') return ok({ equipo: { id: String(Math.random()), nombre: cuerpo.nombre, tipo: cuerpo.tipo, duracion_habitual_min: Number(cuerpo.duracion) } });
         if (cuerpo.accion === 'bienestar') return ok({ ok: true });
         if (cuerpo.accion === 'medicion') return ok({ ok: true, cm_anio: 8.4 });
+        if (cuerpo.accion === 'canjear') { var it = e.tienda.find(function (x) { return x.id === cuerpo.item; }); e.progreso.escamas.saldo -= it.escamas; return ok({ ok: true, saldo: e.progreso.escamas.saldo }); }
         if (cuerpo.accion === 'guardar') {
           var r = cuerpo.respuestas;
           return ok({

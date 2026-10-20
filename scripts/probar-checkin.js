@@ -4,7 +4,7 @@
 'use strict';
 const path = require('path'), crypto = require('crypto');
 // ── Falso PostgREST en memoria ──
-const T = { checkins: [], revisiones: [], equipos_jugador: [], xp_movimientos: [], consentimiento_bienestar: [], consentimientos_tutor: [], mediciones: [], recompensas_entregadas: [] };
+const T = { checkins: [], revisiones: [], equipos_jugador: [], xp_movimientos: [], consentimiento_bienestar: [], consentimientos_tutor: [], mediciones: [], recompensas_entregadas: [], canjes: [] };
 const STORE = {};
 let uid = 0; const nid = () => '00000000-0000-4000-8000-' + String(++uid).padStart(12, '0');
 function filtrar(tabla, q) {
@@ -55,7 +55,7 @@ const ADM = { id: 'u-admin', email: 'a@x.es', app_metadata: { is_admin: true } }
 const fake = { rest, storage, peticion: async (p, o) => {
     if (p.startsWith('/rest/v1/consentimiento_bienestar')) { T.consentimiento_bienestar = T.consentimiento_bienestar.filter((c) => c.user_id !== o.body.user_id); T.consentimiento_bienestar.push(o.body); return { status: 201 }; }
     if (p.startsWith('/rest/v1/mediciones')) { T.mediciones = T.mediciones.filter((m) => !(m.user_id === o.body.user_id && m.fecha === o.body.fecha)); T.mediciones.push(o.body); return { status: 201 }; }
-    if (p.startsWith('/rest/v1/recompensas_entregadas')) { if (!T.recompensas_entregadas.some((r) => r.user_id === o.body.user_id && r.nivel === o.body.nivel)) T.recompensas_entregadas.push(Object.assign({ id: nid(), estado: 'pendiente', created_at: new Date().toISOString() }, o.body)); return { status: 201 }; }
+    if (p.startsWith('/rest/v1/recompensas_entregadas')) { if (!T.recompensas_entregadas.some((r) => r.user_id === o.body.user_id && r.nivel === o.body.nivel && r.temporada === o.body.temporada)) T.recompensas_entregadas.push(Object.assign({ id: nid(), estado: 'pendiente', created_at: new Date().toISOString() }, o.body)); return { status: 201 }; }
     throw new Error('peticion ' + p); },
   usuario: async (req) => (req.headers.authorization === 'Bearer admin' ? ADM : req.headers.authorization === 'Bearer jug' ? JUG : null),
   esAdmin: (u) => !!(u && u.app_metadata && u.app_metadata.is_admin), usuariosPorId: async () => ({ '11111111-1111-4111-8111-111111111111': { email: 'j@x.es', nombre: 'Jugador' } }), SUPABASE_HOST: 'x.supabase.co' };
@@ -145,4 +145,57 @@ const ok = (c, m) => { if (!c) { console.log('FALLO:', m); process.exitCode = 1;
   ok(r.body.edad === 14, 'edad calculada desde el consentimiento');
   r = await call('admin', 'GET', null, { vista: 'revision' }); ok(Array.isArray(r.body.recompensas) && r.body.fuentes_manuales.some((f) => f.id === 'hito_tecnico') && !r.body.fuentes_manuales.some((f) => f.id === 'iq_clash'), 'panel con recompensas y fuentes manuales');
   r = await call('jug', 'GET'); ok(r.body.historial.length >= 3 && r.body.semana.sesiones_semana >= 3 && r.body.foco_actual, 'estado del jugador con historial, semana y foco');
+
+  // ── Tienda y semanas protegidas ──
+  r = await call('jug', 'POST', { accion: 'canjear', item: 'sudadera' }); ok(r.code === 400 && /Te faltan/.test(r.body.error), 'sin Escamas no se canjea: ' + r.body.error);
+  r = await call('jug', 'POST', { accion: 'canjear', item: 'iphone' }); ok(r.code === 400, 'artículo inexistente → 400');
+  r = await call('jug', 'POST', { accion: 'proteger', user_id: JUG.id, fecha: '2026-11-10' }); ok(r.code === 403, 'el jugador no protege semanas');
+  r = await call('admin', 'POST', { accion: 'proteger', user_id: JUG.id, fecha: '2026-11-11' }); ok(r.code === 200 && r.body.semana === '2026-11-09', 'semana protegida por lesión: ' + r.body.semana);
+  r = await call('jug', 'GET'); ok(Array.isArray(r.body.tienda) && r.body.tienda.length >= 5 && r.body.progreso.escamas && r.body.progreso.temporada.id === '2026-27', 'estado con tienda, Escamas y temporada');
+  r = await call('admin', 'GET', null, { vista: 'revision' }); ok(Array.isArray(r.body.canjes) && r.body.temporada.tope_aceleradores === 600, 'panel con canjes y tope de aceleradores');
+
+  // ── Calibración de la temporada (motor puro, fechas simuladas) ──
+  const P = require(path.join(__dirname, '../api/_lib/progreso.js'));
+  const G = require(path.join(__dirname, '../data/gamificacion.json'));
+  const T0 = G.temporadas[0];
+  function temporada(adh, acel, protegerSemana, saltar) {
+    const ck = [], mv = []; let d = new Date(T0.inicio + 'T12:00:00Z'); const prot = new Set(T0.semanas_protegidas.map((x) => x.lunes));
+    let wk = 0, dado = 0; const alcanzado = {};
+    while (d <= new Date('2027-06-02T12:00:00Z')) {
+      const k = d.toISOString().slice(0, 10);
+      const ya = new Set(mv.filter((m) => m.motivo === 'racha').map((m) => m.referencia));
+      for (const x of P.rachasPorAnotar(G, ck, mv, d)) if (!ya.has(x.referencia)) mv.push({ cantidad: x.cantidad, motivo: 'racha', referencia: x.referencia, nota: x.nota, created_at: d.toISOString() });
+      const pr = P.calcular(G, ck, mv, d);
+      if (!alcanzado[pr.nivel.numero]) alcanzado[pr.nivel.numero] = k;
+      if (k <= T0.fin && !prot.has(k)) {
+        wk++;
+        if (protegerSemana === k) mv.push({ cantidad: 0, motivo: 'ajuste_manual', referencia: 'protegida:' + k, created_at: d.toISOString() });
+        else if (saltar !== k && Math.floor(wk * adh) > Math.floor((wk - 1) * adh)) {
+          const sem = 'semana:' + k;
+          for (let i = 0; i < 6; i++) { ck.push({ fecha: new Date(d.getTime() + i * 864e5).toISOString().slice(0, 10), tipo: 'entreno', validado_por: 'entrenador' }); mv.push({ cantidad: 15, motivo: 'checkin', nota: sem, created_at: d.toISOString() }); }
+          mv.push({ cantidad: 25, motivo: 'sesion_pista', nota: sem, created_at: d.toISOString() }, { cantidad: 40, motivo: 'clip_partido', nota: sem, created_at: d.toISOString() });
+        }
+        if (acel && wk % 2 === 0 && dado < acel) { mv.push({ cantidad: 150, motivo: 'hito_tecnico', nota: 'semana:' + k, created_at: d.toISOString() }); dado += 150; }
+      }
+      d = new Date(d.getTime() + 7 * 864e5);
+    }
+    return { p: P.calcular(G, ck, mv, new Date('2027-06-01T12:00:00Z')), alcanzado };
+  }
+  let t = temporada(1, 0);
+  ok(t.p.nivel.numero === 9 && t.alcanzado[9] >= '2027-05-17', 'temporada perfecta sin aceleradores: Leyenda solo al final (' + t.alcanzado[9] + ')');
+  ok(t.p.desglose.recortado > 0, 'entrenar 6 veces por semana no da más XP: ' + t.p.desglose.recortado + ' XP recortados por el tope');
+  ok(t.p.escamas.ganadas <= 124 && t.p.escamas.ganadas >= 120, 'Escamas de una temporada perfecta: ' + t.p.escamas.ganadas);
+  t = temporada(1, 3000);
+  ok(t.alcanzado[9] >= '2027-05-03', 'con todos los aceleradores, Leyenda no antes del 3 de mayo (' + t.alcanzado[9] + ')');
+  ok(t.p.desglose.aceleradores === 600, 'aceleradores topados en 600 por temporada');
+  t = temporada(0.5, 150);
+  ok(t.p.nivel.numero >= 4 && t.p.nivel.numero <= 6, 'mitad de semanas acaba en nivel medio: ' + t.p.nivel.nombre);
+  t = temporada(1, 0, '2027-01-11');
+  ok(t.p.racha >= 25 && t.p.semanas.find((w) => w.lunes === '2027-01-11').estado === 'protegida', 'semana de lesión protegida no rompe la racha (' + t.p.racha + ')');
+  t = temporada(1, 0, null, '2027-01-11');
+  ok(t.p.semanas.find((w) => w.lunes === '2027-01-11').estado === 'comodin' && t.p.racha >= 25, 'una semana fallada gasta un comodín y la racha sigue');
+  const conCanje = P.calcular(G, [], [], new Date('2027-06-01T12:00:00Z'), { canjes: [{ temporada: '2026-27', escamas: 30, estado: 'pendiente' }, { temporada: '2026-27', escamas: 50, estado: 'rechazado' }] });
+  ok(conCanje.escamas.gastadas === 30, 'los canjes rechazados no gastan Escamas');
+  const pre = P.calcular(G, [], [{ cantidad: 15, motivo: 'checkin', nota: 'semana:2026-10-19', created_at: '2026-10-21T10:00:00Z' }], new Date('2026-10-21T12:00:00Z'));
+  ok(pre.xp === 0 && !pre.temporada.en_curso, 'antes del inicio de temporada no se acumula XP');
 })();

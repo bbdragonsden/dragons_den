@@ -229,3 +229,20 @@ a { color: var(--gold); text-underline-offset: 3px; }
 .rv-xp-form { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); align-items: end; max-width: 860px; }
 @media (min-width: 760px) { .rv-xp-form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr) auto; } }
 .rv-estado { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); }
+
+/* Temporada, semanas y tienda */
+.ci-xp-proy { font-size: 13.5px; color: var(--text); margin-top: 12px; }
+.ci-xp-proy b { color: var(--gold); font-weight: 600; }
+.ci-semanas { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; margin-top: 14px; padding: 0; }
+.ci-semanas li { width: 14px; height: 14px; border: 1px solid var(--border); background: var(--surface); }
+.ci-semanas li.cumplida { background: var(--gold); border-color: var(--gold); }
+.ci-semanas li.protegida, .ci-semanas li.comodin { background: transparent; border-color: var(--gold-border); background-image: linear-gradient(135deg, transparent 45%, var(--gold-border) 45%, var(--gold-border) 55%, transparent 55%); }
+.ci-semanas li.fallada { background: #2a1515; border-color: #4a2020; }
+.ci-semanas li.en_curso { border-color: var(--gold); }
+.ci-tienda { list-style: none; display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 14px; padding: 0; }
+.ci-tienda li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 14px; align-items: center; background: var(--surface); padding: 12px 14px; }
+.ci-tienda b { font-size: 14.5px; font-weight: 600; }
+.ci-tienda small { display: block; font-size: 12.5px; color: var(--text-2); margin-top: 2px; }
+.ci-tienda .ci-btn { min-width: 108px; }
+.ci-insignias { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.ci-insignias span { font-size: 12px; padding: 4px 9px; border: 1px solid var(--gold-border); color: var(--gold); }

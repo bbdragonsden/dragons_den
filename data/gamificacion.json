@@ -1,8 +1,8 @@
 {
-  "version": 5,
+  "version": 6,
   "actualizado": "2026-10-21",
   "nombre": "Dragons Ladder",
-  "nota": "Sistema único de gamificacion. Todo lo que hace el jugador (check-in tras entrenar o jugar, sesiones en pista, clips de partido, retos semanales, IQ Clash, hitos tecnicos, mejoras de la ficha, companeros traidos) suma a UN solo libro de XP (tabla xp_movimientos). De ese libro salen el nivel, la racha y los logros, y la carta del jugador sale de la ficha que rellena el entrenador. Nada se cuenta dos veces: cada movimiento lleva una referencia unica. Sustituye a niveles.json (economia antigua de Rookie/PRO/Elite, retirada a _retirado/).",
+  "nota": "Sistema único de gamificación. Todo suma a UN libro de XP (xp_movimientos). El XP mide disciplina dentro de una temporada: hay un tope semanal de constancia para que entrenar más no dé más puntos, y un tope de temporada para los aceleradores que da el entrenador. Así el nivel máximo solo se alcanza al final de la temporada con una disciplina casi perfecta. Aparte del XP están las Escamas: moneda que se gana solo con disciplina (Semanas Dragón, bloques y subidas de nivel) y se canjea en la tienda. El XP nunca se gasta.",
   "economia": {
     "valor_hora_coach_eur": 25,
     "origen_valor_hora": "Plan Elite Hibrido: 100 EUR al mes por 4 horas de pista = 25 EUR/hora.",
@@ -21,9 +21,8 @@
         "hibrido",
         "pro_vip"
       ],
-      "frecuencia_mes_normal": 12,
-      "frecuencia_mes_rapido": 20,
-      "nota": "Un check-in por sesión, de cualquier equipo (hasta 3 al día). El XP llega cuando la sesión queda validada: Dragons Den, por el entrenador; club o partido, con la prueba en vídeo aprobada. Todas cuentan para la Forma, los consejos y la racha aunque no den XP. Catálogo en checkin.json."
+      "nota": "Un check-in por sesión, de cualquier equipo (hasta 3 al día). El XP llega cuando la sesión queda validada: Dragons Den, por el entrenador; club o partido, con la prueba en vídeo aprobada. Todas cuentan para la Forma, los consejos y la racha aunque no den XP. Catálogo en checkin.json.",
+      "grupo": "constancia"
     },
     {
       "id": "checkin_comentario",
@@ -35,9 +34,8 @@
         "hibrido",
         "pro_vip"
       ],
-      "frecuencia_mes_normal": 4,
-      "frecuencia_mes_rapido": 16,
-      "nota": "Solo suma cuando el entrenador lo aprueba. El prefiltro propone, no decide."
+      "nota": "Solo suma cuando el entrenador lo aprueba. El prefiltro propone, no decide.",
+      "grupo": "constancia"
     },
     {
       "id": "prueba_video",
@@ -49,9 +47,8 @@
         "hibrido",
         "pro_vip"
       ],
-      "frecuencia_mes_normal": 4,
-      "frecuencia_mes_rapido": 12,
-      "nota": "Vídeo de 3 a 10 segundos en la pista con un código y un gesto que da la app. Se comprueba que no se repita."
+      "nota": "Vídeo de 3 a 10 segundos en la pista con un código y un gesto que da la app. Se comprueba que no se repita.",
+      "grupo": "constancia"
     },
     {
       "id": "sesion_pista",
@@ -62,10 +59,9 @@
         "hibrido",
         "pro_vip"
       ],
-      "frecuencia_mes_normal": 4,
-      "frecuencia_mes_rapido": 6,
       "concede": "entrenador",
-      "nota": "Se concede al validar en el panel de revisión una sesión de Dragons Den registrada en el check-in."
+      "nota": "Se concede al validar en el panel de revisión una sesión de Dragons Den registrada en el check-in.",
+      "grupo": "constancia"
     },
     {
       "id": "clip_partido",
@@ -77,9 +73,8 @@
         "hibrido",
         "pro_vip"
       ],
-      "frecuencia_mes_normal": 4,
-      "frecuencia_mes_rapido": 8,
-      "concede": "entrenador"
+      "concede": "entrenador",
+      "grupo": "constancia"
     },
     {
       "id": "quest",
@@ -90,11 +85,10 @@
         "hibrido",
         "pro_vip"
       ],
-      "frecuencia_mes_normal": 2,
-      "frecuencia_mes_rapido": 4,
       "nota": "El XP lo fija cada reto en quests.json.",
       "activo": false,
-      "pendiente": "Aún no está construido en la plataforma. No se muestra en la web hasta que exista."
+      "pendiente": "Aún no está construido en la plataforma. No se muestra en la web hasta que exista.",
+      "grupo": "acelerador"
     },
     {
       "id": "iq_clash",
@@ -107,10 +101,9 @@
         "hibrido",
         "pro_vip"
       ],
-      "xp_mes_normal": 0,
-      "xp_mes_rapido": 240,
       "activo": false,
-      "pendiente": "Aún no está construido en la plataforma. No se muestra en la web hasta que exista."
+      "pendiente": "Aún no está construido en la plataforma. No se muestra en la web hasta que exista.",
+      "grupo": "acelerador"
     },
     {
       "id": "racha_semana",
@@ -121,8 +114,7 @@
         "hibrido",
         "pro_vip"
       ],
-      "frecuencia_mes_normal": 3,
-      "frecuencia_mes_rapido": 4
+      "grupo": "racha"
     },
     {
       "id": "racha_bloque",
@@ -133,8 +125,7 @@
         "hibrido",
         "pro_vip"
       ],
-      "frecuencia_mes_normal": 0.5,
-      "frecuencia_mes_rapido": 1
+      "grupo": "racha"
     },
     {
       "id": "hito_tecnico",
@@ -145,9 +136,9 @@
         "hibrido",
         "pro_vip"
       ],
-      "frecuencia_mes_normal": 0.3,
-      "frecuencia_mes_rapido": 0.5,
-      "concede": "entrenador"
+      "concede": "entrenador",
+      "grupo": "acelerador",
+      "tope_semanal_veces": 1
     },
     {
       "id": "metrica_sube",
@@ -158,9 +149,9 @@
         "hibrido",
         "pro_vip"
       ],
-      "frecuencia_mes_normal": 0.5,
-      "frecuencia_mes_rapido": 1,
-      "concede": "entrenador"
+      "concede": "entrenador",
+      "grupo": "acelerador",
+      "tope_semanal_veces": 1
     },
     {
       "id": "referido_activo",
@@ -171,10 +162,9 @@
         "hibrido",
         "pro_vip"
       ],
-      "frecuencia_mes_normal": 0,
-      "frecuencia_mes_rapido": 0,
-      "nota": "No entra en el ritmo: depende del programa de embajadores, no del esfuerzo semanal.",
-      "concede": "entrenador"
+      "nota": "Depende del programa de embajadores. Cuenta dentro del tope de aceleradores.",
+      "concede": "entrenador",
+      "grupo": "acelerador"
     }
   ],
   "semana_dragon": {
@@ -182,8 +172,9 @@
     "regla": "Una semana (lunes a domingo) cuenta si el jugador hace al menos 1 check-in Y al menos otra actividad de su plan: una sesión de Dragons Den validada, un clip de partido o una sesión de su club con prueba aprobada.",
     "minimo_checkins": 1,
     "minimo_otras_actividades": 1,
-    "comodin": "Una semana de vacaciones escolares marcada por el entrenador no rompe la racha.",
-    "nota": "La racha se mide en semanas, no en dias: un jugador de 12 años no entrena todos los dias y no debe sentir que pierde por descansar."
+    "comodin": "Cada 4 Semanas Dragón cumplidas ganas un comodín (máximo 2 guardados). Si fallas una semana, se gasta un comodín y la racha sigue. Las vacaciones del calendario y las semanas de lesión o enfermedad que marca el entrenador no cuentan como fallo.",
+    "nota": "La racha se mide en semanas, no en dias: un jugador de 12 años no entrena todos los dias y no debe sentir que pierde por descansar.",
+    "lesion": "Si el jugador está lesionado o enfermo, el entrenador protege esas semanas: no dan XP, pero no se pierde la racha. Nunca se premia entrenar con dolor."
   },
   "niveles": [
     {
@@ -197,7 +188,7 @@
     {
       "nivel": 2,
       "nombre": "Cantera",
-      "xp_desde": 500,
+      "xp_desde": 150,
       "recompensa": {
         "tipo": "digital",
         "titulo": "Insignia de Cantera en tu carta"
@@ -208,11 +199,10 @@
     {
       "nivel": 3,
       "nombre": "Rotación",
-      "xp_desde": 1300,
+      "xp_desde": 450,
       "recompensa": {
         "tipo": "fisica",
-        "titulo": "Muñequera Dragons Den",
-        "detalle": "Se entrega en mano en la siguiente sesión o con el siguiente pedido agrupado."
+        "titulo": "Muñequera Dragons Den"
       },
       "coste_eur": 4,
       "coste_tiempo_min": 0
@@ -220,7 +210,7 @@
     {
       "nivel": 4,
       "nombre": "Sexto Hombre",
-      "xp_desde": 2600,
+      "xp_desde": 950,
       "recompensa": {
         "tipo": "servicio",
         "titulo": "Un análisis de vídeo extra de 15 minutos"
@@ -231,23 +221,22 @@
     {
       "nivel": 5,
       "nombre": "Titular",
-      "xp_desde": 4400,
+      "xp_desde": 1550,
       "recompensa": {
-        "tipo": "fisica",
-        "titulo": "Camiseta oficial de entrenamiento",
-        "detalle": "Quien ya la tiene (Plan PRO VIP) elige dorsal y nombre estampados."
+        "tipo": "estatus",
+        "titulo": "Carta plateada y capitán de una sesión"
       },
-      "coste_eur": 12,
+      "coste_eur": 0,
       "coste_tiempo_min": 0
     },
     {
       "nivel": 6,
       "nombre": "Quinteto Ideal",
-      "xp_desde": 6800,
+      "xp_desde": 2250,
       "recompensa": {
         "tipo": "servicio",
         "titulo": "Sesión 1v1 de 30 minutos",
-        "detalle": "En pista o por videollamada si el jugador es del Dragons Tracker."
+        "detalle": "En pista o por videollamada si es del Dragons Tracker."
       },
       "coste_eur": 0,
       "coste_tiempo_min": 30
@@ -255,18 +244,19 @@
     {
       "nivel": 7,
       "nombre": "All-Star",
-      "xp_desde": 9800,
+      "xp_desde": 3000,
       "recompensa": {
-        "tipo": "servicio",
-        "titulo": "Un mes gratis de tu plan"
+        "tipo": "mixta",
+        "titulo": "Carta dorada y matrícula gratis la próxima temporada",
+        "detalle": "La matrícula solo se aplica si renuevas."
       },
-      "coste_eur": "precio_plan",
+      "coste_eur": "matricula_si_renueva",
       "coste_tiempo_min": 0
     },
     {
       "nivel": 8,
       "nombre": "MVP",
-      "xp_desde": 13500,
+      "xp_desde": 3800,
       "recompensa": {
         "tipo": "mixta",
         "titulo": "Sudadera oficial e informe de scouting en PDF"
@@ -277,12 +267,14 @@
     {
       "nivel": 9,
       "nombre": "Leyenda del Den",
-      "xp_desde": 18000,
+      "xp_desde": 4500,
+      "no_antes_de": "2027-05-03",
       "recompensa": {
         "tipo": "mixta",
-        "titulo": "Dorsal permanente en el muro y sesión 1v1 de una hora"
+        "titulo": "Dorsal en el muro, 1v1 de una hora y el primer mes de la próxima temporada gratis",
+        "detalle": "El mes gratis solo se aplica si renuevas. Se entrega en la despedida de temporada."
       },
-      "coste_eur": 0,
+      "coste_eur": "precio_plan_si_renueva",
       "coste_tiempo_min": 60
     }
   ],
@@ -332,7 +324,7 @@
     },
     {
       "id": "racha_16",
-      "nombre": "Temporada completa",
+      "nombre": "Media temporada",
       "regla": {
         "tipo": "racha",
         "mínimo": 16
@@ -393,6 +385,14 @@
         "mínimo": 1
       },
       "nota": "Coincide con el primer rango de embajador: mismo nombre y misma condicion."
+    },
+    {
+      "id": "racha_27",
+      "nombre": "Temporada completa",
+      "regla": {
+        "tipo": "racha",
+        "mínimo": 27
+      }
     }
   ],
   "carta": {
@@ -423,7 +423,29 @@
       "fisico": "tiro",
       "lectura": "iq"
     },
-    "foco_semanal": "El reto recomendado cada semana es el del bloque de la métrica más baja de la carta."
+    "foco_semanal": "El reto recomendado cada semana es el del bloque de la métrica más baja de la carta.",
+    "aspectos": [
+      {
+        "desde_nivel": 1,
+        "id": "bronce",
+        "nombre": "Carta de bronce"
+      },
+      {
+        "desde_nivel": 5,
+        "id": "plata",
+        "nombre": "Carta de plata"
+      },
+      {
+        "desde_nivel": 7,
+        "id": "oro",
+        "nombre": "Carta de oro"
+      },
+      {
+        "desde_nivel": 9,
+        "id": "leyenda",
+        "nombre": "Carta Leyenda"
+      }
+    ]
   },
   "forma": {
     "nota": "La Forma resume cómo llega el jugador según sus últimos 5 check-ins: energía, concentración y foco cumplido (de 1 a 5). Sirve para que el entrenador ajuste la carga; no es una nota.",
@@ -461,6 +483,100 @@
       ],
       "beneficios": [],
       "pendiente": "Fecha o número de plazas que cierran el estatus, y beneficios concretos (por ejemplo, precio bloqueado o acceso preferente)."
+    }
+  ],
+  "temporadas": [
+    {
+      "id": "2026-27",
+      "nombre": "Temporada 2026-27",
+      "inicio": "2026-11-02",
+      "fin": "2027-05-30",
+      "cierre_canjes": "2027-06-30",
+      "semanas_protegidas": [
+        {
+          "lunes": "2026-12-21",
+          "motivo": "Navidad"
+        },
+        {
+          "lunes": "2026-12-28",
+          "motivo": "Navidad"
+        },
+        {
+          "lunes": "2027-03-22",
+          "motivo": "Semana Santa"
+        }
+      ],
+      "nota": "Empieza cuando se activa el check-in. Las semanas protegidas no dan XP ni rompen la racha."
+    }
+  ],
+  "reglas": {
+    "tope_semanal_constancia": 120,
+    "tope_temporada_aceleradores": 600,
+    "grupos": {
+      "constancia": "Check-in, comentario, prueba en vídeo, sesión en pista y clip. Entre todos suman como máximo el tope semanal: se llega con unas 4 sesiones y su check-in. Entrenar más no da más XP.",
+      "racha": "Semana Dragón y bloques de 4 semanas. Solo semanas cerradas.",
+      "acelerador": "Hitos técnicos, métricas que suben y compañeros traídos. Los da el entrenador y tienen tope por temporada: permiten adelantar unas 3 semanas, no más."
+    },
+    "semana_maxima": "120 de constancia + 30 de Semana Dragón + 25 de media por bloques = 175 XP",
+    "calibracion": "27 semanas activas x 175 = 4.725 XP de máximo regular. Leyenda pide 4.500: una temporada perfecta, o un 90 % de semanas cumplidas más casi todos los aceleradores. Con el máximo de aceleradores se llega unas 3 semanas antes, y nunca antes del 3 de mayo. Simulación: 85 % de semanas acaba en MVP; 70 %, en All-Star; 50 %, en Titular.",
+    "reinicio": "Cada temporada empieza en Novato. El mejor nivel de cada temporada queda para siempre como insignia en la carta.",
+    "sin_ranking": "No hay clasificación pública entre jugadores: cada uno se compara consigo mismo."
+  },
+  "escamas": {
+    "nombre": "Escamas",
+    "nota": "Moneda de la tienda. Solo se ganan con disciplina, nunca con resultados ni por contestar. Gastarlas no baja el nivel. Valen para la temporada en curso y se pueden canjear hasta el cierre de canjes.",
+    "por_semana_dragon": 2,
+    "por_bloque": 5,
+    "por_nivel": 5,
+    "maximo_temporada": "27 semanas x 2 + 6 bloques x 5 + 8 niveles x 5 = 124",
+    "presupuesto": "Un jugador perfecto cuesta unos 20 a 25 € de material por temporada, menos del 5 % de lo que paga el plan más barato."
+  },
+  "tienda": [
+    {
+      "id": "capitan",
+      "nombre": "Capitán de una sesión",
+      "detalle": "Eliges el calentamiento y diriges un ejercicio.",
+      "escamas": 10,
+      "coste_eur": 0
+    },
+    {
+      "id": "marco_escamas",
+      "nombre": "Marco «Escamas» para tu carta",
+      "detalle": "Se ve en tu carta toda la temporada.",
+      "escamas": 30,
+      "coste_eur": 0
+    },
+    {
+      "id": "munequera",
+      "nombre": "Muñequera Dragons Den",
+      "escamas": 25,
+      "coste_eur": 4
+    },
+    {
+      "id": "descuento_10",
+      "nombre": "10 € de descuento en equipación",
+      "detalle": "En cualquier prenda o accesorio. No es acumulable ni se cambia por dinero.",
+      "escamas": 40,
+      "coste_eur": 10
+    },
+    {
+      "id": "uno_contra_uno",
+      "nombre": "Sesión 1v1 de 30 minutos",
+      "escamas": 70,
+      "coste_eur": 0,
+      "coste_tiempo_min": 30
+    },
+    {
+      "id": "camiseta",
+      "nombre": "Camiseta oficial de entrenamiento",
+      "escamas": 80,
+      "coste_eur": 12
+    },
+    {
+      "id": "sudadera",
+      "nombre": "Sudadera oficial",
+      "escamas": 120,
+      "coste_eur": 20
     }
   ]
 }

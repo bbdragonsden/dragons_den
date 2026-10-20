@@ -174,6 +174,24 @@ ${gam.fuentes_xp.filter((f) => f.activo !== false).map((f) => {
     return `    <div class="dd-fuente"><span class="dd-fuente-xp">${xp}<small>XP</small></span><span class="dd-fuente-txt">${esc(f.nombre)}${nota ? `<small>${nota}</small>` : ''}</span></div>`;
   }).join('\n')}
 </div>`,
+  temporada: () => {
+    const t = gam.temporadas[0], r = gam.reglas;
+    const f = (d) => new Date(d + 'T12:00:00Z').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+    const ley = gam.niveles.find((n) => n.no_antes_de);
+    return `<ul class="dd-ciencia" role="list">
+    <li><b>${r.tope_semanal_constancia} XP</b><p>Tope semanal de constancia. Se llega con unas 4 sesiones y su check-in: entrenar más no da más puntos.</p><small>Disciplina, no volumen</small></li>
+    <li><b>${r.tope_temporada_aceleradores} XP</b><p>Tope de aceleradores por temporada: hitos técnicos, métricas que suben y compañeros traídos. Adelantan unas 3 semanas, no más.</p><small>Lo da el entrenador</small></li>
+    <li><b>${esc(ley.nombre)}</b><p>Solo se corona desde el ${f(ley.no_antes_de)}. Hace falta una temporada casi perfecta.</p><small>${esc(t.nombre)}: del ${f(t.inicio)} al ${f(t.fin)}</small></li>
+</ul>`;
+  },
+  tienda: () => `<ul class="dd-escalera" role="list">
+${(gam.tienda || []).filter((i) => i.activo !== false).map((i) => `    <li class="dd-escalon">
+        <span class="dd-escalon-num" aria-hidden="true">${i.escamas}</span>
+        <span class="dd-escalon-nombre">${esc(i.nombre)}</span>
+        <span class="dd-escalon-xp">${i.escamas} Escamas</span>
+        <span class="dd-escalon-premio">${esc(i.detalle || '')}</span>
+    </li>`).join('\n')}
+</ul>`,
   logros: () => `<ul class="dd-logros" role="list">
 ${gam.logros.filter((l) => l.activo !== false).map((l) => `    <li>${esc(l.nombre)}</li>`).join('\n')}
 </ul>`,

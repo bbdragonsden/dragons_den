@@ -49,6 +49,9 @@
     <section class="rv-panel" role="tabpanel" id="p-rec" aria-labelledby="t-rec" hidden>
         <p class="ci-sub" style="margin:0 0 14px">Recompensas de nivel que han desbloqueado los jugadores. Prepárala, entrégala en mano y márcala.</p>
         <div class="rv-tabla-wrap" tabindex="0"><table class="rv-tabla"><thead><tr><th scope="col">Jugador</th><th scope="col">Nivel</th><th scope="col">Recompensa</th><th scope="col">Estado</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody id="rv-rec"></tbody></table></div>
+        <h2 class="ci-h2" style="margin-top:28px">Canjes de la tienda</h2>
+        <p class="ci-sub" style="margin:0 0 14px">Lo que los jugadores han pedido con sus Escamas. Entrégalo y márcalo; si lo rechazas, recuperan las Escamas.</p>
+        <div class="rv-tabla-wrap" tabindex="0"><table class="rv-tabla"><thead><tr><th scope="col">Jugador</th><th scope="col">Artículo</th><th scope="col">Escamas</th><th scope="col">Pedido</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody id="rv-canjes"></tbody></table></div>
     </section>
     <section class="rv-panel" role="tabpanel" id="p-xp" aria-labelledby="t-xp" hidden>
         <p class="ci-sub" style="margin:0 0 14px">XP que solo puedes dar tú: lo que has visto en pista. Cada fuente tiene su tope semanal.</p>
@@ -59,6 +62,16 @@
             <button class="ci-btn" type="submit">Dar XP</button>
         </form>
         <p class="ci-vacio" id="rv-xp-ok" role="status"></p>
+        <p class="ci-sub" id="rv-xp-tope" style="margin:8px 0 0"></p>
+        <h2 class="ci-h2" style="margin-top:28px">Proteger una semana</h2>
+        <p class="ci-sub" style="margin:0 0 14px">Para lesión o enfermedad. Esa semana no da XP, pero no rompe la racha. Así nadie entrena con dolor por no perderla.</p>
+        <form class="rv-xp-form" id="rv-prot-form">
+            <div><label class="ci-label" for="prot-jug">Jugador</label><select class="ci-select" id="prot-jug" required></select></div>
+            <div><label class="ci-label" for="prot-fecha">Cualquier día de esa semana</label><input class="ci-input" id="prot-fecha" type="date" required></div>
+            <div><label class="ci-label" for="prot-nota">Motivo (solo lo ves tú)</label><input class="ci-input" id="prot-nota" maxlength="150" placeholder="Ej.: esguince de tobillo"></div>
+            <button class="ci-btn ci-btn--sec" type="submit">Proteger</button>
+        </form>
+        <p class="ci-vacio" id="rv-prot-ok" role="status"></p>
     </section>
     <p class="ci-error" id="rv-error" role="alert"></p>
 </main>
