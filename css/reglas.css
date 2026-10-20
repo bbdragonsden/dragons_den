@@ -1,0 +1,142 @@
+/*
+ * Normativa (área de jugadores). Usa los tokens de css/checkin.css.
+ * Móvil primero; tablas con desplazamiento propio; versión de impresión
+ * limpia para "Descargar resumen (PDF)".
+ */
+.rg-main { max-width: 1100px; margin: 0 auto; padding: 24px var(--lado) 96px; }
+.rg-migas { font-size: 12.5px; color: var(--muted); margin-bottom: 14px; }
+.rg-migas a { color: var(--text-2); }
+.rg-cab { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); align-items: end; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+.rg-cab .ci-sub { margin-top: 0; }
+.rg-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12.5px; color: var(--muted); }
+.rg-meta b { color: var(--gold); font-weight: 600; }
+.rg-acciones { display: flex; flex-wrap: wrap; gap: 10px; }
+.rg-h2 { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: clamp(28px, 4vw, 40px); letter-spacing: .5px; line-height: 1; margin: 44px 0 14px; }
+.rg-h3 { font-size: 15px; font-weight: 600; margin: 22px 0 8px; }
+.rg-p { color: var(--text-2); max-width: 70ch; }
+.rg-lista { list-style: none; display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.rg-lista li { background: var(--surface); padding: 13px 16px; color: var(--text); font-size: 14.5px; line-height: 1.55; }
+.rg-lista li b { color: var(--gold); font-weight: 600; }
+.rg-lista li small { display: block; color: var(--text-2); font-size: 13px; margin-top: 2px; }
+.rg-fichas { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
+.rg-ficha { border: 1px solid var(--border); background: var(--surface); padding: 16px 18px; }
+.rg-ficha b { display: block; font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 24px; letter-spacing: .5px; color: #fff; line-height: 1.05; }
+.rg-ficha span { display: block; color: var(--text-2); font-size: 14px; margin-top: 6px; }
+.rg-aviso { margin-top: 16px; padding: 12px 16px; border-left: 2px solid var(--gold-border); background: var(--gold-soft); color: var(--text-2); font-size: 13.5px; }
+
+/* Hub */
+.rg-hub { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); margin-top: 24px; }
+.rg-puerta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 14px; align-items: center; padding: 18px 20px; border: 1px solid var(--border); background: linear-gradient(160deg, #141210, #0a0a0a 70%); color: var(--text); text-decoration: none; min-height: 88px; transition: border-color .3s var(--ease); }
+.rg-puerta:hover { border-color: var(--gold-border); }
+.rg-puerta b { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 26px; letter-spacing: .5px; line-height: 1; }
+.rg-puerta span { grid-column: 1; color: var(--text-2); font-size: 13.5px; }
+.rg-puerta svg { grid-row: 1 / span 2; grid-column: 2; color: var(--gold); transition: transform .3s var(--ease); }
+.rg-puerta:hover svg { transform: translate(3px, -3px); }
+
+/* Buscador por edad */
+.rg-edad { margin-top: 24px; padding: 20px; border: 1px solid var(--gold-border); background: var(--surface); }
+.rg-edad form { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
+.rg-edad .ci-input { width: 140px; }
+.rg-edad-res { display: grid; gap: 1px; background: var(--border); margin-top: 16px; border: 1px solid var(--border); }
+.rg-edad-res div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 12px; background: var(--bg); padding: 12px 14px; font-size: 14.5px; }
+.rg-edad-res small { color: var(--muted); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.rg-edad-res b { color: var(--gold); font-weight: 600; }
+
+/* Tablas */
+.rg-tabla-wrap { overflow-x: auto; border: 1px solid var(--border); margin-top: 12px; }
+.rg-tabla-wrap:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.rg-tabla { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 760px; }
+.rg-tabla th, .rg-tabla td { padding: 11px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); line-height: 1.45; }
+.rg-tabla thead th { position: sticky; top: 0; background: var(--surface-2); font-size: 12px; color: var(--gold); font-weight: 600; }
+.rg-tabla tbody th { color: var(--text); font-weight: 600; background: var(--surface); position: sticky; left: 0; min-width: 130px; }
+.rg-tabla td { color: var(--text-2); }
+.rg-tabla--edades { min-width: 620px; }
+
+/* Documentos */
+.rg-docs { list-style: none; display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.rg-docs a { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 13px 16px; background: var(--surface); color: var(--text); text-decoration: none; min-height: 56px; }
+.rg-docs a:hover { background: var(--surface-2); }
+.rg-docs svg { color: var(--gold); }
+.rg-docs small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+.rg-docs em { font-style: normal; font-size: 11px; letter-spacing: 1px; color: var(--gold); border: 1px solid var(--gold-border); padding: 3px 7px; border-radius: 2px; }
+.rg-filtro { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 14px; }
+
+/* Organigrama */
+.og { margin-top: 24px; }
+.og-arbol { list-style: none; padding: 0; margin: 0; }
+.og-arbol ul { list-style: none; margin: 0; padding: 0; }
+.og-nodo { display: inline-block; text-align: left; border: 1px solid var(--border); background: var(--surface); padding: 12px 14px; min-width: 180px; max-width: 280px; }
+.og-nodo b { display: block; font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 22px; letter-spacing: .5px; color: #fff; line-height: 1; }
+.og-nodo span { display: block; font-size: 12.5px; color: var(--text-2); margin-top: 6px; line-height: 1.45; }
+.og-nodo.foco { border-color: var(--gold); background: linear-gradient(160deg, #1d170d, #0f0f0f); }
+.og-nodo.foco b { color: var(--gold); }
+/* Móvil: árbol vertical con conectores en ángulo recto */
+.og-arbol li { position: relative; padding-left: 22px; margin-top: 10px; }
+.og-arbol > li { padding-left: 0; margin-top: 0; }
+.og-arbol ul li::before { content: ''; position: absolute; left: 6px; top: -10px; height: 34px; width: 14px; border-left: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); border-bottom-left-radius: 6px; }
+.og-arbol ul li:not(:last-child)::after { content: ''; position: absolute; left: 6px; top: 18px; bottom: -10px; border-left: 1px solid var(--gold-border); }
+.og-publico { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); margin-top: 12px; }
+.og-publico .og-nodo { max-width: none; display: block; border-style: dashed; }
+.og-camino { list-style: none; counter-reset: c; display: grid; gap: 0; margin: 12px 0 0; padding: 0; }
+.og-camino li { counter-increment: c; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.og-camino li::before { content: counter(c); font-family: 'Bebas Neue', sans-serif; font-size: 30px; line-height: 1; color: var(--gold); }
+.og-camino b { font-weight: 600; }
+.og-camino small { display: block; color: var(--muted); font-size: 12.5px; }
+
+@media (min-width: 760px) {
+    .rg-cab { grid-template-columns: minmax(0, 1fr) auto; }
+    .rg-hub { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .rg-fichas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .og-publico { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) {
+    .rg-hub { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .rg-fichas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    /* Escritorio: árbol de arriba abajo. Cada hijo dibuja su tramo de barra
+       (::before) y su bajante (::after); el ul dibuja la bajada del padre. */
+    .og-arbol, .og-arbol ul { display: flex; justify-content: center; text-align: center; }
+    .og-arbol li { position: relative; display: flex; flex-direction: column; align-items: center; padding: 24px 8px 0; margin: 0; }
+    .og-arbol > li { padding-top: 0; }
+    .og-arbol li > ul { position: relative; padding-top: 24px; }
+    .og-arbol li > ul::before { content: ''; position: absolute; left: 50%; top: 0; height: 24px; width: 0; border-left: 1px solid var(--gold-border); }
+    .og-arbol ul li::before, .og-arbol ul li::after { content: ''; position: absolute; border: 0; border-radius: 0; width: auto; height: auto; bottom: auto; }
+    .og-arbol ul li::before { top: 0; left: 0; right: 0; height: 0; border-top: 1px solid var(--gold-border); }
+    .og-arbol ul li:first-child::before { left: 50%; }
+    .og-arbol ul li:last-child::before { right: 50%; }
+    .og-arbol ul li:only-child::before { display: none; }
+    .og-arbol ul li::after { top: 0; left: 50%; right: auto; height: 24px; width: 0; border-left: 1px solid var(--gold-border); }
+}
+
+@media print {
+    :root { --bg: #fff; --surface: #fff; --surface-2: #f2f2f2; --text: #111; --text-2: #333; --muted: #555; --border: #ccc; --gold: #7a5c1e; --gold-border: #b8a06a; --gold-soft: #f7f2e6; }
+    body { background: #fff; color: #111; font-size: 11pt; }
+    .ci-top, .rg-acciones, .rg-filtro, .skip-link, .rg-edad form { display: none !important; }
+    .rg-main { padding: 0; max-width: none; }
+    .rg-tabla-wrap { overflow: visible; border: 0; }
+    .rg-tabla { min-width: 0; font-size: 9pt; }
+    .rg-tabla thead th, .rg-tabla tbody th { position: static; }
+    .rg-docs a { grid-template-columns: minmax(0, 1fr) auto; }
+    .rg-docs a::after { content: attr(href); grid-column: 1 / -1; font-size: 8pt; color: #555; word-break: break-all; }
+    .rg-docs svg { display: none; }
+    .og-nodo, .rg-ficha, .rg-lista li { break-inside: avoid; }
+    a { color: #111; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .rg-puerta, .rg-puerta svg { transition: none; }
+}
+
+/* Tabla de reglas en móvil: una categoría cada vez, elegida con los botones. */
+.rg-solo-movil { margin-bottom: 0; }
+@media (max-width: 759px) {
+    .rg-tabla--cols { min-width: 0; }
+    .rg-tabla--cols tbody th { position: static; min-width: 0; width: 40%; }
+    .rg-tabla--cols th:not(:first-child), .rg-tabla--cols td { display: none; }
+    .rg-tabla--cols[data-ver="2"] tr > :nth-child(2),
+    .rg-tabla--cols[data-ver="3"] tr > :nth-child(3),
+    .rg-tabla--cols[data-ver="4"] tr > :nth-child(4),
+    .rg-tabla--cols[data-ver="5"] tr > :nth-child(5),
+    .rg-tabla--cols[data-ver="6"] tr > :nth-child(6),
+    .rg-tabla--cols[data-ver="7"] tr > :nth-child(7) { display: table-cell; }
+}
+@media (min-width: 760px) { .rg-solo-movil { display: none; } }
+@media print { .rg-tabla--cols th, .rg-tabla--cols td { display: table-cell !important; } }

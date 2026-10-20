@@ -2,9 +2,10 @@
    Actualidad del colegio en cualquiera de las webs del grupo.
    ---------------------------------------------------------
    Pinta las últimas noticias dentro de [data-actualidad-nsd] como un
-   carrusel: tarjetas que se deslizan y cada una abre su ficha completa
-   en una ventana modal, igual que la sección de noticias de Dolores
-   Dragons. Las noticias están en nsd-noticias.js, que es el mismo
+   carrusel: buscador, filtro por sección y tarjetas que se deslizan,
+   cada una abriendo su ficha completa en una ventana modal, igual que
+   la sección de noticias de Dolores Dragons y que la portada del
+   colegio. Las noticias están en nsd-noticias.js, que es el mismo
    archivo en las cinco webs: se escriben una vez y salen en todas.
 
    Atributos del contenedor:
@@ -22,8 +23,8 @@
 
    LA REGLA (no tocar): sin data-web salen todas las noticias de
    las cinco webs. Con data-web, solo las que tengan esa clave en
-   su campo 'webs'. Esto no cambia con el rediseño: solo cambia
-   cómo se ven y se abren las tarjetas.
+   su campo 'webs'. Esto no cambia con el buscador ni el filtro:
+   solo se busca y se filtra dentro de las que ya tocaban a esta web.
    ========================================================= */
 (function () {
   'use strict';
@@ -41,6 +42,7 @@
   const esc = (t) => String(t == null ? '' : t).replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
   ));
+  const normalizar = (s) => (s || '').toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
 
   // Un enlace del blog es relativo: desde otra web necesita el dominio.
   const enlace = (u) => (!u ? '' : (/^https?:/.test(u) ? u : base + u));
@@ -55,15 +57,31 @@
   }
 
   // Sin data-web salen todas (la del colegio); con el, solo las suyas.
-  const suyas = web
+  const suyas = (web
     ? window.NSD_NOTICIAS.filter((n) => (n.webs || ['colegio']).indexOf(web) >= 0)
-    : window.NSD_NOTICIAS.slice();
+    : window.NSD_NOTICIAS.slice()
+  ).sort((a, b) => String(b.fecha).localeCompare(String(a.fecha)));
 
-  const lista = suyas
-    .sort((a, b) => String(b.fecha).localeCompare(String(a.fecha)))
-    .slice(0, cuantas);
+  if (!suyas.length) return;
 
-  if (!lista.length) return;
+  const CATS = window.NSD_CATEGORIAS || {};
+  const categoriasConNoticias = Object.keys(CATS).filter((k) => suyas.some((n) => n.categoria === k));
+
+  let consulta = '';
+  let categoria = 'todas';
+  let indice = 0;
+
+  function filtrar() {
+    const q = normalizar(consulta).trim();
+    const filtradas = suyas.filter((n) => {
+      if (categoria !== 'todas' && n.categoria !== categoria) return false;
+      if (!q) return true;
+      const cat = CATS[n.categoria] || {};
+      const texto = normalizar([n.titulo, n.resumen, cat.nombre].join(' '));
+      return q.split(/\s+/).every((p) => texto.includes(p));
+    });
+    return filtradas.slice(0, cuantas);
+  }
 
   function portadaDe(n, clase) {
     const conBase = base && n.imagen && !/^https?:/.test(n.imagen)
@@ -75,21 +93,26 @@
   }
 
   function categoriaDe(n) {
-    return (window.NSD_CATEGORIAS || {})[n.categoria] || { nombre: 'Colegio', icono: 'bi-newspaper' };
+    return CATS[n.categoria] || { nombre: 'Colegio', icono: 'bi-newspaper' };
   }
 
-  function chip(n) {
+  function chip(n, esNueva) {
     const cat = categoriaDe(n);
-    return `<span class="act-nsd__cat"><i class="bi ${esc(cat.icono)}" aria-hidden="true"></i> ${esc(cat.nombre)}</span>${n.documento ? `<span class="act-nsd__doc"><i class="bi bi-paperclip" aria-hidden="true"></i> PDF</span>` : ''}`;
+    return `<span class="act-nsd__cat"><i class="bi ${esc(cat.icono)}" aria-hidden="true"></i> ${esc(cat.nombre)}</span>${esNueva ? '<span class="act-nsd__nuevo">Nuevo</span>' : ''}${n.documento ? `<span class="act-nsd__doc"><i class="bi bi-paperclip" aria-hidden="true"></i> PDF</span>` : ''}`;
   }
 
   // ── El carrusel ──────────────────────────────────────────────────────
-  const tarjetas = lista.map((n, i) => `
+  function tarjeta(n, i) {
+    // "Nuevo" solo tiene sentido en la primera tarjeta cuando no hay
+    // busqueda ni filtro activos: es la mas reciente de verdad, no la
+    // primera de un resultado filtrado.
+    const esNueva = i === 0 && categoria === 'todas' && !consulta.trim() && n.fecha === suyas[0].fecha;
+    return `
     <li class="act-nsd__item" data-reveal data-reveal-delay="${Math.min(i + 1, 4)}">
       <button type="button" class="act-nsd__enlace" data-idx="${i}">
         ${portadaDe(n)}
         <span class="act-nsd__txt">
-          ${chip(n)}
+          ${chip(n, esNueva)}
           <strong class="act-nsd__titulo">${esc(n.titulo)}</strong>
           <span class="act-nsd__resumen">${esc(n.resumen)}</span>
           <span class="act-nsd__pie">
@@ -98,56 +121,118 @@
           </span>
         </span>
       </button>
-    </li>`).join('');
-
-  const conNav = lista.length > 1;
-  caja.removeAttribute('hidden');
-  caja.innerHTML = `
-    <div class="act-nsd">
-      ${conNav ? `
-      <div class="act-nsd__nav">
-        <button type="button" class="act-nsd__flecha act-nsd__flecha--prev" aria-label="Noticia anterior"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
-        <button type="button" class="act-nsd__flecha act-nsd__flecha--next" aria-label="Noticia siguiente"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
-      </div>` : ''}
-      <ul class="act-nsd__pista">${tarjetas}</ul>
-      ${conNav ? `<div class="act-nsd__puntos" role="tablist" aria-label="Ir a una noticia">
-        ${lista.map((_, i) => `<button type="button" class="act-nsd__punto" data-idx="${i}" aria-current="${i === 0}" aria-label="Ir a la noticia ${i + 1}"></button>`).join('')}
-      </div>` : ''}
-    </div>`;
-
-  const pista = caja.querySelector('.act-nsd__pista');
-  const tarjetasEl = Array.from(caja.querySelectorAll('.act-nsd__item'));
-  const flechaPrev = caja.querySelector('.act-nsd__flecha--prev');
-  const flechaNext = caja.querySelector('.act-nsd__flecha--next');
-  const puntos = Array.from(caja.querySelectorAll('.act-nsd__punto'));
-
-  function irA(i) {
-    const tarjeta = tarjetasEl[Math.max(0, Math.min(i, tarjetasEl.length - 1))];
-    if (!tarjeta || !pista) return;
-    pista.scrollTo({ left: tarjeta.offsetLeft - pista.offsetLeft, behavior: reduceMotion() ? 'auto' : 'smooth' });
+    </li>`;
   }
 
-  function actualizarNav() {
-    if (!pista) return;
-    const indice = tarjetasEl.findIndex((el) => el.offsetLeft - pista.offsetLeft >= pista.scrollLeft - 20);
-    const actual = indice < 0 ? 0 : indice;
-    puntos.forEach((p, i) => p.setAttribute('aria-current', String(i === actual)));
-    if (flechaPrev) flechaPrev.disabled = pista.scrollLeft <= 4;
-    if (flechaNext) flechaNext.disabled = pista.scrollLeft >= pista.scrollWidth - pista.clientWidth - 4;
+  const pista = () => caja.querySelector('.act-nsd__pista');
+
+  function anchoTarjeta() {
+    const p = pista();
+    const primera = p && p.querySelector('.act-nsd__item');
+    if (!primera) return 340;
+    const estilo = getComputedStyle(p);
+    return primera.getBoundingClientRect().width + parseFloat(estilo.columnGap || estilo.gap || 18);
   }
 
-  if (conNav) {
-    flechaPrev.addEventListener('click', () => {
-      const actual = puntos.findIndex((p) => p.getAttribute('aria-current') === 'true');
-      irA(actual - 1);
+  function irA(i, lista) {
+    const p = pista();
+    if (!p) return;
+    const max = lista.length - 1;
+    indice = Math.max(0, Math.min(i, max));
+    p.scrollTo({ left: indice * anchoTarjeta(), behavior: reduceMotion() ? 'auto' : 'smooth' });
+    marcarNav(lista);
+  }
+
+  function marcarNav(lista) {
+    caja.querySelectorAll('.act-nsd__punto').forEach((p, i) => p.setAttribute('aria-current', String(i === indice)));
+    const prev = caja.querySelector('.act-nsd__flecha--prev');
+    const next = caja.querySelector('.act-nsd__flecha--next');
+    if (prev) prev.disabled = indice <= 0;
+    if (next) next.disabled = indice >= lista.length - 1;
+  }
+
+  function revelar(raiz) {
+    const piezas = raiz.querySelectorAll('[data-reveal]');
+    if (reduceMotion() || !('IntersectionObserver' in window)) {
+      piezas.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+    const io = new IntersectionObserver((entradas) => {
+      entradas.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    piezas.forEach((el) => io.observe(el));
+  }
+
+  let scrollTimer;
+  function onScrollPista(lista) {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const p = pista();
+      if (!p) return;
+      const i = Math.round(p.scrollLeft / anchoTarjeta());
+      if (i !== indice) { indice = i; marcarNav(lista); }
+    }, 80);
+  }
+
+  function pintar() {
+    const lista = filtrar();
+    indice = 0;
+    const conNav = lista.length > 1;
+
+    caja.innerHTML = `
+      <div class="act-nsd">
+        <div class="act-nsd__toolbar">
+          <div class="act-nsd__filtros" role="group" aria-label="Filtrar las noticias por sección">
+            <button type="button" class="act-nsd__filtro ${categoria === 'todas' ? 'is-activo' : ''}" data-cat="todas" aria-pressed="${categoria === 'todas'}">Todo <span>${suyas.length}</span></button>
+            ${categoriasConNoticias.map((k) => `<button type="button" class="act-nsd__filtro ${categoria === k ? 'is-activo' : ''}" data-cat="${k}" aria-pressed="${categoria === k}"><i class="bi ${CATS[k].icono}" aria-hidden="true"></i>${esc(CATS[k].nombre)}</button>`).join('')}
+          </div>
+          <div class="act-nsd__derecha">
+            <div class="act-nsd__search">
+              <i class="bi bi-search" aria-hidden="true"></i>
+              <label class="sr-only" for="actNsdBuscar-${web || 'todas'}">Buscar en las noticias</label>
+              <input type="search" id="actNsdBuscar-${web || 'todas'}" placeholder="Buscar…" autocomplete="off" enterkeyhint="search" value="${esc(consulta)}">
+            </div>
+            ${conNav ? `<div class="act-nsd__nav">
+              <button type="button" class="act-nsd__flecha act-nsd__flecha--prev" aria-label="Noticia anterior"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
+              <button type="button" class="act-nsd__flecha act-nsd__flecha--next" aria-label="Noticia siguiente"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+            </div>` : ''}
+          </div>
+        </div>
+        ${lista.length
+          ? `<ul class="act-nsd__pista">${lista.map(tarjeta).join('')}</ul>`
+          : '<p class="act-nsd__vacio">No hay noticias en esta sección todavía.</p>'}
+        ${conNav ? `<div class="act-nsd__puntos" role="tablist" aria-label="Ir a una noticia">
+          ${lista.map((_, i) => `<button type="button" class="act-nsd__punto" data-idx="${i}" aria-current="${i === 0}" aria-label="Ir a la noticia ${i + 1}"></button>`).join('')}
+        </div>` : ''}
+      </div>`;
+
+    revelar(caja);
+    marcarNav(lista);
+
+    const p = pista();
+    if (p) p.addEventListener('scroll', () => onScrollPista(lista), { passive: true });
+
+    caja.querySelector('.act-nsd__filtros').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-cat]');
+      if (!b) return;
+      categoria = b.dataset.cat;
+      pintar();
     });
-    flechaNext.addEventListener('click', () => {
-      const actual = puntos.findIndex((p) => p.getAttribute('aria-current') === 'true');
-      irA(actual + 1);
+    caja.querySelector('.act-nsd__search input').addEventListener('input', (e) => {
+      consulta = e.target.value;
+      pintar();
     });
-    puntos.forEach((p) => p.addEventListener('click', () => irA(Number(p.dataset.idx))));
-    pista.addEventListener('scroll', () => { window.requestAnimationFrame(actualizarNav); }, { passive: true });
-    actualizarNav();
+    const prevBtn = caja.querySelector('.act-nsd__flecha--prev');
+    const nextBtn = caja.querySelector('.act-nsd__flecha--next');
+    if (prevBtn) prevBtn.addEventListener('click', () => irA(indice - 1, lista));
+    if (nextBtn) nextBtn.addEventListener('click', () => irA(indice + 1, lista));
+    caja.querySelectorAll('.act-nsd__punto').forEach((b, i) => b.addEventListener('click', () => irA(i, lista)));
+
+    if (window.NSDSpring && typeof window.NSDSpring.tacto === 'function' && !reduceMotion()) {
+      caja.querySelectorAll('.act-nsd__enlace').forEach((el) => {
+        window.NSDSpring.tacto(el, { escala: 0.985 });
+      });
+    }
   }
 
   // ── La ficha, en ventana modal ──────────────────────────────────────
@@ -181,7 +266,7 @@
   function abrirModal(n) {
     if (!modal) construirModal();
     modal.querySelector('[data-modal-portada]').innerHTML = portadaDe(n, 'act-nsd-modal__portada');
-    modal.querySelector('[data-modal-chip]').innerHTML = chip(n);
+    modal.querySelector('[data-modal-chip]').innerHTML = chip(n, false);
     modal.querySelector('[data-modal-titulo]').textContent = n.titulo;
     modal.querySelector('[data-modal-resumen]').textContent = n.resumen;
     const t = modal.querySelector('[data-modal-fecha]');
@@ -207,30 +292,9 @@
     const boton = e.target.closest('.act-nsd__enlace');
     if (!boton) return;
     disparador = boton;
-    abrirModal(lista[Number(boton.dataset.idx)]);
+    abrirModal(filtrar()[Number(boton.dataset.idx)]);
   });
 
-  // Aparición al entrar en pantalla. Estas tarjetas se crean después de que
-  // la web haya arrancado, así que el observer global de [data-reveal]
-  // (nsd-sitio.js, main.js…) ya hizo su barrido y nunca las habría visto:
-  // este widget se ocupa siempre de las suyas, sin depender de nadie más.
-  const piezas = caja.querySelectorAll('[data-reveal]');
-  if (reduceMotion() || !('IntersectionObserver' in window)) {
-    piezas.forEach((el) => el.classList.add('is-visible'));
-  } else {
-    const io = new IntersectionObserver((entradas) => {
-      entradas.forEach((en) => {
-        if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    piezas.forEach((el) => io.observe(el));
-  }
-
-  // Tacto: en las webs que traen el motor de muelles, las tarjetas
-  // responden al dedo/al clic igual que el resto de tarjetas del sitio.
-  if (window.NSDSpring && typeof window.NSDSpring.tacto === 'function' && !reduceMotion()) {
-    caja.querySelectorAll('.act-nsd__enlace').forEach((el) => {
-      window.NSDSpring.tacto(el, { escala: 0.985 });
-    });
-  }
+  caja.removeAttribute('hidden');
+  pintar();
 })();

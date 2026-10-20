@@ -37,3 +37,8 @@ _retirado/
 
 # Propuestas SQL (ya cubiertas por sql/, se repite por claridad)
 sql/propuestas/
+
+# Fuentes del generador multipágina
+_paginas/
+scripts/
+_fuentes/

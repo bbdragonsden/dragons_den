@@ -1757,7 +1757,7 @@
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <a href="academia.html" class="sidebar-brand">
+                <a href="plataforma.html" class="sidebar-brand">
                     <!-- Dragon / basketball SVG mark -->
                     <svg class="sidebar-brand-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="10" cy="10" r="8.5" stroke="#c8a96e" stroke-width="1"/>
@@ -1768,12 +1768,11 @@
                     </svg>
                     <span class="sidebar-logo">Dragons Den</span>
                 </a>
-                <p class="sidebar-tagline">Academia Online</p>
+                <p class="sidebar-tagline">Área de jugadores</p>
             </div>
 
             <nav class="sidebar-nav" id="sidebar-nav" aria-label="Packs">
-                <p class="sidebar-section-label">Tus packs</p>
-                <!-- JS renders pack list here -->
+                <!-- JS pinta aquí el menú -->
             </nav>
 
             <div class="sidebar-footer">
@@ -1801,7 +1800,7 @@
 
             <!-- Desktop sticky header -->
             <header class="desktop-header">
-                <span class="desktop-header-title">Academia</span>
+                <span class="desktop-header-title">Área de jugadores</span>
                 <div class="desktop-header-right">
                     <div class="header-user-chip">
                         <div class="header-user-dot">
@@ -2036,7 +2035,7 @@ const PACKS = [
             { name: 'Bonus 01 — Análisis de partido', duration: '30 min', videoId: '' },
             { name: 'Bonus 02 — Rutina pre-temporada', duration: '28 min', videoId: '' },
             { name: 'Bonus 03 — Entrenamiento en solitario', duration: '25 min', videoId: '' },
-            { name: 'Bonus 04 — Q&A con Yefangyi', duration: '35 min', videoId: '' },
+            { name: 'Bonus 04 — Q&A con el entrenador', duration: '35 min', videoId: '' },
         ]
     }
 ];
@@ -2051,6 +2050,8 @@ let userPacks = [];
 let activePack = null;
 let activeModule = null;
 let isAdmin = false;
+// Funciones que se activan cuando su base de datos está lista (data/funciones.json).
+let FUNCIONES = { checkin: false };
 let adminCache = null;
 
 // ── Auth ──────────────────────────────────────────────────────────────────
@@ -2075,6 +2076,7 @@ async function checkAuth() {
     // Fetch pack permissions from DB
     const { data: packsData } = await sb.from('user_packs').select('pack_id');
     userPacks = packsData ? packsData.map(p => p.pack_id) : [];
+    try { FUNCIONES = Object.assign(FUNCIONES, await fetch('/data/funciones.json', { cache: 'no-store' }).then(r => r.json())); } catch {}
 
     currentUser = { name, email: user.email };
     init();
@@ -2185,9 +2187,10 @@ function anunciar(texto) {
 // ── Sidebar ───────────────────────────────────────────────────────────────
 function renderSidebar() {
     const nav = document.getElementById('sidebar-nav');
-    nav.innerHTML = '<p class="sidebar-section-label">Tus packs</p>';
+    const tienePacks = PACKS.some(pack => hasAccess(pack.id));
+    nav.innerHTML = tienePacks ? '<p class="sidebar-section-label">Tus packs</p>' : '';
 
-    PACKS.forEach(pack => {
+    (tienePacks ? PACKS : []).forEach(pack => {
         const accessible = hasAccess(pack.id);
         const btn = document.createElement('button');
         btn.className = 'sidebar-item' + (accessible ? '' : ' locked');
@@ -2211,7 +2214,7 @@ function renderSidebar() {
     // ── Mi espacio (for all users) ──
     const sepUser = document.createElement('p');
     sepUser.className = 'sidebar-section-label';
-    sepUser.style.marginTop = '16px';
+    if (tienePacks) sepUser.style.marginTop = '16px';
     sepUser.textContent = 'Mi espacio';
     nav.appendChild(sepUser);
 
@@ -2219,8 +2222,10 @@ function renderSidebar() {
         { id: '__dashboard__', label: 'Dashboard', fn: renderDashboard, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/>' },
         { id: '__perfil__', label: 'Mi Perfil', fn: renderMiPerfil, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>' },
         { id: '__mis_videos__', label: 'Mis vídeos', fn: renderMisVideos, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/>' },
+        { id: '__checkin__', label: 'Check-in', fn: () => { window.location.href = '/checkin.html'; }, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>' },
+        { id: '__normativa__', label: 'Normativa', fn: () => { window.location.href = '/reglas/'; }, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>' },
         { id: '__mensajes__', label: 'Mensajes', fn: renderMisMensajes, icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>' },
-    ].forEach(({ id, label, fn, icon }) => {
+    ].filter(({ id }) => id !== '__checkin__' || FUNCIONES.checkin || isAdmin).forEach(({ id, label, fn, icon }) => {
         const btn = document.createElement('button');
         btn.className = 'sidebar-item';
         btn.id = `sidebar-${id.replace(/__/g,'')}btn`;
@@ -2277,6 +2282,11 @@ function renderSidebar() {
         });
 
         nav.appendChild(alumnosBtn);
+        const revisionBtn = document.createElement('a');
+        revisionBtn.className = 'sidebar-item';
+        revisionBtn.href = '/revision.html';
+        revisionBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg><span>Revisión</span>';
+        nav.appendChild(revisionBtn);
         nav.appendChild(adminBtn);
 
         const campusBtn = document.createElement('button');
@@ -2428,7 +2438,8 @@ async function renderDashboard(refresh = false) {
             </div>
         </div>
 
-        <div class="dash-stats-row">
+        ${accessiblePacks.length ? '' : hubSinPacks()}
+        <div class="dash-stats-row"${accessiblePacks.length ? '' : ' hidden'}>
             <div class="dash-stat">
                 <span class="dash-stat-num">${accessiblePacks.length}</span>
                 <p class="dash-stat-label">Packs activos</p>
@@ -2443,8 +2454,8 @@ async function renderDashboard(refresh = false) {
             </div>
         </div>
 
-        <p class="dash-section-label">Mis Packs</p>
-        <div class="dash-packs-row">${packPills}</div>
+        ${accessiblePacks.length ? `<p class="dash-section-label">Mis Packs</p>
+        <div class="dash-packs-row">${packPills}</div>` : ''}
 
         <p class="dash-section-label">Mis Datos</p>
         <div class="dash-data-grid">${dataGrid}</div>
@@ -2455,9 +2466,33 @@ async function renderDashboard(refresh = false) {
         <button class="dash-edit-btn" onclick="platTabNav('perfil')">Editar perfil</button>`;
 }
 
+// Accesos para quien todavía no tiene packs de vídeo: lo que sí puede usar hoy.
+function hubSinPacks() {
+    const puertas = [
+        FUNCIONES.checkin || isAdmin ? { href: '/checkin.html', t: 'Check-in', d: 'Un minuto después de cada entreno o partido, de cualquier equipo.' } : null,
+        { href: '/reglas/', t: 'Normativa', d: 'Reglas, categorías y documentos oficiales de tu competición.' },
+        { href: '/metodo.html#calentamiento', t: 'Calentamiento', d: 'La rutina de 10 minutos que reduce lesiones.' },
+        { href: '/planes.html', t: 'Planes', d: 'Tecnificación con vídeo y seguimiento.' },
+    ].filter(Boolean);
+    return `<div class="welcome-grid" style="margin-bottom:24px">${puertas.map(p => `
+        <a class="welcome-pack-card" href="${p.href}" style="text-decoration:none;color:inherit">
+            <p class="wpc-name">${p.t}</p>
+            <p class="wpc-count">${p.d}</p>
+        </a>`).join('')}</div>`;
+}
+
 function renderWelcome() {
     const main = document.getElementById('main-content');
     const firstName = (currentUser.name || '').split(' ')[0];
+    if (!PACKS.some(pack => hasAccess(pack.id))) {
+        main.innerHTML = `
+        <div class="content-header">
+            <p class="content-eyebrow">Bienvenido de vuelta</p>
+            <h1 class="content-title">${esc(firstName || 'Jugador')}</h1>
+            <p class="content-desc">Esto es lo que tienes disponible.</p>
+        </div>${hubSinPacks()}`;
+        return;
+    }
 
     const cards = PACKS.map(pack => {
         const accessible = hasAccess(pack.id);
@@ -2505,7 +2540,7 @@ function renderPack(pack) {
                 </svg>
                 <h2>Pack bloqueado</h2>
                 <p>No tienes acceso a este pack. Amplía tu suscripción para desbloquearlo.</p>
-                <a href="academia.html#lista-espera" class="btn-upgrade">Ver opciones</a>
+                <a href="planes.html" class="btn-upgrade">Ver planes</a>
             </div>`;
         return;
     }
@@ -3344,7 +3379,7 @@ function renderMsgThread(msgs) {
         ? msgs.map(m => {
             const hora = m.created_at ? new Date(m.created_at).toLocaleString('es', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }) : '';
             const cls  = m.de_admin ? 'admin-msg' : 'user-msg';
-            const from = m.de_admin ? 'Yefangyi · Entrenador' : 'Tú';
+            const from = m.de_admin ? 'Entrenador' : 'Tú';
             return `<div class="msg-bubble ${cls}">
                 <p class="msg-meta">${esc(from)} &middot; ${hora}</p>
                 ${esc(m.contenido).replace(/\n/g, '<br>')}
@@ -4182,11 +4217,11 @@ function platTabNav(view) {
         </svg>
         <span>Inicio</span>
     </button>
-    <button class="plat-tab-item" id="plt-packs" onclick="platTabNav('packs')" aria-label="Mis Packs">
+    <button class="plat-tab-item" id="plt-packs" onclick="platTabNav('packs')" aria-label="Entrenar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
         </svg>
-        <span>Mis Packs</span>
+        <span>Entrenar</span>
     </button>
     <button class="plat-tab-item" id="plt-videos" onclick="platTabNav('videos')" aria-label="Mis vídeos">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

@@ -162,7 +162,7 @@ function userHTML({ nombre, nivel, meses }) {
 </td></tr>
 
 <tr><td style="background:#111111;padding:40px 56px;">
-  <p style="margin:0 0 2px;font-size:12px;color:#ffffff;font-family:Arial,sans-serif;font-weight:600;">Yefangyi Hu Garcia</p>
+  <p style="margin:0 0 2px;font-size:12px;color:#ffffff;font-family:Arial,sans-serif;font-weight:600;">Dragons Den</p>
   <p style="margin:0;font-size:11px;color:#555;font-family:Arial,sans-serif;letter-spacing:1px;">Director &mdash; Dragons Den Basketball Academy</p>
 </td></tr>
 

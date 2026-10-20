@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "actualizado": "2026-10-18",
+  "nota": "Ficha de DEMOSTRACION para la portada: ensena a las familias como es el seguimiento por dentro. No es un jugador real. Las fichas reales viven en la plataforma (Supabase), nunca en este archivo, que se sirve en publico.",
+  "escala_max": 10,
+  "demo": {
+    "jugador": "Jugador de ejemplo",
+    "categoria": "Infantil",
+    "posicion": "Base",
+    "plan": "Plan Élite Híbrido",
+    "actualizado": "Octubre 2026",
+    "metricas": [
+      {
+        "id": "bote",
+        "nombre": "Control visual y manejo de bote",
+        "valor": 8
+      },
+      {
+        "id": "pies",
+        "nombre": "Mecánica de pies y apoyos",
+        "valor": 7
+      },
+      {
+        "id": "tiro",
+        "nombre": "Biomecánica de tiro y rango",
+        "valor": 8
+      },
+      {
+        "id": "iq",
+        "nombre": "Lectura de ventajas (IQ) y disciplina",
+        "valor": 9
+      }
+    ],
+    "siguiente_hito": "Salida de bote con mano izquierda ante presión a toda pista, sin mirar el balón.",
+    "observaciones": "Lee bien el 2v1, pero en el partido del sábado frenó tres veces antes de pasar. Esta semana trabajamos el pase en carrera tras el primer bote.",
+    "founder": true
+  }
+}

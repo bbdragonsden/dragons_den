@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "actualizado": "2026-10-18",
+  "nota": "Programa Dragons Squad. La portada solo pinta a quien tenga \"consentimiento\": true, y ese true solo se pone con la autorizacion firmada del padre, madre o tutor para publicar nombre, foto, club y recompensa del menor (guardada fuera de este repo). Sin firma, la tarjeta no aparece. Este archivo se sirve en publico: aqui va solo lo que se puede ver en la web. Fotos en /images/embajadores/ (vertical, 4:5, maximo 200 KB, .webp o .jpg).",
+  "rangos": [
+    {
+      "id": "scout",
+      "nombre": "Scout",
+      "nivel_badge": "bronze",
+      "orden": 1
+    },
+    {
+      "id": "captain",
+      "nombre": "Captain",
+      "nivel_badge": "silver",
+      "orden": 2
+    },
+    {
+      "id": "franchise",
+      "nombre": "Franchise Player",
+      "nivel_badge": "gold",
+      "orden": 3
+    }
+  ],
+  "pendiente": "Definir cuantos referidos activos pide cada rango y que recompensa da cada uno. Mientras no este definido, la web no publica umbrales.",
+  "embajadores": [
+    {
+      "id": "amb-01",
+      "nombre": "Naomi C.",
+      "rango": "franchise",
+      "club_actual": "",
+      "referidos": 4,
+      "recompensa": "Pack oficial + mes gratis",
+      "imagen": "/images/embajadores/naomi-800.webp",
+      "consentimiento": true,
+      "founder": false,
+      "dorsal": 30,
+      "imagen_mini": "/images/embajadores/naomi-480.webp",
+      "imagen_jpg": "/images/embajadores/naomi-800.jpg",
+      "alt": "Naomi, embajadora Franchise Player de Dragons Den, con el balón y el dorsal 30",
+      "fondo": "/images/embajadores/naomi-fondo-800.webp",
+      "fondo_mini": "/images/embajadores/naomi-fondo-480.webp",
+      "fondo_jpg": "/images/embajadores/naomi-fondo-800.jpg",
+      "sale": "/images/embajadores/naomi-sale-800.webp",
+      "sale_mini": "/images/embajadores/naomi-sale-480.webp",
+      "sale_png": "/images/embajadores/naomi-sale-800.png"
+    }
+  ]
+}

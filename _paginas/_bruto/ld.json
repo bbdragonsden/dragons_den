@@ -1,0 +1,70 @@
+{
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SportsClub",
+          "@id": "https://dragons-den-eight.vercel.app/#organization",
+          "name": "Dragons Den Basketball Academy",
+          "alternateName": "Dragons Den",
+          "description": "Gabinete de tecnificación y seguimiento de baloncesto en Madrid (Carabanchel), independiente del club de cada jugador. Micro-grupos de máximo 6, análisis de vídeo de partidos y ficha digital de evolución.",
+          "url": "https://dragons-den-eight.vercel.app/",
+          "email": "bbdragonsden@gmail.com",
+          "foundingDate": "2024",
+          "sport": "Basketball",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Madrid",
+            "addressRegion": "Comunidad de Madrid",
+            "addressCountry": "ES"
+          },
+          "areaServed": { "@type": "City", "name": "Madrid" },
+          "priceRange": "€"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://dragons-den-eight.vercel.app/#preguntas",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Puedo apuntarme si ya juego en otro club o colegio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Dragons Den es un gabinete de tecnificación independiente. Nuestro trabajo de 1 hora semanal y el análisis de vídeo están diseñados para complementar los entrenamientos de tu equipo sin sobrecargarte físicamente."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué edades pueden apuntarse?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Categorías alevín, infantil, cadete y junior. Los grupos se organizan por edad y nivel. Si el jugador es menor de edad, la solicitud la hace su padre, su madre o su tutor legal."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo se cuentan las horas en meses de cinco semanas o con festivos?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Las cuotas mensuales cubren un bloque garantizado de 4 horas de pista al mes en el Plan Élite Híbrido. Si una semana hay festivo escolar o ajuste de agenda, las horas se recuperan íntegras alargando sesiones de 1 hora a 1 hora y media, para que siempre recibas el 100 % de los minutos contratados."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué pasa si falto a una sesión? ¿Qué equipamiento necesito?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Trabajamos con cupos de 6 plazas reservadas por jugador, así que las ausencias individuales no se reembolsan. Por seguridad en pista es obligatorio venir con calzado de baloncesto o deportivo: no se hacen ejercicios dinámicos con calzado de calle ni con chanclas."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuándo y cómo se pagan las cuotas?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Las plazas se renuevan y se abonan por adelantado entre los días 1 y 5 de cada mes, por Bizum, en efectivo o por transferencia. No hay permanencia. Más detalle en las condiciones de contratación."
+              }
+            }
+          ]
+        }
+      ]
+    }

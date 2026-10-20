@@ -155,6 +155,84 @@ if (iq.preguntas.length < iq.config.preguntas_por_duelo * 3)
       `se repetirán enseguida y se memorizarán`,
   );
 
+// ── portada frente a planes.json ─────────────────────────────────────────────
+// index.html trae las cifras escritas (SEO, y por si falla la carga) y
+// js/dd-oferta.js las sustituye por las del JSON. Aquí se comprueba que el
+// texto escrito no se ha quedado atrás: si falla, actualiza el HTML.
+const sp = planes.servicios_presenciales;
+const leerRuta = (o, ruta) =>
+  ruta.split('.').reduce((a, k) => {
+    if (a == null) return undefined;
+    if (Array.isArray(a)) return a.find((x) => x && x.id === k) ?? a[+k];
+    return a[k];
+  }, o);
+const sinHtml = (s) =>
+  s
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&(\w+);/g, (m, e) =>
+      ({ aacute: 'á', eacute: 'é', iacute: 'í', oacute: 'ó', uacute: 'ú', Aacute: 'Á', Eacute: 'É',
+         ntilde: 'ñ', iquest: '¿', amp: '&', middot: '·', euro: '€', quot: '"' })[e] ?? m)
+    .replace(/\s+/g, ' ')
+    .trim();
+const PAGINAS = ['index.html', 'planes.html', 'servicios.html', 'metodo.html', 'ficha.html', 'preguntas.html', 'reservar.html', 'condiciones.html'];
+let revisados = 0;
+for (const pagina of PAGINAS) {
+  let portada = '';
+  try {
+    portada = fs.readFileSync(path.join(dir, '..', pagina), 'utf8');
+  } catch (e) {
+    avisos.push('no se pudo leer ' + pagina + ' para compararlo con planes.json');
+    continue;
+  }
+  if (!sp) break;
+  for (const m of portada.matchAll(/data-dd="([^"]+)"[^>]*>([^<]*)</g)) {
+    revisados++;
+    const v = leerRuta(sp, m[1]);
+    if (v === undefined) mal(`${pagina}: data-dd="${m[1]}" no existe en planes.json`);
+    else if (sinHtml(m[2]) !== String(v))
+      mal(`${pagina}: ${m[1]} dice "${sinHtml(m[2])}" y planes.json dice "${v}"`);
+  }
+  for (const m of portada.matchAll(/data-dd-list="([^"]+)"[^>]*>([\s\S]*?)<\/ul>/g)) {
+    const lista = leerRuta(sp, m[1]);
+    const enHtml = [...m[2].matchAll(/<span>([\s\S]*?)<\/span>/g)].map((x) => sinHtml(x[1]));
+    if (!Array.isArray(lista)) mal(`${pagina}: data-dd-list="${m[1]}" no es una lista en planes.json`);
+    else if (JSON.stringify(enHtml) !== JSON.stringify(lista))
+      mal(`${pagina}: la lista ${m[1]} no coincide con planes.json`);
+  }
+  for (const m of portada.matchAll(/href="([^"]+)"[^>]*data-dd-wa="([^"]+)"/g)) {
+    const texto = leerRuta(sp, m[2]);
+    const esperado = 'https://wa.me/' + sp.whatsapp + '?text=' + encodeURIComponent(texto);
+    if (m[1] !== esperado) mal(`${pagina}: el enlace de WhatsApp ${m[2]} no coincide con planes.json`);
+  }
+}
+if (sp) {
+  for (const t of sp.tiers || []) {
+    for (const campo of ['precio_mes', 'precio_exalumno'])
+      if (!Number.isInteger(t[campo]) || /9$/.test(String(t[campo])))
+        mal(`tier ${t.id}: ${campo} debe ser redondo, sin decimales ni terminado en 9`);
+    if (t.precio_exalumno >= t.precio_mes) mal(`tier ${t.id}: el precio de ex-alumno no es más barato`);
+    if (t.ahorro_exalumno !== t.precio_mes - t.precio_exalumno)
+      mal(`tier ${t.id}: ahorro_exalumno (${t.ahorro_exalumno}) no es ${t.precio_mes} - ${t.precio_exalumno}`);
+  }
+  if (!revisados) avisos.push('ninguna página tiene data-dd: la web no lee de planes.json');
+}
+
+// ── embajadores ──────────────────────────────────────────────────────────────
+try {
+  const emb = leer('embajadores.json');
+  const rangos = new Set(emb.rangos.map((r) => r.id));
+  for (const e of emb.embajadores) {
+    if (!rangos.has(e.rango)) mal(`embajador ${e.id}: rango desconocido "${e.rango}"`);
+    if (typeof e.consentimiento !== 'boolean')
+      mal(`embajador ${e.id}: falta "consentimiento" (true solo con autorización firmada del tutor)`);
+    if (e.consentimiento && e.imagen && !fs.existsSync(path.join(dir, '..', e.imagen)))
+      avisos.push(`embajador ${e.id}: publicado, pero no existe la foto ${e.imagen}`);
+  }
+} catch (e) {
+  mal(`embajadores.json no se puede leer: ${e.message}`);
+}
+
 // ── salida ───────────────────────────────────────────────────────────────────
 console.log(
   `retos ${quests.retos.length} · niveles ${niveles.niveles.length} · ` +

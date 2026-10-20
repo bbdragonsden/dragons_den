@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#080808">
+<title>Check-in | Dragons Den</title>
+<link rel="preload" href="/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/comun.css">
+<link rel="stylesheet" href="/css/checkin.css">
+<script src="/vendor/supabase-js-2.45.4/supabase.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="ci-top">
+    <a class="ci-volver" href="/plataforma.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>Plataforma</a>
+    <span class="ci-marca">Dragons Den</span>
+</header>
+
+<main class="ci-main" id="contenido" tabindex="-1">
+    <p id="ci-cargando" class="ci-vacio" role="status">Cargando…</p>
+
+    <!-- Inicio -->
+    <section id="ci-inicio" class="ci-oculto" aria-labelledby="ci-titulo">
+        <h1 class="ci-h1" id="ci-titulo">Check-<em>in</em></h1>
+        <p class="ci-sub">Un minuto después de cada entreno o partido, de cualquier equipo. Te ayuda a ver qué te sale, qué te cuesta y en qué centrarte la próxima vez.</p>
+
+        <div class="ci-semana" id="ci-semana" aria-label="Sesiones de esta semana"></div>
+        <div class="ci-datos" id="ci-datos"></div>
+        <div class="ci-foco ci-oculto" id="ci-foco"><small>Tu foco ahora</small><p></p></div>
+
+        <section class="ci-xp ci-oculto" id="ci-xp" aria-labelledby="ci-xp-titulo">
+            <div class="ci-xp-cab"><h2 class="ci-h2" id="ci-xp-titulo">Tu progreso</h2><span class="ci-xp-nivel" id="ci-xp-nivel"></span></div>
+            <div class="ci-barra" role="progressbar" id="ci-xp-barra" aria-valuemin="0" aria-valuemax="100" aria-labelledby="ci-xp-titulo"><i></i></div>
+            <p class="ci-xp-sig" id="ci-xp-sig"></p>
+            <div class="ci-datos" id="ci-xp-datos"></div>
+            <ul class="ci-logros" id="ci-logros" aria-label="Logros"></ul>
+            <p class="ci-nota">Los XP llegan cuando tu entrenador valida la sesión o aprueba tu prueba en vídeo. Una semana con check-in y una sesión validada es una Semana Dragón.</p>
+        </section>
+
+        <section class="ci-aviso ci-oculto" id="ci-crec" aria-labelledby="ci-crec-titulo">
+            <h2 class="ci-h3" id="ci-crec-titulo">Crecimiento</h2>
+            <p id="ci-crec-texto">Mídete descalzo, de espaldas a la pared, una vez al mes. Si creces muy rápido (un estirón), tu cuerpo necesita otra carga y otros ejercicios.</p>
+            <form class="ci-form-eq" id="ci-crec-form">
+                <div><label class="ci-label" for="ci-estatura">Estatura en cm</label><input class="ci-input" id="ci-estatura" type="number" min="90" max="230" step="0.5" inputmode="decimal" required></div>
+                <button class="ci-btn ci-btn--sec" type="submit">Guardar medida</button>
+            </form>
+            <p class="ci-error" id="ci-crec-error" role="alert"></p>
+        </section>
+
+        <div class="ci-aviso ci-oculto" id="ci-consent">
+            <p><b>Activa las preguntas de cuerpo y cabeza.</b> Energía, sueño, molestias y ánimo ayudan a tu entrenador a ajustar la carga y a darte mejores consejos. Son datos de salud: solo se guardan si das tu permiso.</p>
+            <form id="ci-consent-form">
+                <label class="ci-label" for="ci-nac">Fecha de nacimiento</label>
+                <input class="ci-input" type="date" id="ci-nac" required>
+                <label class="ci-check ci-oculto" id="ci-tutor-wrap"><input type="checkbox" id="ci-tutor"> <span>Soy la madre, el padre o el tutor del jugador y lo autorizo.</span></label>
+                <label class="ci-check"><input type="checkbox" id="ci-acepto" required> <span id="ci-consent-texto"></span></label>
+                <button class="ci-btn ci-btn--sec ci-btn--ancho" type="submit">Dar permiso</button>
+                <p class="ci-error" id="ci-consent-error" role="alert"></p>
+            </form>
+        </div>
+
+        <h2 class="ci-h2">Tus equipos</h2>
+        <div class="ci-equipos" id="ci-equipos"></div>
+        <form class="ci-form-eq" id="ci-form-eq">
+            <div><label class="ci-label" for="eq-nombre">Nombre del equipo</label><input class="ci-input" id="eq-nombre" maxlength="60" placeholder="Ej.: Infantil A del club" required></div>
+            <div><label class="ci-label" for="eq-tipo">Tipo</label>
+                <select class="ci-select" id="eq-tipo"><option value="club">Mi club</option><option value="dragons_den">Dragons Den</option><option value="seleccion">Selección</option><option value="otro">Otro</option></select></div>
+            <div><label class="ci-label" for="eq-dur">Minutos</label><input class="ci-input" id="eq-dur" type="number" min="15" max="240" value="90" inputmode="numeric"></div>
+            <button class="ci-btn ci-btn--sec" type="submit">Añadir</button>
+        </form>
+        <p class="ci-error" id="eq-error" role="alert"></p>
+
+        <h2 class="ci-h2">Últimas sesiones</h2>
+        <ul class="ci-lista" id="ci-historial"></ul>
+
+        <div class="ci-cta"><button class="ci-btn ci-btn--ancho" id="ci-empezar" type="button">Registrar sesión</button></div>
+    </section>
+
+    <!-- Asistente -->
+    <section id="ci-wizard" class="ci-wizard" aria-live="polite" aria-labelledby="ci-paso-titulo">
+        <div class="ci-progreso" id="ci-progreso" aria-hidden="true"></div>
+        <p class="ci-paso-t" id="ci-paso-num"></p>
+        <h1 class="ci-h1" id="ci-paso-titulo" tabindex="-1"></h1>
+        <div id="ci-paso"></div>
+        <p class="ci-error" id="ci-error" role="alert"></p>
+        <div class="ci-nav">
+            <button class="ci-btn ci-btn--sec" id="ci-atras" type="button">Atrás</button>
+            <button class="ci-btn" id="ci-siguiente" type="button">Siguiente</button>
+        </div>
+    </section>
+
+    <!-- Resultado -->
+    <section id="ci-resultado" class="ci-oculto" aria-labelledby="ci-res-titulo">
+        <h1 class="ci-h1" id="ci-res-titulo" tabindex="-1">Sesión <em>guardada</em></h1>
+        <div class="ci-consejo" id="ci-consejo"></div>
+        <div class="ci-carga" id="ci-carga"></div>
+        <div class="ci-prueba ci-oculto" id="ci-prueba">
+            <h2 class="ci-h2" style="margin-top:0">Prueba de la sesión</h2>
+            <p class="ci-sub" style="margin-top:0">Las sesiones de tu club dan XP cuando tu entrenador ve una prueba. Graba de 3 a 10 segundos en la pista.</p>
+            <button class="ci-btn ci-btn--sec ci-btn--ancho" id="ci-pedir-codigo" type="button" style="margin-top:14px">Quiero enviar prueba</button>
+            <div id="ci-codigo-wrap" class="ci-oculto">
+                <div class="ci-codigo"><b id="ci-codigo"></b><span>Enséñalo en el vídeo<small id="ci-gesto"></small></span></div>
+                <ol class="ci-pasos" id="ci-instr"></ol>
+                <div class="ci-file">
+                    <input type="file" id="ci-video" accept="video/*" capture="environment" aria-label="Grabar o elegir el vídeo de prueba">
+                    <span class="ci-btn ci-btn--ancho" aria-hidden="true">Grabar vídeo</span>
+                </div>
+                <p class="ci-estado-subida" id="ci-subida" role="status"></p>
+            </div>
+        </div>
+        <div class="ci-nav"><a class="ci-btn ci-btn--sec ci-btn--ancho" href="/checkin.html">Volver al inicio</a></div>
+    </section>
+</main>
+
+<script src="/js/huella-video.js"></script>
+<script src="/js/checkin.js"></script>
+</body>
+</html>

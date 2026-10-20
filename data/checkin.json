@@ -1,0 +1,635 @@
+{
+  "version": 2,
+  "actualizado": "2026-10-21",
+  "nombre": "Check-in Dragons",
+  "nota": "Cuestionario de 1 a 2 minutos tras cada entreno o partido, de cualquier equipo. Cada sesión es un check-in: quien juega en dos equipos o tiene partido sábado y domingo registra todos. Las respuestas alimentan la Forma, los consejos y las alertas del entrenador; nunca suben la carta (eso solo lo hace la ficha del entrenador).",
+  "base_cientifica": [
+    {
+      "bloque": "esfuerzo",
+      "fuente": "Foster et al. (2001); revisión de Haddad et al. (2017, Front. Neurosci.); Lupo et al. (2017, Biol. Sport) en baloncesto juvenil",
+      "idea": "Esfuerzo percibido de toda la sesión en escala CR-10 por los minutos = carga de la sesión. Válido en niños y adolescentes y en baloncesto juvenil (r = 0,85 con frecuencia cardiaca)."
+    },
+    {
+      "bloque": "cuerpo",
+      "fuente": "Saw, Main y Gastin (2016, Br. J. Sports Med.)",
+      "idea": "Las preguntas cortas de bienestar (fatiga, energía, molestias, estrés) detectan los cambios de carga mejor que muchas pruebas objetivas. Basta un registro breve diario."
+    },
+    {
+      "bloque": "sueño",
+      "fuente": "Milewski et al. (2014, J. Pediatr. Orthop.); recomendaciones AASM para adolescentes (8 a 10 h)",
+      "idea": "Los deportistas adolescentes que duermen 8 horas o más tienen bastantes menos lesiones."
+    },
+    {
+      "bloque": "reflexión",
+      "fuente": "Kitsantas y Zimmerman (1998); Toering et al. (2012); Jonker et al. (2010)",
+      "idea": "Elegir un aspecto concreto, evaluarlo al terminar y decidir el siguiente paso mejora el aprendizaje y la confianza. La reflexión es lo que más distingue a los jóvenes que llegan a la élite."
+    },
+    {
+      "bloque": "objetivo",
+      "fuente": "Filby, Maynard y Graydon (1999)",
+      "idea": "Combinar el resultado con objetivos de proceso (qué hago yo) rinde más que mirar solo el resultado."
+    },
+    {
+      "bloque": "causa",
+      "fuente": "Teoría de la atribución (Weiner) aplicada al deporte",
+      "idea": "Explicar los fallos con causas que uno controla (técnica, decisión, concentración) mantiene la motivación; si el jugador culpa a algo externo, el consejo le devuelve a lo que sí depende de él."
+    },
+    {
+      "bloque": "recompensas",
+      "fuente": "Deci, Koestner y Ryan (1999, Psychol. Bull.)",
+      "idea": "Las recompensas que informan de la calidad suman motivación; las que solo pagan por hacer la tarea la restan. Por eso el XP del comentario y de la prueba se da tras revisar, y nunca por contestar 'bien'."
+    },
+    {
+      "bloque": "lesiones",
+      "fuente": "Emery et al. (2022, J. Orthop. Sports Phys. Ther.), programa SHRed Injuries Basketball",
+      "idea": "Un calentamiento neuromuscular de 10 minutos (aeróbico, agilidad, fuerza y equilibrio) redujo un 36 % las lesiones de tobillo y rodilla en jugadores de 11 a 18 años."
+    },
+    {
+      "bloque": "carga",
+      "fuente": "Jayanthi et al. (2013, AMSSM; Am. J. Sports Med. 2015)",
+      "idea": "Entrenar más horas a la semana que los años que se tienen y especializarse pronto se asocian a más lesiones graves por sobrecarga."
+    },
+    {
+      "bloque": "crecimiento",
+      "fuente": "van der Sluis et al. (2014, Int. J. Sports Med.)",
+      "idea": "En el año del estirón (pico de velocidad de crecimiento) aumentan las lesiones y los días de baja."
+    },
+    {
+      "bloque": "disfrute",
+      "fuente": "Teoría de la autodeterminación (Deci y Ryan); Lara-Bercial et al. (2025, Youth)",
+      "idea": "El disfrute y sentirse competente sostienen la práctica; el estrés por rendimiento y perder el disfrute están entre las razones principales para dejar el deporte."
+    }
+  ],
+  "tiempo_objetivo_seg": 90,
+  "limites": {
+    "checkins_por_dia": 3,
+    "xp_checkin_tope_semanal": 5,
+    "dias_atras_permitidos": 2,
+    "nota": "Se pueden registrar todas las sesiones (entrenos de dos equipos, partido el sábado y otro el domingo). El XP del check-in se limita a 5 por semana para que nadie gane por apuntar más, solo por entrenar y reflexionar."
+  },
+  "pasos": [
+    {
+      "id": "sesion",
+      "titulo": "La sesión",
+      "preguntas": [
+        {
+          "id": "tipo",
+          "texto": "¿Qué has tenido?",
+          "tipo": "elige",
+          "opciones": [
+            {
+              "v": "entreno",
+              "t": "Entreno"
+            },
+            {
+              "v": "partido",
+              "t": "Partido"
+            }
+          ]
+        },
+        {
+          "id": "equipo_id",
+          "texto": "¿Con qué equipo?",
+          "tipo": "equipo"
+        },
+        {
+          "id": "fecha",
+          "texto": "¿Cuándo?",
+          "tipo": "elige",
+          "opciones": [
+            {
+              "v": "hoy",
+              "t": "Hoy"
+            },
+            {
+              "v": "ayer",
+              "t": "Ayer"
+            },
+            {
+              "v": "anteayer",
+              "t": "Anteayer"
+            }
+          ]
+        },
+        {
+          "id": "duracion_min",
+          "texto": "¿Cuánto duró?",
+          "tipo": "elige",
+          "opciones": [
+            {
+              "v": 45,
+              "t": "45 min"
+            },
+            {
+              "v": 60,
+              "t": "1 h"
+            },
+            {
+              "v": 75,
+              "t": "1 h 15"
+            },
+            {
+              "v": 90,
+              "t": "1 h 30"
+            },
+            {
+              "v": 120,
+              "t": "2 h"
+            }
+          ]
+        },
+        {
+          "id": "minutos_jugados",
+          "texto": "¿Cuánto jugaste?",
+          "tipo": "elige",
+          "solo_si": {
+            "tipo": "partido"
+          },
+          "opciones": [
+            {
+              "v": 0,
+              "t": "No salí"
+            },
+            {
+              "v": 5,
+              "t": "Menos de 10"
+            },
+            {
+              "v": 15,
+              "t": "10 a 20"
+            },
+            {
+              "v": 25,
+              "t": "Más de 20"
+            }
+          ]
+        },
+        {
+          "id": "resultado",
+          "texto": "Resultado",
+          "tipo": "elige",
+          "solo_si": {
+            "tipo": "partido"
+          },
+          "opcional": true,
+          "opciones": [
+            {
+              "v": "victoria",
+              "t": "Ganamos"
+            },
+            {
+              "v": "derrota",
+              "t": "Perdimos"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "esfuerzo",
+      "titulo": "Esfuerzo",
+      "preguntas": [
+        {
+          "id": "rpe",
+          "texto": "¿Cómo de dura ha sido la sesión entera?",
+          "ayuda": "Piensa en toda la sesión, no solo en el final.",
+          "tipo": "escala",
+          "min": 0,
+          "max": 10,
+          "etiquetas": {
+            "0": "Nada",
+            "1": "Muy suave",
+            "2": "Suave",
+            "3": "Normal",
+            "4": "Algo dura",
+            "5": "Dura",
+            "7": "Muy dura",
+            "10": "Máxima"
+          }
+        },
+        {
+          "id": "calentamiento",
+          "texto": "¿Hiciste el Calentamiento Dragons completo?",
+          "ayuda": "10 minutos: equilibrio, saltos y aterrizajes, fuerza y cambios de dirección.",
+          "tipo": "elige",
+          "opciones": [
+            {
+              "v": 2,
+              "t": "Sí, entero"
+            },
+            {
+              "v": 1,
+              "t": "A medias"
+            },
+            {
+              "v": 0,
+              "t": "No"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cuerpo",
+      "titulo": "Tu cuerpo",
+      "requiere_consentimiento": "bienestar",
+      "preguntas": [
+        {
+          "id": "energia",
+          "texto": "¿Cómo tienes la energía ahora?",
+          "tipo": "escala",
+          "min": 1,
+          "max": 5,
+          "etiquetas": {
+            "1": "Vacío",
+            "3": "Normal",
+            "5": "A tope"
+          }
+        },
+        {
+          "id": "sueno",
+          "texto": "¿Cuánto dormiste anoche?",
+          "tipo": "elige",
+          "opciones": [
+            {
+              "v": "menos7",
+              "t": "Menos de 7 h"
+            },
+            {
+              "v": "7a8",
+              "t": "7 a 8 h"
+            },
+            {
+              "v": "8a9",
+              "t": "8 a 9 h"
+            },
+            {
+              "v": "mas9",
+              "t": "Más de 9 h"
+            }
+          ]
+        },
+        {
+          "id": "dolor",
+          "texto": "¿Alguna molestia?",
+          "tipo": "elige",
+          "opciones": [
+            {
+              "v": 0,
+              "t": "Ninguna"
+            },
+            {
+              "v": 1,
+              "t": "Algo, sin parar"
+            },
+            {
+              "v": 2,
+              "t": "Me ha limitado"
+            }
+          ]
+        },
+        {
+          "id": "dolor_zona",
+          "texto": "¿Dónde?",
+          "tipo": "varias",
+          "solo_si_min": {
+            "dolor": 1
+          },
+          "opciones": [
+            {
+              "v": "tobillo",
+              "t": "Tobillo o pie"
+            },
+            {
+              "v": "rodilla",
+              "t": "Rodilla"
+            },
+            {
+              "v": "muslo",
+              "t": "Muslo o gemelo"
+            },
+            {
+              "v": "espalda",
+              "t": "Espalda"
+            },
+            {
+              "v": "hombro",
+              "t": "Hombro o brazo"
+            },
+            {
+              "v": "mano",
+              "t": "Mano o dedos"
+            },
+            {
+              "v": "cabeza",
+              "t": "Cabeza"
+            },
+            {
+              "v": "otra",
+              "t": "Otra"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cabeza",
+      "titulo": "Tu cabeza",
+      "requiere_consentimiento": "bienestar",
+      "preguntas": [
+        {
+          "id": "animo",
+          "texto": "¿Cómo te sientes?",
+          "tipo": "escala",
+          "min": 1,
+          "max": 5,
+          "etiquetas": {
+            "1": "Mal",
+            "3": "Normal",
+            "5": "Genial"
+          }
+        },
+        {
+          "id": "disfrute",
+          "texto": "¿Cuánto lo has disfrutado?",
+          "tipo": "escala",
+          "min": 1,
+          "max": 5,
+          "etiquetas": {
+            "1": "Nada",
+            "3": "Normal",
+            "5": "Muchísimo"
+          }
+        },
+        {
+          "id": "concentracion",
+          "texto": "¿Cuánto has estado en la sesión?",
+          "ayuda": "Concentrado en lo que hacías, sin desconectar.",
+          "tipo": "escala",
+          "min": 1,
+          "max": 5,
+          "etiquetas": {
+            "1": "Muy poco",
+            "3": "A ratos",
+            "5": "Todo el rato"
+          }
+        },
+        {
+          "id": "nervios",
+          "texto": "Los nervios antes del partido…",
+          "tipo": "elige",
+          "solo_si": {
+            "tipo": "partido"
+          },
+          "opciones": [
+            {
+              "v": "bloquearon",
+              "t": "Me bloquearon"
+            },
+            {
+              "v": "normales",
+              "t": "Normales"
+            },
+            {
+              "v": "activaron",
+              "t": "Me activaron"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reflexion",
+      "titulo": "Tu sesión",
+      "preguntas": [
+        {
+          "id": "foco_cumplido",
+          "texto": "Tu foco era: «{foco}». ¿Lo has cumplido?",
+          "tipo": "elige",
+          "solo_si_foco": true,
+          "opciones": [
+            {
+              "v": 0,
+              "t": "No"
+            },
+            {
+              "v": 1,
+              "t": "A medias"
+            },
+            {
+              "v": 2,
+              "t": "Sí"
+            }
+          ]
+        },
+        {
+          "id": "mejor",
+          "texto": "Lo mejor de hoy",
+          "tipo": "aspecto"
+        },
+        {
+          "id": "mejorar",
+          "texto": "Lo que más te ha costado",
+          "tipo": "aspecto"
+        },
+        {
+          "id": "causa",
+          "texto": "¿De qué ha dependido?",
+          "tipo": "elige",
+          "opciones": [
+            {
+              "v": "tecnica",
+              "t": "Técnica"
+            },
+            {
+              "v": "decision",
+              "t": "Decisiones"
+            },
+            {
+              "v": "cansancio",
+              "t": "Cansancio"
+            },
+            {
+              "v": "concentracion",
+              "t": "Concentración"
+            },
+            {
+              "v": "nervios",
+              "t": "Nervios"
+            },
+            {
+              "v": "externo",
+              "t": "Algo que no controlo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "proximo",
+      "titulo": "Próxima sesión",
+      "preguntas": [
+        {
+          "id": "proximo",
+          "texto": "En la próxima sesión me centro en…",
+          "tipo": "objetivo"
+        },
+        {
+          "id": "comentario",
+          "texto": "¿Algo más? (opcional)",
+          "ayuda": "Un comentario útil para tu entrenador suma XP cuando se revisa.",
+          "tipo": "texto",
+          "opcional": true,
+          "max": 400
+        },
+        {
+          "id": "prueba",
+          "texto": "Prueba de la sesión (opcional)",
+          "ayuda": "Vídeo de 3 a 10 segundos en la pista con el código en pantalla. Sin prueba el check-in cuenta para tu Forma, pero no da XP en sesiones de tu club.",
+          "tipo": "video",
+          "solo_si_equipo": "club",
+          "opcional": true
+        }
+      ]
+    }
+  ],
+  "aspectos": [
+    {
+      "id": "tiro",
+      "t": "Tiro",
+      "objetivos": [
+        "Pies preparados antes de recibir",
+        "Mismo ritmo en todos los tiros",
+        "Mano de tiro hacia el aro al terminar"
+      ]
+    },
+    {
+      "id": "bote",
+      "t": "Bote",
+      "objetivos": [
+        "Botar con la cabeza levantada",
+        "Usar la mano mala en cada ataque",
+        "Proteger el balón con el cuerpo"
+      ]
+    },
+    {
+      "id": "pies",
+      "t": "Pies",
+      "objetivos": [
+        "Primer paso explosivo y bajo",
+        "Parar en dos tiempos sin perder el equilibrio",
+        "Pivotar antes de pasar"
+      ]
+    },
+    {
+      "id": "pase",
+      "t": "Pase",
+      "objetivos": [
+        "Pasar a la mano de fuera del compañero",
+        "Mirar antes de recibir",
+        "Fintar antes de pasar"
+      ]
+    },
+    {
+      "id": "defensa",
+      "t": "Defensa",
+      "objetivos": [
+        "Posición baja y brazos activos",
+        "Ver balón y jugador a la vez",
+        "Hablar en cada bloqueo"
+      ]
+    },
+    {
+      "id": "rebote",
+      "t": "Rebote",
+      "objetivos": [
+        "Cerrar el rebote en cada tiro",
+        "Ir con dos manos al balón"
+      ]
+    },
+    {
+      "id": "lectura",
+      "t": "Lectura de juego",
+      "objetivos": [
+        "Leer la ayuda antes de decidir",
+        "Atacar el espacio libre",
+        "Saber qué haré antes de recibir"
+      ]
+    },
+    {
+      "id": "fisico",
+      "t": "Físico",
+      "objetivos": [
+        "Volver rápido en defensa",
+        "Mantener la intensidad hasta el final"
+      ]
+    },
+    {
+      "id": "actitud",
+      "t": "Actitud",
+      "objetivos": [
+        "Siguiente jugada tras un fallo",
+        "Animar a un compañero cada cuarto"
+      ]
+    },
+    {
+      "id": "comunicacion",
+      "t": "Comunicación",
+      "objetivos": [
+        "Hablar en cada defensa",
+        "Pedir el balón con la mano"
+      ]
+    }
+  ],
+  "objetivo_por_causa": {
+    "cansancio": "Llegar descansado: dormir 8 horas antes del próximo día de entreno",
+    "concentracion": "Una palabra clave para volver a la jugada cuando desconecte",
+    "nervios": "Tres respiraciones lentas antes de empezar",
+    "externo": "Lo que sí controlo: mi esfuerzo y mi siguiente jugada"
+  },
+  "revision": {
+    "nota": "Todo texto libre que pueda dar XP o verse fuera de la cuenta del jugador pasa por revisión. El prefiltro automático propone una decisión; la última palabra es del entrenador. Mientras se revisa, el jugador ve 'En revisión'.",
+    "xp": {
+      "checkin": 15,
+      "checkin_comentario": 5,
+      "prueba_video": 5
+    },
+    "validacion": "El XP del check-in se concede cuando la sesión queda validada: las de Dragons Den las valida el entrenador desde el panel; las del club o los partidos, con la prueba en vídeo aprobada.",
+    "comentario_min_caracteres": 20,
+    "aprobacion_automatica": false,
+    "nota_aprobacion_automatica": "Si se activa, los comentarios con puntuación del prefiltro de 80 o más se aprueban solos. Desactivado: de momento todo lo aprueba el entrenador."
+  },
+  "prueba_video": {
+    "duracion_min_seg": 3,
+    "duracion_max_seg": 10,
+    "tamano_max_mb": 15,
+    "horas_max_desde_grabacion": 36,
+    "validez_codigo_horas": 6,
+    "borrar_dias_tras_revision": 30,
+    "umbral_parecido_bits": 10,
+    "gestos": [
+      "1 dedo",
+      "2 dedos",
+      "3 dedos",
+      "4 dedos",
+      "5 dedos",
+      "pulgar arriba"
+    ],
+    "instrucciones": [
+      "Graba la pista o la canasta del sitio donde has entrenado o jugado.",
+      "Muestra a cámara el gesto que te pedimos.",
+      "No hace falta que salgas tú ni otras personas."
+    ],
+    "sancion": "Una prueba falsa o repetida se rechaza, se retira el XP de esa semana y durante un mes todas tus sesiones necesitan prueba."
+  },
+  "consentimiento_bienestar": {
+    "texto_version": "bienestar-2026-10",
+    "edad_minima_propia": 14,
+    "texto": "Autorizo a que Dragons Den guarde las respuestas sobre energía, sueño, molestias y estado de ánimo del check-in para ajustar los entrenamientos y dar consejos. Solo las ven el jugador y su entrenador. Se pueden borrar en cualquier momento desde el perfil."
+  },
+  "mediciones": {
+    "cada": "Una vez al mes, el primer día de entreno del mes, descalzo y contra la pared.",
+    "umbral_estiron_cm_anio": 7,
+    "requiere_consentimiento": "bienestar"
+  }
+}

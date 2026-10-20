@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#080808">
+<title>Revisión | Dragons Den</title>
+<link rel="preload" href="/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/comun.css">
+<link rel="stylesheet" href="/css/checkin.css">
+<script src="/vendor/supabase-js-2.45.4/supabase.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="ci-top">
+    <a class="ci-volver" href="/plataforma.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>Plataforma</a>
+    <span class="ci-marca">Dragons Den</span>
+</header>
+<main class="ci-main ci-main--ancho" id="contenido" tabindex="-1">
+    <h1 class="ci-h1">Revi<em>sión</em></h1>
+    <p class="ci-sub">Nada da XP ni se publica sin pasar por aquí. El prefiltro propone; tú decides.</p>
+    <p id="rv-cargando" class="ci-vacio" role="status">Cargando…</p>
+
+    <div class="rv-tabs" role="tablist" aria-label="Secciones de revisión">
+        <button class="rv-tab" role="tab" id="t-pend" aria-controls="p-pend" aria-selected="true">Pendientes<span class="ci-num" id="n-pend"></span></button>
+        <button class="rv-tab" role="tab" id="t-val" aria-controls="p-val" aria-selected="false" tabindex="-1">Sesiones Dragons Den<span class="ci-num" id="n-val"></span></button>
+        <button class="rv-tab" role="tab" id="t-ale" aria-controls="p-ale" aria-selected="false" tabindex="-1">Alertas<span class="ci-num" id="n-ale"></span></button>
+        <button class="rv-tab" role="tab" id="t-jug" aria-controls="p-jug" aria-selected="false" tabindex="-1">Jugadores<span class="ci-num" id="n-jug"></span></button>
+        <button class="rv-tab" role="tab" id="t-rec" aria-controls="p-rec" aria-selected="false" tabindex="-1">Recompensas<span class="ci-num" id="n-rec"></span></button>
+        <button class="rv-tab" role="tab" id="t-xp" aria-controls="p-xp" aria-selected="false" tabindex="-1">Dar XP</button>
+    </div>
+
+    <section class="rv-panel" role="tabpanel" id="p-pend" aria-labelledby="t-pend">
+        <div class="rv-acciones" style="margin-bottom:14px"><button class="ci-btn ci-btn--sec ci-btn--peq" id="rv-aprobar-sugeridos" type="button">Aprobar los comentarios que el prefiltro da por buenos</button></div>
+        <div class="rv-grid" id="rv-pend"></div>
+    </section>
+    <section class="rv-panel" role="tabpanel" id="p-val" aria-labelledby="t-val" hidden>
+        <p class="ci-sub" style="margin:0 0 14px">Sesiones de Dragons Den registradas por los jugadores en los últimos 14 días. Marca las que de verdad hicieron y se les suma el XP.</p>
+        <div class="rv-acciones" style="margin-bottom:14px"><button class="ci-btn ci-btn--peq" id="rv-validar" type="button" disabled>Validar seleccionadas</button><button class="ci-link" id="rv-todas" type="button">Seleccionar todas</button></div>
+        <div class="rv-tabla-wrap" tabindex="0"><table class="rv-tabla"><thead><tr><th scope="col"><span class="sr-only">Seleccionar</span></th><th scope="col">Jugador</th><th scope="col">Fecha</th><th scope="col">Tipo</th><th scope="col">Minutos</th><th scope="col">Esfuerzo</th></tr></thead><tbody id="rv-val"></tbody></table></div>
+    </section>
+    <section class="rv-panel" role="tabpanel" id="p-ale" aria-labelledby="t-ale" hidden>
+        <div class="rv-tabla-wrap" tabindex="0"><table class="rv-tabla"><thead><tr><th scope="col">Jugador</th><th scope="col">Fecha</th><th scope="col">Alerta</th></tr></thead><tbody id="rv-ale"></tbody></table></div>
+    </section>
+    <section class="rv-panel" role="tabpanel" id="p-jug" aria-labelledby="t-jug" hidden>
+        <div class="rv-tabla-wrap" tabindex="0"><table class="rv-tabla"><thead><tr><th scope="col">Jugador</th><th scope="col">Sesiones 14 d</th><th scope="col">Carga semana</th><th scope="col">Vs. su media</th><th scope="col">Forma</th><th scope="col">XP · nivel</th><th scope="col">Último foco</th></tr></thead><tbody id="rv-jug"></tbody></table></div>
+    </section>
+    <section class="rv-panel" role="tabpanel" id="p-rec" aria-labelledby="t-rec" hidden>
+        <p class="ci-sub" style="margin:0 0 14px">Recompensas de nivel que han desbloqueado los jugadores. Prepárala, entrégala en mano y márcala.</p>
+        <div class="rv-tabla-wrap" tabindex="0"><table class="rv-tabla"><thead><tr><th scope="col">Jugador</th><th scope="col">Nivel</th><th scope="col">Recompensa</th><th scope="col">Estado</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody id="rv-rec"></tbody></table></div>
+    </section>
+    <section class="rv-panel" role="tabpanel" id="p-xp" aria-labelledby="t-xp" hidden>
+        <p class="ci-sub" style="margin:0 0 14px">XP que solo puedes dar tú: lo que has visto en pista. Cada fuente tiene su tope semanal.</p>
+        <form class="rv-xp-form" id="rv-xp-form">
+            <div><label class="ci-label" for="xp-jug">Jugador</label><select class="ci-select" id="xp-jug" required></select></div>
+            <div><label class="ci-label" for="xp-fuente">Motivo</label><select class="ci-select" id="xp-fuente" required></select></div>
+            <div><label class="ci-label" for="xp-nota">Nota (la verá el jugador)</label><input class="ci-input" id="xp-nota" maxlength="200" placeholder="Ej.: entrada con mano izquierda en partido"></div>
+            <button class="ci-btn" type="submit">Dar XP</button>
+        </form>
+        <p class="ci-vacio" id="rv-xp-ok" role="status"></p>
+    </section>
+    <p class="ci-error" id="rv-error" role="alert"></p>
+</main>
+<script src="/js/revision.js"></script>
+</body>
+</html>

@@ -1,0 +1,466 @@
+{
+  "version": 5,
+  "actualizado": "2026-10-21",
+  "nombre": "Dragons Ladder",
+  "nota": "Sistema único de gamificacion. Todo lo que hace el jugador (check-in tras entrenar o jugar, sesiones en pista, clips de partido, retos semanales, IQ Clash, hitos tecnicos, mejoras de la ficha, companeros traidos) suma a UN solo libro de XP (tabla xp_movimientos). De ese libro salen el nivel, la racha y los logros, y la carta del jugador sale de la ficha que rellena el entrenador. Nada se cuenta dos veces: cada movimiento lleva una referencia unica. Sustituye a niveles.json (economia antigua de Rookie/PRO/Elite, retirada a _retirado/).",
+  "economia": {
+    "valor_hora_coach_eur": 25,
+    "origen_valor_hora": "Plan Elite Hibrido: 100 EUR al mes por 4 horas de pista = 25 EUR/hora.",
+    "plan_referencia_margen": "tracker",
+    "regla_margen": "Ninguna recompensa de nivel puede costar más del 25 % de lo que ha pagado el jugador hasta ese nivel al ritmo rapido, calculado con el plan más barato (Dragons Tracker, 50 EUR/mes). Si una recompensa solo tiene sentido en un plan concreto, lleva plan_minimo y una alternativa para los demas.",
+    "nota_costes": "coste_eur de material es una estimacion de proveedor (camiseta, sudadera, munequera). Revisar con el precio real del proveedor antes de entregar la primera."
+  },
+  "fuentes_xp": [
+    {
+      "id": "checkin",
+      "nombre": "Check-in tras entrenar o jugar (sesión validada)",
+      "xp": 15,
+      "tope_semanal_veces": 5,
+      "planes": [
+        "tracker",
+        "hibrido",
+        "pro_vip"
+      ],
+      "frecuencia_mes_normal": 12,
+      "frecuencia_mes_rapido": 20,
+      "nota": "Un check-in por sesión, de cualquier equipo (hasta 3 al día). El XP llega cuando la sesión queda validada: Dragons Den, por el entrenador; club o partido, con la prueba en vídeo aprobada. Todas cuentan para la Forma, los consejos y la racha aunque no den XP. Catálogo en checkin.json."
+    },
+    {
+      "id": "checkin_comentario",
+      "nombre": "Comentario útil en el check-in (aprobado en revisión)",
+      "xp": 5,
+      "tope_semanal_veces": 4,
+      "planes": [
+        "tracker",
+        "hibrido",
+        "pro_vip"
+      ],
+      "frecuencia_mes_normal": 4,
+      "frecuencia_mes_rapido": 16,
+      "nota": "Solo suma cuando el entrenador lo aprueba. El prefiltro propone, no decide."
+    },
+    {
+      "id": "prueba_video",
+      "nombre": "Prueba en vídeo de la sesión (aprobada)",
+      "xp": 5,
+      "tope_semanal_veces": 5,
+      "planes": [
+        "tracker",
+        "hibrido",
+        "pro_vip"
+      ],
+      "frecuencia_mes_normal": 4,
+      "frecuencia_mes_rapido": 12,
+      "nota": "Vídeo de 3 a 10 segundos en la pista con un código y un gesto que da la app. Se comprueba que no se repita."
+    },
+    {
+      "id": "sesion_pista",
+      "nombre": "Sesión en pista (la marca el entrenador)",
+      "xp": 25,
+      "tope_semanal_veces": 3,
+      "planes": [
+        "hibrido",
+        "pro_vip"
+      ],
+      "frecuencia_mes_normal": 4,
+      "frecuencia_mes_rapido": 6,
+      "concede": "entrenador",
+      "nota": "Se concede al validar en el panel de revisión una sesión de Dragons Den registrada en el check-in."
+    },
+    {
+      "id": "clip_partido",
+      "nombre": "Clip de partido enviado al Video-room",
+      "xp": 20,
+      "tope_semanal_veces": 2,
+      "planes": [
+        "tracker",
+        "hibrido",
+        "pro_vip"
+      ],
+      "frecuencia_mes_normal": 4,
+      "frecuencia_mes_rapido": 8,
+      "concede": "entrenador"
+    },
+    {
+      "id": "quest",
+      "nombre": "Reto semanal aprobado",
+      "xp": "según reto (xp_base)",
+      "planes": [
+        "tracker",
+        "hibrido",
+        "pro_vip"
+      ],
+      "frecuencia_mes_normal": 2,
+      "frecuencia_mes_rapido": 4,
+      "nota": "El XP lo fija cada reto en quests.json.",
+      "activo": false,
+      "pendiente": "Aún no está construido en la plataforma. No se muestra en la web hasta que exista."
+    },
+    {
+      "id": "iq_clash",
+      "nombre": "Duelo de IQ Clash",
+      "xp_victoria": 25,
+      "xp_derrota": 10,
+      "tope_xp_semanal": 60,
+      "planes": [
+        "tracker",
+        "hibrido",
+        "pro_vip"
+      ],
+      "xp_mes_normal": 0,
+      "xp_mes_rapido": 240,
+      "activo": false,
+      "pendiente": "Aún no está construido en la plataforma. No se muestra en la web hasta que exista."
+    },
+    {
+      "id": "racha_semana",
+      "nombre": "Semana Dragón completada",
+      "xp": 30,
+      "planes": [
+        "tracker",
+        "hibrido",
+        "pro_vip"
+      ],
+      "frecuencia_mes_normal": 3,
+      "frecuencia_mes_rapido": 4
+    },
+    {
+      "id": "racha_bloque",
+      "nombre": "4 Semanas Dragón seguidas",
+      "xp": 100,
+      "planes": [
+        "tracker",
+        "hibrido",
+        "pro_vip"
+      ],
+      "frecuencia_mes_normal": 0.5,
+      "frecuencia_mes_rapido": 1
+    },
+    {
+      "id": "hito_tecnico",
+      "nombre": "Hito técnico conseguido (lo marca el entrenador)",
+      "xp": 150,
+      "planes": [
+        "tracker",
+        "hibrido",
+        "pro_vip"
+      ],
+      "frecuencia_mes_normal": 0.3,
+      "frecuencia_mes_rapido": 0.5,
+      "concede": "entrenador"
+    },
+    {
+      "id": "metrica_sube",
+      "nombre": "Una métrica de la ficha sube un punto",
+      "xp": 50,
+      "planes": [
+        "tracker",
+        "hibrido",
+        "pro_vip"
+      ],
+      "frecuencia_mes_normal": 0.5,
+      "frecuencia_mes_rapido": 1,
+      "concede": "entrenador"
+    },
+    {
+      "id": "referido_activo",
+      "nombre": "Compañero traído que se queda (programa de embajadores)",
+      "xp": 150,
+      "planes": [
+        "tracker",
+        "hibrido",
+        "pro_vip"
+      ],
+      "frecuencia_mes_normal": 0,
+      "frecuencia_mes_rapido": 0,
+      "nota": "No entra en el ritmo: depende del programa de embajadores, no del esfuerzo semanal.",
+      "concede": "entrenador"
+    }
+  ],
+  "semana_dragon": {
+    "nombre": "Semana Dragón",
+    "regla": "Una semana (lunes a domingo) cuenta si el jugador hace al menos 1 check-in Y al menos otra actividad de su plan: una sesión de Dragons Den validada, un clip de partido o una sesión de su club con prueba aprobada.",
+    "minimo_checkins": 1,
+    "minimo_otras_actividades": 1,
+    "comodin": "Una semana de vacaciones escolares marcada por el entrenador no rompe la racha.",
+    "nota": "La racha se mide en semanas, no en dias: un jugador de 12 años no entrena todos los dias y no debe sentir que pierde por descansar."
+  },
+  "niveles": [
+    {
+      "nivel": 1,
+      "nombre": "Novato",
+      "xp_desde": 0,
+      "recompensa": null,
+      "coste_eur": 0,
+      "coste_tiempo_min": 0
+    },
+    {
+      "nivel": 2,
+      "nombre": "Cantera",
+      "xp_desde": 500,
+      "recompensa": {
+        "tipo": "digital",
+        "titulo": "Insignia de Cantera en tu carta"
+      },
+      "coste_eur": 0,
+      "coste_tiempo_min": 0
+    },
+    {
+      "nivel": 3,
+      "nombre": "Rotación",
+      "xp_desde": 1300,
+      "recompensa": {
+        "tipo": "fisica",
+        "titulo": "Muñequera Dragons Den",
+        "detalle": "Se entrega en mano en la siguiente sesión o con el siguiente pedido agrupado."
+      },
+      "coste_eur": 4,
+      "coste_tiempo_min": 0
+    },
+    {
+      "nivel": 4,
+      "nombre": "Sexto Hombre",
+      "xp_desde": 2600,
+      "recompensa": {
+        "tipo": "servicio",
+        "titulo": "Un análisis de vídeo extra de 15 minutos"
+      },
+      "coste_eur": 0,
+      "coste_tiempo_min": 15
+    },
+    {
+      "nivel": 5,
+      "nombre": "Titular",
+      "xp_desde": 4400,
+      "recompensa": {
+        "tipo": "fisica",
+        "titulo": "Camiseta oficial de entrenamiento",
+        "detalle": "Quien ya la tiene (Plan PRO VIP) elige dorsal y nombre estampados."
+      },
+      "coste_eur": 12,
+      "coste_tiempo_min": 0
+    },
+    {
+      "nivel": 6,
+      "nombre": "Quinteto Ideal",
+      "xp_desde": 6800,
+      "recompensa": {
+        "tipo": "servicio",
+        "titulo": "Sesión 1v1 de 30 minutos",
+        "detalle": "En pista o por videollamada si el jugador es del Dragons Tracker."
+      },
+      "coste_eur": 0,
+      "coste_tiempo_min": 30
+    },
+    {
+      "nivel": 7,
+      "nombre": "All-Star",
+      "xp_desde": 9800,
+      "recompensa": {
+        "tipo": "servicio",
+        "titulo": "Un mes gratis de tu plan"
+      },
+      "coste_eur": "precio_plan",
+      "coste_tiempo_min": 0
+    },
+    {
+      "nivel": 8,
+      "nombre": "MVP",
+      "xp_desde": 13500,
+      "recompensa": {
+        "tipo": "mixta",
+        "titulo": "Sudadera oficial e informe de scouting en PDF"
+      },
+      "coste_eur": 20,
+      "coste_tiempo_min": 60
+    },
+    {
+      "nivel": 9,
+      "nombre": "Leyenda del Den",
+      "xp_desde": 18000,
+      "recompensa": {
+        "tipo": "mixta",
+        "titulo": "Dorsal permanente en el muro y sesión 1v1 de una hora"
+      },
+      "coste_eur": 0,
+      "coste_tiempo_min": 60
+    }
+  ],
+  "logros": [
+    {
+      "id": "primer_checkin",
+      "nombre": "Primer parte",
+      "regla": {
+        "tipo": "contador",
+        "de": "checkins",
+        "mínimo": 1
+      }
+    },
+    {
+      "id": "checkins_10",
+      "nombre": "Constante",
+      "regla": {
+        "tipo": "contador",
+        "de": "checkins",
+        "mínimo": 10
+      }
+    },
+    {
+      "id": "checkins_50",
+      "nombre": "Diario de un Dragón",
+      "regla": {
+        "tipo": "contador",
+        "de": "checkins",
+        "mínimo": 50
+      }
+    },
+    {
+      "id": "racha_4",
+      "nombre": "Mes Dragón",
+      "regla": {
+        "tipo": "racha",
+        "mínimo": 4
+      }
+    },
+    {
+      "id": "racha_8",
+      "nombre": "Imparable",
+      "regla": {
+        "tipo": "racha",
+        "mínimo": 8
+      }
+    },
+    {
+      "id": "racha_16",
+      "nombre": "Temporada completa",
+      "regla": {
+        "tipo": "racha",
+        "mínimo": 16
+      }
+    },
+    {
+      "id": "partido_registrado",
+      "nombre": "Hoja de estadísticas",
+      "regla": {
+        "tipo": "contador",
+        "de": "partidos",
+        "mínimo": 1
+      }
+    },
+    {
+      "id": "partidos_10",
+      "nombre": "Analista",
+      "regla": {
+        "tipo": "contador",
+        "de": "partidos",
+        "mínimo": 10
+      }
+    },
+    {
+      "id": "primer_clip",
+      "nombre": "Video-room",
+      "regla": {
+        "tipo": "contador_xp",
+        "de": "clip_partido",
+        "mínimo": 1
+      }
+    },
+    {
+      "id": "primer_hito",
+      "nombre": "Hito desbloqueado",
+      "regla": {
+        "tipo": "contador_xp",
+        "de": "hito_tecnico",
+        "mínimo": 1
+      }
+    },
+    {
+      "id": "metrica_8",
+      "nombre": "Especialista",
+      "regla": {
+        "tipo": "métrica",
+        "mínimo": 8
+      },
+      "activo": false,
+      "pendiente": "Necesita que la ficha mensual del entrenador se guarde en la plataforma."
+    },
+    {
+      "id": "scout",
+      "nombre": "Scout",
+      "regla": {
+        "tipo": "contador_xp",
+        "de": "referido_activo",
+        "mínimo": 1
+      },
+      "nota": "Coincide con el primer rango de embajador: mismo nombre y misma condicion."
+    }
+  ],
+  "carta": {
+    "nota": "La carta del jugador sale SOLO de la ficha que rellena el entrenador (1 a 10, cada mes). Lo que el jugador contesta en el check-in nunca sube la carta: alimenta la Forma, que es otra cosa. Asi nadie infla su carta contestando que ha jugado genial.",
+    "métricas": [
+      {
+        "id": "bote",
+        "nombre": "Control de bote"
+      },
+      {
+        "id": "pies",
+        "nombre": "Mecánica de pies"
+      },
+      {
+        "id": "tiro",
+        "nombre": "Biomecánica de tiro"
+      },
+      {
+        "id": "iq",
+        "nombre": "Lectura e IQ"
+      }
+    ],
+    "media": "Media de las 4 métricas x 10, redondeada (de 10 a 100).",
+    "bloque_reto_a_metrica": {
+      "tiro": "tiro",
+      "manejo": "bote",
+      "footwork": "pies",
+      "fisico": "tiro",
+      "lectura": "iq"
+    },
+    "foco_semanal": "El reto recomendado cada semana es el del bloque de la métrica más baja de la carta."
+  },
+  "forma": {
+    "nota": "La Forma resume cómo llega el jugador según sus últimos 5 check-ins: energía, concentración y foco cumplido (de 1 a 5). Sirve para que el entrenador ajuste la carga; no es una nota.",
+    "ventana_checkins": 5,
+    "estados": [
+      {
+        "id": "en_racha",
+        "nombre": "En racha",
+        "desde": 4
+      },
+      {
+        "id": "estable",
+        "nombre": "Estable",
+        "desde": 3
+      },
+      {
+        "id": "cargado",
+        "nombre": "Cargado",
+        "desde": 0
+      }
+    ]
+  },
+  "estatus": [
+    {
+      "id": "founder",
+      "nombre": "Founder",
+      "permanente": true,
+      "concesion": "manual",
+      "criterio": "Primeras familias que confiaron en el programa. Lo marca el entrenador desde la plataforma; no se gana con XP y no se pierde aunque el jugador cause baja.",
+      "se_muestra_en": [
+        "carta del jugador",
+        "tarjeta de embajador",
+        "cabecera de la plataforma",
+        "ficha de jugador de la portada (ejemplo)"
+      ],
+      "beneficios": [],
+      "pendiente": "Fecha o número de plazas que cierran el estatus, y beneficios concretos (por ejemplo, precio bloqueado o acceso preferente)."
+    }
+  ]
+}

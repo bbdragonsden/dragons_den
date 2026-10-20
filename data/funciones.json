@@ -1,0 +1,4 @@
+{
+  "_nota": "Interruptores de funciones que dependen de la base de datos. checkin: poner true después de ejecutar sql/003-checkin-y-revision.sql en Supabase. Los administradores lo ven siempre para poder probarlo.",
+  "checkin": false
+}

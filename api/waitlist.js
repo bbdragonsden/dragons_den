@@ -100,7 +100,7 @@ function userEmailHTML({ nombre, interes }) {
     <!-- Sign off -->
     <tr><td style="border-top:1px solid #141414;padding-top:32px;padding-bottom:48px;">
       <p style="margin:0 0 4px;font-size:14px;color:#cccccc;">Nos vemos en pista.</p>
-      <p style="margin:0;font-size:14px;color:#444444;">&mdash; Yefangyi &middot; Dragons Den Basketball Academy</p>
+      <p style="margin:0;font-size:14px;color:#444444;">&mdash; Dragons Den Basketball Academy</p>
     </td></tr>
 
     <!-- Footer -->

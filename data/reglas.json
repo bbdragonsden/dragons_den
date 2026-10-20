@@ -1,0 +1,1137 @@
+{
+  "temporada": "2026-2027",
+  "verificado": "2026-10-20",
+  "nota": "Catálogo de normativa para el área de jugadores. Todo sale de documentos oficiales enlazados en 'documentos'. Cada temporada: actualizar años de nacimiento, reglas y URLs, y pasar node scripts/comprobar-reglas.js para ver qué enlaces han cambiado. Las bases y reglas son de cada organismo: aquí se resumen y se enlaza al original, que es el que vale.",
+  "secciones": [
+    {
+      "id": "organigrama",
+      "titulo": "Quién organiza qué",
+      "resumen": "FIBA, FEB, ACB, Federación de Madrid, Ayuntamiento y Comunidad: cómo encaja todo."
+    },
+    {
+      "id": "edades",
+      "titulo": "Tu categoría por edad",
+      "resumen": "Escribe tu año de nacimiento y mira en qué categoría juegas en cada competición."
+    },
+    {
+      "id": "federado",
+      "titulo": "Federado en Madrid (FBM)",
+      "resumen": "Ligas de la FBM de Babybasket a Senior: series, reglas por categoría y documentos."
+    },
+    {
+      "id": "municipal",
+      "titulo": "Juegos Deportivos Municipales",
+      "resumen": "La liga del Ayuntamiento de Madrid por distritos: categorías, fases y reglas."
+    },
+    {
+      "id": "escolar",
+      "titulo": "Deporte escolar (Comunidad de Madrid)",
+      "resumen": "Programa de Deporte en Edad Escolar y actividades de 3x3 en colegios."
+    },
+    {
+      "id": "nacional",
+      "titulo": "Nacional (FEB y ACB)",
+      "resumen": "De Liga Endesa a Tercera FEB, ligas femeninas, U22 y Campeonatos de España."
+    },
+    {
+      "id": "3x3",
+      "titulo": "Baloncesto 3x3",
+      "resumen": "Reglas FIBA 3x3 y competiciones 3x3 de la FEB."
+    },
+    {
+      "id": "free-basket",
+      "titulo": "Liga Free Basket",
+      "resumen": "La liga sénior entre semana de la FBM: categorías, reglas propias y precios."
+    },
+    {
+      "id": "reglas-fiba",
+      "titulo": "Reglas FIBA 2026",
+      "resumen": "Los cambios de reglas que se aplican desde esta temporada."
+    },
+    {
+      "id": "autonomicas",
+      "titulo": "Otras comunidades",
+      "resumen": "Las 19 federaciones territoriales de España."
+    },
+    {
+      "id": "documentos",
+      "titulo": "Documentos",
+      "resumen": "Todos los reglamentos y bases oficiales para descargar."
+    }
+  ],
+  "organigrama": {
+    "nota": "Las reglas de juego las fija FIBA. Cada organizador las adapta a sus categorías con sus propias bases.",
+    "niveles": [
+      {
+        "id": "fiba",
+        "nombre": "FIBA",
+        "rol": "Federación Internacional. Escribe las Reglas Oficiales y las del 3x3.",
+        "hijos": [
+          "feb"
+        ]
+      },
+      {
+        "id": "feb",
+        "nombre": "FEB",
+        "rol": "Federación Española. Ligas nacionales, Campeonatos de España y selecciones.",
+        "hijos": [
+          "acb",
+          "fbm",
+          "otras"
+        ]
+      },
+      {
+        "id": "acb",
+        "nombre": "ACB",
+        "rol": "Asociación de clubes que organiza la Liga Endesa (profesional).",
+        "hijos": []
+      },
+      {
+        "id": "fbm",
+        "nombre": "Federación de Baloncesto de Madrid",
+        "rol": "Ligas federadas en Madrid, árbitros, Free Basket y 3x3. Arbitra también las ligas municipales.",
+        "hijos": [
+          "delegaciones"
+        ],
+        "foco": true
+      },
+      {
+        "id": "otras",
+        "nombre": "18 federaciones más",
+        "rol": "Una por comunidad autónoma, más Ceuta y Melilla.",
+        "hijos": []
+      },
+      {
+        "id": "delegaciones",
+        "nombre": "Delegaciones FBM",
+        "rol": "Alcorcón y Getafe organizan ligas de su zona.",
+        "hijos": []
+      }
+    ],
+    "publico": [
+      {
+        "id": "ayto",
+        "nombre": "Ayuntamiento de Madrid",
+        "rol": "Juegos Deportivos Municipales por distritos, para no federados. Árbitros de la FBM."
+      },
+      {
+        "id": "cam",
+        "nombre": "Comunidad de Madrid",
+        "rol": "Deporte en Edad Escolar (fases local, zonal y final) y Madrid Comunidad Deportiva."
+      },
+      {
+        "id": "csd",
+        "nombre": "Consejo Superior de Deportes",
+        "rol": "Regula las federaciones españolas y los Campeonatos de España en edad escolar y universitarios."
+      }
+    ],
+    "camino": [
+      {
+        "paso": "Escuela, Babybasket o deporte escolar",
+        "edad": "3 a 8 años"
+      },
+      {
+        "paso": "Municipal o federado de minibasket",
+        "edad": "8 a 12 años"
+      },
+      {
+        "paso": "Infantil, Cadete y Junior (Preferente o Especial)",
+        "edad": "12 a 18 años"
+      },
+      {
+        "paso": "Campeonatos de España de clubes y selecciones",
+        "edad": "Solo serie Especial"
+      },
+      {
+        "paso": "Senior: autonómico, nacional FEB o ACB",
+        "edad": "18 años en adelante"
+      }
+    ]
+  },
+  "categorias": {
+    "nota": "Mismo año de nacimiento, distinto nombre: en municipal y escolar se dice Juvenil a lo que en federado es Junior.",
+    "columnas": [
+      {
+        "id": "fbm",
+        "nombre": "Federado FBM"
+      },
+      {
+        "id": "jdm",
+        "nombre": "Municipal Madrid"
+      },
+      {
+        "id": "escolar",
+        "nombre": "Escolar CAM"
+      }
+    ],
+    "filas": [
+      {
+        "desde": 2019,
+        "hasta": 2023,
+        "fbm": "Babybasket (2019 y posteriores)",
+        "jdm": "Prebenjamín (2019-2020)",
+        "escolar": "Prebenjamín (2019-2020) · Pre-deporte (2021-2023)"
+      },
+      {
+        "desde": 2017,
+        "hasta": 2018,
+        "fbm": "Benjamín · Minibasket Preferente",
+        "jdm": "Benjamín",
+        "escolar": "Benjamín"
+      },
+      {
+        "desde": 2015,
+        "hasta": 2016,
+        "fbm": "Alevín · Minibasket Especial",
+        "jdm": "Alevín",
+        "escolar": "Alevín"
+      },
+      {
+        "desde": 2013,
+        "hasta": 2014,
+        "fbm": "Infantil (2014: también Infantil de 1er año)",
+        "jdm": "Infantil",
+        "escolar": "Infantil"
+      },
+      {
+        "desde": 2011,
+        "hasta": 2012,
+        "fbm": "Cadete (2012: también Cadete de 1er año)",
+        "jdm": "Cadete",
+        "escolar": "Cadete"
+      },
+      {
+        "desde": 2009,
+        "hasta": 2010,
+        "fbm": "Junior (2010: también Junior de 1er año)",
+        "jdm": "Juvenil",
+        "escolar": "Juvenil (2008-2010)"
+      },
+      {
+        "desde": 2005,
+        "hasta": 2008,
+        "fbm": "Senior · también Sub-22 (2005-2008)",
+        "jdm": "Sénior",
+        "escolar": "2008: Juvenil"
+      },
+      {
+        "desde": 1900,
+        "hasta": 2004,
+        "fbm": "Senior",
+        "jdm": "Sénior (Veterana desde 1991; no hay en baloncesto)",
+        "escolar": "—"
+      }
+    ],
+    "nacional": "FEB (Reglamento General, art. 22): Senior 2008 y anteriores, Sub-22 2005-2008, Junior 2009-2010, Cadete 2011-2012, Infantil 2013-2014, Pre-infantil 2014, Minibasket 2015 y posteriores."
+  },
+  "federado": {
+    "organiza": "Federación de Baloncesto de Madrid (FBM)",
+    "web": "https://www.fbm.es",
+    "series": [
+      {
+        "nombre": "Serie Especial (Oro, Plata y Bronce)",
+        "texto": "Junior, Cadete e Infantil con acceso a los Campeonatos de España. La competición más exigente."
+      },
+      {
+        "nombre": "Preferente (1ª a 6ª división)",
+        "texto": "Junior, Cadete e Infantil sin Campeonato de España. Por niveles, con ascensos y descensos."
+      },
+      {
+        "nombre": "1er año",
+        "texto": "Junior, Cadete e Infantil solo con jugadores de primer año de la categoría."
+      },
+      {
+        "nombre": "Minibasket Especial",
+        "texto": "Alevín 2015 (2º año) y Alevín 2016 (1er año), con reglas de minibasket. El 2º año da acceso al Campeonato de España."
+      },
+      {
+        "nombre": "Minibasket Preferente",
+        "texto": "Benjamín 2017 y Benjamín 2018, con reglas FIBA adaptadas."
+      },
+      {
+        "nombre": "Babybasket",
+        "texto": "2019 y posteriores. Iniciación sin clasificación."
+      }
+    ],
+    "senior": [
+      "Liga VIPS Masculina y Femenina (1ª División Nacional)",
+      "Liga Ginos Masculina Oro y Plata (1ª División Autonómica)",
+      "Liga Ginos Femenina (1ª División Autonómica)",
+      "2ª División Autonómica Masculina y Femenina Oro, Plata y Bronce",
+      "Sub-22 Masculino Oro, Plata y Bronce · Sub-22 Femenino",
+      "Torneos de la Comunidad de Madrid y de la FBM (equipos ACB y FEB, pretemporada)"
+    ],
+    "reglas_generales": [
+      "Fuera de minibasket: línea de triple a 6,75 m, zona rectangular, semicírculo de no carga y regla de 14 segundos.",
+      "Saque rápido sin que el árbitro toque el balón tras violación en pista trasera durante los primeros 38 minutos (no en los 2 últimos minutos del 4º periodo ni de la prórroga). Cadete y Junior Especial siguen el saque de los Campeonatos de España.",
+      "Los cambios de reglas FIBA 2026 (falta disruptiva, falta flagrante, técnicas de categoría 1 y 2) se aplican desde el inicio de la temporada 2026-2027."
+    ],
+    "tabla": {
+      "nota": "Cuadro resumen oficial de la FBM, temporada 2026-2027.",
+      "columnas": [
+        "Benjamín · Mini Preferente (2017-2018)",
+        "Alevín · Mini Especial (2015-2016)",
+        "Infantil 1er año (2014)",
+        "Infantil (2013-2014)",
+        "Cadete y Junior Especial",
+        "De Cadete a Senior"
+      ],
+      "filas": [
+        {
+          "regla": "Tiempo de juego",
+          "valores": [
+            "4 x 10 min. 3 primeros periodos a reloj corrido salvo el último minuto; 4º corrido salvo los 2 últimos minutos",
+            "6 x 8 min. 5 primeros periodos a reloj corrido salvo el último minuto; 6º corrido salvo los 3 últimos minutos",
+            "4 periodos FIBA",
+            "4 periodos FIBA",
+            "4 periodos FIBA",
+            "4 periodos FIBA"
+          ]
+        },
+        {
+          "regla": "Balón",
+          "valores": [
+            "Talla 5",
+            "Talla 5",
+            "Chicos talla 7 · Chicas talla 6",
+            "Chicos talla 7 · Chicas talla 6",
+            "Chicos talla 7 · Chicas talla 6",
+            "Chicos talla 7 · Chicas talla 6"
+          ]
+        },
+        {
+          "regla": "8 y 24/14 segundos",
+          "valores": [
+            "No en fase regular. Sí en play-off y fases finales",
+            "No en fase regular. Sí en play-off y fases finales",
+            "Sí",
+            "Sí (3 oficiales y reloj visible en Infantil Oro)",
+            "Sí (3 oficiales y reloj visible en Cadete y Junior Oro)",
+            "Sí"
+          ]
+        },
+        {
+          "regla": "Tiros libres por faltas de equipo",
+          "valores": [
+            "Desde la 5ª de cada periodo",
+            "Desde la 5ª de cada periodo",
+            "Desde la 5ª",
+            "Desde la 5ª",
+            "Desde la 5ª",
+            "Desde la 5ª"
+          ]
+        },
+        {
+          "regla": "Triple",
+          "valores": [
+            "Línea de minibasket (4 x 4)",
+            "Línea de minibasket (4 x 4)",
+            "6,75 m",
+            "6,75 m",
+            "6,75 m",
+            "6,75 m"
+          ]
+        },
+        {
+          "regla": "Defensa",
+          "valores": [
+            "Individual. Zona: 2 tiros libres y posesión",
+            "Individual. Zona: 2 tiros libres y posesión",
+            "Todas",
+            "Todas",
+            "Todas",
+            "Todas"
+          ]
+        },
+        {
+          "regla": "2 contra 1",
+          "valores": [
+            "Sí",
+            "Sí",
+            "Sí",
+            "Sí",
+            "Sí",
+            "Sí"
+          ]
+        },
+        {
+          "regla": "Minutos de juego obligatorios",
+          "valores": [
+            "Libre (FIBA)",
+            "Cada jugador en acta juega como mínimo 2 periodos completos y descansa 2 de los 5 primeros",
+            "Libre",
+            "Libre",
+            "Libre",
+            "Libre"
+          ]
+        },
+        {
+          "regla": "Jugadores en acta",
+          "valores": [
+            "5 a 12",
+            "5 a 12. Con menos de 9 se anota en acta",
+            "5 a 12",
+            "5 a 12",
+            "5 a 12",
+            "5 a 12"
+          ]
+        },
+        {
+          "regla": "Tiempos muertos",
+          "valores": [
+            "2 en la 1ª parte, 3 en la 2ª (máx. 2 en los 2 últimos min), 1 por prórroga en play-off",
+            "Igual",
+            "Igual",
+            "Igual",
+            "Igual",
+            "Igual"
+          ]
+        },
+        {
+          "regla": "Cambios",
+          "valores": [
+            "Libres salvo saque rápido",
+            "Solo en el 6º periodo (salvo lesión, 5 faltas o descalificación)",
+            "Libres salvo saque rápido",
+            "Libres salvo saque rápido",
+            "Libres salvo saque rápido",
+            "Libres salvo saque rápido"
+          ]
+        },
+        {
+          "regla": "Empate",
+          "valores": [
+            "Válido en fase regular. Final y 3º-4º: prórroga",
+            "Válido en fase regular. Final y 3º-4º: prórroga",
+            "No en fase regular",
+            "No en fase regular",
+            "No en fase regular",
+            "No en fase regular"
+          ]
+        },
+        {
+          "regla": "Regla de 50 puntos",
+          "valores": [
+            "Sí: se congela el marcador y sigue a reloj corrido",
+            "Sí",
+            "Sí",
+            "Sí",
+            "No",
+            "No"
+          ]
+        },
+        {
+          "regla": "Faltas técnicas",
+          "valores": [
+            "Sí",
+            "Sí",
+            "Sí",
+            "Sí",
+            "Sí",
+            "Sí"
+          ]
+        }
+      ]
+    },
+    "minibasket": [
+      "Alevín: 2 partes de 3 periodos de 8 minutos. Descanso de 1 minuto entre periodos y de 5 entre el 3º y el 4º.",
+      "Alevín: mínimo 9 jugadores dispuestos; entre 5 y 8 se juega y se anota en acta.",
+      "Alevín: cada jugador juega al menos 2 periodos completos y como máximo 3 de los 5 primeros, y descansa 2 completos. El entrenador comunica el quinteto de cada periodo; si no coincide, falta técnica.",
+      "Faltas de equipo: 2 tiros libres a partir de la 5ª de cada periodo; la cuenta empieza de cero en cada periodo.",
+      "Defensa en zona: 2 tiros libres y posesión para el rival (no cuenta para descalificar al entrenador).",
+      "Salto entre dos: siempre con flecha de alternancia.",
+      "Diferencia de 50 puntos: el resultado queda fijo y el partido sigue a reloj corrido.",
+      "El árbitro no toca el balón en los saques de banda y fondo salvo tras falta, cambio o tiempo muerto.",
+      "Campo: 28 x 15 m, también válidos 26 x 14, 24 x 13 y 22 x 12."
+    ],
+    "infantil": [
+      "Reglamento FIBA con dos excepciones: regla de 50 puntos y saque sin que el árbitro toque el balón salvo tras falta, cambio o tiempo muerto.",
+      "Los jugadores de Infantil de 1er año no pueden jugar en la categoría superior."
+    ]
+  },
+  "municipal": {
+    "organiza": "Ayuntamiento de Madrid (47 Juegos Deportivos Municipales)",
+    "web": "https://www.madrid.es",
+    "para_quien": "Equipos de no federados en Prebenjamín a Cadete. Inscripción del equipo en la sede electrónica del Ayuntamiento.",
+    "fechas": [
+      {
+        "que": "Sénior: inicio de liga",
+        "cuando": "17-18 de octubre de 2026"
+      },
+      {
+        "que": "Prebenjamín a Juvenil: inicio de liga",
+        "cuando": "14-15 de noviembre de 2026"
+      },
+      {
+        "que": "Fase de Distrito (Alevín a Juvenil)",
+        "cuando": "Abril de 2027"
+      },
+      {
+        "que": "Copa de Primavera: inscripción",
+        "cuando": "8 al 19 de marzo de 2027"
+      },
+      {
+        "que": "Fase final Sénior",
+        "cuando": "5-6 al 26-27 de junio de 2027"
+      }
+    ],
+    "fases": [
+      "Fase de grupo: liga, normalmente a doble vuelta.",
+      "Fase de Distrito: los campeones de grupo se cruzan.",
+      "Fase final de Madrid: los campeones de distrito, a partido único (Alevín a Sénior).",
+      "Fase autonómica en algunas categorías, con las normas de la Comunidad de Madrid."
+    ],
+    "cuotas": [
+      {
+        "categoria": "Prebenjamín, Benjamín, Alevín e Infantil",
+        "precio": "50 € por equipo"
+      },
+      {
+        "categoria": "Cadete y Juvenil",
+        "precio": "100 € por equipo"
+      },
+      {
+        "categoria": "Sénior",
+        "precio": "200 € por equipo, más los arbitrajes"
+      },
+      {
+        "categoria": "Equipos femeninos",
+        "precio": "50 % de descuento"
+      }
+    ],
+    "reglas": {
+      "nota": "Reglas de baloncesto de la normativa de deportes de equipo de los 46 JDM (2025-2026). Se mantienen hasta que el Ayuntamiento publique la de los 47 JDM.",
+      "items": [
+        "Equipos: mínimo 8 inscritos (máximo 25); en acta, de 5 a 12. Cambios ilimitados.",
+        "Prebenjamín, Benjamín y Alevín (mixtos): 4 periodos de 10 min, a reloj corrido salvo el último minuto del 4º. Defensa individual obligatoria; zona = 2 tiros libres y posesión. Triple a 4 m. Todos los del acta deben jugar.",
+        "Prebenjamín: sin tiros libres (todas las faltas, saque de banda) y sin clasificación.",
+        "Benjamín y Alevín: si no juegan todos, se pierde el partido (10-0).",
+        "Infantil: 4 x 10 min, defensa individual obligatoria, regla de 24/14. Victoria 2 puntos, derrota 1.",
+        "Cadete, Juvenil y Sénior: 4 x 12 min a reloj corrido salvo el último minuto. Regla de 24/14.",
+        "Todas: un tiempo muerto por periodo; con 50 puntos de diferencia se congela el marcador."
+      ]
+    }
+  },
+  "escolar": {
+    "organiza": "Comunidad de Madrid (Dirección General de Deportes) con los ayuntamientos",
+    "web": "https://www.comunidad.madrid/deportes/deporte-edad-escolar",
+    "items": [
+      "Programa de Deporte en Edad Escolar 2026-2027 (Orden 939/2026, BOCM de 1 de junio de 2026).",
+      "Para deportistas de 3 a 19 años sin licencia federativa en ese deporte, inscritos por su club, colegio o escuela municipal en la aplicación GCAM.",
+      "Fases: local (ayuntamientos), de área, zonal y final. Las fechas de zonal y final se publican en la web de la Comunidad.",
+      "Se juega con el reglamento de cada federación, adaptado para que participe más gente. La FBM organiza las fases zonales y finales de Cadete y Juvenil.",
+      "Madrid Comunidad Deportiva: actividad de iniciación al 3x3 en colegios (5º y 6º de Primaria y ESO), en el centro o en la Caja Mágica, con torneo final."
+    ]
+  },
+  "nacional": {
+    "organiza": "Federación Española de Baloncesto (FEB) y ACB",
+    "web": "https://www.feb.es",
+    "masculino": [
+      {
+        "nombre": "Liga Endesa (ACB)",
+        "texto": "Profesional. La organiza la ACB."
+      },
+      {
+        "nombre": "Primera FEB",
+        "texto": "Segunda categoría nacional."
+      },
+      {
+        "nombre": "Segunda FEB",
+        "texto": "Tercera categoría."
+      },
+      {
+        "nombre": "Tercera FEB",
+        "texto": "Cuarta categoría. Antigua Liga EBA."
+      },
+      {
+        "nombre": "1ª División Nacional",
+        "texto": "La gestiona cada federación autonómica (en Madrid, Liga VIPS)."
+      },
+      {
+        "nombre": "Liga U22",
+        "texto": "Liga nacional sub-22."
+      }
+    ],
+    "femenino": [
+      {
+        "nombre": "Liga Femenina Endesa",
+        "texto": "Máxima categoría."
+      },
+      {
+        "nombre": "LF Challenge",
+        "texto": "Segunda categoría."
+      },
+      {
+        "nombre": "Liga Femenina 2",
+        "texto": "Tercera categoría."
+      },
+      {
+        "nombre": "1ª División Femenina",
+        "texto": "Gestionada por cada federación autonómica."
+      }
+    ],
+    "base": [
+      "Campeonatos de España de Clubes Junior, Cadete e Infantil (desde la serie Especial).",
+      "Campeonato de España de Clubes Minibasket y de Selecciones Autonómicas Minibasket.",
+      "Campeonatos de España de Selecciones Autonómicas Infantil y Cadete.",
+      "Copa del Rey, Copa de la Reina, Copa España y Minicopa."
+    ]
+  },
+  "tres": {
+    "reglas": [
+      "Medio campo con una canasta (15 x 11 m). Balón de talla 6 con el peso de un talla 7.",
+      "3 jugadores en pista y 1 cambio. Los cambios, solo con el balón muerto.",
+      "Gana el primero que llega a 21 puntos o el que va por delante a los 10 minutos.",
+      "Canasta dentro del arco: 1 punto. Desde fuera: 2 puntos. Tiro libre: 1 punto.",
+      "12 segundos de posesión.",
+      "Tras canasta, rebote defensivo o robo, hay que sacar el balón fuera del arco antes de tirar.",
+      "Faltas de equipo: de la 7ª a la 9ª, 2 tiros libres; desde la 10ª, 2 tiros libres y posesión. No hay eliminación por faltas personales.",
+      "Prórroga: gana el primero que anota 2 puntos."
+    ],
+    "competiciones": [
+      "Copa España 3x3 (FEB).",
+      "Liga Invierno 3x3 FEB.",
+      "Campeonato de España de Clubes 3x3 U17.",
+      "Campeonato de España de Selecciones Autonómicas 3x3 U13 y U15.",
+      "Circuitos de verano en plazas (Circuito Plaza 3x3 de la FEB).",
+      "En Madrid, la FBM organiza torneos 3x3 y la actividad 3x3 escolar de la Comunidad."
+    ]
+  },
+  "free": {
+    "organiza": "Federación de Baloncesto de Madrid",
+    "para_quien": "Senior que quiere competir entre semana, de lunes a viernes desde las 20:00, en pabellón cubierto.",
+    "categorias": [
+      "Masculino",
+      "Femenino",
+      "Mixto (siempre al menos 2 jugadoras en pista)",
+      "Over 35 masculino y femenino (hasta 4 excepciones de 30 a 34 años)",
+      "Over 45 masculino (hasta 4 excepciones de 40 a 44 años)",
+      "Old School: más de 35 años, exjugadores o madres y padres del club o colegio; los viernes"
+    ],
+    "formato": "Grupos de 8 equipos: 14 partidos a doble vuelta y 4 de fase final por niveles (Oro, Plata y Bronce). 18 partidos en total.",
+    "precio": "1.400 € por equipo (reserva de 100 €), en uno o dos pagos. Incluye pista, árbitro y anotador con estadísticas, y seguro para 12 jugadores.",
+    "reglas": [
+      "4 periodos de 12 minutos a reloj corrido. Último minuto a reloj parado si hay 10 puntos o menos, y los 5 últimos segundos de los 3 primeros cuartos.",
+      "Balón talla 7 en masculino y talla 6 en femenino y mixto.",
+      "Tiro libre único: el primero vale todos los tiros de la falta; si se falla, se tira el siguiente. Normal en el último minuto.",
+      "Se puede empezar con 4 jugadores hasta el descanso; desde el 3er cuarto, mínimo 5 o se pierde 20-0.",
+      "Un tiempo muerto de 30 segundos por cada dos cuartos.",
+      "Empate válido salvo en fase final (prórrogas de 1 minuto).",
+      "Clasificación: victoria 3, empate 2, derrota 1, no presentado 0.",
+      "Entre 8 y 20 jugadores inscritos por equipo. Un aplazamiento por temporada."
+    ]
+  },
+  "fiba2026": {
+    "vigor": "1 de octubre de 2026. La FBM los aplica desde el inicio de la temporada 2026-2027.",
+    "cambios": [
+      {
+        "art": "Art. 15",
+        "titulo": "Acción de tiro",
+        "texto": "Se define cuándo empieza y acaba según el tipo de tiro. Un lanzamiento desde pista trasera solo cuenta como tiro al final de un periodo o de la posesión."
+      },
+      {
+        "art": "Art. 24",
+        "titulo": "Regate",
+        "texto": "Solo se puede volver a botar si se perdió el control por un tiro, un toque del rival o un pase o balón suelto tocado por otro jugador."
+      },
+      {
+        "art": "Art. 36",
+        "titulo": "Falta técnica",
+        "texto": "Dos tipos: categoría 1 (cuenta para la descalificación) y categoría 2 (no cuenta)."
+      },
+      {
+        "art": "Art. 37",
+        "titulo": "Falta disruptiva (nueva)",
+        "texto": "Sustituye a la antideportiva para cortar un contraataque o parar el reloj. No descalifica."
+      },
+      {
+        "art": "Art. 38",
+        "titulo": "Falta flagrante (nueva)",
+        "texto": "La falta más grave: acciones fuera del baloncesto legítimo o temerarias. Dos flagrantes, o una más una técnica de categoría 1, descalifican."
+      },
+      {
+        "art": "Art. 4",
+        "titulo": "Uniformes",
+        "texto": "Los calcetines tienen que ser del mismo color dominante en todo el equipo."
+      },
+      {
+        "art": "Apéndices",
+        "titulo": "Señales, acta y revisión",
+        "texto": "Nuevas señales y marcas en el acta. El entrenador puede pedir revisión de vídeo en cualquier momento (donde haya sistema de revisión)."
+      }
+    ]
+  },
+  "autonomicas": [
+    {
+      "nombre": "Andalucía",
+      "federacion": "Federación Andaluza de Baloncesto"
+    },
+    {
+      "nombre": "Aragón",
+      "federacion": "Federación Aragonesa de Baloncesto",
+      "web": "https://fabasket.com"
+    },
+    {
+      "nombre": "Asturias",
+      "federacion": "Federación de Baloncesto del Principado de Asturias"
+    },
+    {
+      "nombre": "Canarias",
+      "federacion": "Federación Canaria de Baloncesto"
+    },
+    {
+      "nombre": "Cantabria",
+      "federacion": "Federación Cántabra de Baloncesto",
+      "web": "https://www.fecanbaloncesto.com"
+    },
+    {
+      "nombre": "Castilla y León",
+      "federacion": "Federación de Baloncesto de Castilla y León",
+      "web": "https://www.fbcyl.es"
+    },
+    {
+      "nombre": "Castilla-La Mancha",
+      "federacion": "Federación de Baloncesto de Castilla-La Mancha"
+    },
+    {
+      "nombre": "Cataluña",
+      "federacion": "Federació Catalana de Basquetbol"
+    },
+    {
+      "nombre": "Ceuta",
+      "federacion": "Federación de Baloncesto de Ceuta"
+    },
+    {
+      "nombre": "Comunidad Valenciana",
+      "federacion": "Federación de Baloncesto de la Comunidad Valenciana",
+      "web": "https://www.fbcv.es"
+    },
+    {
+      "nombre": "Comunidad de Madrid",
+      "federacion": "Federación de Baloncesto de Madrid",
+      "web": "https://www.fbm.es"
+    },
+    {
+      "nombre": "Extremadura",
+      "federacion": "Federación Extremeña de Baloncesto"
+    },
+    {
+      "nombre": "Galicia",
+      "federacion": "Federación Galega de Baloncesto",
+      "web": "https://fegaba.com"
+    },
+    {
+      "nombre": "Illes Balears",
+      "federacion": "Federació de Bàsquet de les Illes Balears"
+    },
+    {
+      "nombre": "La Rioja",
+      "federacion": "Federación Riojana de Baloncesto",
+      "web": "https://frbaloncesto.com"
+    },
+    {
+      "nombre": "Melilla",
+      "federacion": "Federación Melillense de Baloncesto"
+    },
+    {
+      "nombre": "Región de Murcia",
+      "federacion": "Federación de Baloncesto de la Región de Murcia"
+    },
+    {
+      "nombre": "Navarra",
+      "federacion": "Federación Navarra de Baloncesto",
+      "web": "https://www.fnbaloncesto.com"
+    },
+    {
+      "nombre": "País Vasco",
+      "federacion": "Federación Vasca de Baloncesto"
+    }
+  ],
+  "documentos": [
+    {
+      "grupo": "federado",
+      "titulo": "Cuadro resumen de reglas por categoría 2026-2027",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1188&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Reglas Oficiales de Juego de la FBM 2026-2027",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1183&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Generales 2026-2027",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1145&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Cambios en las reglas FIBA aplicados en la FBM",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1189&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Saque rápido 2026-2027",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1190&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Minibasket Preferente (Benjamín)",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1177&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Minibasket Especial Masculino (Alevín)",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1175&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Minibasket Especial Femenino (Alevín)",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1176&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Junior, Cadete e Infantil Masculino Preferente",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1153&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Junior, Cadete e Infantil Femenino Preferente",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1152&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Junior, Cadete e Infantil Masculino de 1er año",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1151&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Junior, Cadete e Infantil Femenino de 1er año",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1150&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Junior Masculino Especial",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1159&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Junior Femenino Especial",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1158&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Cadete Masculino Especial",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1157&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Cadete Femenino Especial",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1156&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Infantil Masculino Especial",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1155&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Infantil Femenino Especial",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1154&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Sub-22 Masculino Oro",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1163&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Bases Sub-22 Femenino",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=1160&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Dimensiones de los campos de juego",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=documentos&id=895&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "federado",
+      "titulo": "Todas las bases y reglas de la FBM",
+      "org": "FBM",
+      "url": "https://www.fbm.es/documentos-116/FBM/Bases-y-reglas",
+      "tipo": "Web"
+    },
+    {
+      "grupo": "free-basket",
+      "titulo": "Información Liga Free Basket 2026-2027",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=noticia&id=5330&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "free-basket",
+      "titulo": "Campos de juego de la Free Basket",
+      "org": "FBM",
+      "url": "https://www.fbm.es/descargar?seccion=noticia&id=5331&delegacion=1",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "municipal",
+      "titulo": "Bases reguladoras 47 Juegos Deportivos Municipales",
+      "org": "Ayuntamiento de Madrid",
+      "url": "https://www.madrid.es/UnidadesDescentralizadas/Deportes/EspecialInformativo/47JDM/ficheros/BasesReguladoras47JDM_1Sp.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "municipal",
+      "titulo": "Normativa de deportes de equipo (46 JDM, referencia)",
+      "org": "Ayuntamiento de Madrid",
+      "url": "https://www.madrid.es/UnidadesDescentralizadas/Deportes/EspecialInformativo/46%20Juegos%20Deportivos%20Municipales%2025-26/normativas/normativaDeportesEquipo46jdm.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "municipal",
+      "titulo": "Inscripción de equipos en los 47 JDM",
+      "org": "Ayuntamiento de Madrid",
+      "url": "https://sede.madrid.es/portal/site/tramites/menuitem.62876cb64654a55e2dbd7003a8a409a0/?vgnextoid=85089e2cf1d08910VgnVCM100000891ecb1aRCRD&vgnextchannel=5ba637c190180210VgnVCM100000c90da8c0RCRD&vgnextfmt=default",
+      "tipo": "Web"
+    },
+    {
+      "grupo": "escolar",
+      "titulo": "Orden del programa Deporte en Edad Escolar 2026-2027 (BOCM)",
+      "org": "Comunidad de Madrid",
+      "url": "https://www.comunidad.madrid/docs/2026-08/orden-bocm-deecm-2026-2027.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "escolar",
+      "titulo": "Guía Madrid Comunidad Deportiva 2026-2027",
+      "org": "Comunidad de Madrid",
+      "url": "https://www.comunidad.madrid/docs/2026-08/guia-final-mcd-2026-2027.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "escolar",
+      "titulo": "Deporte en Edad Escolar",
+      "org": "Comunidad de Madrid",
+      "url": "https://www.comunidad.madrid/deportes/deporte-edad-escolar",
+      "tipo": "Web"
+    },
+    {
+      "grupo": "reglas-fiba",
+      "titulo": "Reglas Oficiales de Baloncesto FIBA 2026",
+      "org": "FIBA / FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[5612]FIBA%20Official%20Rules%202026.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "reglas-fiba",
+      "titulo": "Interpretaciones oficiales de las reglas 2026",
+      "org": "FIBA / FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[5742]Official%20Interpretations%20FIBA%20Rules%202026.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "reglas-fiba",
+      "titulo": "Cambios en las Reglas Oficiales 2026 (español)",
+      "org": "FIBA",
+      "url": "https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2026-rule-changes-v1-1-es.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "reglas-fiba",
+      "titulo": "Reglas de juego FIBA (todas, incluido 3x3)",
+      "org": "FIBA",
+      "url": "https://about.fiba.basketball/es/our-sport/official-basketball-rules",
+      "tipo": "Web"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Reglamento General y de Competiciones",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6692]Reglamento%20General%20y%20de%20Competiciones%20FEB.%20Version%20web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Reglamento Disciplinario",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6693]Reglamento%20Disciplinario%20(26-27)%20Propuestas%20Modificaci%C3%B3n%20(limpio).pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Bases Primera FEB 2026-2027",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6537]BBCC%20Primera%20FEB%2026-27%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Bases Segunda FEB 2026-2027",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6549]BBCC%20Segunda%20FEB%2026-27%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Bases Tercera FEB 2026-2027",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6547]BBCC%20Tercera%20FEB%2026-27%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Bases Liga Femenina Endesa 2026-2027",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6536]BBCC%20LF%20ENDESA%2026-27%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Bases LF Challenge 2026-2027",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6539]BBCC%20Liga%20Femenina%20Challenge%2026-27%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Bases Liga Femenina 2 2026-2027",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6548]BBCC%20Liga%20Femenina%202%2026-27%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Bases Liga U22 2026-2027",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6617]BB.CC.%20Liga%20U%2026-27%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Bases 1ª División Masculina 2026-2027",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6540]BBCC%201%C2%AA%20Div.%20Masculina%202026-2027%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Bases 1ª División Femenina 2026-2027",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6541]BBCC%201%C2%AA%20Div.%20Femenina%202026-2027%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Bases Campeonatos de España de Clubes Junior, Cadete e Infantil",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6544]BBCC%20CE%20Clubes%20Junior%20Cadete%20Infantil%202026-2027%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Bases Campeonato de España de Clubes Minibasket",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6543]BBCC%20CE%20Clubes%20Minibasket%202026-2027%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Bases Campeonato de España de Selecciones Minibasket",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6545]BBCC%20CE%20Selecciones%20Mini%202026-2027%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Normativa Infantil de Selecciones Autonómicas",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6661]Normativa%20Infantil%20SSAA%202025-2026.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Normativa Cadete de Selecciones Autonómicas",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6660]Normativa%20Cadete%20SSAA%202025-2026.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "nacional",
+      "titulo": "Toda la normativa de la FEB",
+      "org": "FEB",
+      "url": "https://www.feb.es/normativa.aspx",
+      "tipo": "Web"
+    },
+    {
+      "grupo": "3x3",
+      "titulo": "Bases Copa España 3x3",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6521]BB.CC.%20COPA%20ESPA%C3%91A%203x3%202026%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "3x3",
+      "titulo": "Bases Liga Invierno 3x3 FEB 2026-2027",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6605]BBCC%20LIGA%20INVIERNO%203X3%20FEB%2026-27%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "3x3",
+      "titulo": "Bases Campeonato de España de Clubes 3x3 U17",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6542]BBCC%20CE%20Clubes%203X3%20U17%202026-2027%20-%20Versi%C3%B3n%20Web.pdf",
+      "tipo": "PDF"
+    },
+    {
+      "grupo": "3x3",
+      "titulo": "Normativa Selecciones Autonómicas 3x3 U13 y U15",
+      "org": "FEB",
+      "url": "https://www.feb.es/Documentos/Enlaces/[6691]Normativa%20CESA%203x3%20SSAA%20U13%20U15%20-%202025-2026.pdf",
+      "tipo": "PDF"
+    }
+  ]
+}

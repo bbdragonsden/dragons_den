@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SportsClub",
+  "@id": "https://dragons-den-eight.vercel.app/#organization",
+  "name": "Dragons Den Basketball Academy",
+  "alternateName": "Dragons Den",
+  "description": "Gabinete de tecnificación y seguimiento de baloncesto en Madrid (Carabanchel), independiente del club de cada jugador. Micro-grupos de máximo 6, análisis de vídeo de partidos y ficha digital de evolución.",
+  "url": "https://dragons-den-eight.vercel.app/",
+  "email": "bbdragonsden@gmail.com",
+  "foundingDate": "2024",
+  "sport": "Basketball",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Madrid",
+    "addressRegion": "Comunidad de Madrid",
+    "addressCountry": "ES"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Madrid"
+  },
+  "priceRange": "€"
+}

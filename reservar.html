@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservar plaza | Dragons Den</title>
+    <meta name="description" content="Cuéntanos quién eres y qué buscas. Al terminar te abrimos WhatsApp o el correo con el mensaje ya escrito.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="canonical" href="https://dragons-den-eight.vercel.app/reservar.html">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23c8a96e'/%3E%3Cg fill='none' stroke='%230a0a0a' stroke-width='5'%3E%3Cpath d='M4 50h92M50 4v92'/%3E%3Cpath d='M18 18c14 14 14 50 0 64M82 18c-14 14-14 50 0 64'/%3E%3C/g%3E%3C/svg%3E">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Dragons Den Basketball Academy">
+    <meta property="og:title" content="Reservar plaza | Dragons Den">
+    <meta property="og:description" content="Cuéntanos quién eres y qué buscas. Al terminar te abrimos WhatsApp o el correo con el mensaje ya escrito.">
+    <meta property="og:url" content="https://dragons-den-eight.vercel.app/reservar.html">
+    <meta property="og:image" content="https://dragons-den-eight.vercel.app/og/temporada.png">
+    <meta property="og:locale" content="es_ES">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/comun.css">
+    <link rel="stylesheet" href="/css/sitio.css">
+    <link rel="stylesheet" href="/css/detalles.css">
+    <link rel="stylesheet" href="/css/temporada.css">
+    <link rel="stylesheet" href="/css/paginas.css">
+</head>
+<body class="dd-pag dd-pag--reservar">
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<nav class="dd-nav" aria-label="Principal">
+    <a href="index.html" class="nav-logo" aria-label="Dragons Den, inicio">Dragons Den</a>
+    <ul class="nav-links">
+        <li><a href="metodo.html">Método</a></li>
+        <li><a href="planes.html">Planes</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="ficha.html">Ficha</a></li>
+        <li><a href="embajadores.html">Embajadores</a></li>
+        <li><a href="preguntas.html">Preguntas</a></li>
+    </ul>
+    <div class="dd-nav-acciones">
+        <a href="login.html" class="dd-nav-acceso"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Acceso jugadores</span></a>
+        <a href="reservar.html" class="btn-primary dd-nav-cta" aria-current="page">Reservar plaza</a>
+    </div>
+</nav>
+
+<div class="dd-menu" id="dd-menu" hidden>
+    <div class="dd-menu-fondo" data-menu-cerrar></div>
+    <div class="dd-menu-hoja" role="dialog" aria-modal="true" aria-labelledby="dd-menu-titulo">
+        <div class="dd-menu-cab">
+            <p class="dd-menu-titulo" id="dd-menu-titulo">Men&uacute;</p>
+            <button type="button" class="dd-menu-cerrar" data-menu-cerrar aria-label="Cerrar men&uacute;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <div role="navigation" aria-label="Secciones">
+            <ul class="dd-menu-lista">
+                <li><a href="index.html"><span><b>Inicio</b><small>Qu&eacute; es Dragons Den</small></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+                <li><a href="metodo.html"><span><b>El método</b><small>Por qué el entreno del club no basta</small></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+                <li><a href="planes.html"><span><b>Planes de temporada</b><small>Tracker, Élite Híbrido y PRO VIP</small></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+                <li><a href="servicios.html"><span><b>Servicios y equipación</b><small>1v1, Campus vacacional y merchandising</small></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+                <li><a href="ficha.html"><span><b>Ficha de jugador</b><small>Seguimiento, niveles y recompensas</small></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+                <li><a href="embajadores.html"><span><b>Dragons Squad</b><small>Las cartas de nuestros embajadores</small></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+                <li><a href="preguntas.html"><span><b>Preguntas frecuentes</b><small>Horas, ausencias, calzado y pagos</small></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+                <li><a href="familias.html"><span><b>Guía para familias</b><small>Categoría, horas, sueño, estirón y presión</small></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+                <li><a href="blog.html"><span><b>Blog</b><small>Metodología y novedades</small></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="dd-menu-acciones">
+            <a href="reservar.html" class="btn-primary">Reservar plaza</a>
+            <a href="https://wa.me/34646794962?text=Hola%20Coach!%20Quiero%20informaci%C3%B3n%20sobre%20Dragons%20Den." target="_blank" rel="noopener noreferrer" class="btn-secondary dd-btn-wa"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>WhatsApp</a>
+        </div>
+        <ul class="dd-menu-extra">
+            <li><a href="login.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Acceso jugadores</a></li>
+            <li><a href="legal.html">Legal</a></li>
+        </ul>
+    </div>
+</div>
+
+<main id="contenido">
+<header class="dd-pag-hero">
+    <p class="dd-migas"><a href="index.html">Inicio</a> / Reservar</p>
+    <h1>Reserva <em>tu plaza.</em></h1>
+    <div class="dd-pag-hero-texto">
+        <p>Seis pasos cortos. Al final eliges WhatsApp o correo y el mensaje sale escrito con tus respuestas. No guardamos nada en la web.</p>
+    </div>
+</header>
+
+<section class="dd-bloque" aria-labelledby="r-form">
+    <h2 class="dd-oculto" id="r-form">Formulario de reserva</h2>
+    <div class="form-section" id="inscripcion" aria-label="Formulario de reserva">
+    <div class="form-inner">
+        
+        <div class="form-layout">
+            <div class="form-info">
+                <p class="section-eyebrow">Inscripci&oacute;n</p>
+                
+                <div class="divider"></div>
+                <p>Rellena la solicitud y te respondemos en 24&ndash;48 h por WhatsApp o email para confirmar plaza, horario y precio. Enviarla no te obliga a nada ni supone ning&uacute;n pago. <a href="condiciones.html" style="color:var(--gold);">Condiciones de contrataci&oacute;n</a>.</p>
+                <ul class="contact-list">
+                    <li>
+                        <span class="label">WhatsApp</span>
+                        <a href="https://wa.me/34646794962" target="_blank" rel="noopener noreferrer" style="color:var(--text);text-decoration:none;">Escribir por WhatsApp</a>
+                    </li>
+                    <li>
+                        <span class="label">Email</span>
+                        <a href="mailto:bbdragonsden@gmail.com" style="color:var(--text);text-decoration:none;">bbdragonsden@gmail.com</a>
+                    </li>
+                    <li>
+                        <span class="label">Ubicaci&oacute;n</span>
+                        Pistas confirmadas por mes
+                    </li>
+                </ul>
+            </div>
+
+            <form id="inscripcion-form" novalidate>
+
+                
+                <div class="wizard-progress-bar-wrap">
+                    <div class="wizard-progress-track">
+                        <div class="wizard-progress-fill" id="wizard-progress-fill"></div>
+                    </div>
+                    <p class="wizard-progress-label" id="wizard-progress-label" aria-live="polite">Paso 1 de 6</p>
+                </div>
+
+                
+                <div class="wizard-step-dots" id="wizard-step-dots" aria-hidden="true">
+                    <div class="wizard-dot active" data-dot="1">1</div>
+                    <div class="wizard-dot-line" data-line="1"></div>
+                    <div class="wizard-dot" data-dot="2">2</div>
+                    <div class="wizard-dot-line" data-line="2"></div>
+                    <div class="wizard-dot" data-dot="3">3</div>
+                    <div class="wizard-dot-line" data-line="3"></div>
+                    <div class="wizard-dot" data-dot="4">4</div>
+                    <div class="wizard-dot-line" data-line="4"></div>
+                    <div class="wizard-dot" data-dot="5">5</div>
+                    <div class="wizard-dot-line" data-line="5"></div>
+                    <div class="wizard-dot" data-dot="6">6</div>
+                </div>
+
+                
+                <div class="wizard-steps-container" id="wizard-steps-container">
+                    <input type="text" name="_honey" id="insc-honey" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                    
+                    <div class="wizard-step active" data-step="1">
+                        <h3 class="wizard-step-title" tabindex="-1">&iquest;Para qui&eacute;n es la solicitud?</h3>
+                        <div class="form-group">
+                            <label for="fecha-nacimiento">Fecha de nacimiento del jugador/a *</label>
+                            <input type="date" id="fecha-nacimiento" name="fecha_nacimiento" required aria-describedby="err-fecha-nacimiento ayuda-fecha">
+                            <span class="field-hint" id="ayuda-fecha">La pedimos primero porque, si el jugador es menor de edad, la solicitud la tiene que hacer su padre, su madre o su tutor legal.</span>
+                            <span class="field-error" id="err-fecha-nacimiento">Indica una fecha de nacimiento v&aacute;lida</span>
+                        </div>
+                        <fieldset class="wizard-fieldset">
+                            <legend class="form-legend">La solicitud la hace&hellip;</legend>
+                            <div class="toggle-group">
+                                <div class="toggle-option">
+                                    <input type="radio" id="para-mi" name="para_quien" value="yo" checked>
+                                    <label for="para-mi">El propio jugador/a (mayor de edad)</label>
+                                </div>
+                                <div class="toggle-option">
+                                    <input type="radio" id="para-hijo" name="para_quien" value="hijo">
+                                    <label for="para-hijo">Su padre, madre o tutor/a</label>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <p class="wizard-notice" id="aviso-menor" hidden>El jugador es menor de edad: la solicitud la tiene que hacer su padre, su madre o su tutor legal. En el paso siguiente te pediremos tus datos.</p>
+                        <div class="wizard-nav end">
+                            <button type="button" class="wizard-btn-next" data-next="2">Siguiente &rarr;</button>
+                        </div>
+                    </div>
+
+                    
+                    <div class="wizard-step" data-step="2">
+                        <h3 class="wizard-step-title" tabindex="-1">Datos del jugador/a</h3>
+                        <div class="form-group">
+                            <label for="nombre">Nombre y apellidos del jugador/a *</label>
+                            <input type="text" id="nombre" name="nombre" required autocomplete="off" aria-describedby="err-nombre">
+                            <span class="field-error" id="err-nombre">Campo obligatorio</span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="posicion">Posici&oacute;n</label>
+                                <select id="posicion" name="posicion">
+                                    <option value="">Selecciona&hellip;</option>
+                                    <option value="base">Base</option>
+                                    <option value="escolta">Escolta</option>
+                                    <option value="alero">Alero</option>
+                                    <option value="alapivot">Ala-p&iacute;vot</option>
+                                    <option value="pivot">P&iacute;vot</option>
+                                    <option value="no-se">No s&eacute; / todas</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="nivel">Nivel de juego *</label>
+                                <select id="nivel" name="nivel" required aria-describedby="err-nivel">
+                                    <option value="">Selecciona&hellip;</option>
+                                    <option value="iniciacion">Iniciaci&oacute;n (sin experiencia)</option>
+                                    <option value="basico">B&aacute;sico (1&ndash;2 a&ntilde;os)</option>
+                                    <option value="intermedio">Intermedio (3&ndash;5 a&ntilde;os)</option>
+                                    <option value="avanzado">Avanzado (+5 a&ntilde;os)</option>
+                                    <option value="federado">Federado / competici&oacute;n</option>
+                                </select>
+                                <span class="field-error" id="err-nivel">Campo obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="club">Club actual (si tiene)</label>
+                            <input type="text" id="club" name="club" placeholder="Nombre del club&hellip;">
+                        </div>
+
+                        
+                        <div id="hijo-fields">
+                            <p class="form-section-title">Datos del padre, madre o tutor/a</p>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tutor-nombre">Tu nombre y apellidos *</label>
+                                    <input type="text" id="tutor-nombre" name="tutor_nombre" autocomplete="name" aria-describedby="err-tutor-nombre">
+                                    <span class="field-error" id="err-tutor-nombre">Campo obligatorio</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tutor-relacion">Relaci&oacute;n con el jugador *</label>
+                                    <select id="tutor-relacion" name="tutor_relacion" aria-describedby="err-tutor-relacion">
+                                        <option value="">Selecciona&hellip;</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="tutor">Tutor/a legal</option>
+                                    </select>
+                                    <span class="field-error" id="err-tutor-relacion">Campo obligatorio</span>
+                                </div>
+                            </div>
+                            <label class="rgpd-group">
+                                <input type="checkbox" id="tutor-declara" name="tutor_declara" aria-describedby="err-tutor-declara">
+                                <span>Declaro que soy el padre, la madre o el tutor legal del jugador/a y que hago esta solicitud en su nombre. Si tiene menos de 14 a&ntilde;os, soy yo quien presta los consentimientos de este formulario.</span>
+                            </label>
+                            <span class="field-error" id="err-tutor-declara">Esta declaraci&oacute;n es necesaria para solicitar plaza para un menor</span>
+                        </div>
+
+                        <div class="wizard-nav">
+                            <button type="button" class="wizard-btn-prev" data-prev="1">&larr; Anterior</button>
+                            <button type="button" class="wizard-btn-next" data-next="3">Siguiente &rarr;</button>
+                        </div>
+                    </div>
+
+                    
+                    <div class="wizard-step" data-step="3">
+                        <h3 class="wizard-step-title" tabindex="-1">Contacto</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required autocomplete="email" aria-describedby="err-email">
+                                <span class="field-error" id="err-email">Introduce un email v&aacute;lido</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Tel&eacute;fono (WhatsApp) *</label>
+                                <input type="tel" id="telefono" name="telefono" required autocomplete="tel" aria-describedby="err-telefono">
+                                <span class="field-error" id="err-telefono">Campo obligatorio</span>
+                            </div>
+                        </div>
+                        <p class="field-hint" id="hint-contacto-menor" hidden>Si el jugador es menor, pon aqu&iacute; tu email y tu tel&eacute;fono (los del padre, la madre o el tutor).</p>
+                        <div class="wizard-nav">
+                            <button type="button" class="wizard-btn-prev" data-prev="2">&larr; Anterior</button>
+                            <button type="button" class="wizard-btn-next" data-next="4">Siguiente &rarr;</button>
+                        </div>
+                    </div>
+
+                    
+                    <div class="wizard-step" data-step="4">
+                        <h3 class="wizard-step-title" tabindex="-1">Programa</h3>
+                        <div class="form-group">
+                            <label for="tipo">&iquest;Has entrenado antes con Dragons Den? *</label>
+                            <select id="tipo" name="tipo" required aria-describedby="err-tipo">
+                                <option value="">Selecciona&hellip;</option>
+                                <option value="anterior">S&iacute;, ya hemos entrenado juntos</option>
+                                <option value="nuevo">No, es la primera vez</option>
+                            </select>
+                            <span class="field-error" id="err-tipo">Campo obligatorio</span>
+                        </div>
+                        <fieldset class="wizard-fieldset" id="programa-fieldset" aria-describedby="err-programa">
+                            <legend class="form-legend">&iquest;Qu&eacute; te interesa? *</legend>
+                            <div class="check-group check-group-1">
+                                <label class="check-option"><input type="radio" name="programa" value="tracker" data-label="Tier 1 - Dragons Tracker (online)"><span>Tier 1 &middot; Dragons Tracker, seguimiento 100&nbsp;% online</span></label>
+                                <label class="check-option"><input type="radio" name="programa" value="hibrido" data-label="Tier 2 - Plan Elite Hibrido"><span>Tier 2 &middot; Plan &Eacute;lite H&iacute;brido, seguimiento + 1 hora semanal en pista</span></label>
+                                <label class="check-option"><input type="radio" name="programa" value="pro-vip" data-label="Tier 3 - Plan PRO VIP"><span>Tier 3 &middot; Plan PRO VIP, alto rendimiento</span></label>
+                                <label class="check-option"><input type="radio" name="programa" value="puntual" data-label="1v1 o Campus vacacional"><span>Algo puntual: sesiones 1v1 o el Campus vacacional</span></label>
+                                <label class="check-option"><input type="radio" name="programa" value="informacion" data-label="Primera sesion de evaluacion / informacion"><span>A&uacute;n no lo s&eacute;: quiero la sesi&oacute;n de evaluaci&oacute;n sin coste o m&aacute;s informaci&oacute;n</span></label>
+                            </div>
+                        </fieldset>
+                        <span class="field-error" id="err-programa">Elige una opci&oacute;n</span>
+                        <p class="field-hint">Precios finales, impuestos aplicables incluidos. <a href="condiciones.html" target="_blank" rel="noopener" style="color:var(--gold);">Condiciones de contrataci&oacute;n</a>.</p>
+                        <div class="wizard-nav">
+                            <button type="button" class="wizard-btn-prev" data-prev="3">&larr; Anterior</button>
+                            <button type="button" class="wizard-btn-next" data-next="5">Siguiente &rarr;</button>
+                        </div>
+                    </div>
+
+                    
+                    <div class="wizard-step" data-step="5">
+                        <h3 class="wizard-step-title" tabindex="-1">M&aacute;s informaci&oacute;n</h3>
+                        <div class="form-group">
+                            <label for="objetivo">Objetivo principal</label>
+                            <select id="objetivo" name="objetivo">
+                                <option value="">Selecciona&hellip;</option>
+                                <option value="tecnica">Mejorar t&eacute;cnica individual</option>
+                                <option value="fisico">Mejorar condici&oacute;n f&iacute;sica</option>
+                                <option value="tactica">Entender mejor el juego colectivo</option>
+                                <option value="confianza">Ganar confianza y mentalidad</option>
+                                <option value="todo">Todo lo anterior</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="lesiones">Lesiones, alergias o condiciones f&iacute;sicas a tener en cuenta (opcional)</label>
+                            <textarea id="lesiones" name="lesiones" placeholder="Solo si es algo que debamos saber para entrenar con seguridad&hellip;" aria-describedby="ayuda-salud"></textarea>
+                            <span class="field-hint" id="ayuda-salud">No es obligatorio. Si lo rellenas, necesitamos tu consentimiento expl&iacute;cito en la casilla de abajo; si no la marcas, este texto no se env&iacute;a.</span>
+                        </div>
+                        <label class="rgpd-group">
+                            <input type="checkbox" id="consiente-salud" name="consiente_salud" aria-describedby="err-consiente-salud">
+                            <span>Consiento expresamente que Dragons Den trate estos datos de salud solo para adaptar los entrenamientos (art.&nbsp;9.2.a RGPD).</span>
+                        </label>
+                        <span class="field-error" id="err-consiente-salud">Marca la casilla o deja vac&iacute;o el campo de salud</span>
+                        <div class="form-group">
+                            <label for="origen">&iquest;C&oacute;mo nos conociste?</label>
+                            <select id="origen" name="origen">
+                                <option value="">Selecciona&hellip;</option>
+                                <option value="recomendacion">Recomendaci&oacute;n de un jugador</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="tiktok">TikTok</option>
+                                <option value="whatsapp">WhatsApp / grupo</option>
+                                <option value="google">Google / b&uacute;squeda</option>
+                                <option value="club">Mi club de baloncesto</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="comentarios">Comentarios o preguntas</label>
+                            <textarea id="comentarios" name="comentarios" placeholder="Cu&eacute;ntanos cualquier cosa&hellip;"></textarea>
+                        </div>
+                        <div class="wizard-nav">
+                            <button type="button" class="wizard-btn-prev" data-prev="4">&larr; Anterior</button>
+                            <button type="button" class="wizard-btn-next" data-next="6">Siguiente &rarr;</button>
+                        </div>
+                    </div>
+
+                    
+                    <div class="wizard-step" data-step="6">
+                        <h3 class="wizard-step-title" tabindex="-1">Resumen</h3>
+                        <div class="wizard-summary" id="wizard-summary">
+                            
+                        </div>
+
+                        <p class="field-hint primera-capa"><strong>Protecci&oacute;n de datos.</strong> Responsable: el titular de Dragons Den Basketball Academy. Finalidad: gestionar tu solicitud y responderte. Base: medidas precontractuales a petici&oacute;n tuya (art.&nbsp;6.1.b RGPD). La solicitud se guarda en Supabase y nos llega un aviso por email (Resend); adem&aacute;s, t&uacute; nos env&iacute;as el mensaje por WhatsApp o correo desde tu propia cuenta. Puedes acceder, rectificar, suprimir y ejercer tus dem&aacute;s derechos en bbdragonsden@gmail.com. M&aacute;s informaci&oacute;n en la <a href="politica-privacidad.html" target="_blank" rel="noopener">pol&iacute;tica de privacidad</a>.</p>
+
+                        <label class="rgpd-group">
+                            <input type="checkbox" name="rgpd" id="rgpd" required aria-describedby="err-rgpd">
+                            <span>He le&iacute;do la <a href="politica-privacidad.html" target="_blank" rel="noopener">pol&iacute;tica de privacidad</a> y acepto que Dragons Den trate estos datos para gestionar esta solicitud y responderme. *</span>
+                        </label>
+                        <span class="field-error" id="err-rgpd">Necesitamos esta casilla para poder gestionar tu solicitud</span>
+
+                        <label class="rgpd-group">
+                            <input type="checkbox" name="acepta_comunicaciones" id="acepta-comunicaciones">
+                            <span>Opcional: quiero recibir por email o WhatsApp avisos de nuevos programas, de campus vacacionales y otras novedades de Dragons Den. Puedo darme de baja cuando quiera.</span>
+                        </label>
+
+                        <div class="dd-msg">
+                            <p class="dd-msg-titulo">As&iacute; nos llegar&aacute; tu mensaje</p>
+                            <pre class="dd-msg-texto" id="dd-msg-texto" aria-live="polite"></pre>
+                            <p class="dd-msg-ayuda">Se abrir&aacute; tu WhatsApp o tu correo con este texto ya escrito. Puedes cambiar lo que quieras antes de enviarlo.</p>
+                        </div>
+
+                        <div class="dd-enviar">
+                            <button type="submit" id="submit-btn" class="wizard-btn-next dd-enviar-btn" data-canal="whatsapp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Enviar por WhatsApp</button>
+                            <button type="submit" class="dd-enviar-btn dd-enviar-btn--mail" data-canal="email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Enviar por correo</button>
+                        </div>
+                        <div class="wizard-nav">
+                            <button type="button" class="wizard-btn-prev" data-prev="5">&larr; Anterior</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="form-success" class="dd-ok" role="status" tabindex="-1" style="display:none;">
+                    <p class="dd-ok-titulo"><svg class="ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3,10 8,15 17,5"/></svg> <span id="dd-ok-titulo">Solo falta pulsar Enviar</span></p>
+                    <p class="dd-ok-texto" id="dd-ok-texto">Se ha abierto WhatsApp con tu mensaje ya escrito. Env&iacute;alo y te contestamos en 24&ndash;48 horas para confirmar plaza, horario y precio. El pago solo se hace despu&eacute;s de esa confirmaci&oacute;n.</p>
+                    <div class="dd-ok-acciones">
+                        <a class="btn-primary dd-btn-wa" id="dd-ok-abrir" href="#" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg><span id="dd-ok-abrir-txt">Abrir WhatsApp otra vez</span></a>
+                        <button type="button" class="btn-secondary" id="dd-ok-copiar">Copiar el mensaje</button>
+                    </div>
+                    <p class="dd-ok-otro">&iquest;Prefieres el otro canal? <a href="#" id="dd-ok-otro" target="_blank" rel="noopener noreferrer">Enviar por correo</a></p>
+                </div>
+
+                <div id="form-error" role="alert" style="display:none; margin-top:4px; background:#1f0d0d; border-left:3px solid #e53935; padding:24px 28px;">
+                    <p style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#e53935;margin-bottom:8px;">Error al enviar</p>
+                    <p style="font-size:14px;color:var(--muted);line-height:1.7;">No se pudo enviar el formulario. Escr&iacute;benos directamente a <a href="mailto:bbdragonsden@gmail.com" style="color:var(--gold);">bbdragonsden@gmail.com</a> o por <a href="https://wa.me/34646794962" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">WhatsApp</a>.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</section>
+</main>
+
+<footer class="dd-pie">
+    <div class="dd-pie-marca">
+        <div class="footer-logo">Dragons Den</div>
+        <p>Tecnificaci&oacute;n y seguimiento de baloncesto en Madrid (Carabanchel), juegues en el club que juegues.</p>
+        <p class="dd-pie-contacto"><a href="https://wa.me/34646794962?text=Hola%20Coach!%20Quiero%20informaci%C3%B3n%20sobre%20Dragons%20Den." target="_blank" rel="noopener noreferrer" class="dd-btn-wa"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>WhatsApp</a><a href="mailto:bbdragonsden@gmail.com">bbdragonsden@gmail.com</a></p>
+    </div>
+    <div role="navigation" class="dd-pie-nav" aria-label="Secciones del pie">
+        <a href="metodo.html">El método</a>
+        <a href="planes.html">Planes de temporada</a>
+        <a href="servicios.html">Servicios y equipación</a>
+        <a href="ficha.html">Ficha de jugador</a>
+        <a href="embajadores.html">Dragons Squad</a>
+        <a href="preguntas.html">Preguntas frecuentes</a>
+        <a href="familias.html">Guía para familias</a>
+        <a href="blog.html">Blog</a>
+        <a href="reservar.html">Reservar plaza</a>
+        <a href="login.html">Acceso jugadores</a>
+    </div>
+    <p class="dd-pie-legal">&copy; 2026 Dragons Den Basketball Academy <span aria-hidden="true">&middot;</span> <a href="legal.html">Legal</a></p>
+</footer>
+
+<div id="aviso-cookies" class="aviso-cookies" role="region" aria-label="Aviso sobre cookies" hidden>
+    <p>Esta web no usa cookies de an&aacute;lisis ni de publicidad. Solo guarda en tu navegador lo imprescindible para funcionar. <a href="cookies.html">M&aacute;s informaci&oacute;n</a>.</p>
+    <button type="button" id="aviso-cookies-ok">Entendido</button>
+</div>
+
+<div role="navigation" class="tab-bar" id="tab-bar" aria-label="Navegaci&oacute;n m&oacute;vil">
+    <a href="index.html" class="tab-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        <span>Inicio</span>
+    </a>
+    <a href="planes.html" class="tab-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10"/><path d="M7 13h6"/></svg>
+        <span>Planes</span>
+    </a>
+    <a href="reservar.html" class="tab-item tab-item--cta active" aria-current="page">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        <span>Reservar</span>
+    </a>
+    <a href="ficha.html" class="tab-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg>
+        <span>Ficha</span>
+    </a>
+    <button type="button" class="tab-item" id="dd-menu-abrir" aria-controls="dd-menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+        <span>Men&uacute;</span>
+    </button>
+</div>
+
+<script src="/js/sitio.js" defer></script>
+<script src="/js/dd-oferta.js" defer></script>
+<script src="/js/reservar.js" defer></script>
+<script src="/js/nsd-spring.js" defer></script>
+<script src="/js/nsd-arriba.js" defer></script>
+</body>
+</html>
