@@ -816,3 +816,12 @@ html.dd-guarida-abierta { overflow: hidden; }
     .sq-dorso-txt { font-size: 12.5px; line-height: 1.45; margin-top: 10px; }
     .sq-dorso .sq-datos { margin-right: 44px; }
 }
+
+/* «Dragones» con la aclaración (ex-alumnos) en pequeño */
+.dd-ex-nota { font-family: 'Inter', sans-serif; font-size: .62em; letter-spacing: .3px; text-transform: none; font-weight: 400; opacity: .78; white-space: nowrap; vertical-align: .1em; }
+h3 .dd-ex-nota { font-size: .5em; }
+
+/* Carta: el cartel del rango y Founder siempre por encima de la jugadora recortada */
+.sq-sello, .sq-founder { transform: translateZ(90px); z-index: 5; }
+/* Se gira tocando o pulsando cualquier parte de la carta */
+.sq-card .sq-tilt, .sq-card .sq-sale { cursor: pointer; }

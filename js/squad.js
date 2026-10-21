@@ -165,7 +165,7 @@
       dorso.setAttribute('aria-hidden', girada ? 'false' : 'true');
     }
     boton.addEventListener('click', function (ev) { ev.stopPropagation(); girar(); });
-    art.querySelector('.sq-tilt').addEventListener('click', girar);
+    art.addEventListener('click', function (ev) { if (ev.target.closest('a, .sq-girar')) return; girar(); });
 
     // Si la foto no carga, se queda la inicial en vez de un hueco roto.
     var img = art.querySelector('.sq-recorte img');
