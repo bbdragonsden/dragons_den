@@ -456,6 +456,11 @@
       $('ci-video-wrap').classList.toggle('ci-oculto', menor || !!EST.video);
       $('ci-video-familia').classList.toggle('ci-oculto', !menor || !!EST.video);
     });
+    $('ci-copia').addEventListener('click', function () {
+      var a = EST.autorizaciones_registro;
+      if (!a) return;
+      try { sessionStorage.setItem('dd_copia_autorizacion', JSON.stringify(Object.assign({ jugador: '', email: '' }, a))); } catch (e) {}
+    });
     $('ci-tienda-lista').addEventListener('click', async function (ev) {
       var b = ev.target.closest('[data-canje]');
       if (!b) return;

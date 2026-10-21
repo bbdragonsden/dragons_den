@@ -2073,6 +2073,17 @@ async function checkAuth() {
     // datos de administración los protege /api/admin-* comprobando app_metadata.
     isAdmin = user.app_metadata?.is_admin === true;
 
+    // Autorizaciones aceptadas al registrarse: con Google llegan por localStorage;
+    // se guardan en la cuenta y la API las pasa a la base de datos (idempotente).
+    try {
+        const pend = localStorage.getItem('dd_autorizaciones');
+        if (pend && !user.user_metadata?.autorizaciones) await sb.auth.updateUser({ data: { autorizaciones: JSON.parse(pend) } });
+        localStorage.removeItem('dd_autorizaciones');
+        if (pend || user.user_metadata?.autorizaciones) {
+            fetch('/api/checkin', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + session.access_token }, body: JSON.stringify({ accion: 'autorizaciones' }) }).catch(() => {});
+        }
+    } catch {}
+
     // Fetch pack permissions from DB
     const { data: packsData } = await sb.from('user_packs').select('pack_id');
     userPacks = packsData ? packsData.map(p => p.pack_id) : [];

@@ -133,7 +133,9 @@
             isAnimating = false;
             var title = toEl.querySelector('.wizard-step-title');
             if (title) title.focus({ preventScroll: true });
-            var inscEl = $('inscripcion');
+            var caja = form.closest('.dd-guarida-cuerpo');
+            if (caja) caja.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+            var inscEl = caja ? null : $('inscripcion');
             if (inscEl) {
                 var top = inscEl.getBoundingClientRect().top + window.pageYOffset - 80;
                 window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });

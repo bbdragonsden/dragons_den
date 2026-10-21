@@ -39,6 +39,19 @@ const ICONO = {
   cerrar: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
 };
 
+// Iconos del menú, uno por sección (trazos al estilo Lucide).
+const ICONO_SECCION = {
+  index: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>',
+  metodo: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="14" height="14" rx="2"/><path d="m16.5 10 5-3v10l-5-3"/></svg>',
+  planes: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 5-9 5-9-5z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg>',
+  servicios: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 3.5 16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.1a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.3-2.2z"/></svg>',
+  ficha: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg>',
+  embajadores: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 18 2-11 5 5 3-7 3 7 5-5 2 11z"/><path d="M4 21h16"/></svg>',
+  preguntas: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M9.2 9a3 3 0 0 1 5.6 1c0 2-3 2.5-3 4.5"/><path d="M12 17.5h.01"/></svg>',
+  familias: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="3.5"/><path d="M2.5 21a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 6 4.8"/></svg>',
+  blog: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h12v16H6a2 2 0 0 1-2-2z"/><path d="M16 8h3a1 1 0 0 1 1 1v9a2 2 0 0 1-4 0"/><path d="M8 8h4M8 12h4M8 16h3"/></svg>',
+};
+
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const ruta = (id) => (id === 'index' ? '/' : `/${id}.html`);
 const href = (id) => (id === 'index' ? 'index.html' : `${id}.html`);
@@ -52,7 +65,7 @@ ${SECCIONES.filter((s) => s.id !== 'blog' && s.enNav !== false).map((s) => `    
     </ul>
     <div class="dd-nav-acciones">
         <a href="login.html" class="dd-nav-acceso">${ICONO.usuario}<span>Acceso jugadores</span></a>
-        <a href="reservar.html" class="btn-primary dd-nav-cta"${actual('reservar', pagina)}>Reservar plaza</a>
+        <a href="reservar.html" class="btn-primary dd-nav-cta"${actual('reservar', pagina)}>Entra en la Guarida</a>
     </div>
 </nav>
 
@@ -60,22 +73,28 @@ ${SECCIONES.filter((s) => s.id !== 'blog' && s.enNav !== false).map((s) => `    
     <div class="dd-menu-fondo" data-menu-cerrar></div>
     <div class="dd-menu-hoja" role="dialog" aria-modal="true" aria-labelledby="dd-menu-titulo">
         <div class="dd-menu-cab">
-            <p class="dd-menu-titulo" id="dd-menu-titulo">Men&uacute;</p>
+            <p class="dd-menu-titulo" id="dd-menu-titulo"><span>Dragons Den</span>La Guarida</p>
             <button type="button" class="dd-menu-cerrar" data-menu-cerrar aria-label="Cerrar men&uacute;">${ICONO.cerrar}</button>
         </div>
+        <a href="reservar.html" class="dd-menu-portal" style="--i:0">
+            <span class="dd-menu-portal-brillo" aria-hidden="true"></span>
+            <span class="dd-menu-portal-eyebrow">Temporada 2026-27 &middot; m&aacute;x. 6 por pista</span>
+            <b>Entra en la Guarida</b>
+            <span class="dd-menu-portal-sub">Primera sesi&oacute;n de evaluaci&oacute;n sin coste.</span>
+            <span class="dd-menu-portal-flecha" aria-hidden="true">${ICONO.flecha}</span>
+        </a>
         <div role="navigation" aria-label="Secciones">
-            <ul class="dd-menu-lista">
-                <li><a href="index.html"${actual('index', pagina)}><span><b>Inicio</b><small>Qu&eacute; es Dragons Den</small></span>${ICONO.flecha}</a></li>
-${SECCIONES.map((s) => `                <li><a href="${href(s.id)}"${actual(s.id, pagina)}><span><b>${esc(s.largo)}</b><small>${esc(s.nota)}</small></span>${ICONO.flecha}</a></li>`).join('\n')}
-            </ul>
+            <ol class="dd-menu-lista">
+${[{ id: 'index', largo: 'Inicio', nota: 'Qué es Dragons Den' }].concat(SECCIONES).map((s, i) => `                <li style="--i:${i + 1}"><a href="${href(s.id)}"${actual(s.id, pagina)}><span class="dd-menu-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><span class="dd-menu-ico">${ICONO_SECCION[s.id] || ''}</span><span class="dd-menu-txt"><b>${esc(s.largo)}</b><small>${esc(s.nota)}</small></span>${ICONO.flecha}</a></li>`).join('\n')}
+            </ol>
         </div>
-        <div class="dd-menu-acciones">
-            <a href="reservar.html" class="btn-primary">Reservar plaza</a>
+        <div class="dd-menu-acciones" style="--i:12">
             <a href="${WA}" target="_blank" rel="noopener noreferrer" class="btn-secondary dd-btn-wa">${ICONO.wa}WhatsApp</a>
+            <a href="login.html" class="btn-secondary">${ICONO.usuario}Acceso jugadores</a>
         </div>
         <ul class="dd-menu-extra">
-            <li><a href="login.html">${ICONO.usuario}Acceso jugadores</a></li>
             <li><a href="legal.html">Legal</a></li>
+            <li><a href="mailto:bbdragonsden@gmail.com">bbdragonsden@gmail.com</a></li>
         </ul>
     </div>
 </div>`;
@@ -90,7 +109,7 @@ function pie() {
     </div>
     <div role="navigation" class="dd-pie-nav" aria-label="Secciones del pie">
 ${SECCIONES.map((s) => `        <a href="${href(s.id)}">${esc(s.largo)}</a>`).join('\n')}
-        <a href="reservar.html">Reservar plaza</a>
+        <a href="reservar.html">Entra en la Guarida</a>
         <a href="login.html">Acceso jugadores</a>
     </div>
     <p class="dd-pie-legal">&copy; 2026 Dragons Den Basketball Academy <span aria-hidden="true">&middot;</span> <a href="legal.html">Legal</a></p>
@@ -111,7 +130,7 @@ function barraInferior(pagina) {
   return `<div role="navigation" class="tab-bar" id="tab-bar" aria-label="Navegaci&oacute;n m&oacute;vil">
 ${tab('index', '<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/>', 'Inicio')}
 ${tab('planes', '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10"/><path d="M7 13h6"/>', 'Planes')}
-${tab('reservar', '<path d="M12 5v14"/><path d="M5 12h14"/>', 'Reservar', ' tab-item--cta')}
+${tab('reservar', '<path d="M12 5v14"/><path d="M5 12h14"/>', 'Únete', ' tab-item--cta')}
 ${tab('ficha', '<path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/>', 'Ficha')}
     <button type="button" class="tab-item" id="dd-menu-abrir" aria-controls="dd-menu" aria-expanded="false">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
@@ -211,7 +230,7 @@ function montar(id) {
   });
   if (meta.ld_archivo) meta.ld = fs.readFileSync(path.join(DIR, meta.ld_archivo), 'utf8').trim();
 
-  const scripts = ['/js/sitio.js', '/js/dd-oferta.js', ...(meta.scripts || []), '/js/nsd-spring.js', '/js/nsd-arriba.js'];
+  const scripts = ['/js/sitio.js', '/js/dd-oferta.js', ...(meta.scripts || []), '/js/guarida.js', '/js/nsd-spring.js', '/js/nsd-arriba.js'];
   const html = `${cabezaHtml(id, meta)}
 <body class="dd-pag dd-pag--${id}">
 <a class="skip-link" href="#contenido">Saltar al contenido</a>

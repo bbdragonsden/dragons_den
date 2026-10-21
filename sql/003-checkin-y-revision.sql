@@ -193,6 +193,11 @@ RETURNS BOOLEAN LANGUAGE sql STABLE AS $
 $;
 
 
+-- Las autorizaciones se aceptan online al crear la cuenta; el DNI del tutor
+-- deja de ser obligatorio (solo se pide si la familia trae el papel).
+ALTER TABLE consentimientos_tutor ALTER COLUMN tutor_dni DROP NOT NULL;
+
+
 -- ── 8. Temporadas: recompensas de nivel por temporada ────────────────────────
 -- Cada temporada empieza en Novato, así que la misma recompensa de nivel puede
 -- volver a ganarse la temporada siguiente.

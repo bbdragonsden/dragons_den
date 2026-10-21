@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autorización de la familia | Dragons Den</title>
+    <title>Autorizaciones | Dragons Den</title>
     <meta name="description" content="Formulario para que la madre, el padre o el tutor autorice el check-in de bienestar, los vídeos de prueba y, si quiere, el uso de la imagen del jugador.">
     <meta name="robots" content="noindex, follow">
     <link rel="canonical" href="https://dragons-den-eight.vercel.app/autorizacion.html">
@@ -71,12 +71,12 @@
     <a href="index.html" class="back">&larr; Volver</a>
 </header>
 <main id="contenido">
-    <p class="eyebrow">Para jugadores menores de 14 a&ntilde;os</p>
-    <h1>Autorizaci&oacute;n de la familia</h1>
+    <p class="eyebrow">Check-in, v&iacute;deos e imagen</p>
+    <h1>Autorizaciones</h1>
     <div class="divider"></div>
 
     <div class="box no-imprimir">
-        <p>Impr&iacute;melo, rell&eacute;nalo a mano y entr&eacute;galo firmado al entrenador (o env&iacute;a una foto por WhatsApp). &Eacute;l lo registra en la plataforma. Cada casilla es independiente: puedes marcar solo las que quieras y retirarlas cuando quieras.</p>
+        <p id="aut-intro">Las autorizaciones se aceptan al <a href="register.html">crear la cuenta</a> y se pueden cambiar despu&eacute;s en la plataforma. <strong>No hace falta imprimir ni firmar nada.</strong> Este documento es una copia por si quieres tenerla en papel, o la v&iacute;a alternativa si prefieres entregarla firmada al entrenador.</p>
         <p><button class="btn" type="button" onclick="window.print()">Imprimir o guardar en PDF</button></p>
     </div>
 
@@ -107,8 +107,25 @@
         <div class="campo"><span>Firma</span><div class="linea" style="min-height:60px"></div></div>
     </div>
 
-    <p class="updated">Versi&oacute;n del texto: familia-2026-10</p>
+    <p class="updated" id="aut-version">Versi&oacute;n del texto: registro-2026-10</p>
 </main>
+<script>
+// Copia de lo aceptado al registrarse (llega por sessionStorage, nunca por la URL).
+(function () {
+  var d = null;
+  try { d = JSON.parse(sessionStorage.getItem('dd_copia_autorizacion') || 'null'); } catch (e) {}
+  if (!d) return;
+  var lineas = document.querySelectorAll('.linea');
+  var f = function (x) { return x ? new Date(x + (x.length === 10 ? 'T12:00:00Z' : '')).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : ''; };
+  var rel = { madre: 'Madre', padre: 'Padre', tutor_legal: 'Tutor legal' };
+  var valores = [d.jugador, f(d.fecha_nacimiento), d.email, d.tutor_nombre || '', '', d.tutor_relacion ? rel[d.tutor_relacion] : (d.otorgado_por === 'jugador' ? 'El propio jugador (14 años o más)' : ''), d.otorgado_por === 'tutor' ? d.email : '', f((d.at || '').slice(0, 10)), 'Aceptado online al crear la cuenta'];
+  lineas.forEach(function (l, i) { if (valores[i]) { l.textContent = valores[i]; l.style.color = 'var(--text)'; } });
+  var marcas = [d.bienestar, d.video, d.imagen];
+  document.querySelectorAll('.casilla i').forEach(function (c, i) { if (marcas[i]) { c.textContent = '✓'; c.style.cssText += ';display:grid;place-items:center;color:var(--gold);font-style:normal;font-size:13px;line-height:1'; } });
+  document.getElementById('aut-intro').textContent = 'Copia de las autorizaciones que aceptaste al crear la cuenta. Guárdala o imprímela si quieres tenerla en papel; no hace falta entregarla.';
+  document.getElementById('aut-version').textContent = 'Versión del texto: ' + (d.version || 'registro-2026-10');
+})();
+</script>
 <footer>
     <nav aria-label="Legal">
         <a href="index.html">Inicio</a>

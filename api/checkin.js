@@ -139,6 +139,7 @@ async function estadoJugador(u) {
     equipos: Array.isArray(eq.body) ? eq.body : [],
     bienestar: bien,
     video: vid.status === 200 && vid.body === true,
+    autorizaciones_registro: (u.user_metadata || {}).autorizaciones || null,
     consentimiento: Array.isArray(cons.body) && cons.body[0] ? cons.body[0] : null,
     historial: hist.slice(0, 20),
     revisiones: Array.isArray(rev.body) ? rev.body : [],
@@ -414,6 +415,35 @@ async function guardarBienestar(u, body, req) {
   return up.status < 300 ? { status: 200, body: { ok: true } } : { status: 500, body: { error: 'No se pudo guardar' } };
 }
 
+// Autorizaciones aceptadas al crear la cuenta (user_metadata.autorizaciones).
+// Se pasan a la base de datos la primera vez; si ya hay una fila, no se tocan,
+// así un cambio o una retirada posterior desde la app manda sobre el registro.
+async function autorizacionesRegistro(u) {
+  const a = (u.user_metadata || {}).autorizaciones;
+  if (!a || typeof a !== 'object') return { status: 200, body: { ok: true, nada: true } };
+  const fn = String(a.fecha_nacimiento || '');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(fn) || isNaN(Date.parse(fn))) return { status: 200, body: { ok: false, motivo: 'fecha' } };
+  const edad = (Date.now() - Date.parse(fn)) / 31557600000;
+  const tutor = a.otorgado_por === 'tutor';
+  if (edad < catalogo.consentimiento_bienestar.edad_minima_propia && !tutor) return { status: 200, body: { ok: false, motivo: 'menor_sin_tutor' } };
+  const at = !isNaN(Date.parse(a.at)) ? new Date(a.at).toISOString() : new Date().toISOString();
+  const version = String(a.version || 'registro-2026-10').slice(0, 40);
+  const ign = { Prefer: 'resolution=ignore-duplicates,return=minimal' };
+  if (tutor) {
+    await peticion('/rest/v1/consentimientos_tutor?on_conflict=user_id', { method: 'POST', headers: ign, body: {
+      user_id: u.id, fecha_nacimiento: fn, tutor_nombre: String(a.tutor_nombre || '').slice(0, 120) || 'Sin indicar', tutor_dni: null, tutor_email: u.email,
+      tutor_relacion: ['madre', 'padre', 'tutor_legal'].includes(a.tutor_relacion) ? a.tutor_relacion : 'tutor_legal',
+      acepta_tratamiento_video: a.video === true, acepta_uso_promocional: a.imagen === true, acepta_ranking_publico: false,
+      otorgado_en: at, texto_version: version } });
+  }
+  if (a.bienestar === true || a.video === true) {
+    await peticion('/rest/v1/consentimiento_bienestar?on_conflict=user_id', { method: 'POST', headers: ign, body: {
+      user_id: u.id, fecha_nacimiento: fn, otorgado_por: tutor ? 'tutor' : 'jugador', texto_version: version, otorgado_en: at,
+      acepta_bienestar: a.bienestar === true, acepta_video: a.video === true } });
+  }
+  return { status: 200, body: { ok: true } };
+}
+
 // ── Entrenador ───────────────────────────────────────────────────────────────
 // Registra la autorización en papel de la familia (formulario /autorizacion.html).
 async function registrarTutor(body) {
@@ -652,6 +682,7 @@ module.exports = async function handler(req, res) {
         dar_xp: () => (admin ? darXp(body) : { status: 403, body: { error: 'Solo el entrenador' } }),
         recompensa: () => (admin ? cambiarRecompensa(body) : { status: 403, body: { error: 'Solo el entrenador' } }),
         medicion: () => guardarMedicion(u, body),
+        autorizaciones: () => autorizacionesRegistro(u),
         canjear: () => canjear(u, body),
         canje: () => (admin ? cambiarCanje(body) : { status: 403, body: { error: 'Solo el entrenador' } }),
         tutor: () => (admin ? registrarTutor(body) : { status: 403, body: { error: 'Solo el entrenador' } }),

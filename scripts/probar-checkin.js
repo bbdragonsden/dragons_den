@@ -56,13 +56,14 @@ const storage = {
 };
 const JUG = { id: '11111111-1111-4111-8111-111111111111', email: 'j@x.es', app_metadata: {}, user_metadata: { name: 'Jugador' } };
 const ADM = { id: 'u-admin', email: 'a@x.es', app_metadata: { is_admin: true } };
+const EXTRA = {};
 const fake = { rest, storage, peticion: async (p, o) => {
     if (p.startsWith('/rest/v1/consentimiento_bienestar')) { T.consentimiento_bienestar = T.consentimiento_bienestar.filter((c) => c.user_id !== o.body.user_id); T.consentimiento_bienestar.push(o.body); return { status: 201 }; }
     if (p.startsWith('/rest/v1/consentimientos_tutor')) { T.consentimientos_tutor = T.consentimientos_tutor.filter((c) => c.user_id !== o.body.user_id); T.consentimientos_tutor.push(o.body); return { status: 201 }; }
     if (p.startsWith('/rest/v1/mediciones')) { T.mediciones = T.mediciones.filter((m) => !(m.user_id === o.body.user_id && m.fecha === o.body.fecha)); T.mediciones.push(o.body); return { status: 201 }; }
     if (p.startsWith('/rest/v1/recompensas_entregadas')) { if (!T.recompensas_entregadas.some((r) => r.user_id === o.body.user_id && r.nivel === o.body.nivel && r.temporada === o.body.temporada)) T.recompensas_entregadas.push(Object.assign({ id: nid(), estado: 'pendiente', created_at: new Date().toISOString() }, o.body)); return { status: 201 }; }
     throw new Error('peticion ' + p); },
-  usuario: async (req) => (req.headers.authorization === 'Bearer admin' ? ADM : req.headers.authorization === 'Bearer jug' ? JUG : null),
+  usuario: async (req) => EXTRA[req.headers.authorization] || (req.headers.authorization === 'Bearer admin' ? ADM : req.headers.authorization === 'Bearer jug' ? JUG : null),
   esAdmin: (u) => !!(u && u.app_metadata && u.app_metadata.is_admin), usuariosPorId: async () => ({ '11111111-1111-4111-8111-111111111111': { email: 'j@x.es', nombre: 'Jugador' } }), SUPABASE_HOST: 'x.supabase.co' };
 require.cache[require.resolve('../api/_lib/supa')] = { id: 'supa', filename: 'supa', loaded: true, exports: fake };
 const handler = require('../api/checkin.js');
@@ -213,4 +214,13 @@ const ok = (c, m) => { if (!c) { console.log('FALLO:', m); process.exitCode = 1;
   r = await call('admin', 'POST', { accion: 'tutor', user_id: NINO, fecha_nacimiento: '2015-03-01', tutor_nombre: 'Ana', tutor_relacion: 'madre', tutor_dni: 'abc', tutor_email: 'ana@x.es' }); ok(r.code === 400, 'DNI mal escrito → 400');
   r = await call('jug', 'POST', { accion: 'tutor', user_id: NINO }); ok(r.code === 403, 'el jugador no registra autorizaciones');
   r = await call('admin', 'GET', null, { vista: 'revision' }); ok(Array.isArray(r.body.todos), 'panel con lista de todos los usuarios');
+  // ── Autorizaciones aceptadas al crear la cuenta ──
+  const NUEVO = { id: '44444444-4444-4444-8444-444444444444', email: 'familia@x.es', app_metadata: {}, user_metadata: { name: 'Niño', autorizaciones: { version: 'registro-2026-10', at: '2026-10-21T10:00:00Z', fecha_nacimiento: '2015-02-01', otorgado_por: 'tutor', tutor_nombre: 'Luis Gómez', tutor_relacion: 'padre', bienestar: true, video: true, imagen: false } } };
+  EXTRA['Bearer nuevo'] = NUEVO;
+  r = await call('nuevo', 'POST', { accion: 'autorizaciones' });
+  ok(r.code === 200 && T.consentimientos_tutor.some((c) => c.user_id === NUEVO.id && c.tutor_dni === null && c.acepta_tratamiento_video) && T.consentimiento_bienestar.some((c) => c.user_id === NUEVO.id && c.acepta_bienestar && c.acepta_video && c.otorgado_por === 'tutor'), 'las autorizaciones del registro pasan a la base de datos sin papel');
+  const SOLO = { id: '55555555-5555-4555-8555-555555555555', email: 'nino@x.es', app_metadata: {}, user_metadata: { autorizaciones: { fecha_nacimiento: '2015-02-01', otorgado_por: 'jugador', bienestar: true, video: true } } };
+  EXTRA['Bearer solo'] = SOLO;
+  r = await call('solo', 'POST', { accion: 'autorizaciones' });
+  ok(r.body.ok === false && !T.consentimiento_bienestar.some((c) => c.user_id === SOLO.id), 'un menor de 14 no se autoriza a sí mismo');
 })();

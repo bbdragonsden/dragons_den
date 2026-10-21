@@ -64,6 +64,15 @@
         .check-row input { width: 16px; height: 16px; min-width: 16px; margin-top: 3px; accent-color: #c8a96e; }
         .check-row input[aria-invalid="true"] { outline: 2px solid #ff6b6b; outline-offset: 2px; }
         #reg-edad14-err { margin: -8px 0 20px; }
+        .reg-bloque { border: 0; padding: 0; margin: 0 0 18px; }
+        .reg-bloque legend { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+        .reg-bloque .check-row { margin-bottom: 10px; }
+        .reg-bloque .check-row small { display: block; color: var(--muted); font-size: 12px; }
+        .form-group select { background: var(--surface); border: 1px solid var(--border); color: var(--text); font-family: 'Inter', Arial, sans-serif; font-size: 15px; padding: 14px 16px; border-radius: 0; }
+        .form-group select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+        .reg-oculto { display: none !important; }
+        .reg-nota { font-size: 12px; color: var(--muted); line-height: 1.6; margin: -4px 0 18px; }
+        .reg-nota a, .confirm-copia { color: var(--gold); }
         .primera-capa { font-size: 11px; color: var(--muted); line-height: 1.7; margin-top: 20px; }
         .primera-capa a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
         .confirm-icon { width: 56px; height: 56px; background: rgba(200,169,110,0.08); border: 1px solid rgba(200,169,110,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
@@ -104,11 +113,33 @@
         <div id="form-state">
             <p class="login-form-title">Crear cuenta</p>
 
-            <label class="check-row" for="reg-edad14">
-                <input type="checkbox" id="reg-edad14" required aria-describedby="reg-edad14-err">
-                <span>Tengo 14 a&ntilde;os o m&aacute;s (si eres menor de 14, tu padre, madre o tutor debe crear la cuenta). *</span>
-            </label>
-            <p class="auth-error" id="reg-edad14-err" role="alert">Para crear la cuenta tienes que tener 14 a&ntilde;os o m&aacute;s. Si eres menor de 14, p&iacute;dele a tu padre, madre o tutor que la cree.</p>
+            <fieldset class="reg-bloque">
+                <legend>&iquest;Qui&eacute;n crea la cuenta? *</legend>
+                <label class="check-row"><input type="radio" name="reg-quien" value="jugador" checked> <span>Soy el jugador y tengo 14 a&ntilde;os o m&aacute;s</span></label>
+                <label class="check-row"><input type="radio" name="reg-quien" value="tutor"> <span>Soy la madre, el padre o el tutor del jugador</span></label>
+            </fieldset>
+            <div class="form-group">
+                <label for="reg-nac">Fecha de nacimiento del jugador *</label>
+                <input type="date" id="reg-nac" required>
+            </div>
+            <div id="reg-tutor" class="reg-oculto">
+                <div class="form-group">
+                    <label for="reg-tutor-nombre">Tu nombre y apellidos *</label>
+                    <input type="text" id="reg-tutor-nombre" autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="reg-tutor-rel">Relaci&oacute;n con el jugador *</label>
+                    <select id="reg-tutor-rel"><option value="madre">Madre</option><option value="padre">Padre</option><option value="tutor_legal">Tutor legal</option></select>
+                </div>
+            </div>
+            <fieldset class="reg-bloque">
+                <legend>Autorizaciones (opcionales)</legend>
+                <label class="check-row"><input type="checkbox" id="reg-aut-bien"> <span>Check-in de bienestar<small>Energ&iacute;a, sue&ntilde;o, molestias, &aacute;nimo y estatura para ajustar la carga. Son datos de salud; solo los ve el entrenador y se borran el 30 de junio.</small></span></label>
+                <label class="check-row"><input type="checkbox" id="reg-aut-video"> <span>V&iacute;deos de prueba y de an&aacute;lisis<small>Clips cortos de la pista y de partidos. Solo los ve el entrenador; los de prueba se borran a los 30 d&iacute;as.</small></span></label>
+                <label class="check-row"><input type="checkbox" id="reg-aut-img"> <span>Uso de la imagen<small>Carta de embajador o fotos en la web y redes. Nunca con el nombre de su club.</small></span></label>
+            </fieldset>
+            <p class="reg-nota">Cada casilla es independiente y se puede retirar cuando quieras. No hace falta firmar nada: si quieres una copia en papel, podr&aacute;s descargarla al terminar.</p>
+            <p class="auth-error" id="reg-edad14-err" role="alert"></p>
 
             <button class="btn-google" id="btn-google">
                 <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 6.293C4.672 4.166 6.656 3.58 9 3.58z"/></svg>
@@ -119,11 +150,11 @@
 
             <form id="register-form" novalidate>
                 <div class="form-group">
-                    <label for="reg-name">Nombre completo</label>
-                    <input type="text" id="reg-name" placeholder="Carlos Martínez" autocomplete="name" required>
+                    <label for="reg-name">Nombre del jugador</label>
+                    <input type="text" id="reg-name" placeholder="Carlos Martínez" required>
                 </div>
                 <div class="form-group">
-                    <label for="reg-email">Email</label>
+                    <label for="reg-email" id="reg-email-label">Email</label>
                     <input type="email" id="reg-email" placeholder="tu@email.com" autocomplete="email" required>
                 </div>
                 <div class="form-group">
@@ -134,7 +165,7 @@
                 <div class="auth-error" id="reg-error" role="alert"></div>
             </form>
 
-            <p class="primera-capa"><strong>Protecci&oacute;n de datos.</strong> Responsable: el titular de Dragons Den Basketball Academy. Finalidad: crear y gestionar tu cuenta en la plataforma. Base: ejecuci&oacute;n del contrato que aceptas al registrarte (art.&nbsp;6.1.b RGPD). Los datos se guardan en Supabase; si entras con Google, Google nos facilita tu nombre y email. Derechos de acceso, rectificaci&oacute;n, supresi&oacute;n y dem&aacute;s en bbdragonsden@gmail.com. M&aacute;s informaci&oacute;n en la <a href="politica-privacidad.html" target="_blank" rel="noopener">pol&iacute;tica de privacidad</a> y en las <a href="condiciones.html" target="_blank" rel="noopener">condiciones</a>.</p>
+            <p class="primera-capa"><strong>Protecci&oacute;n de datos.</strong> Responsable: el titular de Dragons Den Basketball Academy. Finalidad: crear y gestionar tu cuenta en la plataforma. Base: ejecuci&oacute;n del contrato que aceptas al registrarte (art.&nbsp;6.1.b RGPD); las autorizaciones, tu consentimiento (art.&nbsp;6.1.a y 9.2.a). Si el jugador tiene menos de 14 a&ntilde;os, la cuenta y las autorizaciones las da su familia. Los datos se guardan en Supabase; si entras con Google, Google nos facilita tu nombre y email. Derechos de acceso, rectificaci&oacute;n, supresi&oacute;n y dem&aacute;s en bbdragonsden@gmail.com. M&aacute;s informaci&oacute;n en la <a href="politica-privacidad.html" target="_blank" rel="noopener">pol&iacute;tica de privacidad</a> y en las <a href="condiciones.html" target="_blank" rel="noopener">condiciones</a>.</p>
 
             <div class="auth-links">
                 <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
@@ -151,6 +182,7 @@
             </div>
             <p class="confirm-title">Revisa<br>tu email</p>
             <p class="confirm-text">Te hemos enviado un enlace de confirmación a <span class="confirm-email" id="confirm-email-display"></span>. Haz clic en él para activar tu cuenta.</p>
+            <p class="confirm-text" style="margin-top:16px"><a class="confirm-copia" href="autorizacion.html?copia=1" id="reg-copia">Descargar una copia de las autorizaciones</a> (opcional)</p>
             <div class="auth-links" style="margin-top:32px;text-align:center;">
                 <p><a href="login.html">Volver al inicio de sesión</a></p>
             </div>
@@ -167,20 +199,44 @@ sb.auth.getSession().then(({ data: { session } }) => {
     if (session) window.location.href = 'plataforma.html';
 });
 
-// La casilla de 14 años es obligatoria también para registrarse con Google.
-function edadConfirmada() {
-    const cb = document.getElementById('reg-edad14');
-    const err = document.getElementById('reg-edad14-err');
-    if (cb.checked) { cb.removeAttribute('aria-invalid'); err.style.display = 'none'; return true; }
-    cb.setAttribute('aria-invalid', 'true');
-    err.style.display = 'block';
-    cb.focus();
-    return false;
+// Quién crea la cuenta, fecha de nacimiento y autorizaciones: obligatorio
+// también para registrarse con Google. Las autorizaciones se guardan con la
+// cuenta y la API las pasa a la base de datos en el primer acceso.
+const $ = (id) => document.getElementById(id);
+const quien = () => document.querySelector('input[name="reg-quien"]:checked').value;
+function pintarQuien() {
+    const t = quien() === 'tutor';
+    $('reg-tutor').classList.toggle('reg-oculto', !t);
+    $('reg-email-label').textContent = t ? 'Tu email' : 'Email';
 }
-document.getElementById('reg-edad14').addEventListener('change', edadConfirmada);
+document.querySelectorAll('input[name="reg-quien"]').forEach((r) => r.addEventListener('change', pintarQuien));
+function autorizaciones() {
+    const err = $('reg-edad14-err');
+    const fallo = (msg, el) => { err.textContent = msg; err.style.display = 'block'; if (el) { el.setAttribute('aria-invalid', 'true'); el.focus(); } return null; };
+    err.style.display = 'none';
+    document.querySelectorAll('[aria-invalid]').forEach((x) => x.removeAttribute('aria-invalid'));
+    const fn = $('reg-nac').value;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(fn)) return fallo('Indica la fecha de nacimiento del jugador.', $('reg-nac'));
+    const edad = (Date.now() - Date.parse(fn)) / 31557600000;
+    if (edad < 5 || edad > 80) return fallo('Revisa la fecha de nacimiento.', $('reg-nac'));
+    const q = quien();
+    if (q === 'jugador' && edad < 14) return fallo('Con menos de 14 años, la cuenta la crea tu madre, tu padre o tu tutor. Marca la segunda opción.', document.querySelector('input[name="reg-quien"][value="tutor"]'));
+    const tn = $('reg-tutor-nombre').value.trim();
+    if (q === 'tutor' && tn.length < 3) return fallo('Escribe tu nombre y apellidos.', $('reg-tutor-nombre'));
+    return {
+        version: 'registro-2026-10', at: new Date().toISOString(), fecha_nacimiento: fn, otorgado_por: q,
+        tutor_nombre: q === 'tutor' ? tn : null, tutor_relacion: q === 'tutor' ? $('reg-tutor-rel').value : null,
+        bienestar: $('reg-aut-bien').checked, video: $('reg-aut-video').checked, imagen: $('reg-aut-img').checked,
+    };
+}
+function guardarCopia(a, nombre, email) {
+    try { sessionStorage.setItem('dd_copia_autorizacion', JSON.stringify(Object.assign({ jugador: nombre, email }, a))); } catch (e) {}
+}
 
 document.getElementById('btn-google').addEventListener('click', async () => {
-    if (!edadConfirmada()) return;
+    const a = autorizaciones();
+    if (!a) return;
+    try { localStorage.setItem('dd_autorizaciones', JSON.stringify(a)); } catch (e) {}
     const { error } = await sb.auth.signInWithOAuth({
         provider: 'google',
         options: { redirectTo: window.location.origin + '/plataforma.html' }
@@ -195,7 +251,9 @@ document.getElementById('register-form').addEventListener('submit', async functi
     const email = document.getElementById('reg-email').value.trim();
     const password = document.getElementById('reg-password').value;
 
-    if (!edadConfirmada()) return;
+    const a = autorizaciones();
+    if (!a) return;
+    if (!name) return showError('Escribe el nombre del jugador.');
     if (password.length < 8) return showError('La contraseña debe tener al menos 8 caracteres.');
 
     btn.disabled = true;
@@ -205,7 +263,7 @@ document.getElementById('register-form').addEventListener('submit', async functi
     const { error } = await sb.auth.signUp({
         email, password,
         options: {
-            data: { name, declara_14_o_mas: true, declara_14_o_mas_at: new Date().toISOString() },
+            data: { name, autorizaciones: a, declara_14_o_mas: a.otorgado_por === 'jugador', declara_14_o_mas_at: a.at },
             emailRedirectTo: window.location.origin + '/plataforma.html'
         }
     });
@@ -216,6 +274,7 @@ document.getElementById('register-form').addEventListener('submit', async functi
         btn.disabled = false;
         btn.textContent = 'Crear cuenta';
     } else {
+        guardarCopia(a, name, email);
         document.getElementById('confirm-email-display').textContent = email;
         document.getElementById('form-state').style.display = 'none';
         document.getElementById('confirm-state').style.display = 'block';

@@ -144,9 +144,10 @@
     ],
     "aviso_nombres": "El 'Plan Élite Híbrido' presencial (100 €/mes) comparte nombre con el plan 'elite' de la plataforma online de abajo (197 €/mes), del que dependen niveles.json, quests.json y la tabla de suscripciones en SQL. Pendiente de decidir si la plataforma online se retira o se renombra; no tocar la gamificación sin esa decisión.",
     "exalumno": {
-      "boton": "Soy ex-alumno",
+      "boton": "Soy un Dragón",
       "condicion": "Precio para quien ya ha entrenado con Dragons Den. Se mantiene toda la temporada mientras la plaza siga activa mes a mes; si causas baja y vuelves, pagas la matrícula y la tarifa estándar.",
-      "whatsapp_sufijo": " Soy ex-alumno/a de Dragons Den."
+      "whatsapp_sufijo": " Soy ex-alumno/a de Dragons Den.",
+      "boton_nota": "(ex-alumno)"
     },
     "founder": {
       "etiqueta": "Founder",

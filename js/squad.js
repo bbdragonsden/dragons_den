@@ -36,8 +36,10 @@
   // ── Relieve 3D ────────────────────────────────────────────────────────
   // Escribe --rx, --ry (giro), --gx, --gy (posición del brillo) y --brillo en el
   // elemento. El CSS decide qué capa usa cada variable.
+  // Con ratón sigue al puntero; en pantallas táctiles se mueve arrastrando con
+  // el dedo en horizontal (el desplazamiento vertical de la página se respeta).
   function activarRelieve(el, opciones) {
-    if (QUIETO || !PUNTERO_FINO || !el) return;
+    if (QUIETO || !el) return;
     var max = (opciones && opciones.max) || 14;
     var marco = null;
     var rect = null;
@@ -63,14 +65,35 @@
       el.classList.add('is-siguiendo');
       el.style.setProperty('--brillo', '1');
     });
-    el.addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse') mover(e); });
-    el.addEventListener('pointerleave', function () {
+    el.addEventListener('pointermove', function (e) {
+      if (e.pointerType === 'mouse' || dedo === e.pointerId) {
+        if (dedo === e.pointerId && Math.abs(e.clientX - x0) > 8) arrastrado = true;
+        mover(e);
+      }
+    });
+    function soltar() {
       if (marco) cancelAnimationFrame(marco);
       el.classList.remove('is-siguiendo');
       ['--rx', '--ry', '--gx', '--gy'].forEach(function (v) { el.style.removeProperty(v); });
       el.style.setProperty('--brillo', '0');
       rect = null;
+      dedo = null;
+    }
+    el.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') soltar(); });
+    // Táctil
+    var dedo = null, x0 = 0, arrastrado = false;
+    el.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse') return;
+      dedo = e.pointerId; x0 = e.clientX; arrastrado = false;
+      rect = el.getBoundingClientRect();
+      el.classList.add('is-siguiendo');
+      el.style.setProperty('--brillo', '1');
+      mover(e);
     });
+    el.addEventListener('pointerup', function (e) { if (dedo === e.pointerId) soltar(); });
+    el.addEventListener('pointercancel', function (e) { if (dedo === e.pointerId) soltar(); });
+    // Un arrastre no debe girar la carta como si fuera un toque.
+    el.addEventListener('click', function (e) { if (arrastrado) { e.stopPropagation(); e.preventDefault(); arrastrado = false; } }, true);
     window.addEventListener('scroll', function () { rect = null; }, { passive: true });
     window.addEventListener('resize', function () { rect = null; });
   }
