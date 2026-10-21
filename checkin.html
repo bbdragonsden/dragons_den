@@ -60,13 +60,15 @@
         </section>
 
         <div class="ci-aviso ci-oculto" id="ci-consent">
-            <p><b>Activa las preguntas de cuerpo y cabeza.</b> Energía, sueño, molestias y ánimo ayudan a tu entrenador a ajustar la carga y a darte mejores consejos. Son datos de salud: solo se guardan si das tu permiso.</p>
+            <p><b>Autorizaciones.</b> Las preguntas de cuerpo y cabeza (energía, sueño, molestias, ánimo) ayudan a ajustar la carga; son datos de salud y solo se guardan con tu permiso. Los vídeos de prueba hacen que tus sesiones del club sumen puntos. Cada una es independiente.</p>
             <form id="ci-consent-form">
                 <label class="ci-label" for="ci-nac">Fecha de nacimiento</label>
                 <input class="ci-input" type="date" id="ci-nac" required>
                 <label class="ci-check ci-oculto" id="ci-tutor-wrap"><input type="checkbox" id="ci-tutor"> <span>Soy la madre, el padre o el tutor del jugador y lo autorizo.</span></label>
-                <label class="ci-check"><input type="checkbox" id="ci-acepto" required> <span id="ci-consent-texto"></span></label>
-                <button class="ci-btn ci-btn--sec ci-btn--ancho" type="submit">Dar permiso</button>
+                <label class="ci-check" id="ci-acepto-wrap"><input type="checkbox" id="ci-acepto"> <span id="ci-consent-texto"></span></label>
+                <label class="ci-check" id="ci-video-wrap"><input type="checkbox" id="ci-acepto-video"> <span id="ci-video-texto"></span></label>
+                <p class="ci-nota ci-oculto" id="ci-video-familia">Con menos de 14 años, los vídeos los autoriza tu familia con <a href="/autorizacion.html">este formulario</a>: imprímelo o enséñaselo y entrégalo firmado a tu entrenador.</p>
+                <button class="ci-btn ci-btn--sec ci-btn--ancho" type="submit">Guardar autorizaciones</button>
                 <p class="ci-error" id="ci-consent-error" role="alert"></p>
             </form>
         </div>

@@ -122,12 +122,13 @@ async function sincronizarProgreso(uid, d) {
 
 // ── Jugador ──────────────────────────────────────────────────────────────────
 async function estadoJugador(u) {
-  const [eq, hist, rev, bien, cons] = await Promise.all([
+  const [eq, hist, rev, bien, cons, vid] = await Promise.all([
     rest.get('equipos_jugador', 'user_id=eq.' + u.id + '&activo=eq.true&select=id,nombre,tipo,duracion_habitual_min&order=created_at'),
     historial(u.id, 40),
     rest.get('revisiones', 'user_id=eq.' + u.id + '&select=id,tipo,estado,checkin_id,nota_revisor,xp_si_aprueba,created_at,revisado_en&order=created_at.desc&limit=30'),
     puedeBienestar(u.id),
-    rest.get('consentimiento_bienestar', 'user_id=eq.' + u.id + '&select=fecha_nacimiento,otorgado_por,revocado_en'),
+    rest.get('consentimiento_bienestar', 'user_id=eq.' + u.id + '&select=fecha_nacimiento,otorgado_por,revocado_en,acepta_bienestar,acepta_video'),
+    rest.rpc('puede_subir_video', { p_user: u.id }),
   ]);
   const ultimo = hist[0];
   const d = await datosProgreso(u.id);
@@ -137,6 +138,7 @@ async function estadoJugador(u) {
     catalogo_version: catalogo.version,
     equipos: Array.isArray(eq.body) ? eq.body : [],
     bienestar: bien,
+    video: vid.status === 200 && vid.body === true,
     consentimiento: Array.isArray(cons.body) && cons.body[0] ? cons.body[0] : null,
     historial: hist.slice(0, 20),
     revisiones: Array.isArray(rev.body) ? rev.body : [],
@@ -271,7 +273,7 @@ async function pedirCodigo(u, body) {
   if (!Array.isArray(c.body) || !c.body[0]) return { status: 404, body: { error: 'No encuentro ese check-in' } };
   const pv = await rest.rpc('puede_subir_video', { p_user: u.id });
   if (pv.status === 200 && pv.body === false) {
-    return { status: 403, body: { error: 'Falta la autorización de tu familia para subir vídeos. Pídesela a tu entrenador.' } };
+    return { status: 403, body: { error: 'Falta la autorización para subir vídeos. Con 14 años o más, márcala arriba en Autorizaciones; con menos, tu familia rellena el formulario de /autorizacion.html y se lo da a tu entrenador.' } };
   }
   const ya = await rest.get('revisiones', 'checkin_id=eq.' + body.checkin_id + '&tipo=eq.prueba_video&select=id,estado,codigo,gesto,codigo_creado_en');
   if (Array.isArray(ya.body) && ya.body[0]) {
@@ -384,7 +386,7 @@ async function guardarBienestar(u, body, req) {
     await rest.update('consentimiento_bienestar', 'user_id=eq.' + u.id, { revocado_en: new Date().toISOString() });
     return { status: 200, body: { ok: true } };
   }
-  if (body.acepto !== true) return { status: 400, body: { error: 'Falta aceptar la autorización' } };
+  if (body.acepto !== true && body.acepto_video !== true) return { status: 400, body: { error: 'Marca al menos una de las dos autorizaciones' } };
   const fn = String(body.fecha_nacimiento || '');
   if (!/^\d{4}-\d{2}-\d{2}$/.test(fn) || isNaN(Date.parse(fn))) return { status: 400, body: { error: 'Fecha de nacimiento no válida' } };
   const edad = (Date.now() - Date.parse(fn)) / (365.25 * 86400000);
@@ -399,7 +401,13 @@ async function guardarBienestar(u, body, req) {
     por = 'tutor';
   }
   const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || null;
-  const fila = { user_id: u.id, fecha_nacimiento: fn, otorgado_por: por, texto_version: cfg.texto_version, otorgado_en: new Date().toISOString(), ip_otorgamiento: ip, revocado_en: null };
+  // Lo ya autorizado se conserva: marcar solo una casilla no retira la otra.
+  const prev = await rest.get('consentimiento_bienestar', 'user_id=eq.' + u.id + '&revocado_en=is.null&select=acepta_bienestar,acepta_video');
+  const p0 = Array.isArray(prev.body) && prev.body[0] ? prev.body[0] : { acepta_bienestar: false, acepta_video: false };
+  // Con menos de 14 años, el vídeo solo lo autoriza la familia con el formulario.
+  const video = body.acepto_video === true && por !== 'tutor' ? true : p0.acepta_video;
+  const fila = { user_id: u.id, fecha_nacimiento: fn, otorgado_por: por, texto_version: cfg.texto_version, otorgado_en: new Date().toISOString(), ip_otorgamiento: ip, revocado_en: null,
+    acepta_bienestar: body.acepto === true || p0.acepta_bienestar, acepta_video: video };
   const up = await peticion('/rest/v1/consentimiento_bienestar?on_conflict=user_id', {
     method: 'POST', body: fila, headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
   });
@@ -407,6 +415,30 @@ async function guardarBienestar(u, body, req) {
 }
 
 // ── Entrenador ───────────────────────────────────────────────────────────────
+// Registra la autorización en papel de la familia (formulario /autorizacion.html).
+async function registrarTutor(body) {
+  if (!uuidOk(body.user_id)) return { status: 400, body: { error: 'Jugador no válido' } };
+  const fn = String(body.fecha_nacimiento || '');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(fn)) return { status: 400, body: { error: 'Fecha de nacimiento no válida' } };
+  const nombre = String(body.tutor_nombre || '').trim().slice(0, 120);
+  const dni = String(body.tutor_dni || '').trim().toUpperCase().slice(0, 12);
+  const email = String(body.tutor_email || '').trim().slice(0, 160);
+  if (!nombre || !/^[0-9XYZ][0-9]{7}[A-Z]$/.test(dni) || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { status: 400, body: { error: 'Revisa nombre, DNI o NIE y email de la familia' } };
+  if (!['madre', 'padre', 'tutor_legal'].includes(body.tutor_relacion)) return { status: 400, body: { error: 'Relación no válida' } };
+  const ahora = new Date().toISOString();
+  const t = await peticion('/rest/v1/consentimientos_tutor?on_conflict=user_id', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, body: {
+    user_id: body.user_id, fecha_nacimiento: fn, tutor_nombre: nombre, tutor_dni: dni, tutor_email: email, tutor_relacion: body.tutor_relacion,
+    acepta_tratamiento_video: body.video === true, acepta_uso_promocional: body.imagen === true, acepta_ranking_publico: false,
+    otorgado_en: ahora, texto_version: 'familia-2026-10', revocado_en: null } });
+  if (t.status >= 300) return { status: 500, body: { error: 'No se pudo guardar' } };
+  if (body.bienestar === true || body.video === true) {
+    await peticion('/rest/v1/consentimiento_bienestar?on_conflict=user_id', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, body: {
+      user_id: body.user_id, fecha_nacimiento: fn, otorgado_por: 'tutor', texto_version: 'familia-2026-10', otorgado_en: ahora, revocado_en: null,
+      acepta_bienestar: body.bienestar === true, acepta_video: body.video === true } });
+  }
+  return { status: 200, body: { ok: true } };
+}
+
 async function panelRevision() {
   const hace14 = fechaMadrid(14);
   const [pend, sinVal, recientes, usuarios, recomp, movs, canj] = await Promise.all([
@@ -455,6 +487,7 @@ async function panelRevision() {
       return Object.assign({}, r, { jugador: quien(r.user_id), nivel_nombre: n.nombre, titulo: n.recompensa ? n.recompensa.titulo : '' });
     }),
     temporada: { id: T.id, nombre: T.nombre, tope_aceleradores: gam.reglas.tope_temporada_aceleradores },
+    todos: Object.keys(usuarios).map((id) => ({ user_id: id, nombre: usuarios[id].nombre, email: usuarios[id].email })).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')),
     canjes: (Array.isArray(canj.body) ? canj.body : []).map((c) => {
       const it = (gam.tienda || []).find((t) => t.id === c.item) || {};
       return Object.assign({}, c, { jugador: quien(c.user_id), nombre: it.nombre || c.item });
@@ -621,6 +654,7 @@ module.exports = async function handler(req, res) {
         medicion: () => guardarMedicion(u, body),
         canjear: () => canjear(u, body),
         canje: () => (admin ? cambiarCanje(body) : { status: 403, body: { error: 'Solo el entrenador' } }),
+        tutor: () => (admin ? registrarTutor(body) : { status: 403, body: { error: 'Solo el entrenador' } }),
         proteger: () => (admin ? protegerSemana(body) : { status: 403, body: { error: 'Solo el entrenador' } }),
       };
       const fn = ACCIONES[body.accion];

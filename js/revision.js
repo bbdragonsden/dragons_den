@@ -69,6 +69,7 @@
       return '<tr data-canje="' + c.id + '"><td>' + esc(c.jugador.nombre) + '</td><td>' + esc(c.nombre) + '</td><td class="ci-num">' + c.escamas + '</td><td>' + fecha(c.created_at) + '</td><td><div class="rv-acciones"><button class="ci-btn ci-btn--ok ci-btn--peq" data-cest="entregado" type="button">Entregado</button><button class="ci-link" data-cest="rechazado" type="button">Rechazar</button></div></td></tr>';
     }).join('') : '<tr><td colspan="5" class="ci-vacio">No hay canjes pendientes.</td></tr>';
     if (D.temporada) $('rv-xp-tope').textContent = 'Los aceleradores (hitos, métricas, referidos) tienen un tope de ' + D.temporada.tope_aceleradores + ' XP por jugador en la ' + D.temporada.nombre + '. Pasado el tope no suman.';
+    $('fam-jug').innerHTML = (D.todos || D.jugadores.map(function (j) { return { user_id: j.user_id, nombre: j.jugador.nombre, email: '' }; })).map(function (u) { return '<option value="' + esc(u.user_id) + '">' + esc(u.nombre) + (u.email ? ' · ' + esc(u.email) : '') + '</option>'; }).join('');
     $('prot-jug').innerHTML = D.jugadores.map(function (j) { return '<option value="' + esc(j.user_id) + '">' + esc(j.jugador.nombre) + '</option>'; }).join('');
     $('xp-jug').innerHTML = D.jugadores.map(function (j) { return '<option value="' + esc(j.user_id) + '">' + esc(j.jugador.nombre) + '</option>'; }).join('');
     $('xp-fuente').innerHTML = (D.fuentes_manuales || []).map(function (f) { return '<option value="' + esc(f.id) + '">' + esc(f.nombre) + ' (+' + f.xp + ')</option>'; }).join('');
@@ -163,6 +164,17 @@
         pintar();
       } catch (e) { $('rv-error').textContent = e.message; b.disabled = false; }
     });
+    $('rv-fam-form').addEventListener('submit', async function (ev) {
+      ev.preventDefault();
+      $('rv-fam-ok').textContent = '';
+      var btn = this.querySelector('button[type=submit]'); btn.disabled = true;
+      try {
+        await api('POST', { accion: 'tutor', user_id: $('fam-jug').value, fecha_nacimiento: $('fam-nac').value, tutor_nombre: $('fam-nombre').value, tutor_relacion: $('fam-rel').value, tutor_dni: $('fam-dni').value, tutor_email: $('fam-email').value, bienestar: $('fam-bien').checked, video: $('fam-video').checked, imagen: $('fam-img').checked });
+        $('rv-fam-ok').textContent = 'Autorización registrada.';
+        this.reset();
+      } catch (e) { $('rv-error').textContent = e.message; }
+      btn.disabled = false;
+    });
     $('rv-prot-form').addEventListener('submit', async function (ev) {
       ev.preventDefault();
       $('rv-prot-ok').textContent = '';
@@ -223,6 +235,7 @@
           jugadores: [{ user_id: '11111111-1111-4111-8111-111111111111', jugador: J('Naomi C.'), sesiones: 6, semana: { carga_semana: 1820, relacion: 1.6 }, forma: 3.8, xp: 1240, aceleradores: 150, nivel: 'Sexto Hombre', ultimo: { proximo: 'Botar con la cabeza levantada', causa: 'cansancio' } }],
           recompensas: [{ id: 'rc1', jugador: J('Naomi C.'), nivel: 4, nivel_nombre: 'Sexto Hombre', titulo: 'Un análisis de vídeo extra de 15 minutos', estado: 'pendiente' }],
           temporada: { id: '2026-27', nombre: 'Temporada 2026-27', tope_aceleradores: 600 },
+          todos: [{ user_id: '11111111-1111-4111-8111-111111111111', nombre: 'Naomi C.', email: 'naomi@ejemplo.es' }, { user_id: '22222222-2222-4222-8222-222222222222', nombre: 'Jugador de ejemplo', email: 'jugador@ejemplo.es' }],
           canjes: [{ id: 'cj1', jugador: J('Naomi C.'), nombre: 'Capitán de una sesión', escamas: 10, created_at: hoy }],
           fuentes_manuales: [{ id: 'sesion_pista', nombre: 'Sesión en pista (la marca el entrenador)', xp: 25 }, { id: 'hito_tecnico', nombre: 'Hito técnico conseguido (lo marca el entrenador)', xp: 150 }],
         });

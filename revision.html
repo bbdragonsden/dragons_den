@@ -29,6 +29,7 @@
         <button class="rv-tab" role="tab" id="t-jug" aria-controls="p-jug" aria-selected="false" tabindex="-1">Jugadores<span class="ci-num" id="n-jug"></span></button>
         <button class="rv-tab" role="tab" id="t-rec" aria-controls="p-rec" aria-selected="false" tabindex="-1">Recompensas<span class="ci-num" id="n-rec"></span></button>
         <button class="rv-tab" role="tab" id="t-xp" aria-controls="p-xp" aria-selected="false" tabindex="-1">Dar XP</button>
+        <button class="rv-tab" role="tab" id="t-fam" aria-controls="p-fam" aria-selected="false" tabindex="-1">Familias</button>
     </div>
 
     <section class="rv-panel" role="tabpanel" id="p-pend" aria-labelledby="t-pend">
@@ -72,6 +73,24 @@
             <button class="ci-btn ci-btn--sec" type="submit">Proteger</button>
         </form>
         <p class="ci-vacio" id="rv-prot-ok" role="status"></p>
+    </section>
+    <section class="rv-panel" role="tabpanel" id="p-fam" aria-labelledby="t-fam" hidden>
+        <p class="ci-sub" style="margin:0 0 14px">Para menores de 14 años. La familia rellena y firma el <a href="/autorizacion.html" target="_blank" rel="noopener">formulario de autorización</a>; tú lo registras aquí y guardas el papel o la foto. Cada casilla es independiente.</p>
+        <form class="rv-fam-form" id="rv-fam-form">
+            <div><label class="ci-label" for="fam-jug">Jugador</label><select class="ci-select" id="fam-jug" required></select></div>
+            <div><label class="ci-label" for="fam-nac">Fecha de nacimiento del jugador</label><input class="ci-input" id="fam-nac" type="date" required></div>
+            <div><label class="ci-label" for="fam-nombre">Nombre de la madre, padre o tutor</label><input class="ci-input" id="fam-nombre" maxlength="120" required autocomplete="off"></div>
+            <div><label class="ci-label" for="fam-rel">Relación</label><select class="ci-select" id="fam-rel"><option value="madre">Madre</option><option value="padre">Padre</option><option value="tutor_legal">Tutor legal</option></select></div>
+            <div><label class="ci-label" for="fam-dni">DNI o NIE</label><input class="ci-input" id="fam-dni" maxlength="12" required autocomplete="off"></div>
+            <div><label class="ci-label" for="fam-email">Email</label><input class="ci-input" id="fam-email" type="email" maxlength="160" required autocomplete="off"></div>
+            <fieldset class="rv-fam-casillas"><legend class="ci-label">Ha autorizado</legend>
+                <label class="ci-check"><input type="checkbox" id="fam-bien"> Check-in de bienestar</label>
+                <label class="ci-check"><input type="checkbox" id="fam-video"> Vídeos de prueba y de análisis</label>
+                <label class="ci-check"><input type="checkbox" id="fam-img"> Uso de la imagen</label>
+            </fieldset>
+            <button class="ci-btn" type="submit">Registrar autorización</button>
+        </form>
+        <p class="ci-vacio" id="rv-fam-ok" role="status"></p>
     </section>
     <p class="ci-error" id="rv-error" role="alert"></p>
 </main>

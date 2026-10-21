@@ -246,3 +246,6 @@ a { color: var(--gold); text-underline-offset: 3px; }
 .ci-tienda .ci-btn { min-width: 108px; }
 .ci-insignias { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .ci-insignias span { font-size: 12px; padding: 4px 9px; border: 1px solid var(--gold-border); color: var(--gold); }
+.rv-fam-form { display: grid; gap: 12px 16px; grid-template-columns: minmax(0, 1fr); max-width: 860px; align-items: end; }
+.rv-fam-casillas { border: 0; padding: 0; margin: 0; display: grid; gap: 6px; }
+@media (min-width: 760px) { .rv-fam-form { grid-template-columns: repeat(2, minmax(0, 1fr)); } .rv-fam-casillas, .rv-fam-form > button { grid-column: 1 / -1; justify-self: start; } }

@@ -71,9 +71,13 @@
 
     if (EST.foco_actual) { $('ci-foco').classList.remove('ci-oculto'); $('ci-foco').querySelector('p').textContent = EST.foco_actual; }
 
-    if (!EST.bienestar) {
+    if (!EST.bienestar || !EST.video) {
       $('ci-consent').classList.remove('ci-oculto');
       $('ci-consent-texto').textContent = CAT.consentimiento_bienestar.texto;
+      $('ci-video-texto').textContent = CAT.consentimiento_bienestar.texto_video || '';
+      $('ci-acepto-wrap').classList.toggle('ci-oculto', !!EST.bienestar);
+      $('ci-video-wrap').classList.toggle('ci-oculto', !!EST.video);
+      if (EST.consentimiento && EST.consentimiento.fecha_nacimiento) $('ci-nac').value = EST.consentimiento.fecha_nacimiento;
     }
 
     pintarProgreso();
@@ -447,7 +451,10 @@
 
     $('ci-nac').addEventListener('change', function () {
       var edad = (Date.now() - Date.parse(this.value)) / (365.25 * 86400000);
-      $('ci-tutor-wrap').classList.toggle('ci-oculto', !(edad < CAT.consentimiento_bienestar.edad_minima_propia));
+      var menor = edad < CAT.consentimiento_bienestar.edad_minima_propia;
+      $('ci-tutor-wrap').classList.toggle('ci-oculto', !menor);
+      $('ci-video-wrap').classList.toggle('ci-oculto', menor || !!EST.video);
+      $('ci-video-familia').classList.toggle('ci-oculto', !menor || !!EST.video);
     });
     $('ci-tienda-lista').addEventListener('click', async function (ev) {
       var b = ev.target.closest('[data-canje]');
@@ -478,9 +485,11 @@
       ev.preventDefault();
       $('ci-consent-error').textContent = '';
       try {
-        await api('POST', { accion: 'bienestar', fecha_nacimiento: $('ci-nac').value, acepto: $('ci-acepto').checked, otorgado_por: $('ci-tutor').checked ? 'tutor' : 'jugador' });
-        EST.bienestar = true;
-        $('ci-consent').classList.add('ci-oculto');
+        var bien = $('ci-acepto').checked, vid = $('ci-acepto-video').checked && !$('ci-video-wrap').classList.contains('ci-oculto');
+        if (!bien && !vid) throw new Error('Marca al menos una de las dos autorizaciones.');
+        await api('POST', { accion: 'bienestar', fecha_nacimiento: $('ci-nac').value, acepto: bien, acepto_video: vid, otorgado_por: $('ci-tutor').checked ? 'tutor' : 'jugador' });
+        if (DEMO) { EST.bienestar = EST.bienestar || bien; EST.video = EST.video || vid; $('ci-consent').classList.add('ci-oculto'); }
+        else location.reload();
       } catch (e) { $('ci-consent-error').textContent = e.message; }
     });
   }
@@ -513,7 +522,7 @@
     var hoy = new Date().toISOString().slice(0, 10);
     var hace = function (d) { return new Date(Date.now() - d * 86400000).toISOString().slice(0, 10); };
     if (!DEMO_EST) DEMO_EST = {
-      catalogo_version: 1, bienestar: /bienestar=0/.test(location.search) ? false : true, hoy: hoy,
+      catalogo_version: 1, bienestar: /bienestar=0/.test(location.search) ? false : true, video: !/video=0/.test(location.search), hoy: hoy,
       equipos: [{ id: '00000000-0000-0000-0000-000000000001', nombre: 'Infantil A del club', tipo: 'club', duracion_habitual_min: 90 },
                 { id: '00000000-0000-0000-0000-000000000002', nombre: 'Dragons Den', tipo: 'dragons_den', duracion_habitual_min: 60 }],
       historial: [

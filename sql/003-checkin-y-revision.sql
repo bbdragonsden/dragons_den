@@ -36,8 +36,14 @@ CREATE TABLE IF NOT EXISTS consentimiento_bienestar (
   texto_version    TEXT NOT NULL,
   otorgado_en      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   ip_otorgamiento  INET,
-  revocado_en      TIMESTAMPTZ
+  revocado_en      TIMESTAMPTZ,
+  -- Dos autorizaciones independientes en la misma fila: datos de bienestar y
+  -- vídeos de prueba. Se puede dar una sin la otra.
+  acepta_bienestar BOOLEAN NOT NULL DEFAULT TRUE,
+  acepta_video     BOOLEAN NOT NULL DEFAULT FALSE
 );
+ALTER TABLE consentimiento_bienestar ADD COLUMN IF NOT EXISTS acepta_bienestar BOOLEAN NOT NULL DEFAULT TRUE;
+ALTER TABLE consentimiento_bienestar ADD COLUMN IF NOT EXISTS acepta_video BOOLEAN NOT NULL DEFAULT FALSE;
 ALTER TABLE consentimiento_bienestar ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "bienestar_self_read" ON consentimiento_bienestar FOR SELECT USING (auth.uid() = user_id);
 
@@ -165,12 +171,26 @@ ON CONFLICT (id) DO NOTHING;
 CREATE OR REPLACE FUNCTION puede_registrar_bienestar(p_user UUID)
 RETURNS BOOLEAN LANGUAGE sql STABLE AS $$
   SELECT COALESCE(
-    (SELECT b.revocado_en IS NULL
+    (SELECT b.revocado_en IS NULL AND b.acepta_bienestar
             AND (b.otorgado_por = 'tutor'
                  OR AGE(NOW(), b.fecha_nacimiento) >= INTERVAL '14 years')
      FROM consentimiento_bienestar b WHERE b.user_id = p_user),
     FALSE);
-$$;
+$;
+
+-- Puede subir vídeo de prueba: con 14 años o más y su propia autorización, o
+-- con la autorización de la familia registrada por el entrenador (formulario
+-- /autorizacion.html). Sustituye a la versión de la 002, que solo miraba la
+-- tabla del tutor y dejaba fuera a todos los demás.
+CREATE OR REPLACE FUNCTION puede_subir_video(p_user UUID)
+RETURNS BOOLEAN LANGUAGE sql STABLE AS $
+  SELECT
+    COALESCE((SELECT c.acepta_tratamiento_video AND c.revocado_en IS NULL
+              FROM consentimientos_tutor c WHERE c.user_id = p_user), FALSE)
+    OR COALESCE((SELECT b.acepta_video AND b.revocado_en IS NULL
+                        AND (b.otorgado_por = 'tutor' OR AGE(NOW(), b.fecha_nacimiento) >= INTERVAL '14 years')
+                 FROM consentimiento_bienestar b WHERE b.user_id = p_user), FALSE);
+$;
 
 
 -- ── 8. Temporadas: recompensas de nivel por temporada ────────────────────────
@@ -200,3 +220,12 @@ CREATE INDEX IF NOT EXISTS idx_canjes_user ON canjes(user_id, temporada);
 ALTER TABLE canjes ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "canjes_self_read" ON canjes;
 CREATE POLICY "canjes_self_read" ON canjes FOR SELECT USING (auth.uid() = user_id);
+
+
+-- ── 10. Mantenimiento de cada 30 de junio (ejecutar a mano) ─────────────────
+-- Borra los datos de bienestar y las estaturas de la temporada que acaba, como
+-- promete la política de privacidad. El resto del check-in se conserva.
+-- UPDATE checkins SET energia = NULL, sueno = NULL, dolor = NULL, dolor_zona = NULL,
+--        animo = NULL, nervios = NULL, disfrute = NULL, concentracion = NULL
+--  WHERE fecha <= '2027-06-30';
+-- DELETE FROM mediciones WHERE fecha <= '2027-06-30';

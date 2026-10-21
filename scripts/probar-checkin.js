@@ -40,8 +40,12 @@ const rest = {
   },
   update: async (t, q, cambios) => { const rows = filtrar(t, q); rows.forEach((r) => Object.assign(r, cambios)); return { status: 200, body: rows }; },
   rpc: async (fn, a) => {
-    if (fn === 'puede_registrar_bienestar') return { status: 200, body: T.consentimiento_bienestar.some((c) => c.user_id === a.p_user && !c.revocado_en) };
-    if (fn === 'puede_subir_video') return { status: 200, body: true };
+    if (fn === 'puede_registrar_bienestar') return { status: 200, body: T.consentimiento_bienestar.some((c) => c.user_id === a.p_user && !c.revocado_en && c.acepta_bienestar !== false) };
+    if (fn === 'puede_subir_video') {
+      const t = T.consentimientos_tutor.find((c) => c.user_id === a.p_user && !c.revocado_en && c.acepta_tratamiento_video);
+      const b = T.consentimiento_bienestar.find((c) => c.user_id === a.p_user && !c.revocado_en && c.acepta_video && (c.otorgado_por === 'tutor' || (Date.now() - Date.parse(c.fecha_nacimiento)) / 31557600000 >= 14));
+      return { status: 200, body: !!(t || b) };
+    }
   },
 };
 const storage = {
@@ -54,6 +58,7 @@ const JUG = { id: '11111111-1111-4111-8111-111111111111', email: 'j@x.es', app_m
 const ADM = { id: 'u-admin', email: 'a@x.es', app_metadata: { is_admin: true } };
 const fake = { rest, storage, peticion: async (p, o) => {
     if (p.startsWith('/rest/v1/consentimiento_bienestar')) { T.consentimiento_bienestar = T.consentimiento_bienestar.filter((c) => c.user_id !== o.body.user_id); T.consentimiento_bienestar.push(o.body); return { status: 201 }; }
+    if (p.startsWith('/rest/v1/consentimientos_tutor')) { T.consentimientos_tutor = T.consentimientos_tutor.filter((c) => c.user_id !== o.body.user_id); T.consentimientos_tutor.push(o.body); return { status: 201 }; }
     if (p.startsWith('/rest/v1/mediciones')) { T.mediciones = T.mediciones.filter((m) => !(m.user_id === o.body.user_id && m.fecha === o.body.fecha)); T.mediciones.push(o.body); return { status: 201 }; }
     if (p.startsWith('/rest/v1/recompensas_entregadas')) { if (!T.recompensas_entregadas.some((r) => r.user_id === o.body.user_id && r.nivel === o.body.nivel && r.temporada === o.body.temporada)) T.recompensas_entregadas.push(Object.assign({ id: nid(), estado: 'pendiente', created_at: new Date().toISOString() }, o.body)); return { status: 201 }; }
     throw new Error('peticion ' + p); },
@@ -76,6 +81,9 @@ const ok = (c, m) => { if (!c) { console.log('FALLO:', m); process.exitCode = 1;
   r = await call('jug', 'POST', { accion: 'bienestar', fecha_nacimiento: '2012-05-01', acepto: true }); ok(r.code === 200, 'bienestar con 14 años, lo da el jugador');
   r = await call('jug', 'POST', { accion: 'bienestar', fecha_nacimiento: '2015-05-01', acepto: true }); ok(r.code === 403, 'menor de 14 sin tutor → 403');
   r = await call('jug', 'POST', { accion: 'bienestar', fecha_nacimiento: '2012-05-01', acepto: true }); ok(r.code === 200, 'vuelve a dar permiso');
+  r = await call('jug', 'GET'); ok(r.body.bienestar === true && r.body.video === false, 'bienestar sí, vídeo todavía no');
+  r = await call('jug', 'POST', { accion: 'bienestar', fecha_nacimiento: '2012-05-01', acepto_video: true }); ok(r.code === 200, 'autoriza vídeos aparte');
+  r = await call('jug', 'GET'); ok(r.body.bienestar === true && r.body.video === true, 'autorizar vídeo no retira bienestar');
   const base = { tipo: 'partido', equipo_id: club, fecha: 'hoy', duracion_min: 90, minutos_jugados: 15, resultado: 'derrota', rpe: 8, calentamiento: 0, energia: 2, disfrute: 2, sueno: 'menos7', dolor: 2, dolor_zona: ['tobillo'], animo: 3, concentracion: 3, nervios: 'bloquearon', mejor: 'defensa', mejorar: 'tiro', causa: 'externo', proximo: 'Pies preparados antes de recibir', comentario: 'Hoy he fallado muchos tiros abiertos porque llegaba cansado, pero en defensa hablé en cada bloqueo' };
   r = await call('jug', 'POST', { accion: 'guardar', respuestas: Object.assign({}, base, { rpe: 15 }) }); ok(r.code === 400 && r.body.campos.includes('rpe'), 'esfuerzo fuera de rango → 400');
   r = await call('jug', 'POST', { accion: 'guardar', respuestas: base });
@@ -198,4 +206,11 @@ const ok = (c, m) => { if (!c) { console.log('FALLO:', m); process.exitCode = 1;
   ok(conCanje.escamas.gastadas === 30, 'los canjes rechazados no gastan Escamas');
   const pre = P.calcular(G, [], [{ cantidad: 15, motivo: 'checkin', nota: 'semana:2026-10-19', created_at: '2026-10-21T10:00:00Z' }], new Date('2026-10-21T12:00:00Z'));
   ok(pre.xp === 0 && !pre.temporada.en_curso, 'antes del inicio de temporada no se acumula XP');
+  // ── Autorización de la familia (menores de 14) ──
+  const NINO = '33333333-3333-4333-8333-333333333333';
+  r = await call('admin', 'POST', { accion: 'tutor', user_id: NINO, fecha_nacimiento: '2015-03-01', tutor_nombre: 'Ana Pérez', tutor_relacion: 'madre', tutor_dni: '12345678Z', tutor_email: 'ana@x.es', bienestar: true, video: true, imagen: false });
+  ok(r.code === 200 && T.consentimientos_tutor.some((c) => c.user_id === NINO && c.acepta_tratamiento_video) && T.consentimiento_bienestar.some((c) => c.user_id === NINO && c.otorgado_por === 'tutor'), 'el entrenador registra la autorización en papel');
+  r = await call('admin', 'POST', { accion: 'tutor', user_id: NINO, fecha_nacimiento: '2015-03-01', tutor_nombre: 'Ana', tutor_relacion: 'madre', tutor_dni: 'abc', tutor_email: 'ana@x.es' }); ok(r.code === 400, 'DNI mal escrito → 400');
+  r = await call('jug', 'POST', { accion: 'tutor', user_id: NINO }); ok(r.code === 403, 'el jugador no registra autorizaciones');
+  r = await call('admin', 'GET', null, { vista: 'revision' }); ok(Array.isArray(r.body.todos), 'panel con lista de todos los usuarios');
 })();

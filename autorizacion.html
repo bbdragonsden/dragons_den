@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autorización de la familia | Dragons Den</title>
+    <meta name="description" content="Formulario para que la madre, el padre o el tutor autorice el check-in de bienestar, los vídeos de prueba y, si quiere, el uso de la imagen del jugador.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://dragons-den-eight.vercel.app/autorizacion.html">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23c8a96e'/%3E%3Cg fill='none' stroke='%230a0a0a' stroke-width='5'%3E%3Cpath d='M4 50h92M50 4v92'/%3E%3Cpath d='M18 18c14 14 14 50 0 64M82 18c-14 14-14 50 0 64'/%3E%3C/g%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/css/comun.css">
+    <style>
+        :root { --gold:#c8a96e; --black:#080808; --surface:#111; --border:rgba(200,169,110,0.2); --muted:#8f8f8f; --text:#e8e8e8; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',Arial,sans-serif; background:var(--black); color:var(--text); font-weight:300; line-height:1.8; }
+        .top { padding:24px 60px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); }
+        .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:4px; color:var(--gold); text-decoration:none; }
+        .back { font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); text-decoration:none; }
+        .back:hover { color:var(--gold); }
+        main { max-width:820px; margin:0 auto; padding:80px 40px; }
+        h1 { font-family:'Bebas Neue',sans-serif; font-size:56px; letter-spacing:3px; color:#fff; margin-bottom:8px; line-height:1.05; }
+        .eyebrow { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+        .divider { width:48px; height:1px; background:var(--gold); margin:24px 0 48px; }
+        h2 { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; color:var(--gold); margin:44px 0 12px; }
+        h3 { font-size:15px; font-weight:600; color:#fff; margin:24px 0 8px; }
+        p { font-size:15px; color:var(--muted); margin-bottom:16px; }
+        strong { color:#d6d6d6; font-weight:600; }
+        ul, ol { margin:0 0 16px 24px; color:var(--muted); font-size:15px; }
+        li { margin-bottom:8px; }
+        a { color:var(--gold); }
+        .data-table { width:100%; border-collapse:collapse; margin:16px 0 32px; }
+        .table-wrap { overflow-x:auto; margin:16px 0 32px; }
+        .table-wrap .data-table { margin:0; min-width:640px; }
+        .data-table th { text-align:left; padding:12px 16px; border-bottom:1px solid var(--gold); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:500; }
+        .data-table td { padding:12px 16px; border-bottom:1px solid var(--border); font-size:14px; color:var(--muted); vertical-align:top; }
+        .data-table td:first-child { color:#fff; font-weight:500; }
+        .box { background:var(--surface); border-left:3px solid var(--gold); padding:20px 24px; margin:16px 0 28px; }
+        .box p:last-child { margin-bottom:0; }
+        .modelo { background:var(--surface); border:1px solid var(--border); padding:24px 28px; margin:16px 0 28px; font-size:14px; color:var(--muted); }
+        .modelo p { font-size:14px; }
+        [data-pendiente] { color:#ffcf70; background:rgba(255,207,112,0.08); padding:0 4px; }
+        .btn { display:inline-block; margin-top:8px; padding:12px 28px; background:transparent; border:1px solid var(--gold); color:var(--gold); font-family:'Inter',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; text-decoration:none; }
+        .btn:hover { background:rgba(200,169,110,0.08); }
+        .updated { margin-top:48px; font-size:13px; }
+        footer { border-top:1px solid var(--border); padding:24px 60px; text-align:center; font-size:12px; color:var(--muted); line-height:2; }
+        footer a { color:#b9b9b9; margin:0 6px; }
+        @media(max-width:768px){ .top,footer{padding:20px 16px;} main{padding:48px 16px;} h1{font-size:40px;} }
+
+        .campo { display:grid; grid-template-columns: minmax(0,1fr); gap:4px; margin-bottom:18px; }
+        .campo span { font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); }
+        .linea { border-bottom:1px solid var(--muted); min-height:30px; }
+        .casilla { display:grid; grid-template-columns: 22px minmax(0,1fr); gap:12px; margin-bottom:16px; font-size:14.5px; color:var(--muted); }
+        .casilla i { width:18px; height:18px; border:1px solid var(--gold); margin-top:4px; }
+        .dos { display:grid; gap:0 28px; grid-template-columns: minmax(0,1fr); }
+        @media(min-width:640px){ .dos { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+        @media print {
+            :root { --black:#fff; --surface:#fff; --text:#111; --muted:#222; --gold:#5b4a24; --border:#bbb; }
+            .top, footer, .no-imprimir, .skip-link { display:none !important; }
+            main { padding:0; max-width:none; }
+            h1 { color:#111; font-size:30pt; }
+            p, li, .casilla { font-size:10.5pt; }
+            .casilla, .campo { break-inside: avoid; }
+        }
+    </style>
+    <link rel="stylesheet" href="/css/detalles.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="top">
+    <a href="index.html" class="nav-logo">Dragons Den</a>
+    <a href="index.html" class="back">&larr; Volver</a>
+</header>
+<main id="contenido">
+    <p class="eyebrow">Para jugadores menores de 14 a&ntilde;os</p>
+    <h1>Autorizaci&oacute;n de la familia</h1>
+    <div class="divider"></div>
+
+    <div class="box no-imprimir">
+        <p>Impr&iacute;melo, rell&eacute;nalo a mano y entr&eacute;galo firmado al entrenador (o env&iacute;a una foto por WhatsApp). &Eacute;l lo registra en la plataforma. Cada casilla es independiente: puedes marcar solo las que quieras y retirarlas cuando quieras.</p>
+        <p><button class="btn" type="button" onclick="window.print()">Imprimir o guardar en PDF</button></p>
+    </div>
+
+    <h2>Jugador</h2>
+    <div class="dos">
+        <div class="campo"><span>Nombre y apellidos</span><div class="linea"></div></div>
+        <div class="campo"><span>Fecha de nacimiento</span><div class="linea"></div></div>
+        <div class="campo"><span>Email de su cuenta en la plataforma</span><div class="linea"></div></div>
+    </div>
+
+    <h2>Madre, padre o tutor legal</h2>
+    <div class="dos">
+        <div class="campo"><span>Nombre y apellidos</span><div class="linea"></div></div>
+        <div class="campo"><span>DNI o NIE</span><div class="linea"></div></div>
+        <div class="campo"><span>Relaci&oacute;n (madre, padre o tutor legal)</span><div class="linea"></div></div>
+        <div class="campo"><span>Email</span><div class="linea"></div></div>
+    </div>
+
+    <h2>Qu&eacute; autorizo</h2>
+    <div class="casilla"><i aria-hidden="true"></i><p><strong>Check-in de bienestar.</strong> Que el jugador responda en la plataforma preguntas sobre energ&iacute;a, sue&ntilde;o, molestias, &aacute;nimo, disfrute y su estatura mensual, para ajustar la carga y avisar de riesgo de lesi&oacute;n. Son datos de salud: solo los ven el jugador, la familia y el entrenador, y se borran al final de la temporada (30 de junio).</p></div>
+    <div class="casilla"><i aria-hidden="true"></i><p><strong>V&iacute;deos de prueba y de an&aacute;lisis.</strong> Que el jugador suba v&iacute;deos cortos de la pista y de sus partidos para comprobar las sesiones y corregir su t&eacute;cnica. Los ve solo el entrenador, no se publican y los de prueba se borran 30 d&iacute;as despu&eacute;s de revisarlos.</p></div>
+    <div class="casilla"><i aria-hidden="true"></i><p><strong>Uso de la imagen (opcional).</strong> Que Dragons Den publique en su web y redes la carta de embajador o fotos del jugador. Sin esta casilla no se publica ninguna imagen suya. Nunca se usa el nombre de su club.</p></div>
+
+    <p>He le&iacute;do la <a href="politica-privacidad.html">pol&iacute;tica de privacidad</a>. Puedo retirar cualquiera de estas autorizaciones en cualquier momento escribiendo a <a href="mailto:bbdragonsden@gmail.com">bbdragonsden@gmail.com</a>, sin que eso afecte a la plaza del jugador.</p>
+
+    <div class="dos" style="margin-top:28px">
+        <div class="campo"><span>Fecha</span><div class="linea"></div></div>
+        <div class="campo"><span>Firma</span><div class="linea" style="min-height:60px"></div></div>
+    </div>
+
+    <p class="updated">Versi&oacute;n del texto: familia-2026-10</p>
+</main>
+<footer>
+    <nav aria-label="Legal">
+        <a href="index.html">Inicio</a>
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="condiciones.html">Condiciones de contrataci&oacute;n</a>
+        <a href="politica-privacidad.html">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="proteccion-infancia.html">Protecci&oacute;n de la infancia</a>
+    </nav>
+    &copy; 2026 Dragons Den Basketball Academy
+</footer>
+
+</body>
+</html>
