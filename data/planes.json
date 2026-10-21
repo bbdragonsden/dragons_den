@@ -11,10 +11,12 @@
     "nota": "Gabinete de tecnificacion y seguimiento anual (invierno + verano), en Madrid. Independiente del club o colegio de cada jugador. Todos los importes son numeros redondos (sin decimales ni terminados en 9) y precio final con IVA incluido. La web (index.html) lee de aqui: cambiar un precio es cambiarlo en este archivo y en nada mas. Los precios de ex-alumno son publicos (boton \"Soy ex-alumno\" de la portada). Nunca se anuncian con el nombre de ningun club.",
     "ubicacion": "Madrid (Carabanchel)",
     "categorias": [
+      "Minibasket",
       "Alevín",
       "Infantil",
       "Cadete",
-      "Junior"
+      "Junior",
+      "Sénior"
     ],
     "grupo_max": 6,
     "temporada": "Octubre a mayo",
