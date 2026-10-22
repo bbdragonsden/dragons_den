@@ -918,3 +918,7 @@ h3 .dd-ex-nota { font-size: .5em; }
     .p-cifras .dd-ico { position: absolute; right: 0; top: 50%; margin: -23px 0 0; }
     .p-cifras > div { padding-right: 56px; }
 }
+@media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
+    /* Cada tarjeta por encima de la anterior, aunque alguna (Élite «Recomendado») traiga su propio z-index */
+    .dd-pila > * { z-index: calc(var(--n, 0) + 1) !important; }
+}
