@@ -84,6 +84,7 @@
 
 <main id="contenido">
 <header class="dd-pag-hero">
+    <div class="dd-pag-dib" aria-hidden="true"><span class="dd-pag-dib-aro"></span><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></div>
     <p class="dd-migas"><a href="index.html">Inicio</a> / Ficha</p>
     <h1>Tu progreso, <em>en n&uacute;meros.</em></h1>
     <div class="dd-pag-hero-texto">
@@ -148,7 +149,7 @@
 <section class="dd-bloque" aria-labelledby="f-temporada">
     <h2 class="dd-h2" id="f-temporada" data-reveal>Una temporada, un objetivo</h2>
     <p class="dd-entrada" data-reveal>La escalera est&aacute; calculada para que el nivel m&aacute;ximo llegue al final de la temporada, y solo si no fallas casi ninguna semana. Lo que se premia es la disciplina: aparecer, registrar y reflexionar cada semana. Cada temporada se empieza de cero y el mejor nivel de la anterior queda en tu carta para siempre.</p>
-    <ul class="dd-ciencia" role="list">
+    <ul class="dd-ciencia dd-pila" role="list">
     <li><b>120 XP</b><p>Tope semanal de constancia. Se llega con unas 4 sesiones y su check-in: entrenar más no da más puntos.</p><small>Disciplina, no volumen</small></li>
     <li><b>600 XP</b><p>Tope de aceleradores por temporada: hitos técnicos, métricas que suben y compañeros traídos. Adelantan unas 3 semanas, no más.</p><small>Lo da el entrenador</small></li>
     <li><b>Leyenda del Den</b><p>Solo se corona desde el 3 de mayo de 2027. Hace falta una temporada casi perfecta.</p><small>Temporada 2026-27: del 2 de noviembre de 2026 al 30 de mayo de 2027</small></li>
@@ -267,20 +268,24 @@
 
 <section class="dd-bloque" aria-labelledby="f-extra">
     <h2 class="dd-h2" id="f-extra" data-reveal>Lo que tambi&eacute;n cuenta</h2>
-    <div class="dd-dos" data-reveal-stagger>
+    <div class="dd-dos dd-dos--cajas dd-pila" data-reveal-stagger>
         <div>
+            <span class="dd-ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.4 0 7-2.7 7-6.6 0-3.2-2-5.6-3.6-7.4-.4 1.9-1.4 3.2-2.7 3.9C13 8 11.6 4.6 9 2c.2 3.3-1.6 5.6-3.1 7.6C4.6 11.4 5 13.4 5 15.4 5 19.3 7.6 22 12 22z"/></svg></span>
             <h3>Semana Drag&oacute;n</h3>
             <p>Tu racha cuenta por semanas, no por d&iacute;as. Cada 4 seguidas ganas un comod&iacute;n para una semana mala. Vacaciones, lesi&oacute;n o enfermedad no rompen la racha: nunca premiamos entrenar con dolor.</p>
         </div>
         <div>
+            <span class="dd-ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4"/><path d="M4 4h12l-2 4 2 4H4"/></svg></span>
             <h3>Founder</h3>
             <p>Los primeros que confiaron en el programa llevan la etiqueta Founder para siempre en su ficha y en su carta, con beneficios futuros reservados.</p>
         </div>
         <div>
+            <span class="dd-ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="18" rx="2"/><path d="M9 4V2.5h6V4"/><path d="m9 13 2 2 4-4"/></svg></span>
             <h3>Check-in tras cada entreno <span class="dd-proximo">Pr&oacute;ximamente</span></h3>
             <p>Un cuestionario de un minuto al acabar: c&oacute;mo te has visto, c&oacute;mo te sientes y qu&eacute; quieres comentar. Tu ficha lo recoge y te devuelve un consejo.</p>
         </div>
         <div>
+            <span class="dd-ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="6"/><path d="M8.5 9.8 5 2h4l3 6 3-6h4l-3.5 7.8"/></svg></span>
             <h3>Logros</h3>
             <p>Insignias por hitos concretos que quedan visibles en tu ficha.</p>
             <ul class="dd-logros" role="list">
@@ -366,6 +371,7 @@
 <script src="/js/dd-oferta.js" defer></script>
 <script src="/js/squad.js" defer></script>
 <script src="/js/guarida.js" defer></script>
+<script src="/js/pila.js" defer></script>
 <script src="/js/nsd-spring.js" defer></script>
 <script src="/js/nsd-arriba.js" defer></script>
 </body>

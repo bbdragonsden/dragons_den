@@ -777,4 +777,4 @@ footer.dd-pie {
 
 /* Botón «Soy un Dragón» con la aclaración debajo */
 .dd-modo-dos { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1.15; }
-.dd-modo-dos small { font-family: 'Inter', sans-serif; font-size: 10.5px; letter-spacing: .5px; text-transform: none; opacity: .75; font-weight: 400; }
+.dd-modo-dos small { font-family: 'Inter', sans-serif; font-size: 10.5px; letter-spacing: .5px; text-transform: none; opacity: 1; font-weight: 400; }

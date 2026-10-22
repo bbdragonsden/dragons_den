@@ -197,7 +197,7 @@ ${gam.fuentes_xp.filter((f) => f.activo !== false).map((f) => {
     const t = gam.temporadas[0], r = gam.reglas;
     const f = (d) => new Date(d + 'T12:00:00Z').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
     const ley = gam.niveles.find((n) => n.no_antes_de);
-    return `<ul class="dd-ciencia" role="list">
+    return `<ul class="dd-ciencia dd-pila" role="list">
     <li><b>${r.tope_semanal_constancia} XP</b><p>Tope semanal de constancia. Se llega con unas 4 sesiones y su check-in: entrenar más no da más puntos.</p><small>Disciplina, no volumen</small></li>
     <li><b>${r.tope_temporada_aceleradores} XP</b><p>Tope de aceleradores por temporada: hitos técnicos, métricas que suben y compañeros traídos. Adelantan unas 3 semanas, no más.</p><small>Lo da el entrenador</small></li>
     <li><b>${esc(ley.nombre)}</b><p>Solo se corona desde el ${f(ley.no_antes_de)}. Hace falta una temporada casi perfecta.</p><small>${esc(t.nombre)}: del ${f(t.inicio)} al ${f(t.fin)}</small></li>
@@ -223,6 +223,10 @@ function montar(id) {
   if (!m) throw new Error(`_paginas/${id}.html: falta la cabecera <!--pagina {...} -->`);
   const meta = JSON.parse(m[1]);
   src = src.slice(m[0].length);
+  // Dibujo grande y animado en la cabecera de cada página (el mismo icono que en el menú).
+  const DIB_EXTRA = { reservar: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v17"/><path d="M3 21h18"/><circle cx="15" cy="12" r=".8"/></svg>' };
+  const dib = ICONO_SECCION[id] || DIB_EXTRA[id];
+  if (dib && id !== 'index') src = src.replace('<header class="dd-pag-hero">', '<header class="dd-pag-hero">\n    <div class="dd-pag-dib" aria-hidden="true"><span class="dd-pag-dib-aro"></span>' + dib.replace('width="22" height="22"', 'width="100%" height="100%"') + '</div>');
   src = src.replace(/<!--incluye\s+([^\s]+)\s*-->/g, (_, f) => fs.readFileSync(path.join(DIR, f), 'utf8'));
   src = src.replace(/<!--gamificacion\s+(\w+)\s*-->/g, (_, b) => {
     if (!BLOQUES[b]) throw new Error('bloque desconocido: ' + b);
@@ -230,7 +234,7 @@ function montar(id) {
   });
   if (meta.ld_archivo) meta.ld = fs.readFileSync(path.join(DIR, meta.ld_archivo), 'utf8').trim();
 
-  const scripts = ['/js/sitio.js', '/js/dd-oferta.js', ...(meta.scripts || []), '/js/guarida.js', '/js/nsd-spring.js', '/js/nsd-arriba.js'];
+  const scripts = ['/js/sitio.js', '/js/dd-oferta.js', ...(meta.scripts || []), '/js/guarida.js', '/js/pila.js', '/js/nsd-spring.js', '/js/nsd-arriba.js'];
   const html = `${cabezaHtml(id, meta)}
 <body class="dd-pag dd-pag--${id}">
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
