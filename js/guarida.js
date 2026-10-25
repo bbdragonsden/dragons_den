@@ -58,12 +58,20 @@
     return cargando;
   }
 
-  function abrir(plan) {
+  function anclar(origen) {
+    var carta = dlg.querySelector('.dd-guarida-carta');
+    if (!origen || !origen.getBoundingClientRect) { carta.style.transformOrigin = ''; return; }
+    var o = origen.getBoundingClientRect(), c = carta.getBoundingClientRect();
+    carta.style.transformOrigin = Math.round(o.left + o.width / 2 - c.left) + 'px ' + Math.round(o.top + o.height / 2 - c.top) + 'px';
+  }
+
+  function abrir(plan, origen) {
     if (!dlg) crear();
     ultimoFoco = document.activeElement;
     var menu = document.getElementById('dd-menu');
     if (menu && !menu.hidden) { var c = menu.querySelector('[data-menu-cerrar]'); if (c) c.click(); }
     dlg.showModal();
+    anclar(origen);
     document.documentElement.classList.add('dd-guarida-abierta');
     requestAnimationFrame(function () { requestAnimationFrame(function () { dlg.classList.add('is-open'); }); });
     cargar().then(function () {
@@ -95,6 +103,6 @@
     try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
     if (u.origin !== location.origin || !/\/reservar(\.html)?$/.test(u.pathname)) return;
     e.preventDefault();
-    abrir((u.searchParams.get('plan') || '').replace(/[^a-z-]/g, ''));
+    abrir((u.searchParams.get('plan') || '').replace(/[^a-z-]/g, ''), a);
   });
 })();

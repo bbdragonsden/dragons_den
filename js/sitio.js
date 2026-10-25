@@ -50,6 +50,45 @@
     hoja.querySelectorAll('a').forEach(function(a) {
         a.addEventListener('click', function() { cerrarMenu(false); });
     });
+    // Arrastrar la hoja hacia abajo la cierra: sigue al dedo 1:1, hacia arriba
+    // ofrece resistencia, y al soltar decide con la posición proyectada por la inercia.
+    (function () {
+        var cab = hoja.querySelector('.dd-menu-cab');
+        if (!cab) return;
+        var y0 = 0, dy = 0, hist = [], activo = false;
+        function proyectar(v) { var d = 0.998; return (v / 1000) * d / (1 - d); }
+        cab.addEventListener('pointerdown', function (e) {
+            if (e.target.closest('button')) return;
+            activo = true; y0 = e.clientY; dy = 0; hist = [{ y: e.clientY, t: e.timeStamp }];
+            cab.setPointerCapture(e.pointerId);
+            hoja.classList.add('is-arrastrando');
+        });
+        cab.addEventListener('pointermove', function (e) {
+            if (!activo) return;
+            var d = e.clientY - y0;
+            dy = d > 0 ? d : -Math.pow(-d, 0.6); // goma hacia arriba
+            hoja.style.transform = 'translateY(' + dy + 'px)';
+            hist.push({ y: e.clientY, t: e.timeStamp }); if (hist.length > 5) hist.shift();
+        });
+        function soltar() {
+            if (!activo) return;
+            activo = false;
+            hoja.classList.remove('is-arrastrando');
+            var a = hist[0], b = hist[hist.length - 1];
+            var v = b && a && b.t > a.t ? (b.y - a.y) / (b.t - a.t) * 1000 : 0;
+            var destino = dy + proyectar(v);
+            if (destino > hoja.offsetHeight * 0.4) {
+                // Sale hacia abajo desde donde está, por el mismo camino por el que entró.
+                hoja.style.transform = 'translateY(100%)';
+                cerrarMenu(true);
+                setTimeout(function () { hoja.style.transform = ''; }, 340);
+            } else {
+                hoja.style.transform = '';
+            }
+        }
+        cab.addEventListener('pointerup', soltar);
+        cab.addEventListener('pointercancel', soltar);
+    })();
     document.addEventListener('keydown', function(e) {
         if (panel.hidden) return;
         if (e.key === 'Escape') { cerrarMenu(true); return; }
