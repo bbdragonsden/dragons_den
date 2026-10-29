@@ -67,7 +67,7 @@
 (function () {
   'use strict';
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
-  var els = Array.prototype.slice.call(document.querySelectorAll('.p-cifras b'));
+  var els = Array.prototype.slice.call(document.querySelectorAll('.p-cifras b, .pm-num'));
   if (!els.length) return;
   var io = new IntersectionObserver(function (entradas) {
     entradas.forEach(function (e) {
@@ -86,4 +86,18 @@
     });
   }, { threshold: .6 });
   els.forEach(function (el) { io.observe(el); });
+})();
+
+// Marcador de la portada: reloj de posesión de 24 s mientras se ve.
+(function () {
+  'use strict';
+  var reloj = document.querySelector('[data-pm-reloj]');
+  if (!reloj || window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  var t = 24, id = null;
+  function tic() { t = t <= 0 ? 24 : t - 1; reloj.textContent = String(t).padStart(2, '0'); }
+  new IntersectionObserver(function (es) {
+    var ve = es.some(function (e) { return e.isIntersecting; });
+    if (ve && !id) id = setInterval(tic, 1000);
+    if (!ve && id) { clearInterval(id); id = null; }
+  }).observe(reloj);
 })();
