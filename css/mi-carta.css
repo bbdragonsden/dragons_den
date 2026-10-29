@@ -1,0 +1,167 @@
+/*
+ * Mi carta (plataforma, js/mi-carta.js): la carta del jugador y el panel para compartirla.
+ * Solo se anima transform y opacity. Todo respeta prefers-reduced-motion.
+ */
+.mc, .mc *, .mc *::before, .mc *::after { box-sizing: border-box; }
+.mc {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+    margin-top: 8px;
+}
+.mc-col { min-width: 0; }
+.mc-h {
+    font-family: 'Bebas Neue', sans-serif; font-weight: 400;
+    font-size: 26px; letter-spacing: 1.5px; color: var(--text);
+    margin-bottom: 18px;
+}
+
+/* La carta */
+.mc-escena {
+    position: relative; isolation: isolate;
+    display: grid; place-items: center;
+    padding: 28px 0 36px;
+}
+.mc-escena::before {
+    content: ''; position: absolute; z-index: -1; inset: 0;
+    background: radial-gradient(50% 55% at 50% 40%, rgba(200,169,110,.18), transparent 70%);
+    pointer-events: none;
+}
+.mc-escena::after {
+    content: ''; position: absolute; z-index: -1; left: 50%; bottom: 8px; width: 60%; height: 34px;
+    transform: translateX(-50%);
+    background: radial-gradient(closest-side, rgba(0,0,0,.9), transparent);
+    pointer-events: none;
+}
+.mc-carta {
+    display: block; width: min(340px, 100%); height: auto; aspect-ratio: 800 / 1131;
+    border-radius: 12px;
+    box-shadow: 0 30px 60px -28px rgba(0,0,0,.95), 0 0 50px -20px rgba(200,169,110,.6);
+    animation: mc-flota 6s ease-in-out infinite;
+}
+@keyframes mc-flota { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+/* Campos de personalización */
+.mc-campos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.mc-campo { display: grid; gap: 7px; min-width: 0; }
+.mc-campo--ancho { grid-column: 1 / -1; }
+.mc-campo > label {
+    font-size: 10.5px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--text-secondary);
+}
+.mc-campo input[type="text"], .mc-campo input[type="file"] {
+    width: 100%; min-height: 44px; padding: 10px 12px;
+    background: var(--bg-3, #0f0f0f); color: var(--text);
+    border: 1px solid var(--border-strong, rgba(255,255,255,.1)); border-radius: 0;
+    font: inherit; font-size: 14px;
+}
+.mc-campo input[type="file"] { padding: 9px 10px; font-size: 13px; color: var(--text-secondary); }
+.mc-campo input:focus-visible, .mc-texto:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.mc-ayuda { font-size: 12px; line-height: 1.55; color: var(--text-muted); }
+.mc-quitar {
+    justify-self: start; min-height: 36px; padding: 0 12px;
+    background: transparent; color: var(--text-secondary);
+    border: 1px solid var(--border-strong, rgba(255,255,255,.1)); cursor: pointer; font-size: 12px;
+}
+.mc-checks { display: grid; gap: 10px; }
+.mc-checks label {
+    display: flex; align-items: center; gap: 10px; min-height: 32px;
+    font-size: 13px; color: var(--text-secondary); cursor: pointer; text-transform: none; letter-spacing: 0;
+}
+.mc-checks input { width: 18px; height: 18px; accent-color: var(--gold); flex-shrink: 0; }
+
+/* Paso a paso para compartir */
+.mc-paso {
+    display: block; margin: 22px 0 10px;
+    font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+}
+.mc-col > .mc-paso:first-of-type { margin-top: 0; }
+.mc-redes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.mc-red {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    min-height: 68px; padding: 10px 6px;
+    background: var(--bg-3, #0f0f0f); color: var(--text-secondary);
+    border: 1px solid var(--border-strong, rgba(255,255,255,.1));
+    font: inherit; font-size: 11.5px; cursor: pointer;
+    transition: transform .25s cubic-bezier(.2,.9,.25,1), opacity .2s;
+}
+.mc-red span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.mc-red:hover { color: var(--text); border-color: var(--gold-border); }
+.mc-red:active, .mc-modo:active, .mc-btn:active { transform: scale(.97); }
+.mc-red[aria-checked="true"] { color: var(--gold); border-color: var(--gold); background: rgba(200,169,110,.08); }
+.mc-red:focus-visible, .mc-modo:focus-visible, .mc-btn:focus-visible, .mc-quitar:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.mc-modos { display: flex; flex-wrap: wrap; gap: 8px; }
+.mc-modo {
+    display: grid; gap: 2px; text-align: left;
+    min-height: 52px; padding: 9px 14px;
+    background: var(--bg-3, #0f0f0f); color: var(--text);
+    border: 1px solid var(--border-strong, rgba(255,255,255,.1));
+    font: inherit; cursor: pointer;
+    transition: transform .25s cubic-bezier(.2,.9,.25,1);
+}
+.mc-modo b { font-weight: 600; font-size: 13px; }
+.mc-modo span { font-size: 11px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.mc-modo[aria-checked="true"] { border-color: var(--gold); background: rgba(200,169,110,.08); }
+.mc-modo[aria-checked="true"] b { color: var(--gold); }
+
+/* Vista previa con la zona que la app no tapa */
+.mc-vista { margin-top: 18px; }
+.mc-marco {
+    position: relative; overflow: hidden;
+    width: min(260px, 100%); margin: 0 auto;
+    background: #050505; border: 1px solid var(--border-strong, rgba(255,255,255,.1));
+    box-shadow: 0 24px 50px -30px rgba(0,0,0,.9);
+}
+.mc-marco.is-ancho { width: min(440px, 100%); }
+.mc-img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.mc-seguro {
+    position: absolute; border: 1px dashed rgba(200,169,110,.55);
+    pointer-events: none;
+}
+.mc-nota { margin-top: 10px; font-size: 12px; line-height: 1.55; color: var(--text-muted); text-align: center; text-wrap: balance; }
+
+.mc-texto {
+    width: 100%; padding: 12px; resize: vertical; min-height: 84px;
+    background: var(--bg-3, #0f0f0f); color: var(--text);
+    border: 1px solid var(--border-strong, rgba(255,255,255,.1));
+    font: inherit; font-size: 13.5px; line-height: 1.55;
+}
+.mc-acciones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.mc-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    min-height: 46px; padding: 0 18px;
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border-strong, rgba(255,255,255,.14));
+    font: inherit; font-size: 12px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase;
+    cursor: pointer;
+    transition: transform .25s cubic-bezier(.2,.9,.25,1);
+}
+.mc-btn:hover { border-color: var(--gold-border); }
+.mc-btn--uno { flex: 1 1 100%; background: var(--gold); color: #0a0a0a; border-color: var(--gold); }
+.mc-btn--uno:hover { border-color: var(--gold); }
+.mc-estado { min-height: 20px; margin-top: 10px; font-size: 13px; color: var(--text-secondary); }
+
+/* Aviso en Mi Perfil que lleva a la carta */
+.mc-aviso-perfil {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    margin: 0 0 28px; padding: 18px 20px;
+    border: 1px solid var(--gold-border); background: rgba(200,169,110,.05);
+}
+.mc-aviso-perfil p { font-size: 14px; color: var(--text-secondary); }
+.mc-aviso-perfil b { color: var(--text); font-weight: 600; }
+
+@media (max-width: 900px) {
+    .mc { grid-template-columns: minmax(0, 1fr); }
+    .mc-carta { width: min(280px, 78vw); }
+}
+@media (max-width: 420px) {
+    .mc-redes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .mc-campos { grid-template-columns: minmax(0, 1fr); }
+    .mc-modo { flex: 1 1 calc(50% - 4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .mc-carta { animation: none; }
+    .mc-red, .mc-modo, .mc-btn { transition: none; }
+    .mc-red:active, .mc-modo:active, .mc-btn:active { transform: none; }
+}
